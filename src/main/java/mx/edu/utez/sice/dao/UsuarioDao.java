@@ -12,25 +12,25 @@ public class UsuarioDao {
 
     //CRUD para usuario
     //Read para un usuario
-    public Usuario getOne(String nombre, String contra){
+    public Usuario getOne(String correo_electronico, String contrasena){
         Usuario usuario = new Usuario();
-        String query = "select * from Usuario where nombre = ? and contra = sha2(?,256);";
+        String query = "select * from Usuario where correo_electronico = ? and contrasena = sha2(?,256);";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,nombre);
-            ps.setString(2,contra);
+            ps.setString(1,correo_electronico);
+            ps.setString(2,contrasena);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setContra(rs.getString("contra"));
+                usuario.setCorreo_electronico(rs.getString("correo_electronico"));
+                usuario.setContrasena(rs.getString("contrasena"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return usuario;
     }
-
+    /*
     //Encargaco de insertar un nuevo usuario
     public boolean insert(Usuario u){
         boolean flag = false;
@@ -48,5 +48,5 @@ public class UsuarioDao {
             e.printStackTrace();
         }
         return flag;
-    }
+    }*/
 }

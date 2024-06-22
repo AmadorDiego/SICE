@@ -1,53 +1,43 @@
 package mx.edu.utez.sice.model;
 
 public class Usuario {
-    private int id;
-    private String nombre;
-    private String contra;
-    private String correo;
+    private int id_usuario;
+    private String contrasena;
+    private String correo_electronico;
     private boolean estado;
 
     public Usuario() {
     }
 
-    public Usuario(int id, String nombre, String contra, String correo, boolean estado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.contra = contra;
-        this.correo = correo;
+    public Usuario(int id_usuario, String contrasena, String correo_electronico, boolean estado) {
+        this.id_usuario = id_usuario;
+        this.contrasena = contrasena;
+        this.correo_electronico = correo_electronico;
         this.estado = estado;
     }
 
-    public String getNombre() {
-        return nombre;
+    public int getId_usuario() {
+        return id_usuario;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 
-    public String getContra() {
-        return contra;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setContra(String contra) {
-        this.contra = contra;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
-    public int getId() {
-        return id;
+    public String getCorreo_electronico() {
+        return correo_electronico;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setCorreo_electronico(String correo_electronico) {
+        this.correo_electronico = correo_electronico;
     }
 
     public boolean isEstado() {

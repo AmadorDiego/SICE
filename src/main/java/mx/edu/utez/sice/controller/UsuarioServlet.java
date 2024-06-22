@@ -15,16 +15,16 @@ public class UsuarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Conseguimos la info del formulario
         //donde los inputs se llamen asi:
-        String nombre = req.getParameter("nombre");
-        String contra = req.getParameter("contra");
+        String correo_electronico = req.getParameter("correo_electronico");
+        String contrasena = req.getParameter("contrasena");
 
         UsuarioDao dao = new UsuarioDao();
 
         //Si el usuario esta vacio
-        Usuario usr = dao.getOne(nombre, contra);
-        if(usr.getNombre() == null){
+        Usuario usr = dao.getOne(correo_electronico, contrasena);
+        if(usr.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
-            System.out.println("El usuario " + nombre + " No existe en la BD");
+            System.out.println("El usuario " + correo_electronico + " No existe en la BD");
 
             HttpSession session = req.getSession();
             session.setAttribute("mensaje","El usuario no existe en la BD");
@@ -32,7 +32,7 @@ public class UsuarioServlet extends HttpServlet {
             resp.sendRedirect("index.jsp");
         }else{
             //Si existe en la base de datos
-            System.out.println("El usuario " + nombre + " Si esta en la BD");
+            System.out.println("El usuario " + correo_electronico + " Si esta en la BD");
             resp.sendRedirect("usuario.jsp");
         }
     }

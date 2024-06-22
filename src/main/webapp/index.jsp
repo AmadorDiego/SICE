@@ -7,11 +7,11 @@
 <body>
 
 <form method="post" action="login">
-    <label>Nombre: </label>
-    <input type="text" name="correo" required>
+    <label>Correo electrónico: </label>
+    <input type="email" name="correo_electronico" required>
     <br>
     <label>Contra: </label>
-    <input type="password" name="contra" required>
+    <input type="password" name="contrasena" required>
     <br>
     <input type="submit" value="iniciar sesión">
     <%
