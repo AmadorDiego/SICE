@@ -1,4 +1,4 @@
-/*package mx.edu.utez.sice;
+package mx.edu.utez.sice;
 
 import java.io.*;
 
@@ -25,4 +25,4 @@ public class HelloServlet extends HttpServlet {
 
     public void destroy() {
     }
-}*/
+}

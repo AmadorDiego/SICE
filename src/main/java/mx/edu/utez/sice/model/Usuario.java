@@ -5,15 +5,25 @@ public class Usuario {
     private String contrasena;
     private String correo_electronico;
     private boolean estado;
+    private String nombre;
 
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String contrasena, String correo_electronico, boolean estado) {
+    public Usuario(int id_usuario, String contrasena, String correo_electronico, boolean estado, String nombre) {
         this.id_usuario = id_usuario;
         this.contrasena = contrasena;
         this.correo_electronico = correo_electronico;
         this.estado = estado;
+        this.nombre = nombre;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getId_usuario() {
