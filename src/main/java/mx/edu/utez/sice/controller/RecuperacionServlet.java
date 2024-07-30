@@ -30,9 +30,9 @@ public class RecuperacionServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //1) Checar que el usuario tenga una cuenta en nuestro sistema
-        String correo = req.getParameter("correo");
+        String correo_electronico = req.getParameter("correo_electronico");
         UsuarioDao dao = new UsuarioDao();
-        Usuario u = dao.getOne(correo);
+        Usuario u = dao.getOne(correo_electronico);
         if(u.isEstado()){
             //Significa que además de que si existe si puede cambiar su contraseña
             //2) Generar un código unico para ese usuario
@@ -42,7 +42,7 @@ public class RecuperacionServlet extends HttpServlet {
             //4) Generar un correo electronico donde exista un enlace a un Servlet que maneje el código
             try{
                 GmailSender gmail = new GmailSender();
-                String para = correo;
+                String para = correo_electronico;
                 String asunto = "Restablecimiento de contraseña";
                 //req.getServletContext().getContextPath();
                 String mensaje =

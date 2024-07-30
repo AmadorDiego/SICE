@@ -77,7 +77,7 @@ public class GmailSender {
     }
 
     public static void main(String[] args) throws Exception {
-        new GmailSender().sendMail("dericklagunes@utez.edu.mx","Integrantes",
+        new GmailSender().sendMail("20233tn077@utez.edu.mx","Integrantes",
                 "<h1>INTEGRANTES</h1><p>• Erik Balmaceda Miranda</p><p>• Marquez Bailón Elias Manuel</p><p>• Piero Leonardo Vargas Ledesma</p><p>• Gálvez Osorio Jesús Emmanuel</p><p>• Vargas Ledesma Paula</p><p>• Amador Casillas Diego Ricardo</p>");
     }
 }

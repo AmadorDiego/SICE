@@ -13,74 +13,51 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrarUsuarioServlet", value = "/sign_in")
 public class RegistrarUsuarioServlet extends HttpServlet {
-
-    // para modificar la información se necesita: (se ocupan 2 servlets) (el req.getParameter siempre regresa cadenas)
-    // 1) obtener la información del usuario
-
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id_usuario = Integer.parseInt(req.getParameter("id_usuario")); //agarra el id del gestion usuario.jsp
-        //si el id a X ususario necesitamos un metodo para obtener su información (DAO)
+        // 1) obtener la información del usuario
+        int id = Integer.parseInt(req.getParameter("id"));
+        //Si el id identifica a X usuario necesitamos un método
+        //Para obtener su información (DAO)
         UsuarioDao dao = new UsuarioDao();
-        Usuario u = dao.getOne(id_usuario);
+        Usuario u = dao.getOne(id);
 
-        // 2) llevar la indo a un formulario
+        // 2) llevar la info a un formulario
         HttpSession sesion = req.getSession();
         sesion.setAttribute("usuario", u);
-        //aqui sera donde vamos a editar la información a modificar
-        resp.sendRedirect("registroUsuario.jsp");
-        // 3) update
-    }
+        //Aqui sera donde vamos a editar la información a modificar
+        resp.sendRedirect("modificarUsuario.jsp");
 
-
-    /*@Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Usuario u = new Usuario();
-        u.setNombre(req.getParameter("nombre"));
-        u.setCorreo_electronico(req.getParameter("correo_electronico"));
-
-        u.setEstado(true);
-        UsuarioDao dao = new UsuarioDao();
-        if(dao.insert(u)){
-            resp.sendRedirect("usuario.jsp");
-        }else{
-            resp.sendRedirect("registroUsuario.jsp");
-        }
+        // 3) update (se va a hacer en otro servlet)
     }
-    if(req.getParameter("operacion") != ""){
-        u.setId(Integer.parseInt(req.getParameter("operacion")))
-        dao.update();
-    }else{
-        dao.insert(u);
-    }
-    resp.sendRedirect("index.jsp")*/
 
     //Esto es para inicio de sesión
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario u = new Usuario();
-        u.setNombre(req.getParameter("nombre"));
-        u.setCorreo_electronico(req.getParameter("correo"));
-        if(req.getParameter("contra1").equals(req.getParameter("contra2"))){
-            u.setContrasena(req.getParameter("contra1"));
+        u.setNombre_usuario(req.getParameter("nombre_usuario"));
+        u.setApellido_usuario(req.getParameter("apellido_usuario"));
+        u.setCorreo_electronico(req.getParameter("correo_electronico"));
+        if(req.getParameter("contrasena1").equals(req.getParameter("contrasena2"))){
+            u.setContrasena(req.getParameter("contrasena1"));
         }else{
             //Mensaje para visar que las contras no son iguales
             resp.sendRedirect("registroUsuario.jsp");
         }
         u.setEstado(true);
-
+        u.setId_tipo_usuario(Integer.parseInt(req.getParameter("tipo_usuario_id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
+        dao.insertDocenteAdministrativo(u);
 
         //Ver si esta haciendo un insert o un update
         if(req.getParameter("operacion") != "") {
             //es un update
             u.setId_usuario(Integer.parseInt(req.getParameter("operacion")));
-            dao.update(u);
+            dao.updateDocenteAdministrativo(u);
         }else{
             //Es un insert
-            dao.insert(u);
+
         }
         resp.sendRedirect("index.jsp");
+        req.getSession().setAttribute("mensaje","se inserto");
     }
 }

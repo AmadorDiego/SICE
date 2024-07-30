@@ -11,12 +11,16 @@
 </head>
 <body>
     <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
-    <table id="example" class="table table-striped table-hover">
+    <table id="usuarios" class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
                 <th>CORREO</th>
                 <th>ESTADO</th>
+                <th>TIPO DE USUARIO</th>
+                <th>FECHA REGISTRADO</th>
                 <th>MODIFICAR</th>
                 <th>ELIMINAR</th>
             </tr>
@@ -29,13 +33,15 @@
             ArrayList<Usuario> lista = dao.getAll();
             for(Usuario u : lista){//Por cada usuario de la lista %>
         <tr>
-            <td><%=u.getId()%></td>
-            <td><%=u.getNombre()%></td>
-            <td><%=u.getCorreo()%></td>
+            <td><%=u.getId_usuario()%></td>
+            <td><%=u.getNombre_usuario()%></td>
+            <td><%=u.getApellido_usuario()%></td>
+            <td><%=u.getCorreo_electronico()%></td>
             <td><%=u.isEstado() ? "Habilitado":"Deshabilitado"%></td>
-            <td><a href="sign_in?id=<%=u.getId()%>">Actualizar</a></td>
-            <td><a href="fisico?id=<%=u.getId()%>">Eliminar</a></td>
-            <td><a href="logico?id=<%=u.getId()%>">Eliminar</a></td>
+            <td><%=u.getId_usuario()%></td>
+            <td><%=u.getFecha_registrado()%></td>
+            <td><a href="sign_in?id=<%=u.getId_usuario()%>">Actualizar</a></td>
+            <td><a href="logico?id=<%=u.getId_usuario()%>">Eliminar</a></td>
         </tr>
         <% } %>
         </tbody>
@@ -47,7 +53,7 @@
     <script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const table = document.getElementById('example');
+            const table = document.getElementById('usuarios');
             new DataTable(table, {
                 language: {
                     url: '${pageContext.request.contextPath}/JS/es-MX.json'

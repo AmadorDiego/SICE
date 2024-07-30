@@ -9,10 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class UsuarioDao {
 // data access object (DAO)
-    //CRUD para usuario
-    //Read para un usuario
+//CRUD para usuario
+
+//Read para un usuario
+public class UsuarioDao {
+
+    //obtiene un usuario por medio del correo y contraseña, y devuelve los mismos y el id del tipo de usuario que es
     public Usuario getOne(String correo_electronico, String contrasena){
         Usuario usuario = new Usuario();
         String query = "select * from Usuario where correo_electronico = ? and contrasena = sha2(?,256);";
@@ -25,6 +28,7 @@ public class UsuarioDao {
             if(rs.next()){
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
                 usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setId_tipo_usuario(rs.getInt("tipo_usuario_id_tipo_usuario"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -32,7 +36,7 @@ public class UsuarioDao {
         return usuario;
     }
 
-    //obtiene la información de un usuario por ID
+    //obtiene un usuario por medio del ID y regresa el ID, estado, contraseña y su correo electronico
     public Usuario getOne(int id_usuario){
         Usuario usuario = new Usuario();
         String query = "select * from Usuario where id_usuario = ?;";
@@ -53,16 +57,64 @@ public class UsuarioDao {
         return usuario;
     }
 
-    //Encargaco de insertar un nuevo usuario
-    public boolean insert(Usuario u){
+    //obtiene un usuario por medio del correo y devuelve u ID, nombre, contraseña, correo electronico y estado
+    public Usuario getOne(String correo_electronico) {
+        Usuario usuario = new Usuario();
+        String query = "select * from Usuario where correo_electronico = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,correo_electronico);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                usuario.setId_usuario(rs.getInt("id_usuario"));
+                usuario.setNombre_usuario(rs.getString("nombre_usuario"));
+                usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setCorreo_electronico(rs.getString("correo_electronico"));
+                usuario.setEstado(rs.getBoolean("estado"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
+    //Encargado de insertar un nuevo usuario exclusivamente para un administrador, docente o ambos
+    public boolean insertDocenteAdministrativo(Usuario u){
         boolean flag = false;
-        String query = "insert into usuario(nombre,contrasena,correo_electronico) values (?,sha2(?,256),?);";
+        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, tipo_usuario_id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, null);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,u.getNombre());
-            ps.setString(2,u.getContrasena());
+            ps.setString(1,u.getNombre_usuario());
+            ps.setString(2,u.getApellido_usuario());
             ps.setString(3,u.getCorreo_electronico());
+            ps.setString(4,u.getContrasena());
+            ps.setInt(5,u.getId_tipo_usuario());
+
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    //Encargado de insertar un nuevo alumno
+    public boolean insertAlumno(Usuario u){
+        boolean flag = false;
+        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, tipo_usuario_id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, ?);";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,u.getNombre_usuario());
+            ps.setString(2,u.getApellido_usuario());
+            ps.setString(3,u.getCorreo_electronico());
+            ps.setString(4,u.getContrasena());
+            ps.setInt(5,u.getId_tipo_usuario());
+            ps.setInt(6,u.getId_carrera());
+
             if(ps.executeUpdate()>0){
                 flag = true;
             }
@@ -84,42 +136,30 @@ public class UsuarioDao {
             while (rs.next()) { //lo ejecuta por cada ususario en la base de datos
                 Usuario u = new Usuario();
                 u.setId_usuario(rs.getInt("id_usuario"));
+                u.setNombre_usuario(rs.getString("nombre_usuario"));
+                u.setApellido_usuario(rs.getString("apellido_usuario"));
                 u.setCorreo_electronico(rs.getString("correo_electronico"));
-                u.setContrasena(rs.getString("contrasena"));
                 u.setEstado(rs.getBoolean("estado"));
+                u.setId_tipo_usuario(rs.getInt("tipo_usuario_id_tipo_usuario"));
+                u.setFecha_registrado(rs.getString("fecha_registrado"));
                 lista.add(u);
             }
         }catch (SQLException e){
-
         }
         return lista;
     }
-    public boolean update(Usuario u){
+    public boolean updateDocenteAdministrativo(Usuario u){
         boolean flag = false;
-        String query = "update usuario set nombre = ?, contrasena = ?, correo_electronico = ? where id_usuario = ?";
+        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, tipo_usuario_id_tipo_usuario = ? where id_usuario = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,u.getNombre());
-            ps.setString(2, u.getContrasena());
-            ps.setString(3);
+            ps.setString(1,u.getNombre_usuario());
+            ps.setString(2,u.getApellido_usuario());
+            ps.setString(3,u.getCorreo_electronico());
+            ps.setInt(4,u.getId_tipo_usuario());
+            ps.setInt(5,u.getId_usuario());
         }catch (SQLException e){
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    public boolean eliminarFisico(int id) {
-        boolean flag = false;
-        String query = "delete from usuario where id = ?";
-        try{
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,id);
-            if(ps.executeUpdate()>0){
-                flag = true;
-            }
-        }catch(SQLException e){
             e.printStackTrace();
         }
         return flag;
@@ -141,30 +181,9 @@ public class UsuarioDao {
         return flag;
     }
 
-    public Usuario getOne(String correo) {
-        Usuario usuario = new Usuario();
-        String query = "select * from Usuario where correo = ?;";
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,correo);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                usuario.setId_usuario(rs.getInt("id"));
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setContrasena(rs.getString("contra"));
-                usuario.setCorreo_electronico(rs.getString("correo"));
-                usuario.setEstado(rs.getBoolean("estado"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return usuario;
-    }
-
     public boolean updateCodigo(Usuario u, String codigo) {
         boolean flag = false;
-        String query = "update usuario set codigo = ? where id = ?";
+        String query = "update usuario set codigo = ? where id_usuario = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -222,4 +241,21 @@ public class UsuarioDao {
 
     cerrar sesiones*/
 
+
+/*
+    public boolean eliminarFisico(int id) {
+        boolean flag = false;
+        String query = "delete from usuario where id = ?";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }*/
 }
