@@ -33,6 +33,7 @@ public class RecuperacionServlet extends HttpServlet {
         String correo_electronico = req.getParameter("correo_electronico");
         UsuarioDao dao = new UsuarioDao();
         Usuario u = dao.getOne(correo_electronico);
+        System.out.println(u.isEstado());
         if(u.isEstado()){
             //Significa que además de que si existe si puede cambiar su contraseña
             //2) Generar un código unico para ese usuario

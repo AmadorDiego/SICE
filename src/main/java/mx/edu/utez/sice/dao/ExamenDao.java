@@ -10,15 +10,15 @@ import java.util.List;
 
 public class ExamenDao {
     public boolean insertExamen(Examen examen) {
-        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, ?, ?, ?, ?);";
+        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, 1, ?, ?, ?);";
         try (Connection conn = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, examen.getNombre_examen());
-            ps.setInt(2, examen.getCantidad_preguntas());
-            ps.setBoolean(3, examen.isEstado());
-            ps.setString(4, examen.getDescripcion());
-            ps.setInt(5, examen.getId_usuario());
+            //ps.setInt(2, examen.getCantidad_preguntas());
+            ps.setBoolean(2, examen.isEstado());
+            ps.setString(3, examen.getDescripcion());
+            ps.setInt(4, examen.getId_usuario());
 
             int affectedRows = ps.executeUpdate();
             return affectedRows > 0;
@@ -50,6 +50,52 @@ public class ExamenDao {
         }
         return examenes;
     }
+
+    // Otros métodos CRUD según sea necesario
+/*
+    public boolean insertExamen(Examen examen) {
+        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+            pstmt.setString(1, examen.getNombre_examen());
+            pstmt.setInt(2, examen.getCantidad_preguntas());
+            pstmt.setBoolean(3, examen.isEstado());
+            pstmt.setString(4, examen.getDescripcion());
+            pstmt.setInt(5, examen.getId_usuario());
+
+            int affectedRows = pstmt.executeUpdate();
+            return affectedRows > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Examen> getAllExamenes() {
+        List<Examen> examenes = new ArrayList<>();
+        String query = "SELECT * FROM examen";
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+
+            while (rs.next()) {
+                Examen examen = new Examen(
+                        //Aqui esta el error de los getters
+                        rs.getInt("id_examen"),
+                        rs.getString("nombre_examen"),
+                        rs.getInt("cantidad_preguntas"),
+                        rs.getBoolean("estado"),
+                        rs.getString("descripcion"),
+                        rs.getInt("usuario_id_usuario")
+                );
+                examenes.add(examen);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return examenes;
+    }*/
 
     // Otros métodos CRUD según sea necesario
 }

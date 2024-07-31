@@ -33,7 +33,7 @@
         <option selected value="3">Alumno</option>
     </select>
     <br>
-    <input type="hidden" name="operación" value="">
+    <!--<input type="hidden" name="operación" value="">-->
     <input type="submit">
 </form>
 </body>

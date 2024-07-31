@@ -43,11 +43,11 @@ public class RegistrarUsuarioServlet extends HttpServlet {
             resp.sendRedirect("registroUsuario.jsp");
         }
         u.setEstado(true);
-        u.setId_tipo_usuario(Integer.parseInt(req.getParameter("tipo_usuario_id_tipo_usuario")));
+        u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
         dao.insertDocenteAdministrativo(u);
-
+        /*
         //Ver si esta haciendo un insert o un update
         if(req.getParameter("operacion") != "") {
             //es un update
@@ -56,7 +56,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         }else{
             //Es un insert
 
-        }
+        }*/
         resp.sendRedirect("index.jsp");
         req.getSession().setAttribute("mensaje","se inserto");
     }

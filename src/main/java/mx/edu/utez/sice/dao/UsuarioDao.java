@@ -71,7 +71,13 @@ public class UsuarioDao {
                 usuario.setNombre_usuario(rs.getString("nombre_usuario"));
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
-                usuario.setEstado(rs.getBoolean("estado"));
+                int estado = rs.getInt("estado");
+                System.out.println(estado);
+                if(estado==1){
+                    usuario.setEstado(true);
+                }else {
+                    usuario.setEstado(false);
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -167,7 +173,7 @@ public class UsuarioDao {
 
     public boolean eliminarLogico(int id) {
         boolean flag = false;
-        String query = "update usuario set estado = false where id = ?";
+        String query = "update usuario set estado = 0 where id = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
