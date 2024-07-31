@@ -28,6 +28,7 @@ public class UsuarioServlet extends HttpServlet {
 
             HttpSession session = req.getSession();
             session.setAttribute("mensaje","El usuario no existe en la BD");
+            session.setAttribute("id_usuario",usr.getId_usuario());
 
             resp.sendRedirect("index.jsp");
         }else{

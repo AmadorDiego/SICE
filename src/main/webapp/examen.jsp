@@ -1,4 +1,4 @@
-<%--
+<%@ page import="mx.edu.utez.sice.model.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: corey
   Date: 30/07/2024
@@ -12,6 +12,10 @@
     <link rel="stylesheet" href="CSS/bootstrap.css">
 </head>
 <body>
+<%
+    HttpSession sesion = request.getSession();
+    Usuario u = (Usuario) sesion.getAttribute("usuario");
+%>
 <div class="container">
     <h1>Crear Nuevo Examen</h1>
     <form action="crear" method="post">
@@ -31,7 +35,7 @@
             <label for="descripcion" class="form-label">Descripción</label>
             <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
         </div>
-        <input type="hidden" name="id_usuario" value="${sessionScope.usuario.id_usuario}">
+        <input type="hidden" name="id_usuario" value="<%=u.getId_usuario()%>">
         <button type="submit" class="btn btn-primary">Crear Examen</button>
     </form>
 </div>

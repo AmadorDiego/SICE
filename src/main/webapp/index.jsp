@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/adicionales.css">
 
-<<<<<<< HEAD
 <form method="post" action="login">
     <label>Correo electrónico: </label>
     <input type="email" name="correo_electronico" required>
@@ -29,7 +28,6 @@
 <a href="registroUsuario.jsp">Registrarme</a>
 <a href="gestionUsuario.jsp">Ver usuarios</a>
 <a href="pdf">Generar archivo PDF</a>
-=======
 </head>
 <body class="bg-black">
 
@@ -69,8 +67,6 @@
                             </div>
 
                             <%
-                                HttpSession sesion = request.getSession();
-                                String mensaje = (String) sesion.getAttribute("mensaje");
                                 if(mensaje != null){ %>
                             <p style="color: red"><%=mensaje%></p>
                             <% } %>
@@ -91,7 +87,6 @@
 
 
 <script src='JS/bootstrap.js'></script>
->>>>>>> c84070ab2c21a40ef2bf0d21e4e8e3f7b769b353
 </body>
 </html>
 

@@ -13,5 +13,6 @@
 <body>
     <h1>Bienvenido administrador</h1>
     <a href="gestionUsuario.jsp">Ver usuarios</a>
+    <a href="registroUsuario.jsp">Registrar usuarios</a>
 </body>
 </html>

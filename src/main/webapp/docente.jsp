@@ -13,5 +13,6 @@
 <body>
     <h1>Bienvenido docente</h1>
     <a href="examen.jsp">Crear examen</a>
+    <a href="examen2.jsp">Crear examen</a>
 </body>
 </html>
