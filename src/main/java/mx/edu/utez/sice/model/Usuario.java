@@ -6,7 +6,7 @@ public class Usuario {
     private String apellido_usuario;
     private String correo_electronico;
     private String contrasena;
-    private boolean estado;
+    private int estado;
     private String fecha_registrado;
     private String codigo;
     private int id_tipo_usuario;
@@ -15,7 +15,7 @@ public class Usuario {
     public Usuario() {
     }
     //campo de carrera exclusivo para alumno
-    public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, boolean estado, String fecha_registrado, String codigo, int id_tipo_usuario, int id_carrera) {
+    public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, int estado, String fecha_registrado, String codigo, int id_tipo_usuario, int id_carrera) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
@@ -29,7 +29,7 @@ public class Usuario {
     }
 
     //exclusivo para docente, profesor o ambos
-    public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, boolean estado, String fecha_registrado, String codigo, int id_tipo_usuario) {
+    public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, int estado, String fecha_registrado, String codigo, int id_tipo_usuario) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.apellido_usuario = apellido_usuario;
@@ -81,11 +81,11 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 

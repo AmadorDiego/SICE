@@ -47,7 +47,7 @@ public class UsuarioDao {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 usuario.setId_usuario(rs.getInt("id_usuario"));
-                usuario.setEstado(rs.getBoolean("estado"));
+                usuario.setEstado(rs.getInt("estado"));
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
             }
@@ -71,13 +71,7 @@ public class UsuarioDao {
                 usuario.setNombre_usuario(rs.getString("nombre_usuario"));
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
-                int estado = rs.getInt("estado");
-                System.out.println(estado);
-                if(estado==1){
-                    usuario.setEstado(true);
-                }else {
-                    usuario.setEstado(false);
-                }
+                usuario.setEstado(rs.getInt("estado"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -145,7 +139,7 @@ public class UsuarioDao {
                 u.setNombre_usuario(rs.getString("nombre_usuario"));
                 u.setApellido_usuario(rs.getString("apellido_usuario"));
                 u.setCorreo_electronico(rs.getString("correo_electronico"));
-                u.setEstado(rs.getBoolean("estado"));
+                u.setEstado(rs.getInt("estado"));
                 u.setId_tipo_usuario(rs.getInt("tipo_usuario_id_tipo_usuario"));
                 u.setFecha_registrado(rs.getString("fecha_registrado"));
                 lista.add(u);

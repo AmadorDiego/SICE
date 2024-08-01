@@ -6,8 +6,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/datatables.css">
 </head>
 <body>
     <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
@@ -46,17 +46,17 @@
         <% } %>
         </tbody>
     </table>
-    <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/datatables.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/dataTables.bootstrap5.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/es-MX.json"></script>
+    <script src="/JS/jquery-3.7.0.js"></script>
+    <script src="/JS/bootstrap.js"></script>
+    <script src="/JS/datatables.js"></script>
+    <script src="/JS/dataTables.bootstrap5.js"></script>
+    <script src="/JS/es-MX.json"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const table = document.getElementById('usuarios');
             new DataTable(table, {
                 language: {
-                    url: '${pageContext.request.contextPath}/JS/es-MX.json'
+                    url: '/JS/es-MX.json'
                 }
             });
         });
