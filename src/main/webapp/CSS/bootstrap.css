@@ -57,7 +57,7 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #fff;
+  --bs-body-bg: #242323;
   --bs-border-width: 1px;
   --bs-border-style: solid;
   --bs-border-color: #dee2e6;
@@ -10874,5 +10874,263 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/*  *********************Estilo página *************************** */
+.encabezado {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 40px; /* Incrementa el padding horizontal */
+  background-color: rgb(1, 36, 73);
+  border-bottom: 1px solid #ccc;
+}
 
+.encabezado img {
+  height: 70px; /* Ajusta la altura según sea necesario */
+  margin: 0 20px; /* Agrega margen alrededor de las imágenes */
+}
+
+#imagen_arriba{
+  width: 20%; /* Ajusta el ancho según sea necesario */
+  object-fit: cover; /* Cubrir todo el contenedor manteniendo la proporción */
+  position: absolute;
+  top: 92px; /* Ajusta este valor para mover la imagen más abajo */
+  right: 0;
+  height: auto;
+  display: block; /* Asegura que la imagen se muestre como un bloque */
+}
+
+#imagen_esq_izq {
+  width: 20%;
+  object-fit: cover; /* Cubre todo el contenedor manteniendo la proporción */
+  position: absolute;
+  z-index: 1; /* Asegura que la imagen esté detrás del formulario */
+  top:550px;
+}
+
+#imagen_esq_derecha {
+  top: 0 ;
+  right: 0;
+}
+
+#imagen_esq_izq {
+  bottom: 0;
+  left: 0;
+}
+
+#imagenLogo {
+  text-align: center;
+  margin-bottom: 40px; /* Espacio opcional debajo de la imagen */
+}
+
+#imagenLogo img {
+  width: 30%; /* Ajusta el porcentaje según sea necesario */
+}
+
+/* *************************Contenido Docente********************* */
+.contenedor {
+  padding: 20px;
+  margin: 20px;
+  background-color:white;
+  border-radius: 8px;
+  display: flex;
+
+  align-items: center;
+}
+.titulo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 10px;
+}
+.descripcion {
+  font-size: 1rem;
+  color: #faf7f7;
+  margin-bottom: 10px;
+}
+.fecha {
+  font-size: 0.8rem;
+  color: #fffefe;
+  margin-bottom: 10px;
+}
+.boton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 30px 0px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.Crear_Examen{
+  background-color: #23d83b;
+}
+
+.conic-gradient {
+  background: conic-gradient(at 0% 30%, rgba(6, 80, 43, 0.562) 10%, rgba(10, 10, 88, 0.603) 30%, #050a0f98 50%);
+  background-size: cover;
+  width: 100vw; /* Asegura que el div ocupe todo el ancho de la pantalla */
+  height: 100vh; /* Asegura que el div ocupe toda la altura de la pantalla */
+  margin: 0; /* Elimina cualquier margen */
+  padding: 0; /* Elimina cualquier padding */
+}
+
+.h2_Docente{
+  top: 17px;
+  text-decoration-color: #0a53be;
+  color: #0dcaf0;
+}
+
+.Crear_Examen {
+  background-color: rgb(1, 36, 73);
+  color: #fff;
+  padding: 20px 30px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 20px auto; /* Centra el botón horizontalmente y añade un margen superior */
+  display: block; /* Asegura que el botón se comporte como un bloque */
+}
+
+.Examen {
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  width: 80%;
+  max-width: 600px;
+}
+
+.titulo, .descripcion, .fecha, .boton {
+  margin-bottom: 10px;
+}
+
+.boton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+  background-color: #0056b3;
+}
+
+
+/* *******************************Creación de Examen ******************************* */
+.container_exam {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 28px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+textarea, input[type="text"], input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #21467d;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: #9bafac;
+}
+
+#opcionesContainer {
+  margin-top: 10px;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.opcion input[type="text"] {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.correcta-label {
+  white-space: nowrap;
+}
+
+.pregunta {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #6fdeb9;
+  border: 1px solid #198f9e;
+  border-radius: 4px;
+}
+
+.imagenPregunta {
+  max-width: 100%;
+  margin-bottom: 10px;
+}
+
+.opcionRespuesta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.opcionRespuesta input[type="radio"] {
+  margin-right: 10px;
+}
+
+.pregunta p, .opcionRespuesta label {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.file-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.file-input {
+  position: absolute;
+  left: -9999px;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#file-name {
+  margin-left: 10px;
+}
+
+.respuesta-correcta {
+  color: green;
+  font-weight: bold;
+  margin-left: 5px;
+}
 /*# sourceMappingURL=bootstrap.css.map */

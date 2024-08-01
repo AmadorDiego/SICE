@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear preguntas</title>
+    <link rel="stylesheet" href="../CSS/bootstrap.css">
+
+    <link rel="stylesheet" href="">
+
+</head>
+<body>
+<div class="container">
+    <h1>Formulario</h1>
+    <form id="examenForm" method="GET" action="/docente.html">
+        <input type="text" id="nombreExamen" name="nombreExamen" placeholder="Nombre del examen" maxlength="50" required>
+        <textarea id="descripcionExamen" name="descripcionExamen" placeholder="Descripción del examen" rows="4" required></textarea>
+
+        <div id="crearPregunta">
+            <h2>Crear pregunta</h2>
+            <div class="file-input-wrapper">
+                <label for="imagenPregunta" class="file-input-label">Seleccionar archivo</label>
+                <input type="file" id="imagenPregunta" name="imagenPregunta" accept="image/*" class="file-input">
+                <span id="file-name">Sin archivos seleccionados</span>
+            </div>
+
+            <div class="tipo-pregunta-container">
+                <textarea id="textoPregunta" name="textoPregunta" placeholder="Escribe tu pregunta aquí" maxlength="100" required></textarea>
+                <button type="button" id="cambiarTipoPregunta">Cambiar</button>
+            </div>
+
+            <div id="opcionesContainer">
+                <div class="opcion">
+                    <input type="text" name="opcion[]" placeholder="Opción 1" maxlength="30">
+                    <label class="correcta-label">
+                        <input type="checkbox" name="correcta[]" class="respuestaCorrectaCheck"> Correcta
+                    </label>
+                </div>
+            </div>
+            <button type="button" onclick="agregarOpcion()">Agregar opción</button>
+
+            <div id="respuestaEscritaContainer" style="display: none;">
+                <input type="text" id="respuestaEscritaInput" name="respuestaEscrita" placeholder="Respuesta correcta" maxlength="30">
+            </div>
+            <button type="button" onclick="guardarPregunta()">Guardar pregunta</button>
+        </div>
+
+        <!-- Área para mostrar preguntas creadas -->
+        <div id="preguntasCreadas">
+            <h2>Preguntas creadas</h2>
+            <!-- Aquí se mostrarán las preguntas dinámicamente -->
+        </div>
+
+        <!-- Botón para guardar el examen -->
+        <button type="submit" id="guardarExamen">Guardar Examen</button>
+    </form>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

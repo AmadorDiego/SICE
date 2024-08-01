@@ -38,3 +38,445 @@
 .red-SICE {
     color: #CA4E4E;
 }
+
+/********Estilo Formulario*******/
+
+
+
+#imagenLogo {
+    text-align: center;
+    margin-bottom: 40px; /* Espacio opcional debajo de la imagen */
+}
+
+#imagenLogo img {
+    width: 30%; /* Ajusta el porcentaje según sea necesario */
+}
+
+/* Estilo del formulario */
+.form {
+    position: absolute;
+    top: 50%; /* Mueve el formulario al 50% desde la parte superior del contenedor */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: hsl(0, 0%, 0%, 60%);  /* Fondo negro */
+    padding: 40px;
+    border-radius: 40px; /* Bordes redondeados */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    width: 80%;
+    max-width: 350px; /* Ancho máximo para evitar que se expanda demasiado */
+    color: #fff;
+    margin: auto;
+    z-index: 2; /* Coloca el formulario encima de la imagen */
+}
+
+/* Grupo de campos del formulario */
+.form-group {
+    margin-bottom: 15px;
+    font-size: 100%;
+}
+
+/* Estilo de las etiquetas */
+.form label {
+    display: block;
+    margin-bottom: 1px;
+    text-align: left;
+}
+
+/* Estilo de los campos de entrada */
+.form input[type="email"],
+.form input[type="password"] {
+    width: 95%;
+    padding: 5px;
+    margin-bottom: 9px;
+    border: none;
+    border-radius: 15px;
+}
+
+/* Contenedor para centrar el botón de envío */
+.submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 100%;
+}
+
+/* Estilo del botón de envío */
+.form input[type="submit"] {
+    background-color: #008CBA; /* Color del botón */
+    color: white;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el botón de envío */
+.form input[type="submit"]:hover {
+    background-color: #009475;
+}
+
+/* Estilo del div para mostrar el resultado */
+#resultado {
+    margin-top: 20px;
+    color: #fff;
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
+
+.multi-repeating-linear {
+    background: repeating-linear-gradient(
+            190deg,
+            rgba(12, 19, 117, 0.5) 40px,
+            rgba(4, 17, 15, 0.5) 80px,
+            rgba(13, 8, 66, 0.5) 160px,
+            rgba(23, 23, 131, 0.5) 200px,
+            rgba(7, 107, 40, 0.5) 240px,
+            rgba(30, 11, 82, 0.5) 300px
+    ),
+    repeating-linear-gradient(
+            -190deg,
+            rgba(49, 67, 148, 0.5) 30px,
+            rgba(28, 32, 31, 0.5) 60px,
+            rgba(33, 15, 136, 0.5) 90px,
+
+            rgba(11, 11, 88, 0.5) 150px,
+            rgba(15, 26, 124, 0.5) 180px,
+            rgba(23, 22, 70, 0.5) 230px
+    ),
+    repeating-linear-gradient(
+            23deg,
+
+            rgba(0, 128, 0, 0.438) 200px,
+            rgb(55, 55, 73) 250px,
+            rgba(11, 9, 12, 0.568) 300px,
+            rgba(49, 41, 156, 0.747) 350px,
+            rgba(11, 11, 12, 0.541) 370px
+    );
+    width: 100%;
+    height: 110vh; /* Asegura que el div ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/***************************Estilo Docente_Administrador**************************/
+.contenedor {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se ajusten en varias filas */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    margin-top: 50px;
+    background-color: transparent;
+
+}
+
+.contenido, .contenido2 {
+    width: 250px;
+    margin: 20px; /* Margen alrededor de los contenedores */
+    padding: 20px;
+    text-align: center;
+    background-color: #ccc;
+    border-radius: 20%;
+}
+
+.contenido img, .contenido2 img {
+    width: 70%;
+    height: auto;
+}
+
+.contenido p, .contenido2 p {
+    margin-top: 10px;
+}
+
+.encabezado {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px; /* Incrementa el padding horizontal */
+    background-color: rgb(1, 36, 73);
+    border-bottom: 1px solid #ccc;
+}
+
+.encabezado img {
+    height: 70px; /* Ajusta la altura según sea necesario */
+    margin: 0 20px; /* Agrega margen alrededor de las imágenes */
+}
+
+#imagen_arriba {
+    width: 20%; /* Ajusta el ancho según sea necesario */
+    object-fit: cover; /* Cubrir todo el contenedor manteniendo la proporción */
+    position: absolute;
+    top: 92px; /* Ajusta este valor para mover la imagen más abajo */
+    right: 0;
+    height: auto;
+    display: block; /* Asegura que la imagen se muestre como un bloque */
+}
+
+.pagina2 h2 {
+    color: #ccc;
+    text-align: center;
+    width: 100%;
+    flex-direction: column
+}
+
+.pagina2 h3 {
+    color: rgb(1, 36, 73);
+}
+
+.btn-iniciar-sesion {
+    position: auto; /* Asegúrate de que esta propiedad sea la adecuada para tu caso, puede que necesites ajustar o eliminar esta línea */
+    border-radius: 15px; /* Ajusta el valor para hacer los bordes más o menos redondeados */
+    margin-top: 600px;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .form {
+        width: 90%; /* Ajusta el ancho del formulario en tabletas */
+        padding: 20px;
+    }
+
+    #imagenLogo img {
+        width: 60%; /* Ajusta el ancho de la imagen del logo en tabletas */
+    }
+
+    .contenedor {
+        align-items: center; /* Centra los elementos */
+    }
+
+    .contenido, .contenido2 {
+        width: 80%; /* Ajusta el ancho de los contenedores en tabletas */
+        margin: 10px 0;
+    }
+
+    .encabezado {
+        flex-direction: column; /* Cambia la dirección del encabezado a columna */
+        align-items: center; /* Centra los elementos */
+    }
+
+    .encabezado img {
+        margin: 10px 0; /* Ajusta el margen de las imágenes del encabezado */
+    }
+
+    #imagen_arriba {
+        width: 30%; /* Ajusta el ancho de la imagen de arriba en tabletas */
+        top: 90px; /* Ajusta la posición de la imagen de arriba en tabletas */
+    }
+}
+
+@media (max-width: 480px) {
+    .form {
+        width: 95%; /* Ajusta el ancho del formulario en móviles */
+        padding: 15px;
+    }
+
+    #imagenLogo img {
+        width: 70%; /* Ajusta el ancho de la imagen del logo en móviles */
+    }
+
+    .contenido, .contenido2 {
+        width: 90%; /* Ajusta el ancho de los contenedores en móviles */
+    }
+
+    .encabezado {
+        padding: 10px 20px; /* Ajusta el padding del encabezado en móviles */
+    }
+
+    #imagen_arriba {
+        width: 40%; /* Ajusta el ancho de la imagen de arriba en móviles */
+    }
+}
+
+h2 {
+    text-align: center;
+    width: 100%;
+}
+
+.btn-iniciar-sesion:hover {
+    background-color: rgba(0, 148, 117, 1)
+}
+.conic-gradient {
+    background: conic-gradient(at 0% 30%, rgba(6, 80, 43, 0.562) 10%, rgba(10, 10, 88, 0.603) 30%, #050a0f98 50%);
+    width: 100%;
+    height: 100vh; /* Asegura que el div ocupe toda la altura de la pantalla */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+/* **************************Contenido Docente  ***********************/
+.examen {
+    border-top: 4px solid #007bff; /* Barra azul en la parte superior */
+    padding: 20px;
+    margin: 20px;
+    background-color:white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+.titulo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.descripcion {
+    font-size: 1rem;
+    color: #faf7f7;
+    margin-bottom: 10px;
+}
+.fecha {
+    font-size: 0.8rem;
+    color: #fffefe;
+    margin-bottom: 10px;
+}
+.boton {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.Crear_Examen {
+    background-color: rgba(0, 148, 117, 1);
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    float: right; /* Mueve el botón a la derecha */
+    margin-right: 20%;
+}
+
+.Crear_Examen:hover {
+    background-color: rgb(41, 224, 169); /* Color azul para el efecto hover */
+}
+
+#h2_Docente{
+    color: white;
+}
+
+/* *********************Creación Examen******************** */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #bbbbbb;
+    margin: 0;
+    padding: 20px;
+}
+.container_exam {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #258863;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+textarea, input[type="text"], input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #21467d;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+button:hover {
+    background-color: #9bafac;
+}
+
+
+
+.opcion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.opcion input[type="text"] {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.correcta-label {
+    white-space: nowrap;
+}
+
+.pregunta {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #6fdeb9;
+    border: 1px solid #198f9e;
+    border-radius: 4px;
+}
+
+.imagenPregunta {
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+.opcionRespuesta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.opcionRespuesta input[type="radio"] {
+    margin-right: 10px;
+}
+
+.pregunta p, .opcionRespuesta label {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.file-input {
+    position: absolute;
+    left: -9999px;
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#file-name {
+    margin-left: 10px;
+}
+
+.respuesta-correcta {
+    color: green;
+    font-weight: bold;
+    margin-left: 5px;
+}
