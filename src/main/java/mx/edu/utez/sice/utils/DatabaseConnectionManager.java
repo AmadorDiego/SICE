@@ -22,9 +22,9 @@ public class DatabaseConnectionManager {
         config.setUsername(USERNAME);
         config.setPassword(PASSWORD);
         // Ajustes del pool
-        config.setMinimumIdle(5);
-        config.setMaximumPoolSize(10);
-        config.setConnectionTimeout(30000); // 30 seconds
+        config.setMinimumIdle(200000);
+        config.setMaximumPoolSize(200000);
+        config.setConnectionTimeout(300000); // 30 seconds
         dataSource = new HikariDataSource(config);
     }
 
