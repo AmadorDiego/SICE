@@ -8,347 +8,313 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema integradora
+-- Schema SICE
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema integradora
+-- Schema SICE
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `integradora` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
-USE `integradora` ;
+CREATE SCHEMA IF NOT EXISTS `SICE` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+USE `SICE` ;
 
 -- -----------------------------------------------------
--- Table `integradora`.`division_academica`
+-- Table `SICE`.`division_academica`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`division_academica` (
-  `id_division_academica` INT NOT NULL AUTO_INCREMENT,
-  `nombre_division_academica` VARCHAR(60) NOT NULL,
-  PRIMARY KEY (`id_division_academica`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `SICE`.`division_academica` (
+                                                           `id_division_academica` INT NOT NULL AUTO_INCREMENT,
+                                                           `nombre_division_academica` VARCHAR(60) NOT NULL,
+    PRIMARY KEY (`id_division_academica`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`carrera`
+-- Table `SICE`.`carrera`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`carrera` (
-  `id_carrera` INT NOT NULL AUTO_INCREMENT,
-  `nombre_carrera` VARCHAR(78) NOT NULL,
-  `division_academica_id_division_academica` INT NOT NULL,
-  PRIMARY KEY (`id_carrera`),
-  INDEX `fk_carrera_division_academica1_idx` (`division_academica_id_division_academica` ASC) VISIBLE,
-  CONSTRAINT `fk_carrera_division_academica1`
+CREATE TABLE IF NOT EXISTS `SICE`.`carrera` (
+                                                `id_carrera` INT NOT NULL AUTO_INCREMENT,
+                                                `nombre_carrera` VARCHAR(78) NOT NULL,
+    `division_academica_id_division_academica` INT NOT NULL,
+    PRIMARY KEY (`id_carrera`),
+    INDEX `fk_carrera_division_academica1_idx` (`division_academica_id_division_academica` ASC) VISIBLE,
+    CONSTRAINT `fk_carrera_division_academica1`
     FOREIGN KEY (`division_academica_id_division_academica`)
-    REFERENCES `integradora`.`division_academica` (`id_division_academica`)
+    REFERENCES `SICE`.`division_academica` (`id_division_academica`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`tipo_usuario`
+-- Table `SICE`.`usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`tipo_usuario` (
-  `id_tipo_usuario` INT NOT NULL AUTO_INCREMENT,
-  `tipo_usuario` VARCHAR(13) NOT NULL,
-  PRIMARY KEY (`id_tipo_usuario`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `integradora`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`usuario` (
-  `id_usuario` INT NOT NULL AUTO_INCREMENT,
-  `nombre_usuario` VARCHAR(45) NOT NULL,
-  `apellido_usuario` VARCHAR(45) NOT NULL,
-  `correo_electronico` VARCHAR(100) NOT NULL,
-  `contrasena` VARCHAR(256) NOT NULL,
-  `estado` TINYINT NOT NULL DEFAULT 1,
-  `fecha_registrado` DATETIME NOT NULL,
-  `codigo` VARCHAR(20) NULL,
-  `tipo_usuario_id_tipo_usuario` INT NOT NULL,
-  `carrera_id_carrera` INT NULL,
-  PRIMARY KEY (`id_usuario`),
-  UNIQUE INDEX `correo_electronico_UNIQUE` (`correo_electronico` ASC) VISIBLE,
-  INDEX `fk_usuario_tipo_usuario1_idx` (`tipo_usuario_id_tipo_usuario` ASC) VISIBLE,
-  INDEX `fk_usuario_carrera1_idx` (`carrera_id_carrera` ASC) VISIBLE,
-  CONSTRAINT `fk_usuario_tipo_usuario1`
-    FOREIGN KEY (`tipo_usuario_id_tipo_usuario`)
-    REFERENCES `integradora`.`tipo_usuario` (`id_tipo_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usuario_carrera1`
+CREATE TABLE IF NOT EXISTS `SICE`.`usuario` (
+                                                `id_usuario` INT NOT NULL AUTO_INCREMENT,
+                                                `nombre_usuario` VARCHAR(45) NOT NULL,
+    `apellido_usuario` VARCHAR(45) NOT NULL,
+    `correo_electronico` VARCHAR(100) NOT NULL,
+    `contrasena` VARCHAR(256) NOT NULL,
+    `estado` TINYINT NOT NULL DEFAULT 1,
+    `fecha_registrado` DATETIME NOT NULL,
+    `codigo` VARCHAR(20) NULL,
+    `id_tipo_usuario` INT NOT NULL,
+    `carrera_id_carrera` INT NULL,
+    PRIMARY KEY (`id_usuario`),
+    UNIQUE INDEX `correo_electronico_UNIQUE` (`correo_electronico` ASC) VISIBLE,
+    INDEX `fk_usuario_carrera1_idx` (`carrera_id_carrera` ASC) VISIBLE,
+    CONSTRAINT `fk_usuario_carrera1`
     FOREIGN KEY (`carrera_id_carrera`)
-    REFERENCES `integradora`.`carrera` (`id_carrera`)
+    REFERENCES `SICE`.`carrera` (`id_carrera`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`examen`
+-- Table `SICE`.`examen`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`examen` (
-  `id_examen` INT NOT NULL AUTO_INCREMENT,
-  `nombre_examen` VARCHAR(100) NOT NULL,
-  `cantidad_preguntas` INT NOT NULL,
-  `estado` TINYINT(1) NOT NULL DEFAULT 0,
-  `descripcion` VARCHAR(350) NULL,
-  `usuario_id_usuario` INT NOT NULL,
-  PRIMARY KEY (`id_examen`),
-  INDEX `fk_examen_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
-  CONSTRAINT `fk_examen_usuario1`
+CREATE TABLE IF NOT EXISTS `SICE`.`examen` (
+                                               `id_examen` INT NOT NULL AUTO_INCREMENT,
+                                               `nombre_examen` VARCHAR(100) NOT NULL,
+    `cantidad_preguntas` INT NOT NULL,
+    `estado` TINYINT(1) NOT NULL DEFAULT 0,
+    `descripcion` VARCHAR(350) NULL,
+    `usuario_id_usuario` INT NOT NULL,
+    PRIMARY KEY (`id_examen`),
+    INDEX `fk_examen_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
+    CONSTRAINT `fk_examen_usuario1`
     FOREIGN KEY (`usuario_id_usuario`)
-    REFERENCES `integradora`.`usuario` (`id_usuario`)
+    REFERENCES `SICE`.`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`tipo_pregunta`
+-- Table `SICE`.`pregunta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`tipo_pregunta` (
-  `id_tipo_pregunta` INT NOT NULL AUTO_INCREMENT,
-  `nombre_tipo` VARCHAR(20) NOT NULL,
-  PRIMARY KEY (`id_tipo_pregunta`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `SICE`.`pregunta` (
+                                                 `id_pregunta` INT NOT NULL AUTO_INCREMENT,
+                                                 `pregunta` VARCHAR(300) NOT NULL,
+    `id_tipo_pregunta` INT NOT NULL,
+    PRIMARY KEY (`id_pregunta`))
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`pregunta`
+-- Table `SICE`.`opcion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`pregunta` (
-  `id_pregunta` INT NOT NULL AUTO_INCREMENT,
-  `pregunta` VARCHAR(300) NOT NULL,
-  `tipo_pregunta_id_tipo_pregunta` INT NOT NULL,
-  PRIMARY KEY (`id_pregunta`),
-  INDEX `fk_pregunta_tipo_pregunta1_idx` (`tipo_pregunta_id_tipo_pregunta` ASC) VISIBLE,
-  CONSTRAINT `fk_pregunta_tipo_pregunta1`
-    FOREIGN KEY (`tipo_pregunta_id_tipo_pregunta`)
-    REFERENCES `integradora`.`tipo_pregunta` (`id_tipo_pregunta`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+CREATE TABLE IF NOT EXISTS `SICE`.`opcion` (
+                                               `id_opcion` INT NOT NULL AUTO_INCREMENT,
+                                               `opcion` VARCHAR(350) NOT NULL,
+    PRIMARY KEY (`id_opcion`))
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`opcion`
+-- Table `SICE`.`examen_tiene_pregunta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`opcion` (
-  `id_opcion` INT NOT NULL AUTO_INCREMENT,
-  `opcion` VARCHAR(350) NOT NULL,
-  PRIMARY KEY (`id_opcion`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `integradora`.`examen_tiene_pregunta`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`examen_tiene_pregunta` (
-  `examen_id_examen` INT NOT NULL,
-  `pregunta_id_pregunta` INT NOT NULL,
-  PRIMARY KEY (`examen_id_examen`, `pregunta_id_pregunta`),
-  INDEX `fk_examen_has_pregunta_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
-  INDEX `fk_examen_has_pregunta_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
-  CONSTRAINT `fk_examen_has_pregunta_examen1`
+CREATE TABLE IF NOT EXISTS `SICE`.`examen_tiene_pregunta` (
+                                                              `examen_id_examen` INT NOT NULL,
+                                                              `pregunta_id_pregunta` INT NOT NULL,
+                                                              PRIMARY KEY (`examen_id_examen`, `pregunta_id_pregunta`),
+    INDEX `fk_examen_has_pregunta_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
+    INDEX `fk_examen_has_pregunta_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
+    CONSTRAINT `fk_examen_has_pregunta_examen1`
     FOREIGN KEY (`examen_id_examen`)
-    REFERENCES `integradora`.`examen` (`id_examen`)
+    REFERENCES `SICE`.`examen` (`id_examen`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_examen_has_pregunta_pregunta1`
+    CONSTRAINT `fk_examen_has_pregunta_pregunta1`
     FOREIGN KEY (`pregunta_id_pregunta`)
-    REFERENCES `integradora`.`pregunta` (`id_pregunta`)
+    REFERENCES `SICE`.`pregunta` (`id_pregunta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`pregunta_opcion`
+-- Table `SICE`.`pregunta_opcion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`pregunta_opcion` (
-  `pregunta_id_pregunta` INT NOT NULL,
-  `opcion_id_opcion` INT NOT NULL,
-  `correcta` TINYINT NOT NULL,
-  PRIMARY KEY (`pregunta_id_pregunta`, `opcion_id_opcion`),
-  INDEX `fk_pregunta_has_opcion_opcion1_idx` (`opcion_id_opcion` ASC) VISIBLE,
-  INDEX `fk_pregunta_has_opcion_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
-  CONSTRAINT `fk_pregunta_has_opcion_pregunta1`
+CREATE TABLE IF NOT EXISTS `SICE`.`pregunta_opcion` (
+                                                        `pregunta_id_pregunta` INT NOT NULL,
+                                                        `opcion_id_opcion` INT NOT NULL,
+                                                        `correcta` TINYINT NOT NULL,
+                                                        PRIMARY KEY (`pregunta_id_pregunta`, `opcion_id_opcion`),
+    INDEX `fk_pregunta_has_opcion_opcion1_idx` (`opcion_id_opcion` ASC) VISIBLE,
+    INDEX `fk_pregunta_has_opcion_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
+    CONSTRAINT `fk_pregunta_has_opcion_pregunta1`
     FOREIGN KEY (`pregunta_id_pregunta`)
-    REFERENCES `integradora`.`pregunta` (`id_pregunta`)
+    REFERENCES `SICE`.`pregunta` (`id_pregunta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pregunta_has_opcion_opcion1`
+    CONSTRAINT `fk_pregunta_has_opcion_opcion1`
     FOREIGN KEY (`opcion_id_opcion`)
-    REFERENCES `integradora`.`opcion` (`id_opcion`)
+    REFERENCES `SICE`.`opcion` (`id_opcion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`periodo`
+-- Table `SICE`.`periodo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`periodo` (
-  `id_periodo` INT NOT NULL AUTO_INCREMENT,
-  `descripcion` VARCHAR(100) NOT NULL,
-  `fecha_inicio` DATE NOT NULL,
-  `fecha_final` DATE NOT NULL,
-  PRIMARY KEY (`id_periodo`))
-ENGINE = InnoDB;
+CREATE TABLE IF NOT EXISTS `SICE`.`periodo` (
+                                                `id_periodo` INT NOT NULL AUTO_INCREMENT,
+                                                `descripcion` VARCHAR(100) NOT NULL,
+    `fecha_inicio` DATE NOT NULL,
+    `fecha_final` DATE NOT NULL,
+    PRIMARY KEY (`id_periodo`))
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`aplicacion`
+-- Table `SICE`.`aplicacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`aplicacion` (
-  `id_aplicacion` INT NOT NULL AUTO_INCREMENT,
-  `periodo_id_periodo` INT NOT NULL,
-  `examen_id_examen` INT NOT NULL,
-  INDEX `fk_aplicacion_periodo1_idx` (`periodo_id_periodo` ASC) VISIBLE,
-  INDEX `fk_aplicacion_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
-  PRIMARY KEY (`id_aplicacion`),
-  CONSTRAINT `fk_aplicacion_periodo1`
+CREATE TABLE IF NOT EXISTS `SICE`.`aplicacion` (
+                                                   `id_aplicacion` INT NOT NULL AUTO_INCREMENT,
+                                                   `periodo_id_periodo` INT NOT NULL,
+                                                   `examen_id_examen` INT NOT NULL,
+                                                   INDEX `fk_aplicacion_periodo1_idx` (`periodo_id_periodo` ASC) VISIBLE,
+    INDEX `fk_aplicacion_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
+    PRIMARY KEY (`id_aplicacion`),
+    CONSTRAINT `fk_aplicacion_periodo1`
     FOREIGN KEY (`periodo_id_periodo`)
-    REFERENCES `integradora`.`periodo` (`id_periodo`)
+    REFERENCES `SICE`.`periodo` (`id_periodo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_aplicacion_examen1`
+    CONSTRAINT `fk_aplicacion_examen1`
     FOREIGN KEY (`examen_id_examen`)
-    REFERENCES `integradora`.`examen` (`id_examen`)
+    REFERENCES `SICE`.`examen` (`id_examen`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`grupo`
+-- Table `SICE`.`grupo`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`grupo` (
-  `id_grupo` INT NOT NULL AUTO_INCREMENT,
-  `grado` INT NOT NULL,
-  `grupo` VARCHAR(1) NOT NULL,
-  `periodo_id_periodo` INT NOT NULL,
-  INDEX `fk_grupos_periodo1_idx` (`periodo_id_periodo` ASC) VISIBLE,
-  PRIMARY KEY (`id_grupo`),
-  CONSTRAINT `fk_grupos_periodo1`
+CREATE TABLE IF NOT EXISTS `SICE`.`grupo` (
+                                              `id_grupo` INT NOT NULL AUTO_INCREMENT,
+                                              `grado` INT NOT NULL,
+                                              `grupo` VARCHAR(1) NOT NULL,
+    `periodo_id_periodo` INT NOT NULL,
+    INDEX `fk_grupos_periodo1_idx` (`periodo_id_periodo` ASC) VISIBLE,
+    PRIMARY KEY (`id_grupo`),
+    CONSTRAINT `fk_grupos_periodo1`
     FOREIGN KEY (`periodo_id_periodo`)
-    REFERENCES `integradora`.`periodo` (`id_periodo`)
+    REFERENCES `SICE`.`periodo` (`id_periodo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`respuesta_abierta`
+-- Table `SICE`.`respuesta_abierta`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`respuesta_abierta` (
-  `pregunta_id_pregunta` INT NOT NULL,
-  `aplicacion_id_aplicacion` INT NOT NULL,
-  `respuesta` VARCHAR(500) NULL,
-  `correcta` TINYINT NOT NULL,
-  PRIMARY KEY (`pregunta_id_pregunta`, `aplicacion_id_aplicacion`),
-  INDEX `fk_pregunta_has_aplicacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
-  INDEX `fk_pregunta_has_aplicacion_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
-  CONSTRAINT `fk_pregunta_has_aplicacion_pregunta1`
+CREATE TABLE IF NOT EXISTS `SICE`.`respuesta_abierta` (
+                                                          `pregunta_id_pregunta` INT NOT NULL,
+                                                          `aplicacion_id_aplicacion` INT NOT NULL,
+                                                          `respuesta` VARCHAR(500) NULL,
+    `correcta` TINYINT NOT NULL,
+    PRIMARY KEY (`pregunta_id_pregunta`, `aplicacion_id_aplicacion`),
+    INDEX `fk_pregunta_has_aplicacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
+    INDEX `fk_pregunta_has_aplicacion_pregunta1_idx` (`pregunta_id_pregunta` ASC) VISIBLE,
+    CONSTRAINT `fk_pregunta_has_aplicacion_pregunta1`
     FOREIGN KEY (`pregunta_id_pregunta`)
-    REFERENCES `integradora`.`pregunta` (`id_pregunta`)
+    REFERENCES `SICE`.`pregunta` (`id_pregunta`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pregunta_has_aplicacion_aplicacion1`
+    CONSTRAINT `fk_pregunta_has_aplicacion_aplicacion1`
     FOREIGN KEY (`aplicacion_id_aplicacion`)
-    REFERENCES `integradora`.`aplicacion` (`id_aplicacion`)
+    REFERENCES `SICE`.`aplicacion` (`id_aplicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`respuesta_opcion`
+-- Table `SICE`.`respuesta_opcion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`respuesta_opcion` (
-  `pregunta_opcion_pregunta_id_pregunta` INT NOT NULL,
-  `pregunta_opcion_opcion_id_opcion` INT NOT NULL,
-  `aplicacion_id_aplicacion` INT NOT NULL,
-  PRIMARY KEY (`pregunta_opcion_pregunta_id_pregunta`, `pregunta_opcion_opcion_id_opcion`, `aplicacion_id_aplicacion`),
-  INDEX `fk_pregunta_opcion_has_aplicacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
-  INDEX `fk_pregunta_opcion_has_aplicacion_pregunta_opcion1_idx` (`pregunta_opcion_pregunta_id_pregunta` ASC, `pregunta_opcion_opcion_id_opcion` ASC) VISIBLE,
-  CONSTRAINT `fk_pregunta_opcion_has_aplicacion_pregunta_opcion1`
+CREATE TABLE IF NOT EXISTS `SICE`.`respuesta_opcion` (
+                                                         `pregunta_opcion_pregunta_id_pregunta` INT NOT NULL,
+                                                         `pregunta_opcion_opcion_id_opcion` INT NOT NULL,
+                                                         `aplicacion_id_aplicacion` INT NOT NULL,
+                                                         PRIMARY KEY (`pregunta_opcion_pregunta_id_pregunta`, `pregunta_opcion_opcion_id_opcion`, `aplicacion_id_aplicacion`),
+    INDEX `fk_pregunta_opcion_has_aplicacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
+    INDEX `fk_pregunta_opcion_has_aplicacion_pregunta_opcion1_idx` (`pregunta_opcion_pregunta_id_pregunta` ASC, `pregunta_opcion_opcion_id_opcion` ASC) VISIBLE,
+    CONSTRAINT `fk_pregunta_opcion_has_aplicacion_pregunta_opcion1`
     FOREIGN KEY (`pregunta_opcion_pregunta_id_pregunta` , `pregunta_opcion_opcion_id_opcion`)
-    REFERENCES `integradora`.`pregunta_opcion` (`pregunta_id_pregunta` , `opcion_id_opcion`)
+    REFERENCES `SICE`.`pregunta_opcion` (`pregunta_id_pregunta` , `opcion_id_opcion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_pregunta_opcion_has_aplicacion_aplicacion1`
+    CONSTRAINT `fk_pregunta_opcion_has_aplicacion_aplicacion1`
     FOREIGN KEY (`aplicacion_id_aplicacion`)
-    REFERENCES `integradora`.`aplicacion` (`id_aplicacion`)
+    REFERENCES `SICE`.`aplicacion` (`id_aplicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+    ENGINE = InnoDB
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`calificacion`
+-- Table `SICE`.`calificacion`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`calificacion` (
-  `id_calificacion` INT NOT NULL AUTO_INCREMENT,
-  `calificacion` INT NULL,
-  `usuario_id_usuario` INT NOT NULL,
-  `aplicacion_id_aplicacion` INT NOT NULL,
-  PRIMARY KEY (`id_calificacion`),
-  INDEX `fk_calificacion_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
-  INDEX `fk_calificacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
-  CONSTRAINT `fk_calificacion_usuario1`
+CREATE TABLE IF NOT EXISTS `SICE`.`calificacion` (
+                                                     `id_calificacion` INT NOT NULL AUTO_INCREMENT,
+                                                     `calificacion` INT NULL,
+                                                     `usuario_id_usuario` INT NOT NULL,
+                                                     `aplicacion_id_aplicacion` INT NOT NULL,
+                                                     PRIMARY KEY (`id_calificacion`),
+    INDEX `fk_calificacion_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
+    INDEX `fk_calificacion_aplicacion1_idx` (`aplicacion_id_aplicacion` ASC) VISIBLE,
+    CONSTRAINT `fk_calificacion_usuario1`
     FOREIGN KEY (`usuario_id_usuario`)
-    REFERENCES `integradora`.`usuario` (`id_usuario`)
+    REFERENCES `SICE`.`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_calificacion_aplicacion1`
+    CONSTRAINT `fk_calificacion_aplicacion1`
     FOREIGN KEY (`aplicacion_id_aplicacion`)
-    REFERENCES `integradora`.`aplicacion` (`id_aplicacion`)
+    REFERENCES `SICE`.`aplicacion` (`id_aplicacion`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `integradora`.`grupo_tiene_usuario`
+-- Table `SICE`.`grupo_tiene_usuario`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `integradora`.`grupo_tiene_usuario` (
-  `grupo_id_grupo` INT NOT NULL,
-  `usuario_id_usuario` INT NOT NULL,
-  PRIMARY KEY (`grupo_id_grupo`, `usuario_id_usuario`),
-  INDEX `fk_grupo_has_usuario_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
-  INDEX `fk_grupo_has_usuario_grupo1_idx` (`grupo_id_grupo` ASC) VISIBLE,
-  CONSTRAINT `fk_grupo_has_usuario_grupo1`
+CREATE TABLE IF NOT EXISTS `SICE`.`grupo_tiene_usuario` (
+                                                            `grupo_id_grupo` INT NOT NULL,
+                                                            `usuario_id_usuario` INT NOT NULL,
+                                                            PRIMARY KEY (`grupo_id_grupo`, `usuario_id_usuario`),
+    INDEX `fk_grupo_has_usuario_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
+    INDEX `fk_grupo_has_usuario_grupo1_idx` (`grupo_id_grupo` ASC) VISIBLE,
+    CONSTRAINT `fk_grupo_has_usuario_grupo1`
     FOREIGN KEY (`grupo_id_grupo`)
-    REFERENCES `integradora`.`grupo` (`id_grupo`)
+    REFERENCES `SICE`.`grupo` (`id_grupo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_grupo_has_usuario_usuario1`
+    CONSTRAINT `fk_grupo_has_usuario_usuario1`
     FOREIGN KEY (`usuario_id_usuario`)
-    REFERENCES `integradora`.`usuario` (`id_usuario`)
+    REFERENCES `SICE`.`usuario` (`id_usuario`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+    ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
