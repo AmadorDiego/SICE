@@ -13,7 +13,7 @@
 <html>
 <head>
     <title>Exámenes Pendientes</title>
-    <link rel="stylesheet" href="CSS/bootstrap.css">
+    <link rel="stylesheet" href="../../CSS/bootstrap.css">
 </head>
 <body>
 <div class="container">
@@ -53,7 +53,7 @@
     </table>
 </div>
 
-<script src="JS/jquery-3.7.0.js"></script>
-<script src="JS/bootstrap.js"></script>
+<script src="../../JS/jquery-3.7.0.js"></script>
+<script src="../../JS/bootstrap.js"></script>
 </body>
 </html>
