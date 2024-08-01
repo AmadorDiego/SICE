@@ -1,3 +1,40 @@
-.bg-blue-800 {
+.bg-blue-utz {
     background-color: #002E60;
-  }
+}
+.bg-green-utz {
+    background-color: #009475;
+}
+.bg-green-SICE {
+    background-color: #9EAF9B;
+}
+.bg-green-SICE-obscuro {
+    background-color: #00604C;
+}
+.bg-gray-SICE {
+    background-color: #949495;
+}
+.bg-red-SICE {
+    background-color: #CA4E4E;
+}
+
+
+
+
+.blue-utz {
+    color: #002E60;
+}
+.green-utz {
+    color: #009475;
+}
+.green-SICE-fondos {
+    color: #9EAF9B;
+}
+.green-SICE-obscuro {
+    color: #00604C;
+}
+.gray-SICE {
+    color: #949495;
+}
+.red-SICE {
+    color: #CA4E4E;
+}
