@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="CSS/bootstrap.css">
+    <link rel="stylesheet" href="../CSS/bootstrap.css">
     <!-- <link rel="stylesheet" href="CSS/adicionales.css"> -->
 </head>
 <body>
@@ -32,8 +32,8 @@
 </div>
 
 <a href="solicitudRecuperacion.jsp">¿Olvisdaste tu contraseña?</a>
-<a href="registroUsuario.jsp">Registrarme</a>
-<a href="gestionUsuario.jsp">Ver usuarios</a>
+<a href="Administrador/registroUsuario.jsp">Registrarme</a>
+<a href="Administrador/gestionUsuario.jsp">Ver usuarios</a>
 <a href="pdf">Generar archivo PDF</a>
 </body>
 </html>

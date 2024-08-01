@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Crear Examen</title>
-    <link rel="stylesheet" href="CSS/bootstrap.css">
+    <link rel="stylesheet" href="../../CSS/bootstrap.css">
 </head>
 <body>
 <div class="container">
@@ -69,8 +69,8 @@
     </form>
 </div>
 
-<script src="JS/jquery-3.7.0.js"></script>
-<script src="JS/bootstrap.js"></script>
+<script src="../../JS/jquery-3.7.0.js"></script>
+<script src="../../JS/bootstrap.js"></script>
 <script>
     $(document).ready(function() {
         // Mostrar/ocultar campos según la opción seleccionada

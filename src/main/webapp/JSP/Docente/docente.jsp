@@ -55,7 +55,7 @@
     <a href="examen.jsp">Crear examen</a>
     <a href="examen2.jsp">Crear examen</a>
 
-    <script src="JS/jquery-3.7.0.js"></script>
-    <script src="JS/bootstrap.js"></script>
+    <script src="../../JS/jquery-3.7.0.js"></script>
+    <script src="../../JS/bootstrap.js"></script>
 </body>
 </html>

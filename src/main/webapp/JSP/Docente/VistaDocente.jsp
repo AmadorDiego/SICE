@@ -12,8 +12,8 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Bienvenido</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link rel='stylesheet' type='text/css' media='screen' href='CSS/bootstrap.css'>
-    <link rel='stylesheet' type='text/css' media='screen' href='CSS/adicionales.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/adicionales.css'>
 </head>
 
 
@@ -23,7 +23,7 @@
     <nav class="navbar navbar-light bg-blue-utz">
         <div class="container-fluid">
             <a class="navbar-brand" href="VistaDocente.html">
-                <img src="IMG/LogoUtez.png" alt="" width="80" height="auto" class="d-inline-block align-text-top">
+                <img src="../../IMG/LogoUtez.png" alt="" width="80" height="auto" class="d-inline-block align-text-top">
                 <h3 class="d-inline-block align-text-top text-white">SICE</h3>
             </a>
         </div>
@@ -68,7 +68,7 @@
 </div>
 
 
-<script src='JS/bootstrap.js'></script>
+<script src='../../JS/bootstrap.js'></script>
 
 </body>
 </html>
