@@ -10,19 +10,26 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Bienvenido</title>
+    <title>Bienvenido Docente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/bootstrap.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/adicionales.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/fondo.css'>
 </head>
 
 
-<body style="background-color: #D9D9D9">
+<body>
+<!--/////////////////////////////////// Fondo //////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+
 <!-- //////////////////////////// Navbar /////////////////////////////////-->
 <header>
     <nav class="navbar navbar-light bg-blue-utz">
         <div class="container-fluid">
-            <a class="navbar-brand" href="VistaDocente.html">
+            <a class="navbar-brand" href="../Docente/VistaDocente.jsp">
                 <img src="../../IMG/LogoUtez.png" alt="" width="80" height="auto" class="d-inline-block align-text-top">
                 <h3 class="d-inline-block align-text-top text-white">SICE</h3>
             </a>
