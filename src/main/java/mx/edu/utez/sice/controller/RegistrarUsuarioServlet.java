@@ -42,7 +42,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
             //Mensaje para visar que las contras no son iguales
             resp.sendRedirect("registroUsuario.jsp");
         }
-        u.setEstado(true);
+        u.setEstado(1);
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
