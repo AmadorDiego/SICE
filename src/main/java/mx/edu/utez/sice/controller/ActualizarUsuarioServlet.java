@@ -31,6 +31,7 @@ public class ActualizarUsuarioServlet extends HttpServlet {
     //Esto es para inicio de sesión
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario u = new Usuario();
+        u.setId_usuario(Integer.parseInt(req.getParameter("id_usuario")));
         u.setNombre_usuario(req.getParameter("nombre_usuario"));
         u.setApellido_usuario(req.getParameter("apellido_usuario"));
         u.setCorreo_electronico(req.getParameter("correo_electronico"));
@@ -38,13 +39,19 @@ public class ActualizarUsuarioServlet extends HttpServlet {
             u.setContrasena(req.getParameter("contrasena1"));
         }else{
             //Mensaje para visar que las contras no son iguales
+            req.getSession().setAttribute("mensaje", "Las contraseñas no coinciden");
             resp.sendRedirect("JSP/Administrador/registroUsuario.jsp");
         }
-        u.setEstado(0);
+        //u.setEstado(0);
+        u.setEstado(req.getParameter("estado") != null ? 1 : 0);
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
-        dao.updateDocenteAdministrador(u);
+        if (dao.updateDocenteAdministrador(u)) {
+            req.getSession().setAttribute("mensaje", "Se actualizó correctamente");
+        } else {
+            req.getSession().setAttribute("mensaje", "Error al actualizar");
+        }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
         /*if (dao.updateDocenteAdministrador(u)){
             req.getSession().setAttribute("mensaje","se actualizo");

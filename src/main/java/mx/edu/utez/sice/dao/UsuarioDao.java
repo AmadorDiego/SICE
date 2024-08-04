@@ -169,6 +169,9 @@ public class UsuarioDao {
             ps.setInt(5,u.getEstado());
             ps.setInt(6,u.getId_tipo_usuario());
             ps.setInt(7,u.getId_usuario());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }

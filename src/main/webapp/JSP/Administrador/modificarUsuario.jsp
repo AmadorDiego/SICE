@@ -15,8 +15,13 @@
 <%
     HttpSession sesion = request.getSession();
     Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    if (usuario == null) {
+        response.sendRedirect("index.jsp"); // Redirect if user is not found
+        return;
+    }
 %>
 <form method="post" action="../../ActualizarUsuarioServlet">
+    <input type="hidden" name="id_usuario" value="<%= usuario.getId_usuario() %>">
     <label>Ingrese su nombre: </label>
     <input type="text" name="nombre_usuario" required value="<%= usuario.getNombre_usuario()%>" placeholder="<%= usuario.getNombre_usuario()%>">
     <br>
@@ -45,7 +50,7 @@
     </select>
     <br>
     <!--<input type="hidden" name="operación" value="">-->
-    <input type="submit">
+    <input type="submit" value="Actualizar">
 </form>
 </body>
 </html>
