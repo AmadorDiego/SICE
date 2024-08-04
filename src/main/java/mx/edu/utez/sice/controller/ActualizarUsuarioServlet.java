@@ -40,26 +40,16 @@ public class ActualizarUsuarioServlet extends HttpServlet {
             //Mensaje para visar que las contras no son iguales
             resp.sendRedirect("JSP/Administrador/registroUsuario.jsp");
         }
-        if (Boolean.parseBoolean(req.getParameter("estado"))){
-            u.setEstado(1);
-        }else{
-            u.setEstado(0);
-        }
+        u.setEstado(0);
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
         dao.updateDocenteAdministrador(u);
-        /*
-        //Ver si esta haciendo un insert o un update
-        if(req.getParameter("operacion") != "") {
-            //es un update
-            u.setId_usuario(Integer.parseInt(req.getParameter("operacion")));
-            dao.updateDocenteAdministrativo(u);
-        }else{
-            //Es un insert
-
+        resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
+        /*if (dao.updateDocenteAdministrador(u)){
+            req.getSession().setAttribute("mensaje","se actualizo");
+        }else {
+            req.getSession().setAttribute("mensaje","no se actualizo");
         }*/
-        resp.sendRedirect("index.jsp");
-        req.getSession().setAttribute("mensaje","se actualizo");
     }
 }

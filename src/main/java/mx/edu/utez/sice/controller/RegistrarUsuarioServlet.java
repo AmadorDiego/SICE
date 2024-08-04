@@ -57,7 +57,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
             //Es un insert
 
         }*/
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
         req.getSession().setAttribute("mensaje","se inserto");
     }
 }

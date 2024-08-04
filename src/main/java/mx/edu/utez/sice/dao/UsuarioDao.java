@@ -90,7 +90,7 @@ public class UsuarioDao {
     //Encargado de insertar un nuevo usuario exclusivamente para un administrador, docente o ambos
     public boolean insertDocenteAdministrador(Usuario u){
         boolean flag = false;
-        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, tipo_usuario_id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, null);";
+        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, null);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -112,7 +112,7 @@ public class UsuarioDao {
     //Encargado de insertar un nuevo alumno
     public boolean insertAlumno(Usuario u){
         boolean flag = false;
-        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, tipo_usuario_id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, ?);";
+        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, ?);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -158,15 +158,17 @@ public class UsuarioDao {
     }
     public boolean updateDocenteAdministrador(Usuario u){
         boolean flag = false;
-        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, tipo_usuario_id_tipo_usuario = ? where id_usuario = ?";
+        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, contrasena = sha2(?,256), estado = ?, id_tipo_usuario = ? where id_usuario = ?";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,u.getNombre_usuario());
             ps.setString(2,u.getApellido_usuario());
             ps.setString(3,u.getCorreo_electronico());
-            ps.setInt(4,u.getId_tipo_usuario());
-            ps.setInt(5,u.getId_usuario());
+            ps.setString(4,u.getContrasena());
+            ps.setInt(5,u.getEstado());
+            ps.setInt(6,u.getId_tipo_usuario());
+            ps.setInt(7,u.getId_usuario());
         }catch (SQLException e){
             e.printStackTrace();
         }
