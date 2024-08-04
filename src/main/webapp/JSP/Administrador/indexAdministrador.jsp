@@ -40,7 +40,20 @@
             <td><%=u.getApellido_usuario()%></td>
             <td><%=u.getCorreo_electronico()%></td>
             <td><%=u.getEstado()==1 ? "Habilitado":"Deshabilitado"%></td>
-            <td><%=u.getId_usuario()%></td>
+            <td><% switch(u.getId_tipo_usuario()){
+                case 1:%>
+                <%="Administrador"%><%
+                break;
+                case 2:%>
+                <%="Docente"%><%
+                    break;
+                case 3:%>
+                <%="Alumno"%><%
+                    break;
+                case 4:%>
+                <%="Docente administrador"%><%
+                    break;
+            }%></td>
             <td><%=u.getFecha_registrado()%></td>
             <td><a href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Actualizar</a></td>
             <td><a href="logico?id=<%=u.getId_usuario()%>">Eliminar</a></td>
