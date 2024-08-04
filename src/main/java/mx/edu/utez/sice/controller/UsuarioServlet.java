@@ -36,7 +36,7 @@ public class UsuarioServlet extends HttpServlet {
             System.out.println("El usuario " + correo_electronico + " Si esta en la BD");
             switch (usr.getId_tipo_usuario()) {
                 case 1:
-                    resp.sendRedirect("JSP/Administrador/administrador.jsp");
+                    resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
                     break;
                 case 2:
                     resp.sendRedirect("JSP/Docente/docente.jsp");

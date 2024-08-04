@@ -15,7 +15,7 @@ import java.io.IOException;
 public class ActualizarUsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // obtenemos el id del usuario, recabado por parte del link "actualizar" que está dentro de la tabla de
-        // la vista gestionUsuario.jsp
+        // la vista indexAdministrador.jsp
         int id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
         // el id identifica al usuario y necesitamos un método Para obtener su información (DAO)
         UsuarioDao dao = new UsuarioDao();
@@ -48,7 +48,7 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
-        dao.updateDocenteAdministrativo(u);
+        dao.updateDocenteAdministrador(u);
         /*
         //Ver si esta haciendo un insert o un update
         if(req.getParameter("operacion") != "") {

@@ -5,11 +5,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <title>Bienvenido administrador</title>
     <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
 </head>
 <body>
+    <h1>Bienvenido administrador</h1>
+    <a href="registroUsuario.jsp">Registrar usuario</a>
     <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
     <table id="usuarios" class="table table-striped table-hover">
         <thead>

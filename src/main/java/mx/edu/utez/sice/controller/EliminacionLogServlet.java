@@ -21,6 +21,6 @@ public class EliminacionLogServlet extends HttpServlet {
         }else{
             sesion.setAttribute("mensaje","Fallo la eliminación logica");
         }
-        resp.sendRedirect("gestionUsuario.jsp");
+        resp.sendRedirect("indexAdministrador.jsp");
     }
 }

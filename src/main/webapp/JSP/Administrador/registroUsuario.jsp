@@ -9,7 +9,7 @@
     HttpSession sesion = request.getSession();
     Usuario usuario = (Usuario) sesion.getAttribute("usuario");
 %>
-<form method="post" action="sign_in">
+<form method="post" action="RegistrarUsuarioServlet">
     <label>Ingrese su nombre: </label>
     <input type="text" name="nombre_usuario" value="">
     <br>

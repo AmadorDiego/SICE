@@ -53,6 +53,10 @@ public class UsuarioDao {
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setEstado(rs.getInt("estado"));
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
+                //en caso de que el ID del tipo de usuario obtenido sea 3 (un alumno), seteamos el ID de su carrera
+                if (usuario.getId_tipo_usuario()==3){
+                    usuario.setId_carrera(rs.getInt("carrera_id_carrera"));
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -72,8 +76,9 @@ public class UsuarioDao {
             if(rs.next()){
                 usuario.setId_usuario(rs.getInt("id_usuario"));
                 usuario.setNombre_usuario(rs.getString("nombre_usuario"));
-                usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setApellido_usuario(rs.getString("apellido_usuario"));
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
+                usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setEstado(rs.getInt("estado"));
             }
         } catch (SQLException e) {
@@ -83,7 +88,7 @@ public class UsuarioDao {
     }
 
     //Encargado de insertar un nuevo usuario exclusivamente para un administrador, docente o ambos
-    public boolean insertDocenteAdministrativo(Usuario u){
+    public boolean insertDocenteAdministrador(Usuario u){
         boolean flag = false;
         String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, tipo_usuario_id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, null);";
         try{
@@ -151,7 +156,7 @@ public class UsuarioDao {
         }
         return lista;
     }
-    public boolean updateDocenteAdministrativo(Usuario u){
+    public boolean updateDocenteAdministrador(Usuario u){
         boolean flag = false;
         String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, tipo_usuario_id_tipo_usuario = ? where id_usuario = ?";
         try{

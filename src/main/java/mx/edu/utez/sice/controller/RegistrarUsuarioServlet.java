@@ -11,7 +11,7 @@ import mx.edu.utez.sice.model.Usuario;
 
 import java.io.IOException;
 
-@WebServlet(name = "RegistrarUsuarioServlet", value = "/sign_in")
+@WebServlet(name = "RegistrarUsuarioServlet", value = "/RegistrarUsuarioServlet")
 public class RegistrarUsuarioServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1) obtener la información del usuario
@@ -46,7 +46,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
-        dao.insertDocenteAdministrativo(u);
+        dao.insertDocenteAdministrador(u);
         /*
         //Ver si esta haciendo un insert o un update
         if(req.getParameter("operacion") != "") {
