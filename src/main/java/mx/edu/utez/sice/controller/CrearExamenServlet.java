@@ -17,7 +17,7 @@ public class CrearExamenServlet extends HttpServlet {
         ExamenDao dao = new ExamenDao();
         List<Examen> examenes = dao.getAll();
         request.setAttribute("examenes", examenes);
-        request.getRequestDispatcher("docente.jsp").forward(request, response);
+        request.getRequestDispatcher("indexDocente.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

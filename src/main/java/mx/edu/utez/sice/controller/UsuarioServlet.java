@@ -39,13 +39,13 @@ public class UsuarioServlet extends HttpServlet {
                     resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
                     break;
                 case 2:
-                    resp.sendRedirect("JSP/Docente/docente.jsp");
+                    resp.sendRedirect("JSP/Docente/indexDocente.jsp");
                     break;
                 case 3:
-                    resp.sendRedirect("JSP/Alumno/alumno.jsp");
+                    resp.sendRedirect("JSP/Alumno/indexAlumno.jsp");
                     break;
                 case 4:
-                    resp.sendRedirect("JSP/Docente-Administrador/docenteAdministrador.jsp");
+                    resp.sendRedirect("JSP/Docente-Administrador/indexDocenteAdministrador.jsp");
                     break;
             }
         }
