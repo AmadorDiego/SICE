@@ -6,8 +6,8 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/CSS/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="/CSS/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
 </head>
 <body>
     <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
@@ -37,26 +37,26 @@
             <td><%=u.getNombre_usuario()%></td>
             <td><%=u.getApellido_usuario()%></td>
             <td><%=u.getCorreo_electronico()%></td>
-            <td><%=u.isEstado() ? "Habilitado":"Deshabilitado"%></td>
+            <td><%=u.getEstado()==1 ? "Habilitado":"Deshabilitado"%></td>
             <td><%=u.getId_usuario()%></td>
             <td><%=u.getFecha_registrado()%></td>
-            <td><a href="sign_in?id=<%=u.getId_usuario()%>">Actualizar</a></td>
+            <td><a href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Actualizar</a></td>
             <td><a href="logico?id=<%=u.getId_usuario()%>">Eliminar</a></td>
         </tr>
         <% } %>
         </tbody>
     </table>
-    <script src="/JS/jquery-3.7.0.js"></script>
-    <script src="/JS/bootstrap.js"></script>
-    <script src="/JS/datatables.js"></script>
-    <script src="/JS/dataTables.bootstrap5.js"></script>
-    <script src="/JS/es-MX.json"></script>
+    <script src="../../JS/jquery-3.7.0.js"></script>
+    <script src="../../JS/bootstrap.js"></script>
+    <script src="../../JS/datatables.js"></script>
+    <script src="../../JS/dataTables.bootstrap5.js"></script>
+    <script src="../../JS/es-MX.json"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const table = document.getElementById('usuarios');
             new DataTable(table, {
                 language: {
-                    url: '/JS/es-MX.json'
+                    url: '../../JS/es-MX.json'
                 }
             });
         });
