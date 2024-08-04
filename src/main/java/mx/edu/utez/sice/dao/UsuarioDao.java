@@ -28,7 +28,7 @@ public class UsuarioDao {
             if(rs.next()){
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
                 usuario.setContrasena(rs.getString("contrasena"));
-                usuario.setId_tipo_usuario(rs.getInt("tipo_usuario_id_tipo_usuario"));
+                usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

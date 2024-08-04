@@ -9,12 +9,12 @@ import mx.edu.utez.sice.dao.UsuarioDao;
 import mx.edu.utez.sice.model.Usuario;
 import java.io.IOException;
 
-@WebServlet(name = "UsuarioServlet",value = "/login")
+@WebServlet(name = "UsuarioServlet",value = "/UsuarioServlet")
 public class UsuarioServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Conseguimos la info del formulario
-        //donde los inputs se llamen asi:
+        //donde los inputs se llamen así:
         String correo_electronico = req.getParameter("correo_electronico");
         String contrasena = req.getParameter("contrasena");
 
@@ -36,16 +36,16 @@ public class UsuarioServlet extends HttpServlet {
             System.out.println("El usuario " + correo_electronico + " Si esta en la BD");
             switch (usr.getId_tipo_usuario()) {
                 case 1:
-                    resp.sendRedirect("administrador.jsp");
+                    resp.sendRedirect("JSP/Administrador/administrador.jsp");
                     break;
                 case 2:
-                    resp.sendRedirect("docente.jsp");
+                    resp.sendRedirect("JSP/Docente/docente.jsp");
                     break;
                 case 3:
-                    resp.sendRedirect("alumno.jsp");
+                    resp.sendRedirect("JSP/Alumno/alumno.jsp");
                     break;
                 case 4:
-                    resp.sendRedirect("docenteAdministrador.jsp");
+                    resp.sendRedirect("JSP/Docente-Administrador/docenteAdministrador.jsp");
                     break;
             }
         }
