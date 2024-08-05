@@ -11,8 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Examen</title>
-    <link href="../css/style.css" rel="stylesheet">
-    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/bootstrap.css" rel="stylesheet">
 
     <style>
         .navbar{
