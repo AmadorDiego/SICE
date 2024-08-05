@@ -181,7 +181,22 @@ public class UsuarioDao {
 
     public boolean eliminarLogico(int id_usuario) {
         boolean flag = false;
-        String query = "update usuario set estado = 0 where id_usuario = ?;";
+        String query = "update usuario set estado = 2 where id_usuario = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_usuario);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+    public boolean restaurarUsuario(int id_usuario) {
+        boolean flag = false;
+        String query = "update usuario set estado = 1 where id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);

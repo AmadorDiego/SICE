@@ -52,10 +52,5 @@ public class ActualizarUsuarioServlet extends HttpServlet {
             req.getSession().setAttribute("mensaje", "Error al actualizar");
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
-        /*if (dao.updateDocenteAdministrador(u)){
-            req.getSession().setAttribute("mensaje","se actualizo");
-        }else {
-            req.getSession().setAttribute("mensaje","no se actualizo");
-        }*/
     }
 }

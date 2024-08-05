@@ -43,11 +43,12 @@
         </div>
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" disabled role="switch" name="estado" id="estado" <% if(usuario.getEstado()==1){%>checked<%}%>>
-            <label class="form-check-label" for="estado">Estado: <% if(usuario.getEstado() == 1){%>Habilitado<%}else{%>Deshabilitado<%}%> </label>
+            <label class="form-check-label" for="estado">Estado: <% if(usuario.getEstado() == 1){%>Habilitado<%}else if (usuario.getEstado() == 0){%>Deshabilitado<%} else{%>Eliminado<%}%> </label>
         </div>
         <div>
             <label class="form-label">Tipo de usuario: </label>
-            <input class="form-control" type="text" disabled value="<% switch(usuario.getId_tipo_usuario()){case 1:%><%="Administrador"%><%break;case 2:%><%="Docente"%><%break;case 3:%><%="Alumno"%><%break;case 4:%><%="Docente administrador"%><%break;}%>">
+            <input class="form-control" type="text" disabled value="<% switch(usuario.getId_tipo_usuario()){case 1:%><%="Administrador"%><%break;case 2:%><%="Docente"%><%break;case 3:%><%="Alumno"%><%break;case 4:%><%="Docente administrador"%><%break;
+            }%>">
             <br>
         </div>
         <div>

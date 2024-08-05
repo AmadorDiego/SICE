@@ -15,7 +15,7 @@
 </nav>
     <h1>Bienvenido administrador</h1>
     <a href="registroUsuario.jsp">Registrar usuario</a>
-    <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
+    <a href="verUsuarioEliminado.jsp">Ver usuarios eliminados</a>
     <table id="usuarios" class="table table-striped table-hover">
         <thead>
             <tr>
@@ -35,7 +35,7 @@
             // TODOS los usuarios
             UsuarioDao dao = new UsuarioDao();
             ArrayList<Usuario> lista = dao.getAll();
-            for(Usuario u : lista){//Por cada usuario de la lista %>
+            for(Usuario u : lista){ if (u.getEstado()!=2){//Por cada usuario de la lista %>
         <tr>
             <td><%=u.getNombre_usuario()%></td>
             <td><%=u.getApellido_usuario()%></td>
@@ -59,7 +59,7 @@
             <td><a href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver ></a></td>
             <td><a href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a></td>
         </tr>
-        <% } %>
+        <% }} %>
         </tbody>
     </table>
     <script src="../../JS/jquery-3.7.0.js"></script>
@@ -77,6 +77,12 @@
             });
         });
     </script>
+<div class="container-sm">
+    <% if ((String)request.getSession().getAttribute("mensaje") != null){%><div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong><%=(String)request.getSession().getAttribute("mensaje")%></strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div><%}%>
+</div>
     <%
         request.getSession().removeAttribute("mensaje");
     %>

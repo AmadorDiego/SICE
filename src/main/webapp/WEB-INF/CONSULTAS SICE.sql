@@ -18,6 +18,11 @@
 
 
 /*
+	en la columna llamada "estado" de la tabla "usuario" el...
+	0 = deshabilitado
+	1 = habilitado
+	2 = eliminado (de manera lógica)
+
 	id_tipo_usuario
 
 	1		Administrador

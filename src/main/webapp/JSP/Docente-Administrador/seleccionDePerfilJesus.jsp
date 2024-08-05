@@ -29,7 +29,7 @@
         <h2>Escoge tu perfil:</h2>
         <br><br>
         <div class="contenedor">
-            <div class="contenido" onclick="location.href='../html/Contenido_Docente.html'">
+            <div class="contenido" onclick="location.href='../../HTML/Contenido_Docente.html'">
                 <img src="../recursos/docente.png" alt="Perfil docente" class="img-fluid">
                 <br><br>
                 <h3><strong>Docente</strong></h3>
