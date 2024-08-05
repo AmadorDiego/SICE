@@ -46,18 +46,12 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
-        dao.insertDocenteAdministrador(u);
-        /*
-        //Ver si esta haciendo un insert o un update
-        if(req.getParameter("operacion") != "") {
-            //es un update
-            u.setId_usuario(Integer.parseInt(req.getParameter("operacion")));
-            dao.updateDocenteAdministrativo(u);
-        }else{
-            //Es un insert
-
-        }*/
+        HttpSession sesion = req.getSession();
+        if (dao.insertDocenteAdministrador(u)){
+            sesion.setAttribute("mensaje","Se insertó correctamente el usuario");
+        }else {
+            sesion.setAttribute("mensaje","Ocurrio un error al insertar el usuario");
+        }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
-        req.getSession().setAttribute("mensaje","se inserto");
     }
 }

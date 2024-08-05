@@ -1,3 +1,4 @@
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/adicionales.css">
 </head>
+
 <body class="multi-repeating-linear">
 <div class="container">
     <img id="imagen_esq_derecha" src="./IMG/colorArriba.png">

@@ -47,9 +47,9 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
         if (dao.updateDocenteAdministrador(u)) {
-            req.getSession().setAttribute("mensaje", "Se actualizó correctamente");
+            req.getSession().setAttribute("mensaje", "Se actualizarón correctamente los datos del usuario");
         } else {
-            req.getSession().setAttribute("mensaje", "Error al actualizar");
+            req.getSession().setAttribute("mensaje", "Ocurrio un error al actualizar los datos del usuario");
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }

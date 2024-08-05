@@ -15,55 +15,66 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <!-- Navbar content -->
-</nav>
-<h1>Bienvenido administrador</h1>
-<a href="registroUsuario.jsp">Registrar usuario</a>
-<table id="usuarios" class="table table-striped table-hover">
-    <thead>
-    <tr>
-        <th>NOMBRE</th>
-        <th>APELLIDO</th>
-        <th>CORREO</th>
-        <th>TIPO DE USUARIO</th>
-        <th>FECHA REGISTRADO</th>
-        <th>VER</th>
-        <th>RESTAURAR</th>
-    </tr>
-    </thead>
-    <tbody>
+<br>
+<div class="container-xl">
+    <h1>Usuarios eliminados:</h1>
+    <div>
+        <a class="btn btn-primary" href="indexAdministrador.jsp"> Regresar </a>
+    </div>
+    <br>
+    <div class="container-sm">
+        <% if ((String)request.getSession().getAttribute("mensaje") != null){%><div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong><%=(String)request.getSession().getAttribute("mensaje")%></strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div><%}%>
+    </div>
+</div>
+<div class="container text-center">
+    <table id="usuarios" class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Tipo de usuario</th>
+            <th>Fecha registrado</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
 
-    <%  // necesitamos acceder a la base de datos y obtener
-        // TODOS los usuarios
-        UsuarioDao dao = new UsuarioDao();
-        ArrayList<Usuario> lista = dao.getAll();
-        for(Usuario u : lista){ if (u.getEstado()==2){//Por cada usuario de la lista "eliminado"%>
-    <tr>
-        <td><%=u.getNombre_usuario()%></td>
-        <td><%=u.getApellido_usuario()%></td>
-        <td><%=u.getCorreo_electronico()%></td>
-        <td><% switch(u.getId_tipo_usuario()){
-            case 1:%>
-            <%="Administrador"%><%
-                    break;
-                case 2:%>
-            <%="Docente"%><%
-                    break;
-                case 3:%>
-            <%="Alumno"%><%
-                    break;
-                case 4:%>
-            <%="Docente administrador"%><%
+        <%  // necesitamos acceder a la base de datos y obtener
+            // TODOS los usuarios
+            UsuarioDao dao = new UsuarioDao();
+            ArrayList<Usuario> lista = dao.getAll();
+            for(Usuario u : lista){ if (u.getEstado()==2){//Por cada usuario de la lista "eliminado"%>
+        <tr>
+            <td><%=u.getNombre_usuario()%></td>
+            <td><%=u.getApellido_usuario()%></td>
+            <td><%=u.getCorreo_electronico()%></td>
+            <td><% switch(u.getId_tipo_usuario()){
+                case 1:%>
+                <%="Administrador"%><%
                         break;
-                }%></td>
-        <td><%=u.getFecha_registrado()%></td>
-        <td><a href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver ></a></td>
-        <td><a href="../../RestaurarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Restaurar ></a></td>
-    </tr>
-    <% }} %>
-    </tbody>
-</table>
+                    case 2:%>
+                <%="Docente"%><%
+                        break;
+                    case 3:%>
+                <%="Alumno"%><%
+                        break;
+                    case 4:%>
+                <%="Docente administrador"%><%
+                            break;
+                    }%></td>
+            <td><%=u.getFecha_registrado()%></td>
+            <td><a class="btn btn-primary" href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a></td>
+            <td><a class="btn btn-primary" href="../../RestaurarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Restaurar</a></td>
+        </tr>
+        <% }} %>
+        </tbody>
+    </table>
+</div>
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
 <script src="../../JS/datatables.js"></script>
@@ -79,12 +90,7 @@
         });
     });
 </script>
-<div class="container-sm">
-    <% if ((String)request.getSession().getAttribute("mensaje") != null){%><div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong><%=(String)request.getSession().getAttribute("mensaje")%></strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div><%}%>
-</div>
+
 <%
     request.getSession().removeAttribute("mensaje");
 %>

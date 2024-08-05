@@ -17,9 +17,9 @@ public class EliminacionLogServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
         if(dao.eliminarLogico(id_usuario)){
-            sesion.setAttribute("mensaje","Usuario eliminado logicamente con exito");
+            sesion.setAttribute("mensaje","Usuario eliminado correctamente");
         }else{
-            sesion.setAttribute("mensaje","Fallo la eliminación logica");
+            sesion.setAttribute("mensaje","Ocurrio un error al eliminar el usuario");
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }

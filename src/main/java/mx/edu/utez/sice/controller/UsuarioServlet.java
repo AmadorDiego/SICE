@@ -24,10 +24,8 @@ public class UsuarioServlet extends HttpServlet {
         Usuario usr = dao.getOne(correo_electronico, contrasena);
         if(usr.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
-            System.out.println("El usuario " + correo_electronico + " No existe en la BD");
-
             HttpSession session = req.getSession();
-            session.setAttribute("mensaje","El usuario no existe en la BD");
+            session.setAttribute("mensaje","Correo y/o contraseña incorrecta");
             session.setAttribute("id_usuario",usr.getId_usuario());
 
             resp.sendRedirect("loginSICE.jsp");
