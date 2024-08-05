@@ -19,7 +19,7 @@
         </div>
         <br>
         <div class="container-sm">
-            <% if ((String)request.getSession().getAttribute("mensaje") != null){%><div class="alert alert-success alert-dismissible fade show" role="alert">
+            <% if ((String)request.getSession().getAttribute("mensaje") != null){%><div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> alert-dismissible fade show" role="alert">
             <strong><%=(String)request.getSession().getAttribute("mensaje")%></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div><%}%>

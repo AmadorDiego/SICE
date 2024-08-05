@@ -48,9 +48,11 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
         if (dao.insertDocenteAdministrador(u)){
-            sesion.setAttribute("mensaje","Se insertó correctamente el usuario");
+            sesion.setAttribute("mensaje","Se registró correctamente el usuario");
+            sesion.setAttribute("flag", true);
         }else {
-            sesion.setAttribute("mensaje","Ocurrio un error al insertar el usuario");
+            sesion.setAttribute("mensaje","Ocurrio un error al registrar el usuario");
+            sesion.setAttribute("flag", false);
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }
