@@ -11,8 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calificar Examenes</title>
-    <link href="../css/bootstrap.css" rel="stylesheet">
-    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
         .filter-group {
             display: flex;
