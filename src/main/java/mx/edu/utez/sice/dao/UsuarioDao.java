@@ -255,7 +255,7 @@ public class UsuarioDao {
     cerrar sesiones*/
 
 
-/*
+    /*
     public boolean eliminarFisico(int id) {
         boolean flag = false;
         String query = "delete from usuario where id = ?";

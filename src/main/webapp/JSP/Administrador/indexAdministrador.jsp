@@ -10,6 +10,9 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
 </head>
 <body>
+<nav class="navbar navbar-dark bg-dark">
+    <!-- Navbar content -->
+</nav>
     <h1>Bienvenido administrador</h1>
     <a href="registroUsuario.jsp">Registrar usuario</a>
     <h3 style="color: red"><%=(String)request.getSession().getAttribute("mensaje")%></h3>
@@ -23,7 +26,8 @@
                 <th>ESTADO</th>
                 <th>TIPO DE USUARIO</th>
                 <th>FECHA REGISTRADO</th>
-                <th>MODIFICAR</th>
+                <th>VER</th>
+                <th>ACTUALIZAR</th>
                 <th>ELIMINAR</th>
             </tr>
         </thead>
@@ -55,6 +59,7 @@
                     break;
             }%></td>
             <td><%=u.getFecha_registrado()%></td>
+            <td><a href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver ></a></td>
             <td><a href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Actualizar</a></td>
             <td><a href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a></td>
         </tr>
