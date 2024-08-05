@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form method="post" action="solicitudRecuperacion">
+    <form method="post" action="RecuperacionServlet">
         <label>Correo electronico: </label>
         <input type="email" required
                name="correo" placeholder="ejemplo@gmail.com">

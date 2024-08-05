@@ -25,7 +25,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         HttpSession sesion = req.getSession();
         sesion.setAttribute("usuario", u);
         //Aqui sera donde vamos a editar la información a modificar
-        resp.sendRedirect("modificarUsuario.jsp");
+        resp.sendRedirect("actualizarUsuario.jsp");
 
         // 3) update (se va a hacer en otro servlet)
     }

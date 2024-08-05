@@ -158,7 +158,7 @@ public class UsuarioDao {
     }
     public boolean updateDocenteAdministrador(Usuario u){
         boolean flag = false;
-        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, contrasena = sha2(?,256), estado = ?, id_tipo_usuario = ? where id_usuario = ?";
+        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, contrasena = sha2(?,256), estado = ?, id_tipo_usuario = ? where id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -178,13 +178,13 @@ public class UsuarioDao {
         return flag;
     }
 
-    public boolean eliminarLogico(int id) {
+    public boolean eliminarLogico(int id_usuario) {
         boolean flag = false;
-        String query = "update usuario set estado = 0 where id = ?";
+        String query = "update usuario set estado = 0 where id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,id);
+            ps.setInt(1,id_usuario);
             if(ps.executeUpdate()>0){
                 flag = true;
             }

@@ -20,6 +20,8 @@
         return;
     }
 %>
+
+
 <form method="post" action="../../ActualizarUsuarioServlet">
     <input type="hidden" name="id_usuario" value="<%= usuario.getId_usuario() %>">
     <label>Ingrese su nombre: </label>

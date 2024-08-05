@@ -56,7 +56,7 @@
             }%></td>
             <td><%=u.getFecha_registrado()%></td>
             <td><a href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Actualizar</a></td>
-            <td><a href="logico?id=<%=u.getId_usuario()%>">Eliminar</a></td>
+            <td><a href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a></td>
         </tr>
         <% } %>
         </tbody>

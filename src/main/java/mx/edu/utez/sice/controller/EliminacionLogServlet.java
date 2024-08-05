@@ -10,17 +10,17 @@ import mx.edu.utez.sice.dao.UsuarioDao;
 
 import java.io.IOException;
 
-@WebServlet(name = "EliminacionLogServlet", value = "/eliminacionLogica")
+@WebServlet(name = "EliminacionLogServlet", value = "/EliminacionLogServlet")
 public class EliminacionLogServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
-        if(dao.eliminarLogico(id)){
+        if(dao.eliminarLogico(id_usuario)){
             sesion.setAttribute("mensaje","Usuario eliminado logicamente con exito");
         }else{
             sesion.setAttribute("mensaje","Fallo la eliminación logica");
         }
-        resp.sendRedirect("indexAdministrador.jsp");
+        resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }
 }

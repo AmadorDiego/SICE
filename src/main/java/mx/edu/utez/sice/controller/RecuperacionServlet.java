@@ -12,7 +12,7 @@ import mx.edu.utez.sice.utils.SimpleRandomStringGenerator;
 
 import java.io.IOException;
 
-@WebServlet(name = "RecuperacionServlet",value = "/solicitudRecuperacion")
+@WebServlet(name = "RecuperacionServlet",value = "/RecuperacionServlet")
 public class RecuperacionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //Checar que el código exista en la BD

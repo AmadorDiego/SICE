@@ -20,11 +20,11 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         // el id identifica al usuario y necesitamos un método Para obtener su información (DAO)
         UsuarioDao dao = new UsuarioDao();
         Usuario usuario = dao.getOne(id_usuario);
-        // llevamos la información a un formulario que está en la vista modificarUsuario.jsp para actualizar
+        // llevamos la información a un formulario que está en la vista actualizarUsuario.jsp para actualizar
         HttpSession sesion = req.getSession();
         sesion.setAttribute("usuario", usuario);
         // aqui vamos a actualizar los datos del usuario anteriormente seleccionado
-        resp.sendRedirect("JSP/Administrador/modificarUsuario.jsp");
+        resp.sendRedirect("JSP/Administrador/actualizarUsuario.jsp");
         // proseguimos con un update
     }
 
