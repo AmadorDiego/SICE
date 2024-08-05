@@ -17,39 +17,45 @@
         }
     %>
     <title>Perfil de <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></title>
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
 </head>
 <body>
-
-    <input type="hidden" name="id_usuario" value="<%= usuario.getId_usuario() %>">
-    <label>Ingrese su nombre: </label>
-    <input type="text" disabled name="nombre_usuario" value="<%= usuario.getNombre_usuario()%>" placeholder="<%= usuario.getNombre_usuario()%>">
-    <br>
-    <label>Ingrese su apellido: </label>
-    <input type="text" disabled name="apellido_usuario" value="<%= usuario.getApellido_usuario()%>" placeholder="<%= usuario.getApellido_usuario()%>">
-    <br>
-    <label>Ingrese su correo electrónico: </label>
-    <input type="email" disabled name="correo_electronico" value="<%= usuario.getCorreo_electronico()%>" placeholder="<%= usuario.getCorreo_electronico()%>">
-    <br>
-    <label>Ingrese su contraseña: </label>
-    <input type="password" disabled name="contrasena1">
-    <br>
-    <label>Reingrese su contraseña: </label>
-    <input type="password" disabled name="contrasena2">
-    <br>
-    <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" disabled role="switch" name="estado" id="estado" <% if(usuario.getEstado()==1){%>checked<%}%>>
-        <label class="form-check-label" for="estado">Estado</label>
+<div class="container-sm">
+    <h1 class="h1">Perfil de <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
+    <div class="container-sm">
+        <div>
+            <input class="text-center"  type="hidden" name="id_usuario" value="<%= usuario.getId_usuario() %>">
+        </div>
+        <div>
+            <label class="form-label">Nombre(s): </label>
+            <input class="form-control" type="text" disabled name="nombre_usuario" value="<%= usuario.getNombre_usuario()%>" placeholder="<%= usuario.getNombre_usuario()%>">
+            <br>
+        </div>
+        <div>
+            <label class="form-label">Apellido(s): </label>
+            <input class="form-control" type="text" disabled name="apellido_usuario" value="<%= usuario.getApellido_usuario()%>" placeholder="<%= usuario.getApellido_usuario()%>">
+            <br>
+        </div>
+        <div>
+            <label class="form-label">Correo electrónico: </label>
+            <input class="form-control" type="email" disabled name="correo_electronico" value="<%= usuario.getCorreo_electronico()%>" placeholder="<%= usuario.getCorreo_electronico()%>">
+            <br>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" disabled role="switch" name="estado" id="estado" <% if(usuario.getEstado()==1){%>checked<%}%>>
+            <label class="form-check-label" for="estado">Estado: <% if(usuario.getEstado() == 1){%>Habilitado<%}else{%>Deshabilitado<%}%> </label>
+        </div>
+        <div>
+            <label class="form-label">Tipo de usuario: </label>
+            <input class="form-control" type="text" disabled value="<% switch(usuario.getId_tipo_usuario()){case 1:%><%="Administrador"%><%break;case 2:%><%="Docente"%><%break;case 3:%><%="Alumno"%><%break;case 4:%><%="Docente administrador"%><%break;}%>">
+            <br>
+        </div>
+        <div>
+            <label class="form-label">Fecha registrado: </label>
+            <input class="form-control" type="text" disabled value="<%= usuario.getFecha_registrado()%>">
+        </div>
+        <a href="../../ActualizarUsuarioServlet?id_usuario=<%= usuario.getId_usuario()%>">Actualizar ></a>
     </div>
-    <label>Seleccione el tipo de usuario: </label>
-    <select name="id_tipo_usuario" disabled>
-        <option value="1" <% if(usuario.getId_tipo_usuario()==1){%>selected<%}%>>Administrador</option>
-        <option value="2" <% if(usuario.getId_tipo_usuario()==2){%>selected<%}%>>Docente</option>
-        <option value="3" <% if(usuario.getId_tipo_usuario()==3){%>selected<%}%>>Alumno</option>
-        <option value="4" <% if(usuario.getId_tipo_usuario()==4){%>selected<%}%>>Docente administrador</option>
-    </select>
-    <br>
-    <label>Fecha registrado: </label>
-    <input type="date" disabled value="<%= usuario.getFecha_registrado()%>">
-    <a href="../../ActualizarUsuarioServlet?id_usuario=<%= usuario.getId_usuario()%>">Actualizar ></a>
+</div>
 </body>
 </html>

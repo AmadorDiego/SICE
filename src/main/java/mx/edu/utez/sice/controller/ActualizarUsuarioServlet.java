@@ -42,7 +42,6 @@ public class ActualizarUsuarioServlet extends HttpServlet {
             req.getSession().setAttribute("mensaje", "Las contraseñas no coinciden");
             resp.sendRedirect("JSP/Administrador/registroUsuario.jsp");
         }
-        //u.setEstado(0);
         u.setEstado(req.getParameter("estado") != null ? 1 : 0);
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
         //Debemos mandar a llamar un DAO que me permita insertar

@@ -53,6 +53,7 @@ public class UsuarioDao {
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setEstado(rs.getInt("estado"));
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
+                usuario.setFecha_registrado(rs.getString("fecha_registrado"));
                 //en caso de que el ID del tipo de usuario obtenido sea 3 (un alumno), seteamos el ID de su carrera
                 if (usuario.getId_tipo_usuario()==3){
                     usuario.setId_carrera(rs.getInt("carrera_id_carrera"));
