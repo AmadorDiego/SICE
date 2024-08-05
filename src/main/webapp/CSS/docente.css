@@ -1,4 +1,4 @@
-/*! ----------------------Estilo para docente----------------------------*/
+/*! ----------------------Estilo para docente de pau ----------------------------*/
 body {
     font-family: Arial, sans-serif;
     background-color: #e0e0e0;
@@ -38,4 +38,41 @@ th, td {
 th {
     background-color: #e0e0e0;
     font-weight: bold;
+}
+/*! ----------------------Estilo para docente de piero ----------------------------*/
+/* Estilo para la barra superior */
+.navbar {
+    background-color: #003366; /* Azul oscuro */
+    height: 60px; /* Ajusta la altura de la barra */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+/* Estilo para el contenido */
+body {
+    background-color: #ffffff; /* Fondo verde claro */
+    margin-top: 60px; /* Ajustar margen superior para la barra fija */
+}
+
+/* Estilo para el contenedor del botón de inicio */
+.home-boton-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Estilo para el botón de inicio */
+.home-boton {
+    background-color: #00604C; /* Color de fondo verde oscuro */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.home-boton img {
+    width: 20px;
+    height: 20px;
 }
