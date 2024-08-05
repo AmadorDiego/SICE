@@ -7,8 +7,8 @@ body {
 }
 
 .bg {
-  animation:slide 3s ease-in-out infinite alternate;
-  background-image: linear-gradient(-60deg, #002E60 50%, #00604C 50%);
+  animation:slide 22s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, rgba(0, 46, 96, 0.6) 50%, rgba(0, 96, 76, 0.6) 50%);
   bottom:0;
   left:-50%;
   opacity:.5;
@@ -20,11 +20,11 @@ body {
 
 .bg2 {
   animation-direction:alternate-reverse;
-  animation-duration:4s;
+  animation-duration:24s;
 }
 
 .bg3 {
-  animation-duration:5s;
+  animation-duration:26s;
 }
 
 .content {
@@ -40,9 +40,6 @@ body {
   transform:translate(-50%, -50%);
 }
 
-h1 {
-  font-family:monospace;
-}
 
 @keyframes slide {
   0% {

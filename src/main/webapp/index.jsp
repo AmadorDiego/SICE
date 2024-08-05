@@ -1,42 +1,71 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
-<html>
+
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
-    <link rel="stylesheet" href="CSS/bootstrap.css">
-    <link rel="stylesheet" href="CSS/adicionales.css">
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>SICE Examenes</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='CSS/bootstrap.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='CSS/adicionalesEBM.css'>
+    <link rel='stylesheet' type='text/css' media='screen' href='CSS/fondoLandingPage.css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
-<body class="multi-repeating-linear">
-<div class="container">
-    <img id="imagen_esq_derecha" src="./IMG/colorArriba.png">
-    <form  method="post" action="UsuarioServlet" id="loginForm" class="form">
-        <div id="imagenLogo"><img src="./IMG/logo.png"></div>
-        <h3  >Inicio de Sesión</h3>
-        <br>
-        <div class="form-group">
-            <label for="correo">Correo electrónico: </label>
-            <input type="email" class="form-control" id="correo" name="correo_electronico" required>
+<body>
+<!-- //////////////////////////// Navbar /////////////////////////////////-->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-blue-utz">
+        <div class="container-fluid">
+            <h2 class="text-white p-2 me-4">SICE</h2>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mb-1">
+                    <li class="nav-item me-2">
+                        <a class="text-white btn bg-green-utz d-flex align-items-center justify-content-center" href="loginSICE.jsp"><h6 class="mb-0 p-1">Iniciar Sesion</h6></a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="contrasena">Contraseña: </label>
-            <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+    </nav>
+</header>
+
+<!--////////////////////////////////////Fondo//////////////////////////////////////////////-->
+<div class="bg-container">
+    <div class="area" >
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</div>
+
+
+
+<!--///////////////////////////////////Contenido (Descripccion)///////////////////////////////////////////-->
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-md-6 position-absolute top-50 start-20 translate-middle-y p-2">
+            <h1 class="blue-utz">¡Bienvenido a SICE!</h1>
+            <h2 class="blue-utz">(Sistema de Creacion de Examenes)</h2>
         </div>
 
-        <div class="submit-container">
-            <input type="submit" value="Iniciar sesión" id="loginBtn">
+
+        <div class="col-md-6 position-absolute top-50 end-0 translate-middle-y p-3">
+            <div class="bg-blue-utz rounded-5 p-3">
+                <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
+                <a type="button" class="btn bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
+            </div>
         </div>
-        <%
-            HttpSession sesion = request.getSession();
-            String mensaje = (String) sesion.getAttribute("mensaje");
-            if(mensaje != null){ %>
-        <p style="color: red"><%=mensaje%></p>
-        <% } %>
-    </form>
+    </div>
 </div>
-<img id="imagen_esq_izq" src="./IMG/colorAbajo.png">
 </body>
 </html>
-
-

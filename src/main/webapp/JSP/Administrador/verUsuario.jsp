@@ -12,7 +12,7 @@
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
         if (usuario == null) {
-            response.sendRedirect("index.jsp"); // Redirect if user is not found
+            response.sendRedirect("loginSICE.jsp"); // Redirect if user is not found
             return;
         }
     %>
