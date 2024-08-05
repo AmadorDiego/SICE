@@ -18,7 +18,7 @@ public class ContrasenaServlet extends HttpServlet{
         //Deberiamos cambiar la contra y el codigo de una vez
         if(dao.actualizarContrasena(contra, codigo)){
             //Si se hizo
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("loginSICE.jsp");
         }else{
             //Nose hizo error*
         }

@@ -24,7 +24,7 @@ public class RecuperacionServlet extends HttpServlet {
         }else{
             //Decirle al usuario que el código no sirve o esta expirado
             req.getSession().setAttribute("mensaje", "El código no sirve o esta expirado");
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("loginSICE.jsp");
         }
     }
 
@@ -51,14 +51,14 @@ public class RecuperacionServlet extends HttpServlet {
                                 "<a href=\"http://localhost:8080/PruebaA_war_exploded/solicitudRecuperacion?codigo="+codigo+"\">haz click AQUI PARA RESTABLECER TU CONTRASEÑA</a>";
                 gmail.sendMail(para,asunto,mensaje);
                 req.getSession().setAttribute("mensaje","Favor de revisar tu correo electronico y la carpeta de SPAM");
-                resp.sendRedirect("index.jsp");
+                resp.sendRedirect("loginSICE.jsp");
             }catch(Exception e){
                 e.printStackTrace();
             }
         }else{
             //No existe o no puede cambiar su contraseña
             req.getSession().setAttribute("mensaje","El usuario no existe en la BD");
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("loginSICE.jsp");
         }
     }
     //5) Mandar al usuario a cambiar su contraseña (vista recuperacion.jsp)

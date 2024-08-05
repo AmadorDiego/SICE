@@ -30,7 +30,7 @@ public class UsuarioServlet extends HttpServlet {
             session.setAttribute("mensaje","El usuario no existe en la BD");
             session.setAttribute("id_usuario",usr.getId_usuario());
 
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("loginSICE.jsp");
         }else{
             //Si existe en la base de datos
             System.out.println("El usuario " + correo_electronico + " Si esta en la BD");
