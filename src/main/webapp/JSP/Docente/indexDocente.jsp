@@ -13,7 +13,7 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Inicio docente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="CSS/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
         body {
             background-color: #f0f0f0;
