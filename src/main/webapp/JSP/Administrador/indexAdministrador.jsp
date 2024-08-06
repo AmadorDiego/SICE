@@ -79,8 +79,8 @@
                             <th></th>
                         </tr>
                         </thead>
-                        <tbody class="bg-green-SICE">
 
+                        <tbody class="bg-green-utz">
                         <% // necesitamos acceder a la base de datos y obtener
                             // TODOS los usuarios
                             UsuarioDao dao = new UsuarioDao();
@@ -88,15 +88,15 @@
                             for (Usuario u : lista) {
                                 if (u.getEstado() != 2) {//Por cada usuario de la lista %>
                         <tr>
-                            <td><%=u.getNombre_usuario()%>
+                            <td class="text-white"><%=u.getNombre_usuario()%>
                             </td>
-                            <td><%=u.getApellido_usuario()%>
+                            <td class="text-white"><%=u.getApellido_usuario()%>
                             </td>
-                            <td><%=u.getCorreo_electronico()%>
+                            <td class="text-white"><%=u.getCorreo_electronico()%>
                             </td>
-                            <td><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
+                            <td class="text-white"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
                             </td>
-                            <td><% switch (u.getId_tipo_usuario()) {
+                            <td class="text-white"><% switch (u.getId_tipo_usuario()) {
                                 case 1:%>
                                 <%="Administrador"%><%
                                         break;
@@ -110,7 +110,7 @@
                                 <%="Docente administrador"%><%
                                             break;
                                     }%></td>
-                            <td><%=u.getFecha_registrado()%>
+                            <td class="text-white"><%=u.getFecha_registrado()%>
                             </td>
                             <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white" href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
                             </td>
