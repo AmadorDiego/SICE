@@ -12,34 +12,40 @@
     <link rel="stylesheet" href="../../CSS/bootstrap.css">
 </head>
 <body>
-<div class="container">
+<div class="container mt-5">
     <h1>Crear Nuevo Examen</h1>
-    <form action="${pageContext.request.contextPath}/crear" method="post">
+    <form action="${pageContext.request.contextPath}/crear" method="post" id="id_examen">
         <div class="mb-3">
             <label for="nombre_examen" class="form-label">Nombre del Examen</label>
             <input type="text" class="form-control" id="nombre_examen" name="nombre_examen" required>
         </div>
-        <div class="mb-3 form-check">
+
+        <div class="mb-3">
+            <label for="descripcion" class="form-label">Descripcion</label>
+            <textarea class="form-control" id="descripcion" name="descripcion"></textarea>
+        </div>
+
+        <!--<div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="estado" name="estado">
             <label class="form-check-label" for="estado">Activo</label>
-        </div>
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
+        </div>-->
+
+        <div id="id_preguntas">
+            <!--Aqui van las preguntas dinamicamente-->
         </div>
 
         <!-- Agregar Pregunta -->
-        <div class="mb-3">
+        <!--<div class="mb-3">
             <label for="agregar_pregunta">Agregar Pregunta</label>
             <select class="form-control" id="agregar_pregunta" name="agregar_pregunta">
                 <option value="">Seleccione una opción</option>
                 <option value="opcion_multiple">Pregunta Opción Múltiple</option>
                 <option value="respuesta_abierta">Pregunta Respuesta Abierta</option>
             </select>
-        </div>
+        </div>-->
 
         <!-- Campos para Pregunta Opción Múltiple -->
-        <div class="mb-3 d-none" id="campos_opcion_multiple">
+        <!--<div class="mb-3 d-none" id="campos_opcion_multiple">
             <label for="pregunta_opcion_multiple">Pregunta</label>
             <input type="text" class="form-control" id="pregunta_opcion_multiple" name="pregunta_opcion_multiple">
             <label for="respuesta_opcion_multiple">Respuesta</label>
@@ -50,7 +56,7 @@
                     Respuesta Correcta
                 </label>
             </div>
-        </div>
+        </div>-->
 
         <!-- Campos para Pregunta Respuesta Abierta -->
         <div class="mb-3 d-none" id="campos_respuesta_abierta">
@@ -59,18 +65,23 @@
         </div>
 
         <!-- Agregar Imagen -->
-        <div class="mb-3">
+        <!--<div class="mb-3">
             <label for="agregar_imagen">Agregar Imagen</label>
             <input type="file" class="form-control" id="agregar_imagen" name="agregar_imagen">
-        </div>
+        </div>-->
 
-        <input type="hidden" name="usuario_id_usuario" value="${sessionScope.usuario.id_usuario}">
-        <button type="submit" class="btn btn-primary">Crear Examen</button>
+        <!--<input type="hidden" name="usuario_id_usuario" value="${sessionScope.usuario.id_usuario}">
+        <button type="submit" class="btn btn-primary">Crear Examen</button>-->
+
+        <button type="button" class="btn btn-secondary" onclick="agregarPregunta()">Agregar Pregunta</button>
+        <button type="submit" class="btn btn-primary">Guardar Examen</button>
+
     </form>
 </div>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
+<script src="../../JS/ScriptExamen.js"></script>
 <script>
     $(document).ready(function() {
         // Mostrar/ocultar campos según la opción seleccionada

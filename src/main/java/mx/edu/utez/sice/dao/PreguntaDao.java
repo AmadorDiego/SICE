@@ -18,8 +18,8 @@ public class PreguntaDao {
     public boolean insertPregunta(Pregunta pregunta) {
         try {
             // Preparar la consulta SQL para insertar una nueva pregunta
-            String sql = "INSERT INTO pregunta (pregunta, tipo_pregunta_id_tipo_pregunta) VALUES (?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            String query = "INSERT INTO pregunta (pregunta, tipo_pregunta_id_tipo_pregunta) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, pregunta.getPregunta());
             statement.setInt(2, pregunta.getId_tipo_pregunta());
 
@@ -37,9 +37,9 @@ public class PreguntaDao {
         List<Pregunta> preguntas = new ArrayList<>();
         try {
             // Preparar la consulta SQL para obtener todas las preguntas
-            String sql = "SELECT id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta FROM pregunta";
+            String query = "SELECT id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta FROM pregunta";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(query);
 
             // Iterar sobre los resultados y crear objetos Pregunta
             while (resultSet.next()) {
