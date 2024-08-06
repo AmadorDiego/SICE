@@ -11,6 +11,9 @@
 .bg-green-SICE-obscuro {
     background-color: #00604C;
 }
+.bg-green-utz-claro{
+    background-color: #48A18C;
+}
 .bg-gray-SICE {
     background-color: #949495;
 }
@@ -32,6 +35,9 @@
 }
 .green-SICE-obscuro {
     color: #00604C;
+}
+.green-utz-claro{
+    color: #48A18C;
 }
 .gray-SICE {
     color: #949495;
