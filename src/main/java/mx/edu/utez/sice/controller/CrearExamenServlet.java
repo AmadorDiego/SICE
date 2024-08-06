@@ -23,7 +23,7 @@ public class CrearExamenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Examen examen = new Examen();
         examen.setNombre_examen(req.getParameter("nombre_examen"));
-        examen.setEstado(Boolean.parseBoolean(req.getParameter("estado")));
+        examen.setEstado(Integer.parseInt(req.getParameter("estado")));
         examen.setDescripcion(req.getParameter("descripcion"));
         examen.setId_usuario(Integer.parseInt(req.getParameter("usuario_id_usuario")));
 

@@ -9,6 +9,10 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 
 <body>
@@ -42,7 +46,7 @@
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
     <div class="col-12">
-        <h1 class="text-white">Bienvenido administrador</h1>
+        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
         <div>
             <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0">Ver usuarios eliminados</a>
             <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0">Registrar usuario</a>
