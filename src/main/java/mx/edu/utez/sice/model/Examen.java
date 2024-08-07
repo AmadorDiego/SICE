@@ -88,4 +88,7 @@ public class Examen {
     public void setPreguntas(ArrayList<Pregunta> preguntas) {
         this.preguntas = preguntas;
     }
+
+    public void setEstado(boolean b) {
+    }
 }
