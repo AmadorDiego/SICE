@@ -12,21 +12,21 @@ import java.io.IOException;
 import java.util.List;
 
 @WebServlet (name="CrearExamenServlet", value = "/examen")
-public class CrearExamenServlet extends HttpServlet {
+public class ExamenServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
 
         if ("crear".equals(action)) {
             // Preparar para la creación de un nuevo examen
             request.setAttribute("modo", "crear");
-            request.getRequestDispatcher("examen.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/Docente/examen.jsp").forward(request, response);
         } else {
             // Lógica existente para mostrar todos los exámenes
             ExamenDao dao = new ExamenDao();
             List<Examen> examenes = dao.getAll();
             request.setAttribute("examenes", examenes);
             request.setAttribute("modo", "listar");
-            request.getRequestDispatcher("examen.jsp").forward(request, response);
+            request.getRequestDispatcher("/jsp/Docente/examen.jsp").forward(request, response);
         }
     }
 
