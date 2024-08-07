@@ -33,11 +33,7 @@ public class CrearExamenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Examen examen = new Examen();
         examen.setNombre_examen(req.getParameter("nombre_examen"));
-<<<<<<< HEAD
-        examen.setEstado(Integer.parseInt(req.getParameter("estado")));
-=======
-        examen.setEstado(true); // Asumimos que el examen se crea activo
->>>>>>> 152ed2d6e57f4fa9bb9a3832ee275f874d73af08
+        //examen.setEstado(true); // Asumimos que el examen se crea activo, despues lo activo, RECORDATORIO ELIAS
         examen.setDescripcion(req.getParameter("descripcion"));
         examen.setId_usuario(1);
 
