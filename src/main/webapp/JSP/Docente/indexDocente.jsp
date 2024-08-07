@@ -1,5 +1,7 @@
+
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="mx.edu.utez.sice.model.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -7,11 +9,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>Inicio docente</title>
+
+    <title>Bienvenido docente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
@@ -41,7 +45,10 @@
             color: white;
         }
     </style>
-
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -62,47 +69,47 @@
                     <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
                 </div>
             </div>
-
-
         </div>
     </div>
 </nav>
 
-<!--Modofique container-->
 <div class="container my-2 my-md-4">
-    <div class="row"> <!--Aqui todo lo meti por medio de un div y class row-->
-        <h1 class="text-start mb-3">¡Bienvenido Docente!</h1>
+    <div class="row">
+        <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
         <h3 class="text-start mb-4">Exámenes creados</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div class="d-flex align-items-center">
                 <span class="me-2">Crear examen</span>
-                <button class="btn btn-primary">Crear</button>
-                <div>
-                    <!--Separe lo que fue crear y examenes por div y agregue clases a cada uno-->
-                </div class="d-flex align-items-center">
+                <a class="btn btn-primary" href="../../CrearExamenServlet?action=crear">Crear</a>
+            </div>
+            <div class="d-flex align-items-center">
                 <span class="me-2">Exámenes por calificar</span>
                 <button class="btn btn-primary">Ver</button>
             </div>
         </div>
 
-        <!--Modifique las tablas para ajustarlas-->
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="thead">
                 <tr>
                     <th>Examen</th>
-                    <th>Descripcion</th>
+                    <th>Descripción</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Aqui se van a agregar los datos de la tabla -->
+                <c:forEach var="examen" items="${examenes}">
+                    <tr>
+                        <td>${examen.nombre_examen}</td>
+                        <td>${examen.descripcion}</td>
+                    </tr>
+                </c:forEach>
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
+
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
 </body>

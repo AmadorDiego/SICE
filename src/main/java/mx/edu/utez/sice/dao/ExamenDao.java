@@ -6,7 +6,6 @@ import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExamenDao {
     public boolean insertExamen(Examen examen) {
@@ -16,7 +15,7 @@ public class ExamenDao {
 
             ps.setString(1, examen.getNombre_examen());
             //ps.setInt(2, examen.getCantidad_preguntas());
-            ps.setBoolean(2, examen.isEstado());
+            ps.setInt(2, examen.getEstado());
             ps.setString(3, examen.getDescripcion());
             ps.setInt(4, examen.getId_usuario());
 
@@ -28,27 +27,24 @@ public class ExamenDao {
         }
     }
 
-    public ArrayList<Examen> getAll() {
-        ArrayList<Examen> examenes = new ArrayList<>();
-        String query = "SELECT * FROM examen";
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
+    public ArrayList<Examen> getAll(){
+        ArrayList<Examen> lista = new ArrayList<>();
+        String query = "select * from Usuario";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
+            PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
+            ResultSet rs = ps.executeQuery(); //ejecutar
+            while (rs.next()) { //lo ejecuta por cada ususario en la base de datos
                 Examen examen = new Examen();
                 examen.setId_examen(rs.getInt("id_examen"));
                 examen.setNombre_examen(rs.getString("nombre_examen"));
                 examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
-                examen.setEstado(rs.getBoolean("estado"));
-                examen.setDescripcion(rs.getString("descripcion"));
-                examen.setId_usuario(rs.getInt("usuario_id_usuario"));
-                examenes.add(examen);
+                examen.setEstado(rs.getInt("estado"));
+                lista.add(examen);
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        }catch (SQLException e){
         }
-        return examenes;
+        return lista;
     }
 
     // Otros métodos CRUD según sea necesario
@@ -60,7 +56,7 @@ public class ExamenDao {
 
             pstmt.setString(1, examen.getNombre_examen());
             pstmt.setInt(2, examen.getCantidad_preguntas());
-            pstmt.setBoolean(3, examen.isEstado());
+            pstmt.setBoolean(3, examen.getEstado());
             pstmt.setString(4, examen.getDescripcion());
             pstmt.setInt(5, examen.getId_usuario());
 

@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <hr style="color: white">
+    <hr style=" color: white">
 
 
     <!--////////////////////////////// Contenido principal(Tarjetas) ////////////////////////////-->

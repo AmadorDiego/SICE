@@ -9,6 +9,10 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 
 <body>
@@ -42,7 +46,7 @@
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
     <div class="col-12">
-        <h1 class="text-white">Bienvenido administrador</h1>
+        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
         <div>
             <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0">Ver usuarios eliminados</a>
             <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0">Registrar usuario</a>
@@ -142,9 +146,40 @@
         </script>
 
     </div>
-        <%
+    <%
         request.getSession().removeAttribute("mensaje");
     %>
 </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const myModal = document.getElementById('myModal')
+    const myInput = document.getElementById('myInput')
+
+    myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+    })
+</script>
 </body>
 </html>

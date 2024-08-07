@@ -11,37 +11,97 @@ public class PreguntaDao {
 
     public PreguntaDao() {
         // Obtener la conexión a la base de datos
-        Connection getConnection = null; //Se inicializa la variable get conection
+        Connection getConnection = null; // Se inicializa la variable getConnection
         this.connection = getConnection;  // código para obtener la conexión
     }
 
     public boolean insertPregunta(Pregunta pregunta) {
         try {
-            // Preparar la consulta SQL para insertar una nueva pregunta
-            String sql = "INSERT INTO pregunta (pregunta, tipo_pregunta_id_tipo_pregunta) VALUES (?, ?)";
-            PreparedStatement statement = connection.prepareStatement(sql);
+            String query = "INSERT INTO pregunta (pregunta, tipo_pregunta_id_tipo_pregunta) VALUES (?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, pregunta.getPregunta());
             statement.setInt(2, pregunta.getId_tipo_pregunta());
 
-            // Ejecutar la consulta y obtener el resultado
             int rowsAffected = statement.executeUpdate();
-            return rowsAffected > 0;
+
+            if (rowsAffected > 0) {
+                // Obtener el ID generado
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    pregunta.setId_pregunta(generatedKeys.getInt(1));
+                }
+                return true;
+            }
+            return false;
         } catch (SQLException e) {
-            // Manejar la excepción
             e.printStackTrace();
             return false;
         }
     }
 
+    public boolean updatePregunta(Pregunta pregunta) {
+        try {
+            String query = "UPDATE pregunta SET pregunta = ?, tipo_pregunta_id_tipo_pregunta = ? WHERE id_pregunta = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, pregunta.getPregunta());
+            statement.setInt(2, pregunta.getId_tipo_pregunta());
+            statement.setInt(3, pregunta.getId_pregunta());
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean deletePregunta(int idPregunta) {
+        try {
+            // Primero, eliminar las relaciones en la tabla examen_tiene_pregunta
+            String deleteRelationQuery = "DELETE FROM examen_tiene_pregunta WHERE pregunta_id_pregunta = ?";
+            PreparedStatement deleteRelationStatement = connection.prepareStatement(deleteRelationQuery);
+            deleteRelationStatement.setInt(1, idPregunta);
+            deleteRelationStatement.executeUpdate();
+
+            // Luego, eliminar la pregunta
+            String deletePreguntaQuery = "DELETE FROM pregunta WHERE id_pregunta = ?";
+            PreparedStatement deletePreguntaStatement = connection.prepareStatement(deletePreguntaQuery);
+            deletePreguntaStatement.setInt(1, idPregunta);
+
+            int rowsAffected = deletePreguntaStatement.executeUpdate();
+            return rowsAffected > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Pregunta getPreguntaById(int idPregunta) {
+        try {
+            String query = "SELECT id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta FROM pregunta WHERE id_pregunta = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idPregunta);
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id_pregunta");
+                String preguntaText = resultSet.getString("pregunta");
+                int tipoPreguntaId = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
+                return new Pregunta(id, preguntaText, tipoPreguntaId);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public List<Pregunta> getAllPreguntas() {
         List<Pregunta> preguntas = new ArrayList<>();
         try {
-            // Preparar la consulta SQL para obtener todas las preguntas
-            String sql = "SELECT id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta FROM pregunta";
+            String query = "SELECT id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta FROM pregunta";
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery(query);
 
-            // Iterar sobre los resultados y crear objetos Pregunta
             while (resultSet.next()) {
                 int id_pregunta = resultSet.getInt("id_pregunta");
                 String pregunta = resultSet.getString("pregunta");
@@ -50,25 +110,33 @@ public class PreguntaDao {
                 preguntas.add(p);
             }
         } catch (SQLException e) {
-            // Manejar la excepción
             e.printStackTrace();
         }
         return preguntas;
     }
 
-    // Agrega otros métodos CRUD según tus necesidades
-    public Pregunta getPreguntaById(int id) {
-        // Implementa la lógica para obtener una pregunta por su ID
-        return null;
-    }
+    // Método adicional para obtener las preguntas de un examen específico
+    public List<Pregunta> getPreguntasByExamenId(int examenId) {
+        List<Pregunta> preguntas = new ArrayList<>();
+        try {
+            String query = "SELECT p.id_pregunta, p.pregunta, p.tipo_pregunta_id_tipo_pregunta " +
+                    "FROM pregunta p " +
+                    "JOIN examen_tiene_pregunta etp ON p.id_pregunta = etp.pregunta_id_pregunta " +
+                    "WHERE etp.examen_id_examen = ?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, examenId);
+            ResultSet resultSet = statement.executeQuery();
 
-    public boolean updatePregunta(Pregunta pregunta) {
-        // Implementa la lógica para actualizar una pregunta
-        return false;
-    }
-
-    public boolean deletePregunta(int id) {
-        // Implementa la lógica para eliminar una pregunta
-        return false;
+            while (resultSet.next()) {
+                int id_pregunta = resultSet.getInt("id_pregunta");
+                String pregunta = resultSet.getString("pregunta");
+                int tipo_pregunta_id_tipo_pregunta = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
+                Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
+                preguntas.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return preguntas;
     }
 }

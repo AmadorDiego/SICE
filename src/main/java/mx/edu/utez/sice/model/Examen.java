@@ -6,7 +6,7 @@ public class Examen {
     private int id_examen;
     private String nombre_examen;
     private int cantidad_preguntas;
-    private boolean estado;
+    private int estado;
     private String descripcion;
     private int id_usuario;
     //ArrayList para la tabla examen_tiene_pregunta
@@ -14,7 +14,7 @@ public class Examen {
 
     public Examen() {}
 
-    public Examen(int id_usuario, boolean estado, int cantidad_preguntas, String nombre_examen, int id_examen, ArrayList<Pregunta> preguntas) {
+    public Examen(int id_usuario, int estado, int cantidad_preguntas, String nombre_examen, int id_examen, ArrayList<Pregunta> preguntas) {
         this.id_usuario = id_usuario;
         this.estado = estado;
         this.cantidad_preguntas = cantidad_preguntas;
@@ -23,7 +23,7 @@ public class Examen {
         this.preguntas = preguntas;
     }
 
-    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, boolean estado, String descripcion, int id_usuario, ArrayList<Pregunta> preguntas) {
+    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, int id_usuario, ArrayList<Pregunta> preguntas) {
         this.id_examen = id_examen;
         this.nombre_examen = nombre_examen;
         this.cantidad_preguntas = cantidad_preguntas;
@@ -57,11 +57,11 @@ public class Examen {
         this.cantidad_preguntas = cantidad_preguntas;
     }
 
-    public boolean isEstado() {
+    public int getEstado() {
         return estado;
     }
 
-    public void setEstado(boolean estado) {
+    public void setEstado(int estado) {
         this.estado = estado;
     }
 
@@ -87,5 +87,8 @@ public class Examen {
 
     public void setPreguntas(ArrayList<Pregunta> preguntas) {
         this.preguntas = preguntas;
+    }
+
+    public void setEstado(boolean b) {
     }
 }

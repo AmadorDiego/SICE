@@ -9,82 +9,45 @@
 <html>
 <head>
     <title>Crear Examen</title>
-    <link rel="stylesheet" href="../../CSS/bootstrap.css">
+    <link href="../../CSS/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+
+<c:if test="${modo == 'crear'}">
     <h1>Crear Nuevo Examen</h1>
-    <form action="${pageContext.request.contextPath}/crear" method="post">
-        <div class="mb-3">
-            <label for="nombre_examen" class="form-label">Nombre del Examen</label>
-            <input type="text" class="form-control" id="nombre_examen" name="nombre_examen" required>
-        </div>
-        <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="estado" name="estado">
-            <label class="form-check-label" for="estado">Activo</label>
-        </div>
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea class="form-control" id="descripcion" name="descripcion" rows="3"></textarea>
-        </div>
+    <form action="${pageContext.request.contextPath}/examen" method="post">
+        <label for="nombre">Nombre del Examen:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <br>
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion" required></textarea><br><br>
 
-        <!-- Agregar Pregunta -->
-        <div class="mb-3">
-            <label for="agregar_pregunta">Agregar Pregunta</label>
-            <select class="form-control" id="agregar_pregunta" name="agregar_pregunta">
-                <option value="">Seleccione una opción</option>
-                <option value="opcion_multiple">Pregunta Opción Múltiple</option>
-                <option value="respuesta_abierta">Pregunta Respuesta Abierta</option>
-            </select>
-        </div>
+        <!-- Agrega más campos según sea necesario -->
 
-        <!-- Campos para Pregunta Opción Múltiple -->
-        <div class="mb-3 d-none" id="campos_opcion_multiple">
-            <label for="pregunta_opcion_multiple">Pregunta</label>
-            <input type="text" class="form-control" id="pregunta_opcion_multiple" name="pregunta_opcion_multiple">
-            <label for="respuesta_opcion_multiple">Respuesta</label>
-            <input type="text" class="form-control" id="respuesta_opcion_multiple" name="respuesta_opcion_multiple">
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="respuesta_correcta_opcion_multiple" id="respuesta_correcta_opcion_multiple" value="true">
-                <label class="form-check-label" for="respuesta_correcta_opcion_multiple">
-                    Respuesta Correcta
-                </label>
-            </div>
-        </div>
-
-        <!-- Campos para Pregunta Respuesta Abierta -->
-        <div class="mb-3 d-none" id="campos_respuesta_abierta">
-            <label for="pregunta_respuesta_abierta">Pregunta</label>
-            <input type="text" class="form-control" id="pregunta_respuesta_abierta" name="pregunta_respuesta_abierta">
-        </div>
-
-        <!-- Agregar Imagen -->
-        <div class="mb-3">
-            <label for="agregar_imagen">Agregar Imagen</label>
-            <input type="file" class="form-control" id="agregar_imagen" name="agregar_imagen">
-        </div>
-
-        <input type="hidden" name="usuario_id_usuario" value="${sessionScope.usuario.id_usuario}">
-        <button type="submit" class="btn btn-primary">Crear Examen</button>
+        <input type="submit" value="Guardar cambios">
     </form>
-</div>
+</c:if>
+
+<c:if test="${modo == 'listar'}">
+    <h2>Lista de Exámenes</h2>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Descripción</th>
+        </tr>
+        <c:forEach var="examen" items="${examenes}">
+            <tr>
+                <td>${examen.nombre_examen}</td>
+                <td>${examen.descripcion}</td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
-<script>
-    $(document).ready(function() {
-        // Mostrar/ocultar campos según la opción seleccionada
-        $('#agregar_pregunta').change(function() {
-            var opcionSeleccionada = $(this).val();
-            $('#campos_opcion_multiple, #campos_respuesta_abierta').addClass('d-none');
-            if (opcionSeleccionada === 'opcion_multiple') {
-                $('#campos_opcion_multiple').removeClass('d-none');
-            } else if (opcionSeleccionada === 'respuesta_abierta') {
-                $('#campos_respuesta_abierta').removeClass('d-none');
-            }
-        });
-    });
-</script>
+<script src="../../JS/ScriptExamen.js"></script>
 </body>
 </html>
 
