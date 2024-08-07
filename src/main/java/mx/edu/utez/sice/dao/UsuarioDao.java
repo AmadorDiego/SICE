@@ -18,7 +18,7 @@ public class UsuarioDao {
     //obtiene un usuario por medio del correo y contraseña, y devuelve los mismos y el id del tipo de usuario que es
     public Usuario getOne(String correo_electronico, String contrasena){
         Usuario usuario = new Usuario();
-        String query = "select * from Usuario where correo_electronico = ? and contrasena = sha2(?,256);";
+        String query = "select * from usuario where correo_electronico = ? and contrasena = sha2(?,256);";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -28,8 +28,10 @@ public class UsuarioDao {
             if(rs.next()){
                 usuario.setCorreo_electronico(rs.getString("correo_electronico"));
                 usuario.setContrasena(rs.getString("contrasena"));
+                usuario.setId_usuario(rs.getInt("id_usuario"));
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
-            }
+                usuario.setNombre_usuario(rs.getString("nombre_usuario"));
+                usuario.setApellido_usuario(rs.getString("apellido_usuario"));            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

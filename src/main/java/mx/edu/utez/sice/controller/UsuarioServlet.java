@@ -17,22 +17,17 @@ public class UsuarioServlet extends HttpServlet {
         //donde los inputs se llamen así:
         String correo_electronico = req.getParameter("correo_electronico");
         String contrasena = req.getParameter("contrasena");
-
         UsuarioDao dao = new UsuarioDao();
-
-        //Si el usuario esta vacio
-        Usuario usr = dao.getOne(correo_electronico, contrasena);
-        if(usr.getCorreo_electronico() == null){
+        Usuario usuario = dao.getOne(correo_electronico, contrasena);
+        // llevamos la información a una vista que está en la vista verUsuario.jsp
+        HttpSession session = req.getSession();
+        session.setAttribute("usuario", usuario);
+        if(usuario.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
-            HttpSession session = req.getSession();
             session.setAttribute("mensaje","Correo y/o contraseña incorrecta");
-            session.setAttribute("id_usuario",usr.getId_usuario());
-
             resp.sendRedirect("loginSICE.jsp");
         }else{
-            //Si existe en la base de datos
-            System.out.println("El usuario " + correo_electronico + " Si esta en la BD");
-            switch (usr.getId_tipo_usuario()) {
+            switch (usuario.getId_tipo_usuario()) {
                 case 1:
                     resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
                     break;

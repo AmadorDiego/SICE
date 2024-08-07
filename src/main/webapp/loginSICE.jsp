@@ -25,7 +25,6 @@
             <label for="contrasena">Contraseña: </label>
             <input type="password" class="form-control" id="contrasena" name="contrasena" required>
         </div>
-
         <div class="submit-container">
             <input type="submit" value="Iniciar sesión" id="loginBtn">
         </div>
