@@ -78,7 +78,7 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div class="d-flex align-items-center">
                 <span class="me-2">Crear examen</span>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/examen">Crear</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/examen?action=crear">Crear</a>
             </div>
             <div class="d-flex align-items-center">
                 <span class="me-2">Exámenes por calificar</span>
