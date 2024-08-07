@@ -11,13 +11,23 @@ import mx.edu.utez.sice.model.Examen;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet (name="CrearExamenServlet", value = "/crear")
+@WebServlet (name="CrearExamenServlet", value = "/examen")
 public class CrearExamenServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ExamenDao dao = new ExamenDao();
-        List<Examen> examenes = dao.getAll();
-        request.setAttribute("examenes", examenes);
-        request.getRequestDispatcher("indexDocente.jsp").forward(request, response);
+        String action = request.getParameter("action");
+
+        if ("crear".equals(action)) {
+            // Preparar para la creación de un nuevo examen
+            request.setAttribute("modo", "crear");
+            request.getRequestDispatcher("examen.jsp").forward(request, response);
+        } else {
+            // Lógica existente para mostrar todos los exámenes
+            ExamenDao dao = new ExamenDao();
+            List<Examen> examenes = dao.getAll();
+            request.setAttribute("examenes", examenes);
+            request.setAttribute("modo", "listar");
+            request.getRequestDispatcher("examen.jsp").forward(request, response);
+        }
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,14 +38,14 @@ public class CrearExamenServlet extends HttpServlet {
         examen.setId_usuario(1);
 
         ExamenDao dao = new ExamenDao();
-        dao.insertExamen(examen);
-
         boolean flag = dao.insertExamen(examen);
 
         if (flag) {
             req.getSession().setAttribute("mensaje", "Examen creado exitosamente");
+            resp.sendRedirect(req.getContextPath() + "/examen");
         } else {
             req.getSession().setAttribute("mensaje", "Error al crear el examen");
+            resp.sendRedirect(req.getContextPath() + "/");
         }
 
         resp.sendRedirect(req.getContextPath() + "/examen");
