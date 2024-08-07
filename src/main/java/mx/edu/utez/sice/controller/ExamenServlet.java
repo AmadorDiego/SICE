@@ -11,7 +11,7 @@ import mx.edu.utez.sice.model.Examen;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet (name="CrearExamenServlet", value = "/examen")
+@WebServlet (name="CrearExamenServlet", value = "/CrearExamenServlet")
 public class ExamenServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -19,14 +19,14 @@ public class ExamenServlet extends HttpServlet {
         if ("crear".equals(action)) {
             // Preparar para la creación de un nuevo examen
             request.setAttribute("modo", "crear");
-            request.getRequestDispatcher("/jsp/Docente/examen.jsp").forward(request, response);
+            request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
         } else {
             // Lógica existente para mostrar todos los exámenes
             ExamenDao dao = new ExamenDao();
             List<Examen> examenes = dao.getAll();
             request.setAttribute("examenes", examenes);
             request.setAttribute("modo", "listar");
-            request.getRequestDispatcher("/jsp/Docente/examen.jsp").forward(request, response);
+            request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
         }
     }
 
