@@ -15,7 +15,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 
-    <title>Inicio docente</title>
+    <title>Bienvenido docente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
@@ -45,7 +45,10 @@
             color: white;
         }
     </style>
-
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -72,7 +75,7 @@
 
 <div class="container my-2 my-md-4">
     <div class="row">
-        <h1 class="text-start mb-3">¡Bienvenido docente!</h1>
+        <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
         <h3 class="text-start mb-4">Exámenes creados</h3>
 
         <div class="d-flex justify-content-between align-items-center mb-3">

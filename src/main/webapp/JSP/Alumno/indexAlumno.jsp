@@ -1,5 +1,6 @@
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="mx.edu.utez.sice.model.Usuario" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -14,10 +15,14 @@
 <head>
     <title>Exámenes Pendientes</title>
     <link rel="stylesheet" href="../../CSS/bootstrap.css">
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 <body>
 <div class="container">
-    <h1>Bienvenido alumno</h1>
+    <h1>Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
     <h2>Exámenes pendientes</h2>
     <table class="table">
         <thead>
