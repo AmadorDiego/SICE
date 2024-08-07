@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Crear Examen</title>
-    <link rel="stylesheet" href="../../CSS/bootstrap.css">
+    <link href="../../CSS/bootstrap.css" rel="stylesheet">
 </head>
 <body>
 
