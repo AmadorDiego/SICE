@@ -12,8 +12,9 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Personalizar Examen</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="boostrap/bootstrap.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="../../CSS/bootstrap.css">
+    <link rel="stylesheet" href="../../CSS/adicionales.css">
+    <link rel="stylesheet" href="../../CSS/fondo.css">
     <style>
         body {
             background-color: #f0f0f0;
