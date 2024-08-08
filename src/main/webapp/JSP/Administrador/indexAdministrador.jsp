@@ -61,7 +61,7 @@
     <div class="row">
         <div class="col-12">
             <% if ((String) request.getSession().getAttribute("mensaje") != null) {%>
-            <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> alert-dismissible fade show"
+            <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>primary<%}else{%>danger<%}%> alert-dismissible fade show"
                  role="alert">
                 <strong><%=(String) request.getSession().getAttribute("mensaje")%>
                 </strong>
