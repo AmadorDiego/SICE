@@ -8,6 +8,9 @@
 .bg-green-SICE {
     background-color: #9EAF9B;
 }
+.bg-green-utz-transparente {
+    background-color: rgba(0, 148, 117, 0.6);
+}
 .bg-green-SICE-obscuro {
     background-color: #00604C;
 }
