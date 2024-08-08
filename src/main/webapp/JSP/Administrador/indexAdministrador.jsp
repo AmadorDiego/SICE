@@ -22,14 +22,18 @@
         <div class="bg-blue-utz p-2">
             <h2 class="text-white p-2 ms-2">SICE</h2>
             <div class="d-flex flex-column ms-2">
-                <a href="registroUsuario.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"> <h6>Registrar Usuario</h6> </a>
-                <a href="verUsuarioEliminado.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Usuarios Eliminados</h6></a>
+                <a href="registroUsuario.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Registrar
+                    Usuario</h6></a>
+                <a href="verUsuarioEliminado.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Usuarios
+                    Eliminados</h6></a>
             </div>
         </div>
     </div>
     <nav class="navbar bg-blue-utz">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -46,7 +50,8 @@
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
     <div class="col-12">
-        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
+        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
+        </h1>
         <div>
             <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0">Ver usuarios eliminados</a>
             <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0">Registrar usuario</a>
@@ -66,7 +71,7 @@
         <%}%>
 
 
-<!---//////////////////////////////////////Contanido//////////////////////////////////////////////////-->
+        <!---//////////////////////////////////////Contanido//////////////////////////////////////////////////-->
         <div class="row text-center">
             <div class="col-12">
                 <div class="table-responsive rounded-4 text-white">
@@ -116,10 +121,41 @@
                                     }%></td>
                             <td class="text-white"><%=u.getFecha_registrado()%>
                             </td>
-                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white" href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
+                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white"
+                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
                             </td>
-                            <td><a class="btn btn-warning bg-red-SICE border-0 text-white"
-                                   href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a></td>
+                     <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
+                            <td>
+                                <!-- Boton que activa la alerta -->
+                                <button type="button" class="btn btn-warning bg-red-SICE border-0"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar
+                                </button>
+
+                                <!-- Contenido de la alerta -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-blue-utz">
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Eliminar
+                                                    usuario</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h3>¿Estas seguro de que quieres eliminar a este usuario?</h3>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                    Cancelar
+                                                </button>
+                                                <a class="btn btn-warning bg-red-SICE border-0 text-white"
+                                                   href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <% }
                         } %>
@@ -150,29 +186,7 @@
         request.getSession().removeAttribute("mensaje");
     %>
 </div>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
 
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
 <script>
     const myModal = document.getElementById('myModal')
     const myInput = document.getElementById('myInput')
