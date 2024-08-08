@@ -43,6 +43,7 @@ public class ExamenDao {
                 lista.add(examen);
             }
         }catch (SQLException e){
+            e.printStackTrace();
         }
         return lista;
     }

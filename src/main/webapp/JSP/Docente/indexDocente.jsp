@@ -73,7 +73,6 @@
     </div>
 </nav>
 
-<form action="/CrearExamenServlet" method="post">
     <div class="container my-2 my-md-4">
         <div class="row">
             <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
@@ -82,7 +81,7 @@
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center">
                     <span class="me-2">Crear examen</span>
-                    <a class="btn btn-primary" href="/JSP/Docente/examen.jsp">Crear</a>
+                    <a class="btn btn-primary" href="../../CrearExamenServlet?action=crear">Crear</a>
                 </div>
                 <div class="d-flex align-items-center">
                     <span class="me-2">Exámenes por calificar</span>
@@ -111,7 +110,6 @@
         </div>
     </div>
 
-</form>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>

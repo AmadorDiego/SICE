@@ -1,4 +1,4 @@
-<jsp:useBean id="id_examen" scope="request" type="com.sun.org.apache.xml.internal.security.signature.SignatureProperty"/>
+
 <%--
   Created by IntelliJ IDEA.
   User: corey
@@ -7,7 +7,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html lang="es">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,20 +24,32 @@
 
 </head>
 <body>
-<div class="container mt-4">
-    <h1 class="mb-4">Crear Nuevo Examen</h1>
-    <form action="/PreguntaServlet", method="get" class="mb-4">
-       <h1>Crear Examen</h1>
+    <div class="container mt-4">
+        <h1 class="mb-4">Crear Nuevo Examen</h1>
+        <form action="${pageContext.request.contextPath}/CrearExamenServlet", method="post" class="mb-4">
+           <h1>Crear Examen</h1>
+            <div class="mb-3">
+                <label class="form-label" for="id_nombre">Nombre del Examen:</label>
+                <input class="form-control" type="text" id="id_nombre" name="id_nombre" required>
+            </div>
 
+            <div class="mb-3">
+                <label class="form-label" for="descripcion">Descripción:</label>
+                <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
 
+            <div class="mb-3">
 
-        <input type="submit" value="Guardar Examen">
-    </form>
-</div>
+            </div>
 
-<script src="../../JS/jquery-3.7.0.js"></script>
-<script src="../../JS/bootstrap.js"></script>
-<script src="../../JS/ScriptExamen.js"></script>
+            <button class="btn btn-primary">Guardar cambios</button>
+
+        </form>
+    </div>
+
+    <script src="../../JS/jquery-3.7.0.js"></script>
+    <script src="../../JS/bootstrap.js"></script>
+    <script src="../../JS/ScriptExamen.js"></script>
 </body>
 </html>
 
