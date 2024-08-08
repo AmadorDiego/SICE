@@ -17,9 +17,6 @@
     background-color: #CA4E4E;
 }
 
-
-
-
 .blue-utz {
     color: #002E60;
 }
@@ -39,10 +36,26 @@
     color: #CA4E4E;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /********Estilo Formulario*******/
-
-
-
 #imagenLogo {
     text-align: center;
     margin-bottom: 40px; /* Espacio opcional debajo de la imagen */
@@ -58,7 +71,7 @@
     top: 50%; /* Mueve el formulario al 50% desde la parte superior del contenedor */
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: hsl(0, 0%, 0%, 60%);  /* Fondo negro */
+    background-color: hsla(0, 0%, 0%, 60%);  /* Fondo negro */
     padding: 40px;
     border-radius: 40px; /* Bordes redondeados */
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
@@ -127,7 +140,6 @@ h3 {
     text-align: center;
 }
 
-
 .multi-repeating-linear {
     background: repeating-linear-gradient(
             190deg,
@@ -143,14 +155,12 @@ h3 {
             rgba(49, 67, 148, 0.5) 30px,
             rgba(28, 32, 31, 0.5) 60px,
             rgba(33, 15, 136, 0.5) 90px,
-
             rgba(11, 11, 88, 0.5) 150px,
             rgba(15, 26, 124, 0.5) 180px,
             rgba(23, 22, 70, 0.5) 230px
     ),
     repeating-linear-gradient(
             23deg,
-
             rgba(0, 128, 0, 0.438) 200px,
             rgb(55, 55, 73) 250px,
             rgba(11, 9, 12, 0.568) 300px,
@@ -165,6 +175,17 @@ h3 {
     text-align: center;
 }
 
+
+
+
+
+
+
+
+
+
+
+
 /***************************Estilo Docente_Administrador**************************/
 .contenedor {
     display: flex;
@@ -172,7 +193,6 @@ h3 {
     justify-content: center; /* Centra los elementos horizontalmente */
     margin-top: 50px;
     background-color: transparent;
-
 }
 
 .contenido, .contenido2 {
@@ -197,9 +217,11 @@ h3 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 40px; /* Incrementa el padding horizontal */
+    padding: 10px 40px;
     background-color: rgb(1, 36, 73);
     border-bottom: 1px solid #ccc;
+    width: 100%; /* Añadir esta línea */
+    box-sizing: border-box; /* Asegurarte de que el padding se incluya en el ancho total */
 }
 
 .encabezado img {
@@ -215,13 +237,23 @@ h3 {
     right: 0;
     height: auto;
     display: block; /* Asegura que la imagen se muestre como un bloque */
+    z-index: 1; /* Asegura que esta imagen esté detrás de otros elementos con z-index mayor */
+}
+
+#imagen_esq_izq {
+    position: fixed; /* Fija la posición de la imagen en la ventana del navegador */
+    bottom: 0;       /* Coloca la imagen en la parte inferior */
+    left: 0;         /* Coloca la imagen en la parte izquierda */
+    width: auto;     /* Ajusta el ancho según sea necesario */
+    height: auto;    /* Ajusta la altura según sea necesario */
+    z-index: 1;      /* Asegura que esta imagen esté detrás de otros elementos con z-index mayor */
 }
 
 .pagina2 h2 {
     color: #ccc;
     text-align: center;
     width: 100%;
-    flex-direction: column
+    flex-direction: column;
 }
 
 .pagina2 h3 {
@@ -229,7 +261,7 @@ h3 {
 }
 
 .btn-iniciar-sesion {
-    position: auto; /* Asegúrate de que esta propiedad sea la adecuada para tu caso, puede que necesites ajustar o eliminar esta línea */
+    position: absolute; /* Asegúrate de que esta propiedad sea la adecuada para tu caso, puede que necesites ajustar o eliminar esta línea */
     border-radius: 15px; /* Ajusta el valor para hacer los bordes más o menos redondeados */
     margin-top: 600px;
 }
@@ -280,203 +312,118 @@ h3 {
     }
 
     .contenido, .contenido2 {
-        width: 90%; /* Ajusta el ancho de los contenedores en móviles */
+        width: 100%; /* Ajusta el ancho de los contenedores en móviles */
+        margin: 5px 0;
     }
 
     .encabezado {
-        padding: 10px 20px; /* Ajusta el padding del encabezado en móviles */
+        padding: 10px; /* Ajusta el padding del encabezado en móviles */
+    }
+
+    .encabezado img {
+        height: 50px; /* Ajusta la altura de las imágenes del encabezado en móviles */
     }
 
     #imagen_arriba {
-        width: 40%; /* Ajusta el ancho de la imagen de arriba en móviles */
+        width: 50%; /* Ajusta el ancho de la imagen de arriba en móviles */
+        top: 80px; /* Ajusta la posición de la imagen de arriba en móviles */
+    }
+
+    .btn-iniciar-sesion {
+        margin-top: 100px;
     }
 }
 
-h2 {
-    text-align: center;
-    width: 100%;
-}
-
-.btn-iniciar-sesion:hover {
-    background-color: rgba(0, 148, 117, 1)
-}
-.conic-gradient {
-    background: conic-gradient(at 0% 30%, rgba(6, 80, 43, 0.562) 10%, rgba(10, 10, 88, 0.603) 30%, #050a0f98 50%);
-    width: 100%;
-    height: 100vh; /* Asegura que el div ocupe toda la altura de la pantalla */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-
-
-/* **************************Contenido Docente  ***********************/
-.examen {
-    border-top: 4px solid #007bff; /* Barra azul en la parte superior */
-    padding: 20px;
-    margin: 20px;
-    background-color:white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-.titulo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    margin-bottom: 10px;
-}
-.descripcion {
-    font-size: 1rem;
-    color: #faf7f7;
-    margin-bottom: 10px;
-}
-.fecha {
-    font-size: 0.8rem;
-    color: #fffefe;
-    margin-bottom: 10px;
-}
-.boton {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-.Crear_Examen {
-    background-color: rgba(0, 148, 117, 1);
-    padding: 10px 20px;
-    font-size: 1rem;
-    border-radius: 15px;
-    cursor: pointer;
-    float: right; /* Mueve el botón a la derecha */
-    margin-right: 20%;
-}
-
-.Crear_Examen:hover {
-    background-color: rgb(41, 224, 169); /* Color azul para el efecto hover */
-}
-
-#h2_Docente{
-    color: white;
-}
-
-/* *********************Creación Examen******************** */
-body {
+/*           ************        Perfil Alumno   ********              */
+.fondo {
     font-family: Arial, sans-serif;
-    background-color: #bbbbbb;
+    background-color: #f4f4f4;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
-.container_exam {
-    max-width: 800px;
+
+.contenido_perfilAlumno {
+    width: 100%;
+    max-width: 1000px;
     margin: 0 auto;
-    background-color: #258863;
+    background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+    position: relative; /* Necesario para que el z-index funcione */
+    z-index: 10;        /* Asegura que este contenido esté por encima de las imágenes */
 }
 
-h1, h2 {
+.header {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-textarea, input[type="text"], input[type="file"] {
+.header img {
+    width: 50px;
+    height: 50px;
+}
+
+.header h1 {
+    font-size: 24px;
+    margin: 10px 0;
+}
+
+.profile-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.profile-info .details {
+    width: 70%;
+}
+
+.profile-info .actions {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.profile-info .actions button {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.save-button {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    box-sizing: border-box;
-}
-
-button {
-    padding: 10px 20px;
-    background-color: #21467d;
-    color: #ffffff;
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    cursor: pointer;
-    margin-top: 10px;
-    border-radius: 4px;
-}
-
-button:hover {
-    background-color: #9bafac;
-}
-
-
-
-.opcion {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.opcion input[type="text"] {
-    flex-grow: 1;
-    margin-right: 10px;
-}
-
-.correcta-label {
-    white-space: nowrap;
-}
-
-.pregunta {
-    margin-bottom: 20px;
-    padding: 10px;
-    background-color: #6fdeb9;
-    border: 1px solid #198f9e;
-    border-radius: 4px;
-}
-
-.imagenPregunta {
-    max-width: 100%;
-    margin-bottom: 10px;
-}
-
-.opcionRespuesta {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.opcionRespuesta input[type="radio"] {
-    margin-right: 10px;
-}
-
-.pregunta p, .opcionRespuesta label {
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    max-width: 100%;
-}
-
-.file-input-wrapper {
-    position: relative;
-    display: inline-block;
-}
-
-.file-input {
-    position: absolute;
-    left: -9999px;
-}
-
-.file-input-label {
-    display: inline-block;
-    padding: 6px 12px;
-    cursor: pointer;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-#file-name {
-    margin-left: 10px;
-}
-
-.respuesta-correcta {
-    color: green;
-    font-weight: bold;
-    margin-left: 5px;
+    border-radius: 5px;
+    font-size: 16px;
 }

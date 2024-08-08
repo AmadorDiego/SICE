@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil Alumno</title>
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/adicionales.css">
+    <link rel="stylesheet" href="../css/fondo.css">
+
+</head>
+<body class="fondo">
+<header class="encabezado">
+    <img id="logo" src="../IMG/logo.png" alt="Logo Izquierda">
+    <img id="logo_Utez" src="../IMG/LogoUtez.png" alt="Logo Derecha">
+</header>
+
+<div class="contenido_perfilAlumno">
+    <div class="header">
+        <h1>Perfil de: <span id="nombre-alumno">Erik Balmaceda Miranda</span></h1>
+        <p>[Estás viendo un usuario]</p>
+    </div>
+
+    <div class="profile-info">
+        <div class="details">
+            <div class="form-group">
+                <label for="email">Correo electrónico:</label>
+                <input type="email" id="email" value="20223tn044@utez.edu.mx" disabled>
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" value="7775266514" disabled>
+            </div>
+            <div class="form-group">
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" value="20223tn044" disabled>
+            </div>
+            <div class="form-group">
+                <label for="grupo">Grupo:</label>
+                <input type="text" id="grupo" value="A" disabled>
+            </div>
+            <div class="form-group">
+                <label for="carrera">Carrera:</label>
+                <input type="text" id="carrera" value="DSM" disabled>
+            </div>
+            <div class="form-group">
+                <label for="sexo">Sexo:</label>
+                <input type="text" id="sexo" value="M" disabled>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-danger" id="eliminar-btn">Eliminar</button>
+            <button class="btn btn-secondary" id="desbloquear-btn">Desbloquear</button>
+            <button class="btn btn-primary" id="modificar-btn">Modificar</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="estado">Estado:</label>
+        <input type="text" id="estado" value="Activo" disabled>
+    </div>
+    <div class="form-group">
+        <label for="fecha-registro">Fecha en que se registró:</label>
+        <input type="date" id="fecha-registro" value="2024-06-06" disabled>
+    </div>
+
+    <button class="save-button" id="guardar-btn">Guardar cambios</button>
+</div>
+
+<img id="imagen_arriba" src="../IMG/colorArriba.png" alt="Imagen Arriba">
+<img id="imagen_esq_izq" src="../IMG/colorAbajo.png" alt="Esquina izquierda">
+
+<!-- Background Layers -->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<!-- JavaScript -->
+<script>
+    document.getElementById('modificar-btn').addEventListener('click', function() {
+        const inputs = document.querySelectorAll('.details input');
+        inputs.forEach(input => {
+            input.disabled = !input.disabled;
+        });
+    });
+
+    document.getElementById('desbloquear-btn').addEventListener('click', function() {
+        const inputs = document.querySelectorAll('.details input');
+        inputs.forEach(input => {
+            input.disabled = false;
+        });
+    });
+
+    document.getElementById('eliminar-btn').addEventListener('click', function() {
+        if (confirm("¿Estás seguro de que deseas eliminar este perfil?")) {
+            document.querySelector('.container').innerHTML = '<p>Perfil eliminado</p>';
+        }
+    });
+
+    document.getElementById('guardar-btn').addEventListener('click', function() {
+        const inputs = document.querySelectorAll('.details input');
+        let datos = {};
+        inputs.forEach(input => {
+            datos[input.id] = input.value;
+        });
+        console.log('Datos guardados:', datos);
+        alert('Cambios guardados con éxito.');
+    });
+</script>
+</body>
+</html>
