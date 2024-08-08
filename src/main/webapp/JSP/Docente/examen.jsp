@@ -6,44 +6,41 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<html lang="es">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Examen</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
+
+    <style>
+        .fixed-size-textarea {
+            resize: none; /* Deshabilita el redimensionamiento */
+            width: 100%;  /* Ajusta el ancho al contenedor */
+            max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
+        }
+    </style>
+
 </head>
 <body>
+<div class="container mt-4">
+    <c:if test="${modo == 'crear'}">
+        <h1 class="mb-4">Crear Nuevo Examen</h1>
+        <form action="${pageContext.request.contextPath}/examen" method="post">
+            <div class="mb-3">
+                <label class="form-label" for="nombre">Nombre del Examen:</label>
+                <input class="form-control" type="text" id="nombre" name="nombre" required>
+            </div>
 
-<c:if test="${modo == 'crear'}">
-    <h1>Crear Nuevo Examen</h1>
-    <form action="${pageContext.request.contextPath}/examen" method="post">
-        <label for="nombre">Nombre del Examen:</label>
-        <input type="text" id="nombre" name="nombre" required>
-        <br>
-        <br>
-        <label for="descripcion">Descripción:</label>
-        <textarea id="descripcion" name="descripcion" required></textarea><br><br>
+            <div class="mb-3">
+                <label class="form-label" for="descripcion">Descripción:</label>
+                <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
+            </div>
 
-        <!-- Agrega más campos según sea necesario -->
-
-        <input type="submit" value="Guardar cambios">
-    </form>
-</c:if>
-
-<c:if test="${modo == 'listar'}">
-    <h2>Lista de Exámenes</h2>
-    <table>
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-        </tr>
-        <c:forEach var="examen" items="${examenes}">
-            <tr>
-                <td>${examen.nombre_examen}</td>
-                <td>${examen.descripcion}</td>
-            </tr>
-        </c:forEach>
-    </table>
-</c:if>
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+    </c:if>
+</div>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
