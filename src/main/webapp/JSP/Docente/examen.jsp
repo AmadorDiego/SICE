@@ -1,3 +1,4 @@
+<jsp:useBean id="id_examen" scope="request" type="com.sun.org.apache.xml.internal.security.signature.SignatureProperty"/>
 <%--
   Created by IntelliJ IDEA.
   User: corey
@@ -24,22 +25,14 @@
 </head>
 <body>
 <div class="container mt-4">
-    <c:if test="${modo == 'crear'}">
-        <h1 class="mb-4">Crear Nuevo Examen</h1>
-        <form action="${pageContext.request.contextPath}/examen" method="post">
-            <div class="mb-3">
-                <label class="form-label" for="nombre">Nombre del Examen:</label>
-                <input class="form-control" type="text" id="nombre" name="nombre" required>
-            </div>
+    <h1 class="mb-4">Crear Nuevo Examen</h1>
+    <form action="/PreguntaServlet", method="get" class="mb-4">
+       <h1>Crear Examen</h1>
 
-            <div class="mb-3">
-                <label class="form-label" for="descripcion">Descripción:</label>
-                <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
-            </div>
 
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </form>
-    </c:if>
+
+        <input type="submit" value="Guardar Examen">
+    </form>
 </div>
 
 <script src="../../JS/jquery-3.7.0.js"></script>

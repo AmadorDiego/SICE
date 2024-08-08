@@ -73,42 +73,45 @@
     </div>
 </nav>
 
-<div class="container my-2 my-md-4">
-    <div class="row">
-        <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
-        <h3 class="text-start mb-4">Exámenes creados</h3>
+<form action="/CrearExamenServlet" method="post">
+    <div class="container my-2 my-md-4">
+        <div class="row">
+            <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
+            <h3 class="text-start mb-4">Exámenes creados</h3>
 
-        <div class="d-flex justify-content-between align-items-center mb-3">
-            <div class="d-flex align-items-center">
-                <span class="me-2">Crear examen</span>
-                <a class="btn btn-primary" href="../../CrearExamenServlet?action=crear">Crear</a>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <div class="d-flex align-items-center">
+                    <span class="me-2">Crear examen</span>
+                    <a class="btn btn-primary" href="/JSP/Docente/examen.jsp">Crear</a>
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="me-2">Exámenes por calificar</span>
+                    <button class="btn btn-primary">Ver</button>
+                </div>
             </div>
-            <div class="d-flex align-items-center">
-                <span class="me-2">Exámenes por calificar</span>
-                <button class="btn btn-primary">Ver</button>
-            </div>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table table-striped table-hover">
-                <thead class="thead">
-                <tr>
-                    <th>Examen</th>
-                    <th>Descripción</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach var="examen" items="${examenes}">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover">
+                    <thead class="thead">
                     <tr>
-                        <td>${examen.nombre_examen}</td>
-                        <td>${examen.descripcion}</td>
+                        <th>Examen</th>
+                        <th>Descripción</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                    <c:forEach var="examen" items="${examenes}">
+                        <tr>
+                            <td>${examen.nombre_examen}</td>
+                            <td>${examen.descripcion}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-</div>
+
+</form>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>

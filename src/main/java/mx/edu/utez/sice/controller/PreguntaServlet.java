@@ -62,7 +62,7 @@ public class PreguntaServlet extends HttpServlet {
     private void showNewForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int id_examen = Integer.parseInt(request.getParameter("id_examen"));
         request.setAttribute("id_examen", id_examen);
-        request.getRequestDispatcher("JSP/Docente/nuevaPregunta.jsp").forward(request, response);
+        request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -70,7 +70,7 @@ public class PreguntaServlet extends HttpServlet {
         int id_pregunta = Integer.parseInt(request.getParameter("id_pregunta"));
         Pregunta pregunta = PreguntaDao.getPreguntaById(id_pregunta);
         request.setAttribute("pregunta", pregunta);
-        request.getRequestDispatcher("JSP/Docente/editarPregunta.jsp").forward(request, response);
+        request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
     }
 
     //Aqui se hiciero modificaciones para ajustar preguntas --------------------------------------------------------
@@ -120,7 +120,7 @@ public class PreguntaServlet extends HttpServlet {
         List<Pregunta> preguntas = PreguntaDao.getPreguntasByExamenId(id_examen);
         request.setAttribute("preguntas", preguntas);
         request.setAttribute("id_examen", id_examen);
-        request.getRequestDispatcher("JSP/Docente/listaPreguntas.jsp").forward(request, response);
+        request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
     }
 
 }

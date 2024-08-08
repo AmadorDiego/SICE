@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Administrador/modificarUsuario.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Administrador" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/examen.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/personalizarExamen.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
       </map>
     </option>
