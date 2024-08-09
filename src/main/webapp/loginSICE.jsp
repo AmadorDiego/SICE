@@ -12,7 +12,7 @@
 
 <body class="multi-repeating-linear">
 <div class="container">
-    <img id="imagen_esq_derecha" src="./IMG/colorArriba.png">
+    <img id="imagen_esq_derecha" class="position-absolute top-0 end-0" src="./IMG/colorArriba.png">
     <form  method="post" action="UsuarioServlet" id="loginForm" class="form">
         <div id="imagenLogo"><img src="./IMG/logo.png"></div>
         <h3  >Inicio de Sesión</h3>
