@@ -12,11 +12,11 @@ public class CarreraDao {
 //se agrego Dao carrera
     public ArrayList<Carrera> getAll() {
         ArrayList<Carrera> lista = new ArrayList<>();
-        try (Connection con = DatabaseConnectionManager.getConnection()) {
-            String query = "SELECT * FROM carrera";
+        String query = "SELECT * FROM carrera";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
-
             while (rs.next()) {
                 Carrera carrera = new Carrera();
                 carrera.setId_carrera(rs.getInt("id_carrera"));

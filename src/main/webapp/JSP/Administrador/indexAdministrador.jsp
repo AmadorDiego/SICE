@@ -124,29 +124,30 @@
                             <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white"
                                    href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
                             </td>
-                     <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
+                            <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
                             <td>
                                 <!-- Boton que activa la alerta -->
                                 <button type="button" class="btn btn-warning bg-red-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Eliminar
                                 </button>
 
                                 <!-- Contenido de la alerta -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="exampleModal_<%= u.getId_usuario() %>" tabindex="-1"
+                                     aria-labelledby="exampleModalLabel_<%= u.getId_usuario() %>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-blue-utz">
-                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel">Eliminar
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel_<%= u.getId_usuario() %>">Eliminar
                                                     usuario</h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <h3>¿Estas seguro de que quieres eliminar a este usuario?</h3>
+                                                <h4>¿Estás seguro de que quieres eliminar a <%= u.getNombre_usuario()%>?</h4>
+                                                <p>Por seguridad, los usuarios quedan en un modo restringido. Después de cierto periodo de tiempo, el usuario seleccionado será eliminado completamente</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%= u.getId_usuario() %>">
                                                     Cancelar
                                                 </button>
                                                 <a class="btn btn-warning bg-red-SICE border-0 text-white"
@@ -154,6 +155,16 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <script>
+                                        document.querySelectorAll('[id^="botonCancelar_"]').forEach(function(cancelButton) {
+                                            cancelButton.addEventListener('click', function() {
+                                                let modalId = cancelButton.getAttribute('id').replace('botonCancelar_', '');
+                                                // Aquí puedes agregar lógica adicional si es necesario.
+                                                // Por ejemplo, limpiar o resetear datos del modal
+                                            });
+                                        });
+
+                                    </script>
                                 </div>
                             </td>
                         </tr>
@@ -193,7 +204,9 @@
 
     myModal.addEventListener('shown.bs.modal', () => {
         myInput.focus()
-    })
+    });
+
+
 </script>
 </body>
 </html>

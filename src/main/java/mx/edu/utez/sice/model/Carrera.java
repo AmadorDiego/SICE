@@ -5,13 +5,14 @@ public class Carrera {
     private String carrera;
     private int id_division_academica;
 
+    public Carrera(){}
+
     public Carrera(int id_carrera, String carrera, int id_division_academica) {
         this.id_carrera = id_carrera;
         this.carrera = carrera;
         this.id_division_academica = id_division_academica;
     }
 
-    public Carrera(){}
     public int getId_carrera() {
         return id_carrera;
     }
