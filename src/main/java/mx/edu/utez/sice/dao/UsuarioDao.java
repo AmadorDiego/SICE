@@ -115,7 +115,7 @@ public class UsuarioDao {
     //Encargado de insertar un nuevo alumno
     public boolean insertAlumno(Usuario u){
         boolean flag = false;
-        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), null, now(), ?, ?);";
+        String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, estado, fecha_registrado, codigo, id_tipo_usuario, carrera_id_carrera) values (?, ?, ?, sha2(?,256), ?, now(), null, ?, ?);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -123,8 +123,9 @@ public class UsuarioDao {
             ps.setString(2,u.getApellido_usuario());
             ps.setString(3,u.getCorreo_electronico());
             ps.setString(4,u.getContrasena());
-            ps.setInt(5,u.getId_tipo_usuario());
-            ps.setInt(6,u.getId_carrera());
+            ps.setInt(5,u.getEstado());
+            ps.setInt(6,u.getId_tipo_usuario());
+            ps.setInt(7,u.getId_carrera());
 
             if(ps.executeUpdate()>0){
                 flag = true;
