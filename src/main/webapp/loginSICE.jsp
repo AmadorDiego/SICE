@@ -36,7 +36,7 @@
         <% } %>
     </form>
 </div>
-<img id="imagen_esq_izq" src="./IMG/colorAbajo.png">
+<img id="imagen_esq_izq" class="position-absolute bottom-0 start-0" src="./IMG/colorAbajo.png">
 </body>
 </html>
 
