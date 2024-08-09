@@ -20,14 +20,17 @@
             width: 100%;  /* Ajusta el ancho al contenedor */
             max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
         }
+        .pregunta-form {
+            display: none;
+        }
+
     </style>
 
 </head>
 <body>
     <div class="container mt-4">
         <h1 class="mb-4">Crear Nuevo Examen</h1>
-        <form action="${pageContext.request.contextPath}/CrearExamenServlet", method="post" class="mb-4">
-           <h1>Crear Examen</h1>
+        <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
             <div class="mb-3">
                 <label class="form-label" for="id_nombre">Nombre del Examen:</label>
                 <input class="form-control" type="text" id="id_nombre" name="id_nombre" required>
@@ -38,8 +41,8 @@
                 <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
             </div>
 
-            <div class="mb-3">
-
+            <div id="id_preguntas" class="mb-3">
+            <!--Aqui se van agregando las preguntas que se vayan creando-->
             </div>
 
             <button class="btn btn-primary">Guardar cambios</button>
