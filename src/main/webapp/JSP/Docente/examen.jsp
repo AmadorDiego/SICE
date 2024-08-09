@@ -12,42 +12,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Examen</title>
-    <link href="../../CSS/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
 
-    <style>
-        .fixed-size-textarea {
-            resize: none; /* Deshabilita el redimensionamiento */
-            width: 100%;  /* Ajusta el ancho al contenedor */
-            max-width: 600px; /* Ajusta el ancho máximo según tus necesidades */
-        }
-        .pregunta-form {
-            display: none;
-        }
-
-    </style>
 
 </head>
 <body>
-    <div class="container mt-4">
-        <h1 class="mb-4">Crear Nuevo Examen</h1>
-        <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
-            <div class="mb-3">
-                <label class="form-label" for="id_nombre">Nombre del Examen:</label>
-                <input class="form-control" type="text" id="id_nombre" name="id_nombre" required>
+<!--/////////////////////////////////////////// Fondo //////////////////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+
+<!--///////////////////////////////////////// Contenido ////////////////////////////////////////////////////-->
+    <div class="container md">
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4" href="indexDocente.jsp"> Regresar < </a>
             </div>
+            <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
+                <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>
+                <br>
+                <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
+                    <div class="mb-3">
+                        <label class="form-label text-white h5" for="id_nombre">Nombre del Examen:</label>
+                        <input class="form-control" type="text" id="id_nombre" name="id_nombre" required>
+                    </div>
 
-            <div class="mb-3">
-                <label class="form-label" for="descripcion">Descripción:</label>
-                <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
+                    <div class="mb-3">
+                        <label class="form-label text-white h5" for="descripcion">Descripción:</label>
+                        <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" required></textarea>
+                    </div>
+
+                    <div id="id_preguntas" class="mb-3">
+                        <!--Aqui se van agregando las preguntas que se vayan creando-->
+                    </div>
+
+                    <button class="btn btn-primary bg-blue-utz h6">Guardar cambios</button>
+                </form>
             </div>
-
-            <div id="id_preguntas" class="mb-3">
-            <!--Aqui se van agregando las preguntas que se vayan creando-->
-            </div>
-
-            <button class="btn btn-primary">Guardar cambios</button>
-
-        </form>
+        </div>
     </div>
 
     <script src="../../JS/jquery-3.7.0.js"></script>
