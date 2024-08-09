@@ -6,6 +6,7 @@ import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ExamenDao {
     public boolean insertExamen(Examen examen) {
@@ -47,6 +48,59 @@ public class ExamenDao {
         }
         return lista;
     }
+
+    //se agrego getExamenes
+    public List<Examen> getExamenes(String grupo, String division_academica, String carrera) {
+        List<Examen> examenes = new ArrayList<>();
+        StringBuilder query = new StringBuilder("SELECT e.* FROM examen e JOIN usuario u ON e.usuario_id_usuario = u.id_usuario " +
+                "JOIN carrera c on u.carrera_id_carrera = c.id_carrera " +
+                "JOIN division_academica da ON c.division_academica_id_division_academica = da.id_division_academica WHERE 1=1");
+
+        if (grupo != null && !grupo.isEmpty()) {
+            query.append(" AND u.grupo = ?");
+        }
+        if (division_academica != null && !division_academica.isEmpty()) {
+            query.append(" AND u.nombre_division_academica = ?");
+        }
+        if (carrera != null && !carrera.isEmpty()) {
+            query.append(" AND u.carrera = ?");
+        }
+
+        try (Connection conn = DatabaseConnectionManager.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query.toString())) {
+
+            int index = 1;
+            if (grupo != null && !grupo.isEmpty()) {
+                stmt.setString(index++, grupo);
+            }
+            if (division_academica != null && !division_academica.isEmpty()) {
+                stmt.setString(index++, division_academica);
+            }
+            if (carrera != null && !carrera.isEmpty()) {
+                stmt.setString(index++, carrera);
+            }
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    Examen examen = new Examen();
+
+                    examen.setId_examen(rs.getInt("id_examen"));
+                    examen.setNombre_examen(rs.getString("nombre_examen"));
+                    examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
+                    examen.setEstado(rs.getInt("estado"));
+                    examen.setDescripcion(rs.getString("descripcion"));
+                    examen.setId_usuario(rs.getInt("id_usuario"));
+                    examenes.add(examen);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return examenes;
+    }
+
 
     // Otros métodos CRUD según sea necesario
 /*

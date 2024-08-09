@@ -1,10 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: corey
-  Date: 04/08/2024
-  Time: 08:34 p. m.
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
+<%@ page import="mx.edu.utez.sice.dao.UsuarioDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -12,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar alumnos</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/datatables.css" rel="stylesheet">
+    <link href="../../CSS/docente.css" rel="stylesheet">
     <style>
-        .navbar{
+        .navbar {
             background-color: #003366 !important;
         }
         .navbar-light .navbar-nav .nav-link {
@@ -42,9 +40,6 @@
         <h3>Grupo de 3 A</h3>
     </div>
     <div class="search-and-select row align-items-center">
-        <div class="col">
-            <input type="text" placeholder="Buscar Alumno" class="form-control">
-        </div>
         <div class="col-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="selectAll">
@@ -54,27 +49,94 @@
             </div>
         </div>
         <div class="col-auto">
-            <button class="home-boton">
-                <img src="../img/home_icon.png" alt="Home">
-            </button>
+            <a class="btn btn-primary" href="indexDocente.jsp"> Regresar </a>
         </div>
+
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Seleccionar</th>
-            <th>Nombres</th>
-            <th>Apellidos</th>
-            <th>Matrícula</th>
-        </tr>
-        </thead>
-        <tbody>
-        <!-- Aquí irían los datos de los alumnos -->
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table id="usuarios" class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Seleccionar</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+            </tr>
+            </thead>
+            <tbody id="usuarioTabla">
+            <%
+                UsuarioDao dao = new UsuarioDao();
+                ArrayList<Usuario> lista = dao.getAll();
+                for (Usuario u : lista) {
+                    if (u.getEstado() != 2) {
+            %>
+            <tr>
+                <td><input type="checkbox" class="select-alumno" value="<%= u.getId_usuario() %>"></td>
+                <td><%= u.getNombre_usuario() %></td>
+                <td><%= u.getApellido_usuario() %></td>
+                <td><%= u.getCorreo_electronico() %></td>
+            </tr>
+            <%
+                    }
+                }
+            %>
+            </tbody>
+        </table>
+    </div>
     <div class="text-end">
-            <button class="btn btn-primary">Guardar</button>
-        </div>
+        <button class="btn btn-primary" id="guardarAsignacion">Guardar</button>
     </div>
+</div>
+
+<script src="../../JS/jquery-3.7.0.js"></script>
+<script src="../../JS/bootstrap.js"></script>
+<script src="../../JS/datatables.js"></script>
+<script src="../../JS/dataTables.bootstrap5.js"></script>
+<script src="../../JS/es-MX.json"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const usuarioCheckboxes = document.querySelectorAll('.select-alumno');
+
+        selectAllCheckbox.addEventListener('change', () => {
+            const isChecked = selectAllCheckbox.checked;
+            usuarioCheckboxes.forEach(checkbox => {
+                checkbox.checked = isChecked;
+            });
+        });
+
+        document.getElementById('guardarAsignacion').addEventListener('click', () => {
+            const selectedUsuario = Array.from(usuarioCheckboxes)
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            if (selectedUsuario.length === 0) {
+                alert('Por favor seleccione al menos un alumno.');
+                return;
+            }
+
+            fetch('AsignarUsuarioServlet', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ usuario: selectedUsuario })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Alumnos asignados exitosamente');
+                    location.reload();
+                } else {
+                    alert('Error al asignar alumnos');
+                }
+            });
+        });
+
+        const table = $('#usuarios').DataTable({
+            language: {
+                url: '../../JS/es-MX.json'
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -11,6 +11,7 @@ public class Carrera {
         this.id_division_academica = id_division_academica;
     }
 
+    public Carrera(){}
     public int getId_carrera() {
         return id_carrera;
     }

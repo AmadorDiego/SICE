@@ -18,6 +18,9 @@ public class Grupo {
         this.alumnos = alumnos;
     }
 
+    public Grupo(){
+
+    }
     public int getId_grupo() {
         return id_grupo;
     }

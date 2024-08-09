@@ -9,6 +9,8 @@ public class DivisionAcademica {
         this.division_academica = division_academica;
     }
 
+    public  DivisionAcademica (){}
+
     public int getId_division_academica() {
         return id_division_academica;
     }
