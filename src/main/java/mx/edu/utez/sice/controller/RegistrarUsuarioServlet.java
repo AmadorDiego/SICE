@@ -47,12 +47,23 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
-        if (dao.insertDocenteAdministrador(u)){
-            sesion.setAttribute("mensaje","Se registró correctamente el usuario");
-            sesion.setAttribute("flag", true);
-        }else {
-            sesion.setAttribute("mensaje","Ocurrio un error al registrar el usuario");
-            sesion.setAttribute("flag", false);
+        if (Integer.parseInt(req.getParameter("id_tipo_usuario"))==3){
+            u.setId_carrera(Integer.parseInt(req.getParameter("id_carrera")));
+            if (dao.insertAlumno(u)){
+                sesion.setAttribute("mensaje","Se registró correctamente el alumno");
+                sesion.setAttribute("flag", true);
+            }else {
+                sesion.setAttribute("mensaje","Ocurrio un error al registrar el alumno");
+                sesion.setAttribute("flag", false);
+            }
+        }else{
+            if (dao.insertDocenteAdministrador(u)){
+                sesion.setAttribute("mensaje","Se registró correctamente el usuario");
+                sesion.setAttribute("flag", true);
+            }else {
+                sesion.setAttribute("mensaje","Ocurrio un error al registrar el usuario");
+                sesion.setAttribute("flag", false);
+            }
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }
