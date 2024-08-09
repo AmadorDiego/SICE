@@ -9,68 +9,56 @@
     <title>Asignar alumnos</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <link href="../../CSS/datatables.css" rel="stylesheet">
-    <link href="../../CSS/docente.css" rel="stylesheet">
-    <style>
-        .navbar {
-            background-color: #003366 !important;
-        }
-        .navbar-light .navbar-nav .nav-link {
-            color: white !important;
-        }
-        .full-width-navbar {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        }
-    </style>
+    <link href="../../CSS/fondo.css" rel="stylesheet">
+    <link href="../../CSS/adicionalesEBM.css" rel="stylesheet">
 </head>
 <body>
-<div class="full-width-navbar">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"></a>
-        </div>
-    </nav>
-</div>
-<div class="navbar"></div>
-<div class="container">
+<!--/////////////////////////////////////////// Fondo //////////////////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+
+
+<!--//////////////////////////////////////////// Contenido /////////////////////////////////////////////////-->
+<div class="container gy-3">
     <br>
-    <h1>Asignar alumnos</h1>
+    <h1 class="blue-utz">Asignar alumnos</h1>
     <div class="group-info">
-        <h3>Grupo de 3 A</h3>
+        <h3 class="green-SICE-obscuro">Grupo de 3 A</h3>
     </div>
     <div class="search-and-select row align-items-center">
         <div class="col-auto">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="selectAll">
-                <label class="form-check-label" for="selectAll">
+                <label class="form-check-label text-white h5" for="selectAll">
                     Seleccionar a todos
                 </label>
             </div>
         </div>
         <div class="col-auto">
-            <a class="btn btn-primary" href="indexDocente.jsp"> Regresar </a>
+            <a class="btn btn-primary bg-blue-utz text-white h6" href="indexDocente.jsp"> Regresar </a>
         </div>
 
     </div>
-    <div class="table-responsive">
-        <table id="usuarios" class="table table-striped table-hover">
-            <thead>
-            <tr>
+    <div class="table-responsive text-white h6">
+        <table id="usuarios" class="table table-striped table-hover h6">
+            <thead class="bg-blue-utz">
+            <tr class="text-white h6">
                 <th>Seleccionar</th>
                 <th>Nombres</th>
                 <th>Apellidos</th>
                 <th>Correo</th>
             </tr>
             </thead>
-            <tbody id="usuarioTabla">
+            <tbody id="usuarioTabla" class="bg-green-SICE">
             <%
                 UsuarioDao dao = new UsuarioDao();
                 ArrayList<Usuario> lista = dao.getAll();
                 for (Usuario u : lista) {
                     if (u.getEstado() != 2) {
             %>
-            <tr>
+            <tr class="h6">
                 <td><input type="checkbox" class="select-alumno" value="<%= u.getId_usuario() %>"></td>
                 <td><%= u.getNombre_usuario() %></td>
                 <td><%= u.getApellido_usuario() %></td>
