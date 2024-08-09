@@ -23,8 +23,8 @@
 	1 = habilitado
 	2 = eliminado (de manera lógica)
 
-
 	id_tipo_usuario
+
 	1		Administrador
 	2		Docente
 	3		Alumno
@@ -32,6 +32,7 @@
 
 
     id_tipo_pregunta
+
 	1		abierta
 	2		cerrada
 */

@@ -1,7 +1,4 @@
 <%@ page import="mx.edu.utez.sice.model.Usuario" %>
-<%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.model.Carrera" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -75,29 +72,12 @@
                 <input required class="form-control" type="password" name="contrasena2">
                 <br>
                 <label class="form-label text-white h6">Ingrese el tipo de usuario: </label>
-                <select required class="form-control" name="id_tipo_usuario" id="id_tipo_usuario">
+                <select required class="form-control" name="id_tipo_usuario">
                     <option value="4">Docente administrador</option>
                     <option value="1">Administrador</option>
                     <option value="2">Docente</option>
-                    <option value="3">Alumno</option>
+                    <option selected value="3">Alumno</option>
                 </select>
-                <!-- Este es el campo select adicional que solo aparecerá si se selecciona "Alumno" -->
-                <div class="row" id="campoAdicional" style="display:none;">
-                    <div class="col-md-6 col-12 p-3">
-                        <label class="form-label text-white h6">Seleccione la carrera: </label>
-                        <select required class="form-control" name="id_carrera">
-                            <%
-                                CarreraDao dao = new CarreraDao();
-                                ArrayList<Carrera> lista = dao.getAll();
-                                for (Carrera carrera : lista) {
-                            %>
-                            <option value="<%= carrera.getId_carrera() %>"><%= carrera.getCarrera() %></option>
-                            <%
-                                }
-                            %>
-                        </select>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -108,20 +88,7 @@
         </div>
     </form>
 </div>
-<script>
-    // Escuchar el cambio en el select de tipo de usuario
-    document.getElementById('id_tipo_usuario').addEventListener('change', function () {
-        // Obtener el valor seleccionado
-        var tipoUsuario = this.value;
 
-        // Mostrar o esconder el campo adicional basado en la selección
-        if (tipoUsuario == '3') { // "Alumno" tiene el valor "3"
-            document.getElementById('campoAdicional').style.display = 'block';
-        } else {
-            document.getElementById('campoAdicional').style.display = 'none';
-        }
-    });
-</script>
 
 </body>
 </html>
