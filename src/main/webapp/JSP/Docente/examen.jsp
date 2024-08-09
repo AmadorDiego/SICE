@@ -33,7 +33,8 @@
     <div class="container md">
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4" href="indexDocente.jsp"> Regresar < </a>
+
+                <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp"> Regresar < </a>
             </div>
             <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
                 <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>

@@ -76,10 +76,10 @@
         </div>
 
         <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 mb-3">
-            <a href="docente.html" class="btn btn-primary btn-sm d-inline-flex align-items-center">
-                <img src="img/home.png" alt="Home" class="me-2" style="width: 20px; height: 20px;">
-
+            <a href="../Docente/indexDocente.jsp" class="btn btn-primary btn-sm d-inline-flex align-items-center">
+                <img src="../../IMG/home.png" alt="Home" class="me-2" style="width: 20px; height: 20px;">
             </a>
+
         </div>
 
     </div>

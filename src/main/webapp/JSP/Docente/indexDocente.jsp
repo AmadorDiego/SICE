@@ -41,7 +41,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="d-flex align-items-center">
                         <span class="me-2 text-white h5">Crear examen</span>
-                        <a class="btn btn-primary bg-blue-utz h6" href="../../CrearExamenServlet?action=crear">Crear</a>
+                        <a class="btn btn-primary bg-blue-utz h6" href="examen.jsp">Crear</a>
                     </div>
                     <div class="d-flex align-items-center">
                         <span class="me-2 text-white h5">Exámenes por calificar</span>
