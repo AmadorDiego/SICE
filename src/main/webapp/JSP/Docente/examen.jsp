@@ -33,7 +33,6 @@
     <div class="container md">
         <div class="row">
             <div class="col-12">
-
                 <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp"> Regresar < </a>
             </div>
             <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
@@ -58,8 +57,11 @@
                         <button type="button" class="btn btn-primary me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
                         <button type="button" class="btn btn-secondary" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                     </div>
+                    <div class="mt-3">
+                        <button type="button" id="guardarCambios"
+                                class="btn btn-primary bg-blue-utz h6" href="indexDocente">Guardar cambios</button>
+                    </div>
 
-                    <button type="button" id="guardarCambios" class="btn btn-primary bg-blue-utz h6">Guardar cambios</button>
                 </form>
             </div>
         </div>

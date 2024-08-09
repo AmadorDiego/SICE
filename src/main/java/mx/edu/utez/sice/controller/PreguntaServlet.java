@@ -122,5 +122,4 @@ public class PreguntaServlet extends HttpServlet {
         request.setAttribute("id_examen", id_examen);
         request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
     }
-
 }
