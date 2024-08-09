@@ -10,102 +10,63 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<html>
+<html lang="es">
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 
     <title>Bienvenido docente</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <link href="../../CSS/bootstrap.css" rel="stylesheet">
-    <style>
-        body {
-            background-color: #f0f0f0;
-        }
-        .navbar {
-            background-color: #002E60 !important;
-        }
-        .navbar-light .navbar-nav .nav-link {
-            color: white !important;
-        }
-        .navbar-light .navbar-toggler-icon {
-            background-image: url("/img/menu.png") !important; /* Cambiado a la imagen local */
-            background-size: cover;
-        }
-        .btn-primary {
-            background-color: #00604C !important;
-            border-color: #00604C !important;
-        }
-        .btn-success {
-            background-color: #00604C !important;
-            border-color: #00604C !important;
-        }
-        .thead {
-            background-color: #002E60;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
     %>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="row">
-                <div class="col"></div>
-                <div class="navbar-nav">
-                    <!--<a class="nav-link active" aria-current="page" href="#">Home</a>-->
-                    <a class="nav-link" href="#">Boton1</a>
-                    <a class="nav-link" href="#">Boton2</a>
-                    <a class="nav-link" href="#">Boton3</a>
-                    <a class="nav-link" href="#">Boton4</a>
-                    <!--<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+<!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
 
+<!--////////////////////////////////////// Contenido //////////////////////////////////////////////////-->
     <div class="container my-2 my-md-4">
         <div class="row">
-            <h1 class="text-start mb-3">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
-            <h3 class="text-start mb-4">Exámenes creados</h3>
+            <div class="col p-3">
+                <h1 class="text-start mb-3 blue-utz">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
+                <h3 class="text-start mb-4 blue-utz">Exámenes creados:</h3>
 
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="d-flex align-items-center">
-                    <span class="me-2">Crear examen</span>
-                    <a class="btn btn-primary" href="../../CrearExamenServlet?action=crear">Crear</a>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="d-flex align-items-center">
+                        <span class="me-2 text-white h5">Crear examen</span>
+                        <a class="btn btn-primary bg-blue-utz h6" href="../../CrearExamenServlet?action=crear">Crear</a>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="me-2 text-white h5">Exámenes por calificar</span>
+                        <button class="btn btn-primary bg-blue-utz h6">Ver</button>
+                    </div>
                 </div>
-                <div class="d-flex align-items-center">
-                    <span class="me-2">Exámenes por calificar</span>
-                    <button class="btn btn-primary">Ver</button>
-                </div>
-            </div>
 
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead class="thead">
-                    <tr>
-                        <th>Examen</th>
-                        <th>Descripción</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="examen" items="${examenes}">
-                        <tr>
-                            <td>${examen.nombre_examen}</td>
-                            <td>${examen.descripcion}</td>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="thead bg-blue-utz">
+                        <tr class="text-white h5">
+                            <th>Examen</th>
+                            <th>Descripción</th>
                         </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody class="bg-green-SICE">
+                        <c:forEach var="examen" items="${examenes}">
+                            <tr class="h6">
+                                <td>${examen.nombre_examen}</td>
+                                <td>${examen.descripcion}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
