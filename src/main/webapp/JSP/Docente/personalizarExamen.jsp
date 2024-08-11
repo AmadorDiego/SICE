@@ -13,8 +13,8 @@
     <title>Personalizar Examen</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="../../CSS/bootstrap.css">
-    <link rel="stylesheet" href="../../CSS/adicionales.css">
-    <link rel="stylesheet" href="../../CSS/fondo.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <style>
         body {
             background-color: #f0f0f0;
@@ -52,6 +52,13 @@
 
 </head>
 <body>
+<!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+<!--////////////////////////////////////// Contenido //////////////////////////////////////////////////-->
+
 <div class="full-width-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -82,17 +89,6 @@
 
         </div>
 
-    </div>
-
-    <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 mb-3">
-        <div class="d-flex align-items-center mb-2 mb-md-0">
-            <span class="me-2">Crear examen</span>
-            <button class="btn btn-primary btn-sm">Crear</button>
-        </div>
-        <div class="d-flex align-items-center">
-            <span class="me-2">Exámenes por calificar</span>
-            <button class="btn btn-primary btn-sm">Ver</button>
-        </div>
     </div>
 
     <div class="table-responsive">

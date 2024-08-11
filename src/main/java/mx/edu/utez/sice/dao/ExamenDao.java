@@ -1,7 +1,8 @@
 package mx.edu.utez.sice.dao;
 
 import mx.edu.utez.sice.model.Examen;
-import mx.edu.utez.sice.model.Usuario;
+import mx.edu.utez.sice.model.Pregunta;
+import mx.edu.utez.sice.model.PreguntaOpcion;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -9,8 +10,83 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExamenDao {
+
+    public boolean crearExamen (Examen examen) {
+        try (Connection conexion = DatabaseConnectionManager.getConnection()) {
+            conexion.setAutoCommit(false);
+            try {
+                String sql = "CALL CrearExamen(?, ?, ?, ?, ?, ?)";
+                try (CallableStatement stmt = conexion.prepareCall(sql)) {
+                    stmt.setString(1, examen.getNombre_examen());
+                    stmt.setInt(2, examen.getCantidad_preguntas());
+                    stmt.setInt(3, examen.getEstado());
+                    stmt.setString(4, examen.getDescripcion());
+                    stmt.setInt(5, examen.getId_usuario());
+                    stmt.registerOutParameter(6, Types.INTEGER);
+
+                    stmt.execute();
+
+                    int idExamen = stmt.getInt(6);
+                    examen.setId_examen(idExamen);
+                }
+
+                crearPreguntas(conexion, examen);
+
+                conexion.commit();
+                return true;
+            } catch (SQLException e) {
+                conexion.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private void crearPreguntas(Connection conexion, Examen examen) throws SQLException {
+        String sql = "CALL CrearPregunta(?, ?, ?, ?)";
+        try (CallableStatement stmt = conexion.prepareCall(sql)) {
+            for (Pregunta pregunta : examen.getPreguntas()) {
+                stmt.setInt(1, examen.getId_examen());
+                stmt.setString(2, pregunta.getPregunta());
+                stmt.setInt(3, pregunta.getId_tipo_pregunta());
+                stmt.registerOutParameter(4, Types.INTEGER);
+
+                stmt.execute();
+
+                int idPregunta = stmt.getInt(4);
+                pregunta.setId_pregunta(idPregunta);
+
+                if (pregunta.getId_tipo_pregunta() == 2) { // Pregunta cerrada (opción múltiple)
+                    crearOpciones(conexion, pregunta);
+                }
+            }
+        }
+    }
+
+    private void crearOpciones(Connection conexion, Pregunta pregunta) throws SQLException {
+        String sql = "CALL CrearOpcion(?, ?, ?, ?)";
+        try (CallableStatement stmt = conexion.prepareCall(sql)) {
+            for (PreguntaOpcion preguntaOpcion : pregunta.getOpciones()) {
+                stmt.setInt(1, pregunta.getId_pregunta());
+                stmt.setInt(2, preguntaOpcion.getId_opcion());
+                stmt.setBoolean(3, preguntaOpcion.isCorrecta());
+                stmt.registerOutParameter(4, Types.INTEGER);
+
+                stmt.execute();
+
+                int idOpcion = stmt.getInt(4);
+                preguntaOpcion.setId_opcion(idOpcion);
+                preguntaOpcion.getOpcion().setId_opcion(idOpcion);
+            }
+        }
+    }
+
+    //Codigo que teniamos desde pun principio
     public boolean insertExamen(Examen examen) {
-        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, 1, ?, ?, ?);";
+        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, ?, 1, ?, ?);";
         try (Connection conn = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = conn.prepareStatement(query)) {
 
@@ -101,55 +177,6 @@ public class ExamenDao {
         return examenes;
     }
 
-
-    // Otros métodos CRUD según sea necesario
-/*
-    public boolean insertExamen(Examen examen) {
-        String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             PreparedStatement pstmt = conn.prepareStatement(query)) {
-
-            pstmt.setString(1, examen.getNombre_examen());
-            pstmt.setInt(2, examen.getCantidad_preguntas());
-            pstmt.setBoolean(3, examen.getEstado());
-            pstmt.setString(4, examen.getDescripcion());
-            pstmt.setInt(5, examen.getId_usuario());
-
-            int affectedRows = pstmt.executeUpdate();
-            return affectedRows > 0;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    public List<Examen> getAllExamenes() {
-        List<Examen> examenes = new ArrayList<>();
-        String query = "SELECT * FROM examen";
-        try (Connection conn = DatabaseConnectionManager.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
-
-            while (rs.next()) {
-                Examen examen = new Examen(
-                        //Aqui esta el error de los getters
-                        rs.getInt("id_examen"),
-                        rs.getString("nombre_examen"),
-                        rs.getInt("cantidad_preguntas"),
-                        rs.getBoolean("estado"),
-                        rs.getString("descripcion"),
-                        rs.getInt("usuario_id_usuario")
-                );
-                examenes.add(examen);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return examenes;
-    }*/
-
-    // Otros métodos CRUD según sea necesario
 }
-
 
 

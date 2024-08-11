@@ -30,46 +30,64 @@
 
 
 <!--///////////////////////////////////////// Contenido ////////////////////////////////////////////////////-->
-    <div class="container md">
-        <div class="row">
-            <div class="col-12">
+        <div class="container md">
+            <div class="row">
+                <div class="col-12">
+                    <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp"> Regresar < </a>
+                </div>
+                <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
+                    <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>
+                    <br>
+                    <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
 
-                <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp"> Regresar < </a>
-            </div>
-            <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
-                <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>
-                <br>
-                <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
-                    <div class="mb-3">
-                        <label class="form-label text-white h5" for="id_nombre">Nombre del Examen:</label>
-                        <input class="form-control" type="text" id="id_nombre" name="id_nombre" required>
-                    </div>
+                        <div id="mensajeResultado" class="alert" style="display: none;"></div>
 
-                    <div class="mb-3">
-                        <label class="form-label text-white h5" for="descripcion">Descripción:</label>
-                        <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" style="resize: none;"></textarea>
-                    </div>
+                        <input type="hidden" id="id_usuario" name="id_usuario" value="${usuarioActual.id}">
+                        <input type="hidden" id="cantidad_preguntas" name="cantidad_preguntas" value="0">
 
-                    <div id="id_preguntas" class="mb-3">
-                        <!--Aqui se van agregando las preguntas que se vayan creando-->
-                    </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white h5" for="nombre_examen ">Nombre del Examen:</label>
+                            <input class="form-control" type="text" id="nombre_examen " name="nombre_examen" required>
+                        </div>
 
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-primary me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
-                        <button type="button" class="btn btn-secondary" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
-                    </div>
+                        <div class="mb-3">
+                            <label class="form-label text-white h5" for="descripcion">Descripción:</label>
+                            <textarea class="form-control fixed-size-textarea" id="descripcion" name="descripcion" rows="4" style="resize: none;"></textarea>
+                        </div>
 
-                    <button type="button" id="guardarCambios" class="btn btn-primary bg-blue-utz h6">Guardar cambios</button>
-                </form>
+                        <!--Por este medio se activa el examen-->
+                        <!--<div class="mb-3">
+                            <label class="form-label text-white h5" for="estado">Estado:</label>
+                            <select class="form-control" id="estado" name="estado">
+                                <option value="1">Activo</option>
+                                <option value="0">Borrador</option>
+                            </select>
+                        </div>-->
+
+                        <div id="id_preguntas" class="mb-3">
+                            <!--Aqui se van agregando las preguntas que se vayan creando-->
+                        </div>
+
+                        <div class="mt-3">
+                            <button type="button" class="btn btn-primary me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
+                            <button type="button" class="btn btn-secondary" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
+                        </div>
+                        <div class="mt-3">
+                            <button type="button" id="guardarCambios"
+                                    class="btn btn-primary bg-blue-utz h6" href="indexDocente">Guardar cambios</button>
+                        </div>
+
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    <!--<script src="../../JS/jquery-3.7.0.js"></script>
-    <script src="../../JS/bootstrap.js"></script>
-    <script src="../../JS/ScriptExamen.js"></script>-->
-    <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/JS/ScriptExamen.js"></script>
+
+        <script>
+            var userId = '${usuarioActual.id}';
+        </script>
+        <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
+        <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
+        <script src="${pageContext.request.contextPath}/JS/ScriptExamen.js"></script>
 
 </body>
 </html>

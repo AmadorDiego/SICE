@@ -34,4 +34,13 @@ public class PreguntaOpcion {
     public void setCorrecta(boolean correcta) {
         this.correcta = correcta;
     }
+
+    //Agregue este metodo de SET OPCION CUANDO MODIFIQUE crearExamenServlet
+    public void setOpcion(Opcion opcion) {
+        this.id_opcion = id_opcion;
+    }
+
+    public PreguntaOpcion getOpcion() {
+        return this;
+    }
 }
