@@ -10,8 +10,14 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import mx.edu.utez.sice.dao.ExamenDao;
 import mx.edu.utez.sice.model.Examen;
+import mx.edu.utez.sice.model.Opcion;
+import mx.edu.utez.sice.model.Pregunta;
+import mx.edu.utez.sice.model.PreguntaOpcion;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet (name="CrearExamenServlet", value = "/CrearExamenServlet")
@@ -34,42 +40,41 @@ public class ExamenServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nombre_examen = req.getParameter("nombre_examen");
+        int cantidad_preguntas = Integer.parseInt(req.getParameter("cantidad_preguntas"));
+        String descripcion = req.getParameter("descripcion");
+        int id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
 
-        try {
-            //Crea y configura un examen el objeto examen
-            Examen examen = new Examen();
-            examen.setNombre_examen(req.getParameter("nombre_examen"));
-            examen.setEstado(1); // Asumimos que el examen se crea activo, despues lo activo, RECORDATORIO ELIAS
-            examen.setDescripcion(req.getParameter("descripcion"));
-            examen.setId_usuario(1);
+        Examen examen  = new Examen(0,nombre_examen,cantidad_preguntas,1,descripcion,id_usuario, new ArrayList<>());
+        for (int i = 1; i <= cantidad_preguntas; i++) {
+            String preguntaTexto = req.getParameter("pregunta_" + i);
+            int tipoPregunta = Integer.parseInt(req.getParameter("tipo_pregunta"+i));
 
-            ServletRequest request = null; //Variable nula para r
-            String nombreExamen = request.getParameter("nombre_examen");
-            if (nombreExamen == null || nombreExamen.trim().isEmpty()) {
-                HttpSession session = null; //Variable nula para despues cambiarla
-                session.setAttribute("mensaje", "El nombre del examen no puede estar vacío");
-                resp.sendRedirect(req.getContextPath() + "/examen");
-                return;
+            Pregunta pregunta = new Pregunta(0, preguntaTexto, tipoPregunta);
+
+            if (tipoPregunta == 1) { // Pregunta de opción múltiple
+                for (int j = 1; j <= 4; j++) {
+                    String opcionTexto = req.getParameter("opcion" + i + "_" + j);
+                    boolean esCorrecta = req.getParameter("correcta" + i).equals(String.valueOf(j));
+
+                    Opcion opcion = new Opcion(0, opcionTexto);
+                    PreguntaOpcion preguntaOpcion = new PreguntaOpcion(0, 0, esCorrecta);
+                    preguntaOpcion.setOpcion(opcion);
+                    pregunta.addOpcion(preguntaOpcion);
+                }
             }
-
-            //Inserta el examen en la base de datos
-            ExamenDao dao = new ExamenDao();
-            boolean flag = dao.insertExamen(examen);
-
-            //Redirige un mensaje adecuado
-            HttpSession session = req.getSession();
-            if (flag) {
-                req.getSession().setAttribute("mensaje", "Examen creado exitosamente");
-                resp.sendRedirect(req.getContextPath() + "/examen");
-            } else {
-                req.getSession().setAttribute("mensaje", "Error al crear el examen");
-                resp.sendRedirect(req.getContextPath() + "/examen");
-            }
-        }catch (Exception e) {
-            e.printStackTrace();
-            req.getSession().setAttribute("mensaje", "Error interno del servidor");
-            resp.sendRedirect(req.getContextPath() + "/error");
+            examen.getPreguntas().add(pregunta);
         }
-        resp.sendRedirect(req.getContextPath() + "/examen");
+        // Guardar el examen en la base de datos
+        ExamenDao examenDao = new ExamenDao();
+        boolean exito = examenDao.crearExamen(examen);
+
+        if (exito) {
+            resp.sendRedirect(req.getContextPath() + "/ExamenServlet?action=listar&message=Examen creado exitosamente");
+        } else {
+            req.setAttribute("error", "Hubo un problema al crear el examen");
+            req.getRequestDispatcher("JSP/Docente/examen.jsp").forward(req, resp);
+        }
     }
+
 }

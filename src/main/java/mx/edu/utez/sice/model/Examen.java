@@ -89,6 +89,4 @@ public class Examen {
         this.preguntas = preguntas;
     }
 
-    public void setEstado(boolean b) {
-    }
 }
