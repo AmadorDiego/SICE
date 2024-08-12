@@ -10,20 +10,11 @@ public class Examen {
     private String descripcion;
     private int id_usuario;
     //ArrayList para la tabla examen_tiene_pregunta
-    private ArrayList<Pregunta> preguntas;
+    private ArrayList<Integer> preguntas;
 
     public Examen() {}
 
-    public Examen(int id_usuario, int estado, int cantidad_preguntas, String nombre_examen, int id_examen, ArrayList<Pregunta> preguntas) {
-        this.id_usuario = id_usuario;
-        this.estado = estado;
-        this.cantidad_preguntas = cantidad_preguntas;
-        this.nombre_examen = nombre_examen;
-        this.id_examen = id_examen;
-        this.preguntas = preguntas;
-    }
-
-    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, int id_usuario, ArrayList<Pregunta> preguntas) {
+    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, int id_usuario, ArrayList<Integer> preguntas) {
         this.id_examen = id_examen;
         this.nombre_examen = nombre_examen;
         this.cantidad_preguntas = cantidad_preguntas;
@@ -81,12 +72,11 @@ public class Examen {
         this.id_usuario = id_usuario;
     }
 
-    public ArrayList<Pregunta> getPreguntas() {
+    public ArrayList<Integer> getPreguntas() {
         return preguntas;
     }
 
-    public void setPreguntas(ArrayList<Pregunta> preguntas) {
+    public void setPreguntas(ArrayList<Integer> preguntas) {
         this.preguntas = preguntas;
     }
-
 }

@@ -7,9 +7,12 @@ public class Pregunta {
         private String pregunta;
         private int id_tipo_pregunta;
         //Agregue un arrayList
-        private ArrayList<PreguntaOpcion> opciones;
-    
-        public Pregunta(int id_pregunta, String pregunta, int id_tipo_pregunta) {
+        private ArrayList<Integer> opciones;
+
+    public Pregunta() {
+    }
+
+    public Pregunta(int id_pregunta, String pregunta, int id_tipo_pregunta, ArrayList<Integer> opciones) {
             this.id_pregunta = id_pregunta;
             this.pregunta = pregunta;
             this.id_tipo_pregunta = id_tipo_pregunta;
@@ -41,17 +44,11 @@ public class Pregunta {
             this.id_tipo_pregunta = id_tipo_pregunta;
         }
 
-        //Agregue nuevos Metodos de setOpciones para las preguntas
-        public ArrayList<PreguntaOpcion> getOpciones() {
-            return opciones;
-        }
-
-        public void setOpciones(ArrayList<PreguntaOpcion> opciones) {
-            this.opciones = opciones;
-        }
-
-        public void addOpcion(PreguntaOpcion opcion) {
-            this.opciones.add(opcion);
-        }
-
+    public ArrayList<Integer> getOpciones() {
+        return opciones;
     }
+
+    public void setOpciones(ArrayList<Integer> opciones) {
+        this.opciones = opciones;
+    }
+}

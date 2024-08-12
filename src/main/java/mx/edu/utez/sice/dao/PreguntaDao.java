@@ -1,10 +1,10 @@
 package mx.edu.utez.sice.dao;
 
 import mx.edu.utez.sice.model.Pregunta;
+import mx.edu.utez.sice.model.PreguntaOpcion;
+import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PreguntaDao {
     private Connection connection;
@@ -15,7 +15,7 @@ public class PreguntaDao {
         this.connection = getConnection;  // código para obtener la conexión
     }
 
-    public boolean insertPregunta(Pregunta pregunta) {
+    /*public boolean insertPregunta(Pregunta pregunta) {
         try {
             String query = "INSERT INTO pregunta (pregunta, tipo_pregunta_id_tipo_pregunta) VALUES (?, ?)";
             PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -37,8 +37,60 @@ public class PreguntaDao {
             e.printStackTrace();
             return false;
         }
+    }*/
+    public boolean insertPregunta(Pregunta pregunta){
+        boolean flag = false;
+        String query = "INSERT INTO pregunta (pregunta, id_tipo_pregunta) VALUES (?, ?)";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,pregunta.getPregunta());
+            ps.setInt(2,pregunta.getId_tipo_pregunta());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 
+    public boolean insertPreguntaOpcion(PreguntaOpcion preguntaOpcion){
+        boolean flag = false;
+        String query = "INSERT INTO pregunta_opcion (pregunta_id_pregunta, opcion_id_opcion, correcta) VALUES (?, ?, ?)";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,preguntaOpcion.getId_pregunta());
+            ps.setInt(2,preguntaOpcion.getId_opcion());
+            ps.setInt(3,preguntaOpcion.getCorrecta());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public int getOne(Pregunta pregunta){
+        int id_pregunta = 0;
+        String query = "SELECT id_pregunta FROM pregunta where pregunta = ? and id_tipo_pregunta = ? order by id_pregunta desc limit 1;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,pregunta.getPregunta());
+            ps.setInt(2,pregunta.getId_tipo_pregunta());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                id_pregunta = (rs.getInt("id_pregunta"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_pregunta;
+    }
+/*
     public boolean updatePregunta(Pregunta pregunta) {
         try {
             String query = "UPDATE pregunta SET pregunta = ?, tipo_pregunta_id_tipo_pregunta = ? WHERE id_pregunta = ?";
@@ -87,7 +139,7 @@ public class PreguntaDao {
                 int id = resultSet.getInt("id_pregunta");
                 String preguntaText = resultSet.getString("pregunta");
                 int tipoPreguntaId = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
-                return new Pregunta(id, preguntaText, tipoPreguntaId);
+                /*return new Pregunta(id, preguntaText, tipoPreguntaId);*//*
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,8 +158,8 @@ public class PreguntaDao {
                 int id_pregunta = resultSet.getInt("id_pregunta");
                 String pregunta = resultSet.getString("pregunta");
                 int tipo_pregunta_id_tipo_pregunta = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
-                Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
-                preguntas.add(p);
+                /*Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
+                preguntas.add(p);*//*
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,12 +183,13 @@ public class PreguntaDao {
                 int id_pregunta = resultSet.getInt("id_pregunta");
                 String pregunta = resultSet.getString("pregunta");
                 int tipo_pregunta_id_tipo_pregunta = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
-                Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
-                preguntas.add(p);
+                /*Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
+                preguntas.add(p);*//*
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return preguntas;
-    }
+    }*/
+
 }

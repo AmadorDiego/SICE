@@ -6,6 +6,9 @@ public class Opcion {
     private int id_opcion;
     private String opcion;
 
+    public Opcion() {
+    }
+
     public Opcion(int id_opcion, String opcion) {
         this.id_opcion = id_opcion;
         this.opcion = opcion;

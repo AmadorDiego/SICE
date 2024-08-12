@@ -3,6 +3,7 @@ package mx.edu.utez.sice.dao;
 import mx.edu.utez.sice.model.Examen;
 import mx.edu.utez.sice.model.Pregunta;
 import mx.edu.utez.sice.model.PreguntaOpcion;
+import mx.edu.utez.sice.model.Usuario;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class ExamenDao {
 
-    public boolean crearExamen (Examen examen) {
+    /*public boolean crearExamen (Examen examen) {
         try (Connection conexion = DatabaseConnectionManager.getConnection()) {
             conexion.setAutoCommit(false);
             try {
@@ -43,9 +44,66 @@ public class ExamenDao {
             e.printStackTrace();
             return false;
         }
+    }*/
+    public boolean insertExamen(Examen examen){
+        boolean flag = false;
+        String query = "insert into examen (nombre_examen, cantidad_preguntas, descripcion, usuario_id_usuario) values (?, ?, ?, ?);";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,examen.getNombre_examen());
+            ps.setInt(2,examen.getCantidad_preguntas());
+            ps.setString(3,examen.getDescripcion());
+            ps.setInt(4,examen.getId_usuario());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 
-    private void crearPreguntas(Connection conexion, Examen examen) throws SQLException {
+    public boolean insertExamenPreguntas(int id_examen, int id_pregunta){
+        boolean flag = false;
+        String query = "insert into examen_tiene_pregunta (examen_id_examen, pregunta_id_pregunta) values (?, ?);";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_examen);
+            ps.setInt(2,id_pregunta);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public int getOne(Examen examen){
+        int id_examen = 0;
+        String query = "SELECT id_examen FROM examen where nombre_examen = ? and cantidad_preguntas = ? and estado = 0 and descripcion = ? and usuario_id_usuario = ? order by id_examen desc limit 1;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,examen.getNombre_examen());
+            ps.setInt(2,examen.getCantidad_preguntas());
+            ps.setString(3,examen.getDescripcion());
+            ps.setInt(4,examen.getId_usuario());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                id_examen = (rs.getInt("id_examen"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_examen;
+    }
+
+
+
+    /*private void crearPreguntas(Connection conexion, Examen examen) throws SQLException {
         String sql = "CALL CrearPregunta(?, ?, ?, ?)";
         try (CallableStatement stmt = conexion.prepareCall(sql)) {
             for (Pregunta pregunta : examen.getPreguntas()) {
@@ -83,7 +141,7 @@ public class ExamenDao {
             }
         }
     }
-
+/*
     //Codigo que teniamos desde pun principio
     public boolean insertExamen(Examen examen) {
         String query = "INSERT INTO examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) VALUES (?, ?, 1, ?, ?);";
@@ -102,7 +160,7 @@ public class ExamenDao {
             e.printStackTrace();
             return false;
         }
-    }
+    }*//*
 
     public ArrayList<Examen> getAll(){
         ArrayList<Examen> lista = new ArrayList<>();
@@ -123,7 +181,7 @@ public class ExamenDao {
             e.printStackTrace();
         }
         return lista;
-    }
+    }/*
 
     //se agrego getExamenes
     public List<Examen> getExamenes(String grupo, String division_academica, String carrera) {
@@ -175,7 +233,7 @@ public class ExamenDao {
         }
 
         return examenes;
-    }
+    }*/
 
 }
 

@@ -24,7 +24,7 @@ public class BuscarExamenServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        try {
+        /*try {
             // Obtener los parámetros de los filtros
             String grupo = request.getParameter("grupo");
             String division_academica = request.getParameter("division_academica");
@@ -32,7 +32,7 @@ public class BuscarExamenServlet extends HttpServlet {
 
             // Instanciar el DAO y obtener la lista de exámenes
             ExamenDao examenDao = new ExamenDao();
-            List<Examen> examenes = examenDao.getExamenes(grupo, division_academica, carrera);
+            /*List<Examen> examenes = examenDao.getExamenes(grupo, division_academica, carrera);
 
             // Crear el objeto de respuesta para DataTables
             Map<String, Object> responseData = new HashMap<>();
@@ -50,6 +50,6 @@ public class BuscarExamenServlet extends HttpServlet {
             out.print("{\"error\":\"Ocurrió un error al procesar la solicitud.\"}");
         } finally {
             out.close();
-        }
+        }*/
     }
 }

@@ -33,7 +33,7 @@ public class PreguntaOpcionDao {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, preguntaOpcion.getId_pregunta());
             statement.setInt(2, preguntaOpcion.getId_opcion());
-            statement.setBoolean(3, preguntaOpcion.isCorrecta());
+            statement.setInt(3, preguntaOpcion.getCorrecta());
 
             // Ejecutar la consulta y obtener el resultado
             int rowsAffected = statement.executeUpdate();
@@ -57,7 +57,7 @@ public class PreguntaOpcionDao {
             while (resultSet.next()) {
                 int pregunta_id_pregunta = resultSet.getInt("pregunta_id_pregunta");
                 int opcion_id_opcion = resultSet.getInt("opcion_id_opcion");
-                boolean correcta = resultSet.getBoolean("correcta");
+                int correcta = resultSet.getInt("correcta");
                 PreguntaOpcion po = new PreguntaOpcion(pregunta_id_pregunta, opcion_id_opcion, correcta);
                 preguntaOpciones.add(po);
             }
@@ -81,7 +81,7 @@ public class PreguntaOpcionDao {
             while (resultSet.next()) {
                 int pregunta_id_pregunta = resultSet.getInt("pregunta_id_pregunta");
                 int opcion_id_opcion = resultSet.getInt("opcion_id_opcion");
-                boolean correcta = resultSet.getBoolean("correcta");
+                int correcta = resultSet.getInt("correcta");
                 PreguntaOpcion po = new PreguntaOpcion(pregunta_id_pregunta, opcion_id_opcion, correcta);
                 preguntaOpciones.add(po);
             }
@@ -97,7 +97,7 @@ public class PreguntaOpcionDao {
             // Preparar la consulta SQL para actualizar una relación pregunta-opción
             String sql = "UPDATE pregunta_opcion SET correcta = ? WHERE pregunta_id_pregunta = ? AND opcion_id_opcion = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setBoolean(1, preguntaOpcion.isCorrecta());
+            statement.setInt(1, preguntaOpcion.getCorrecta());
             statement.setInt(2, preguntaOpcion.getId_pregunta());
             statement.setInt(3, preguntaOpcion.getId_opcion());
 

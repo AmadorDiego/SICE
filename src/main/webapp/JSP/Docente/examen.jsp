@@ -1,4 +1,4 @@
-
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
 <%--
   Created by IntelliJ IDEA.
   User: corey
@@ -20,7 +20,10 @@
     <!--<link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Docentes.css">
-
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+    %>
 </head>
 <body>
 <!--/////////////////////////////////////////// Fondo //////////////////////////////////////////////////////-->
@@ -38,11 +41,10 @@
                 <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
                     <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>
                     <br>
-                    <form id="id_examen" action="${pageContext.request.contextPath}/CrearExamenServlet" method="post" class="mb-4">
-
+                    <form method="post" action="../../ExamenServlet" class="mb-4">
                         <div id="mensajeResultado" class="alert" style="display: none;"></div>
 
-                        <input type="hidden" id="id_usuario" name="id_usuario" value="${usuarioActual.id}">
+                        <input type="hidden" id="id_usuario" name="id_usuario" value="<%=usuario.getId_usuario()%>">
                         <input type="hidden" id="cantidad_preguntas" name="cantidad_preguntas" value="0">
 
                         <div class="mb-3">
@@ -72,23 +74,18 @@
                             <button type="button" class="btn btn-primary me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
                             <button type="button" class="btn btn-secondary" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                         </div>
-                        <div class="mt-3">
+                        <!-- <div class="mt-3">
                             <button type="button" id="guardarCambios"
                                     class="btn btn-primary bg-blue-utz h6" href="indexDocente">Guardar cambios</button>
-                        </div>
-
+                        </div> -->
+                        <input class="btn btn-primary bg-blue-utz" type="submit" value="Crear">
                     </form>
                 </div>
             </div>
         </div>
-
-        <script>
-            var userId = '${usuarioActual.id}';
-        </script>
         <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
         <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
         <script src="${pageContext.request.contextPath}/JS/ScriptExamen.js"></script>
-
 </body>
 </html>
 

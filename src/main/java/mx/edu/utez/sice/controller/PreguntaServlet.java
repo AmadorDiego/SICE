@@ -23,7 +23,7 @@ public class PreguntaServlet extends HttpServlet {
         ExamenDao ExamenDao = new ExamenDao();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
         if (action == null) {
             action = "list";
@@ -121,5 +121,5 @@ public class PreguntaServlet extends HttpServlet {
         request.setAttribute("preguntas", preguntas);
         request.setAttribute("id_examen", id_examen);
         request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
-    }
+    }*/
 }

@@ -3,9 +3,13 @@ package mx.edu.utez.sice.model;
 public class PreguntaOpcion {
     private int id_pregunta;
     private int id_opcion;
-    private boolean correcta;
+    private int correcta;
 
-    public PreguntaOpcion(int id_pregunta, int id_opcion, boolean correcta) {
+
+    public PreguntaOpcion() {
+    }
+
+    public PreguntaOpcion(int id_pregunta, int id_opcion, int correcta) {
         this.id_pregunta = id_pregunta;
         this.id_opcion = id_opcion;
         this.correcta = correcta;
@@ -27,14 +31,14 @@ public class PreguntaOpcion {
         this.id_opcion = id_opcion;
     }
 
-    public boolean isCorrecta() {
+    public int getCorrecta() {
         return correcta;
     }
 
-    public void setCorrecta(boolean correcta) {
+    public void setCorrecta(int correcta) {
         this.correcta = correcta;
     }
-
+/*
     //Agregue este metodo de SET OPCION CUANDO MODIFIQUE crearExamenServlet
     public void setOpcion(Opcion opcion) {
         this.id_opcion = id_opcion;
@@ -42,5 +46,5 @@ public class PreguntaOpcion {
 
     public PreguntaOpcion getOpcion() {
         return this;
-    }
+    }*/
 }

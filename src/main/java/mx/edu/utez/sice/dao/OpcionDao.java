@@ -26,7 +26,7 @@ public class OpcionDao {
         }
     }
 
-    public boolean insertOpcion(Opcion opcion) {
+    /*public boolean insertOpcion(Opcion opcion) {
         try {
             // Preparar la consulta SQL para insertar una nueva opción
             String sql = "INSERT INTO opcion (opcion) VALUES (?)";
@@ -41,8 +41,40 @@ public class OpcionDao {
             e.printStackTrace();
             return false;
         }
+    }*/
+    public boolean insertOpcion(Opcion opcion){
+        boolean flag = false;
+        String query = "INSERT INTO opcion (opcion) VALUES (?)";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,opcion.getOpcion());
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
     }
 
+    public int getOne(Opcion opcion){
+        int id_opcion = 0;
+        String query = "SELECT id_opcion FROM opcion where opcion = ? order by id_opcion desc limit 1;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1,opcion.getOpcion());
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                id_opcion = (rs.getInt("id_opcion"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_opcion;
+    }
+/*
     public List<Opcion> getAllOpciones() {
         List<Opcion> opciones = new ArrayList<>();
         try {
@@ -120,5 +152,5 @@ public class OpcionDao {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 }
