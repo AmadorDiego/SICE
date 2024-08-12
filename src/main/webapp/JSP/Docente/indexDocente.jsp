@@ -20,6 +20,7 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/Docentes.css">
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
@@ -49,6 +50,22 @@
                     </div>
                 </div>
 
+                <!--boton de busqueda-->
+                <div class="input-group">
+                    <!--<div class="form-outline" data-mdb-input-init>
+                    </div>-->
+                    <div class="input-group-append">
+                        <input id="search-input" type="search" class="form-control" placeholder="Search">
+
+                        <div class="input-group-append">
+                            <button id="search-button" type="button" class="btn btn-primary">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
                         <thead class="thead bg-blue-utz">
@@ -74,5 +91,6 @@
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
+<script src="../../JS/Ajustes.js"</script>
 </body>
 </html>
