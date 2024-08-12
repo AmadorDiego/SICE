@@ -7,7 +7,7 @@
     <groupId>mx.edu.utez</groupId>
     <artifactId>SICE</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>PruebaA</name>
+    <name>SICE</name>
     <packaging>war</packaging>
 
     <properties>
