@@ -1,7 +1,8 @@
 
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.sice.model.Usuario" %><%--
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -125,15 +126,30 @@
                         </tr>
                         </thead>
                         <tbody class="bg-green-SICE">
-                        <c:forEach var="examen" items="${examenes}">
-                            <tr class="h6">
-                                <td>${examen.nombre_examen}</td>
-                                <td>${examen.descripcion}</td>
-                            </tr>
-                        </c:forEach>
+                        <%
+                            ArrayList<Examen> examenes = (ArrayList<Examen>)request.getAttribute("examenes");
+                            if(examenes != null && !examenes.isEmpty()) {
+                                for(Examen examen : examenes) {
+                        %>
+                        <tr class="h6">
+                            <td><%= examen.getNombre_examen() %></td>
+                            <td><%= examen.getDescripcion() %></td>
+                        </tr>
+                        <%
+                            }
+                        } else {
+                        %>
+                        <tr>
+                            <td colspan="2">No hay exámenes disponibles.</td>
+                        </tr>
+                        <%
+                            }
+                        %>
                         </tbody>
                     </table>
                 </div>
+
+
             </div>
         </div>
     </div>

@@ -41,6 +41,19 @@ public class ExamenServlet extends HttpServlet {
         }
     }*/
 
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ExamenDao examenDao = new ExamenDao();
+        ArrayList<Examen>examenes = examenDao.getAll();
+
+        System.out.println("Número de exámenes recuperados: " + examenes.size());
+        for (Examen examen : examenes) {
+            System.out.println("Examen: " + examen.getNombre_examen()
+                    + ", Descripción: " + examen.getDescripcion());
+        }
+            req.setAttribute("examenes", examenes);
+            req.getRequestDispatcher("JSP/Docente/indexDocente.jsp").forward(req, resp);
+    }
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         boolean flag = false;
         //Creamos un nuevo examen obteniendo los datos necesarios para su creación
