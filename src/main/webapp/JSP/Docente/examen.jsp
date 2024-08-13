@@ -71,14 +71,14 @@
                         </div>
 
                         <div class="mt-3">
-                            <button type="button" class="btn btn-primary me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
-                            <button type="button" class="btn btn-secondary" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
+                            <button type="button" class="btn btn-primary blue-utz me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
+                            <button type="button" class="btn btn-secondary gray-SICE text-white" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                         </div>
                         <!-- <div class="mt-3">
                             <button type="button" id="guardarCambios"
                                     class="btn btn-primary bg-blue-utz h6" href="indexDocente">Guardar cambios</button>
                         </div> -->
-                        <input class="btn btn-primary bg-blue-utz" type="submit" value="Crear">
+                        <input class="btn btn-primary bg-blue-utz mt-3" type="submit" value="Crear">
                     </form>
                 </div>
             </div>
