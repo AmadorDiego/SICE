@@ -13,6 +13,13 @@
     <title>Calificar Examenes</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
+        body {
+            background-color: rgb(242, 242, 242); /* Fondo gris claro */
+        }
+        .navbar {
+            background-color: rgb(0, 46, 96); /* Barra azul */
+            height: 50px;
+        }
         .filter-group {
             display: flex;
             align-items: center;
@@ -61,7 +68,7 @@
     </style>
 </head>
 <body>
-<div class="navbar"></div>
+<div class="navbar"></div> <!-- Barra azul -->
 <div class="container">
     <h1>Calificar Examenes</h1>
     <h3>Examenes contestados</h3>
@@ -95,7 +102,7 @@
         </div>
         <div class="home-boton-container">
             <button class="home-boton btn btn-outline-secondary" onclick="location.href='../index.html';">
-                <img src="../img/home-boton.png" alt="Home">
+                <a href="indexDocente.jsp">home</a>
             </button>
         </div>
     </div>
@@ -112,7 +119,27 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Aquí irían los datos de examen -->
+        <c:forEach var="examen" items="${examenes}">
+            <tr>
+                <td>${examen.nombre}</td>
+                <td>${examen.grado}</td>
+                <td>${examen.grupo}</td>
+                <td>${examen.division}</td>
+                <td>${examen.carrera}</td>
+                <td>
+                    <form action="calificarExamen" method="get">
+                        <button type="submit" class="btn btn-success">Calificar</button>
+                        <input type="hidden" name="examenId" value="${examen.id}">
+                    </form>
+                </td>
+                <td>
+                    <form action="reporteExamen" method="get">
+                        <button type="submit" class="btn btn-primary">Reporte</button>
+                        <input type="hidden" name="examenId" value="${examen.id}">
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>

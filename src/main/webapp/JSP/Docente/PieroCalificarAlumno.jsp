@@ -13,6 +13,13 @@
     <title>Calificar Estudiante</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
+        body {
+            background-color: #f2f2f2; /* Fondo gris claro */
+        }
+        .navbar {
+            background-color: #002e60; /* Barra azul */
+            height: 50px;
+        }
         .filter-group {
             display: flex;
             align-items: center;
@@ -34,7 +41,7 @@
     </style>
 </head>
 <body>
-<div class="navbar"></div>
+<div class="navbar"></div> <!-- Barra azul -->
 <div class="container">
     <h1>Calificar Estudiante</h1>
     <h3>Grupo de <span>3</span> <span>A</span></h3>
@@ -42,9 +49,10 @@
         <input type="text" id="buscar_alumno" placeholder="Buscar Alumno" class="form-control">
         <div class="home-boton-container">
             <button class="home-boton btn btn-outline-secondary" onclick="location.href='../index.html';">
-                <img src="../img/home-boton.png" alt="Home">
+                <a href="indexDocente.jsp">home</a>
             </button>
         </div>
+
     </div>
     <table class="table table-striped mt-4">
         <thead>
@@ -56,11 +64,22 @@
         </tr>
         </thead>
         <tbody>
-        <!-- Aquí irían los datos -->
+        <c:forEach var="alumno" items="${alumnos}">
+            <tr>
+                <td>${alumno.nombre}</td>
+                <td>${alumno.apellido}</td>
+                <td>${alumno.matricula}</td>
+                <td>
+                    <form action="calificarAlumno" method="get">
+                        <button type="submit" class="btn btn-primary">Calificar</button>
+                        <input type="hidden" name="alumnoId" value="${alumno.id}">
+                    </form>
+                </td>
+            </tr>
+        </c:forEach>
         </tbody>
     </table>
 </div>
 <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
