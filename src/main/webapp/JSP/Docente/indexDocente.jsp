@@ -154,7 +154,6 @@
         </div>
     </div>
 
-
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
 <script src="../../JS/Ajustes.js"></script>
