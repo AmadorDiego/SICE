@@ -23,6 +23,6 @@ public class RestaurarUsuarioServlet extends HttpServlet {
             sesion.setAttribute("mensaje","Fallo la restauración");
 
         }
-        resp.sendRedirect("JSP/Administrador/verUsuarioEliminado.jsp");
+        resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }
 }

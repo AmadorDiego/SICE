@@ -71,7 +71,7 @@
         <%}%>
 
 
-        <!---//////////////////////////////////////Contanido//////////////////////////////////////////////////-->
+        <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
         <div class="row text-center">
             <div class="col-12">
                 <div class="table-responsive rounded-4 text-white">
@@ -95,7 +95,7 @@
                             UsuarioDao dao = new UsuarioDao();
                             ArrayList<Usuario> lista = dao.getAll();
                             for (Usuario u : lista) {
-                                if (u.getEstado() != 2) {//Por cada usuario de la lista %>
+                                if (u.getId_tipo_usuario() > 1 && u.getId_tipo_usuario() < 4 ) {//Por cada usuario de la lista %>
                         <tr>
                             <td class="text-white"><%=u.getNombre_usuario()%>
                             </td>
@@ -106,18 +106,12 @@
                             <td class="text-white"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
                             </td>
                             <td class="text-white"><% switch (u.getId_tipo_usuario()) {
-                                case 1:%>
-                                <%="Administrador"%><%
-                                        break;
                                     case 2:%>
                                 <%="Docente"%><%
                                         break;
                                     case 3:%>
                                 <%="Alumno"%><%
                                         break;
-                                    case 4:%>
-                                <%="Docente administrador"%><%
-                                            break;
                                     }%></td>
                             <td class="text-white"><%=u.getFecha_registrado()%>
                             </td>
@@ -126,10 +120,18 @@
                             </td>
                             <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
                             <td>
-                                <!-- Boton que activa la alerta -->
+                                <%
+                                    if(u.getEstado()==1){ %>
+                                        <!-- Boton que activa la alerta -->
                                 <button type="button" class="btn btn-warning bg-red-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Eliminar
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Deshabilitar
                                 </button>
+                                    <%} else { %>
+                                <button type="button" class="btn btn-warning bg-green-SICE border-0"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Habilitar
+                                </button>
+                                    <%}
+                                %>
 
                                 <!-- Contenido de la alerta -->
                                 <div class="modal fade" id="exampleModal_<%= u.getId_usuario() %>" tabindex="-1"
@@ -137,21 +139,35 @@
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header bg-blue-utz">
-                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel_<%= u.getId_usuario() %>">Eliminar
-                                                    usuario</h1>
+                                                <h1 class="modal-title fs-5 text-white" id="exampleModalLabel_<%= u.getId_usuario() %>">
+                                                    <%if (u.getEstado()==1){%>Deshabilitar usuario<%}else{%>Restaurar usuario<%}%>
+                                                </h1>
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <h4>¿Estás seguro de que quieres eliminar a <%= u.getNombre_usuario()%>?</h4>
-                                                <p>Por seguridad, los usuarios quedan en un modo restringido. Después de cierto periodo de tiempo, el usuario seleccionado será eliminado completamente</p>
+                                                <%
+                                                    if(u.getEstado()==1){ // %>
+                                                        <h4>¿Estás seguro de que quieres deshabilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</h4>
+                                                        <p>Los usuarios deshabilitados no podrán ingresar en el sistema, sin embargo, pueden volver a ser habilitados.</p>
+                                                <%} else { %>
+                                                        <h4>¿Estás seguro de que quieres habilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</h4>
+                                                        <p>Los usuarios una vez habilitados volverán a tener los mismos permisos que anteriormente respecto a su rol.</p>
+                                                <%}
+                                                %>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%= u.getId_usuario() %>">
                                                     Cancelar
                                                 </button>
                                                 <a class="btn btn-warning bg-red-SICE border-0 text-white"
-                                                   href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Eliminar</a>
+                                                <%
+                                                    if(u.getEstado()==1){ // %>
+                                                    href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Deshabilitar</a>
+                                                <%} else { %>
+                                                    href="../../RestaurarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Restaurar</a>
+                                                <%}
+                                                %>
                                             </div>
                                         </div>
                                     </div>
@@ -163,7 +179,6 @@
                                                 // Por ejemplo, limpiar o resetear datos del modal
                                             });
                                         });
-
                                     </script>
                                 </div>
                             </td>
@@ -208,5 +223,8 @@
 
 
 </script>
+<%
+
+%>
 </body>
 </html>
