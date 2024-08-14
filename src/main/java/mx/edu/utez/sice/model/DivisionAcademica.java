@@ -2,11 +2,11 @@ package mx.edu.utez.sice.model;
 
 public class DivisionAcademica {
     private int id_division_academica;
-    private String division_academica;
+    private String nombre_division_academica;
 
-    public DivisionAcademica(int id_division_academica, String division_academica) {
+    public DivisionAcademica(int id_division_academica, String nombre_division_academica) {
         this.id_division_academica = id_division_academica;
-        this.division_academica = division_academica;
+        this.nombre_division_academica = nombre_division_academica;
     }
 
     public  DivisionAcademica (){}
@@ -20,10 +20,10 @@ public class DivisionAcademica {
     }
 
     public String getDivision_academica() {
-        return division_academica;
+        return nombre_division_academica;
     }
 
-    public void setDivision_academica(String division_academica) {
-        this.division_academica = division_academica;
+    public void setDivision_academica(String nombre_division_academica) {
+        this.nombre_division_academica = nombre_division_academica;
     }
 }

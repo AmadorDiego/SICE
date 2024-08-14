@@ -1,6 +1,7 @@
 package mx.edu.utez.sice.dao;
 
 import mx.edu.utez.sice.model.Carrera;
+import mx.edu.utez.sice.model.DivisionAcademica;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -28,5 +29,46 @@ public class CarreraDao {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    public Carrera getById(int id) {
+        Carrera carrera = new Carrera();
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            String query = "SELECT  nombre_carrera FROM carrera WHERE id_carrera=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, id);
+            if (rs.next()) {
+                carrera = new Carrera();
+                carrera.setId_carrera(rs.getInt("id_carrera"));
+                carrera.setCarrera(rs.getString("nombre_carrera"));
+                carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return carrera;
+    }
+
+    public Carrera getAllByGrupo(int id) {
+        Carrera carrera = new Carrera();
+        DivisionAcademica divisionAcademica = new DivisionAcademica();
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            String query = "SELECT  nombre_carrera FROM carrera WHERE id_carrera=?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            ps.setInt(1, id);
+            if (rs.next()) {
+                carrera = new Carrera();
+                carrera.setId_carrera(rs.getInt("id_carrera"));
+                carrera.setCarrera(rs.getString("nombre_carrera"));
+                carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return carrera;
     }
 }
