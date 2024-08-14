@@ -24,6 +24,8 @@
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
     %>
+
+
 </head>
 <body>
 <!--/////////////////////////////////////////// Fondo //////////////////////////////////////////////////////-->
@@ -83,6 +85,9 @@
                 </div>
             </div>
         </div>
+
+
+
         <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
         <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
         <script src="${pageContext.request.contextPath}/JS/ScriptExamen.js"></script>
