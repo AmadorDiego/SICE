@@ -104,10 +104,10 @@
                         <td><%= examen.getNombre_examen() %></td>
                         <td><%= examen.getCantidad_preguntas() %></td>
                         <td>
-                            <a href="personalizarExamen.jsp?id=<%= examen.getId_examen() %>" class="btn btn-primary">Ver</a>
+                            <a href="../../ModificarExamenServlet?id_examen=<%=examen.getId_examen()%>" class="btn btn-primary">Ver</a>
                         </td>
                         <td>
-                            <a href="PaulaAsignarExamen.jsp?id=<%= examen.getId_examen() %>" class="btn btn-success">Asignar</a>
+                            <a href="../../AsignarExamenServlet?id_examen=<%=examen.getId_examen()%>" class="btn btn-success">Asignar</a>
                         </td>
                     </tr>
                     <%

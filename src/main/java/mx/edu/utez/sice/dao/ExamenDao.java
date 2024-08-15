@@ -102,7 +102,7 @@ public class ExamenDao {
     }
 
     //obtiene la información de un examen por su ID
-    public int getOne(int id_examen){
+    public Examen getOne(int id_examen){
         Examen examen = new Examen();
         String query = "SELECT * FROM examen where id_examen = ?;";
         try {
@@ -121,7 +121,7 @@ public class ExamenDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return id_examen;
+        return examen;
     }
 
     public ArrayList<Examen> getAll(int id_usuario) {
@@ -310,7 +310,6 @@ public class ExamenDao {
 
         return examenes;
     }*/
-
 }
 
 
