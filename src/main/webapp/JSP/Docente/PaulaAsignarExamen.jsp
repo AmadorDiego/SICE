@@ -5,6 +5,7 @@
 <%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
 <%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
+<%@ page import="mx.edu.utez.sice.model.Tabla" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -53,7 +54,7 @@
                 ArrayList<Grupo> grupos = grupoDao.getAll();
                 for (Grupo g : grupos) {
             %>
-            <option value="<%= g.getGrado() %> - <%= g.getGrupo() %>"><%= g.getGrado() %> - <%= g.getGrupo() %></option>
+            <option value="<%= g.getId_grupo() %>"><%= g.getGrado() %> - <%= g.getGrupo() %></option>
             <%
                 }
             %>
@@ -66,7 +67,7 @@
                 ArrayList<DivisionAcademica> divisiones = divisionDao.getAll();
                 for (DivisionAcademica d : divisiones) {
             %>
-            <option value="<%= d.getDivision_academica() %>"><%= d.getDivision_academica() %></option>
+            <option value="<%= d.getId_division_academica() %>"><%= d.getDivision_academica() %></option>
             <%
                 }
             %>
@@ -79,7 +80,7 @@
                 ArrayList<Carrera> carreras = carreraDao.getAll();
                 for (Carrera c : carreras) {
             %>
-            <option value="<%= c.getCarrera() %>"><%= c.getCarrera() %></option>
+            <option value="<%= c.getId_carrera() %>"><%= c.getCarrera() %></option>
             <%
                 }
             %>
@@ -100,19 +101,19 @@
             <th>Seleccionar Grupo</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="contenido">
         <%
-            ArrayList<Grupo> grupoInfo = grupoDao.getInfo();
-            for (Grupo g : grupoInfo) {
+            ArrayList<Tabla> grupoInfo = grupoDao.getInfo();
+            for (Tabla t : grupoInfo) {
                 Carrera carrera = new Carrera();
                 DivisionAcademica divisionAcademica = new DivisionAcademica();
         %>
         <tr>
-            <td><%= g.getGrupo() %></td>
-            <td><%= g.getGrado() %></td>
-            <td><%= divisionAcademica.getDivision_academica() %></td>
-            <td><%= carrera.getCarrera() %></td>
-            <td><button class="btn btn-success">Asignar</button></td>
+            <td><%= t.getGrupo().getGrupo() %></td>
+            <td><%= t.getGrupo().getGrado() %></td>
+            <td><%= t.getDivision().getDivision_academica() %></td>
+            <td><%= t.getCarrera().getCarrera() %></td>
+            <td><a class="btn btn-primary" href="PaulaAsignarAlumno.jsp."> Asignar </a></td>
         </tr>
         <%
             }
@@ -127,6 +128,74 @@
 <script>
     $(document).ready(function() {
         $('#tablaExamenes').DataTable();
+
+        var bandera_grupo = false;
+        var bandera_carrera = false;
+        var bandera_division = false;
+
+        var grupo = document.getElementById("id_grupo");
+        grupo.addEventListener("change", () => {
+            if(grupo.value > 0){
+                bandera_grupo = true;
+            }
+        });
+
+        var division = document.getElementById("id_division_academica");
+        division.addEventListener("change", () => {
+            if(division.value > 0){
+                bandera_division = true;
+            }
+        });
+
+        var carrera = document.getElementById("id_carrera");
+        carrera.addEventListener("change", () => {
+            if(carrera.value > 0){
+                bandera_carrera = true;
+            }
+
+            if(bandera_grupo && bandera_division && bandera_carrera){
+                //Un metodo fetch para comunicarnos con el servlet
+                var id_grupo = grupo.value;
+                var id_division = division.value;
+                var id_carrera = carrera.value;
+
+                fetch('../../asignarExamen?id_grupo='+id_grupo+'&id_division='+id_division+'&id_carrera='+id_carrera,{
+                    method: 'GET'
+                }).then(response => {
+                    return response.text();
+                }).then(data => {
+                    //Esto es la lista de Tabla
+                    let respuesta = JSON.parse(data);
+                    var tbody = document.getElementById("contenido");
+                    tbody.innerHTML = "";
+
+                    for(const tabla in respuesta) {
+                        var fila = document.createElement("tr");
+                        var td_grupo = document.createElement("td");
+                        var td_grado = document.createElement("td");
+                        var td_division = document.createElement("td");
+                        var td_carrera = document.createElement("td");
+                        var td_boton = document.createElement("td");
+
+                        td_grupo.innerText = tabla.grupo.grupo;
+                        fila.appendChild(td_grupo);
+                        td_grado.innerText = tabla.grupo.grado;
+                        fila.appendChild(td_grado);
+                        td_division.innerText = tabla.division.division_academica;
+                        fila.appendChild(td_division);
+                        td_carrera.innerText = tabla.carrera.carrera;
+                        fila.appendChild(td_carrera);
+                        td_boton.innerHTML = '<a class="btn btn-primary" href="PaulaAsignarAlumno.jsp."> Asignar </a>'
+                        fila.appendChild(td_boton);
+
+                        tbody.appendChild(fila);
+                    }
+                }).catch(error => {
+                    console.log("Error: ", error);
+                });
+            }
+        });
+
     });
 </script>
 </body>

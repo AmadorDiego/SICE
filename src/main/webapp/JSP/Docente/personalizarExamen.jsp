@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.model.Usuario" %>
@@ -5,6 +6,15 @@
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %><%--
 
+=======
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
+<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
+<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
+<%@ page import="mx.edu.utez.sice.model.Opcion" %>
+<%@ page import="mx.edu.utez.sice.model.PreguntaOpcion" %><%--
+>>>>>>> d8fc55a9abf72e6e31c94a47c809c59c904e2bbe
   Created by IntelliJ IDEA.
   User: corey
   Date: 04/08/2024
@@ -58,6 +68,17 @@
 
 </head>
 <body>
+<%
+    HttpSession sesion = request.getSession();
+    Examen examen = (Examen) sesion.getAttribute("examen");
+    ArrayList<Pregunta> listaPreguntas1 = (ArrayList<Pregunta>) sesion.getAttribute("preguntas");
+    ArrayList<Opcion> listaOpciones1 = (ArrayList<Opcion>) sesion.getAttribute("opciones");
+
+    if (examen == null) {
+        response.sendRedirect("loginSICE.jsp"); // Redirect if user is not found
+        return;
+    }
+%>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
 <div class="bg"></div>
 <div class="bg bg2"></div>
@@ -74,61 +95,69 @@
 </div>
 
 <div class="container my-2 my-md-4">
-    <h1 class="text-start mb-2 mb-md-3">Personalizar Examen</h1>
-    <h3 class="text-start mb-3 mb-md-4">Probabilidad y estadística 1</h3>
+    <h1 class="text-start mb-2 mb-md-3">Modificar Examen</h1>
+    <h3 class="text-start mb-3 mb-md-4"><%=examen.getNombre_examen()%></h3>
 
     <div class="d-flex flex-wrap justify-content-start gap-2 mb-3">
-        <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 mb-3">
-            <span class="me-2">Modificar Examen</span>
-            <button class="btn btn-primary btn-sm btn-md-lg">Modificar</button>
-        </div>
-
+        <!--
         <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 mb-3">
             <span class="me-2">Eliminar Examen</span>
             <button class="btn btn-primary btn-sm btn-md-lg">Eliminar</button>
         </div>
+        -->
 
         <div class="d-flex flex-column flex-md-row align-items-start align-items-md-center gap-2 mb-3">
             <a href="../Docente/indexDocente.jsp" class="btn btn-primary btn-sm d-inline-flex align-items-center">
                 <img src="../../IMG/home.png" alt="Home" class="me-2" style="width: 20px; height: 20px;">
             </a>
-
         </div>
-
     </div>
+<<<<<<< HEAD
 
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <thead class="thead bg-blue-utz">
-            <tr class="text-white h5">
-                <th>Pregunta</th>
-                <th>Tipo De Pregunta</th>
-            </tr>
-            </thead>
-            <tbody class="bg-green-SICE">
-            <%
-                ExamenDao examenDao = new ExamenDao();
-                Usuario usuario = new Usuario();
-                PreguntaDao preguntaDao = new PreguntaDao();
-                ArrayList<Examen> listaExamenes = examenDao.getAll(usuario.getId_tipo_usuario());
-
-                for (Examen examen : listaExamenes) {
-                    ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen()); // Asumiendo que necesitas el ID del examen
-                    for (Pregunta pregunta : listaPreguntas) {
-            %>
-            <tr class="h6">
-                <td><%=pregunta.getPregunta()%></td>
-                <td><%=pregunta.getId_tipo_pregunta()%></td>
-            </tr>
-            <%
-                    }
-                }
-            %>
-            </tbody>
-        </table>
+    <div class="container-md">
+        <div class="row">
+            <div class="col-12">
+                <form class="form-control rounded-5 p-3 mt-4 border-0 bg-green-utz" method="post" action="../../ModificarExamenServlet">
+                    <h1 class="blue-utz">Modificar Examen</h1>
+                    <br>
+                    <label class="form-label text-white h5">Título del examen: </label>
+                    <input class="form-control" type="text" name="nombre_examen" required value="<%=examen.getNombre_examen()%>" placeholder="<%=examen.getNombre_examen()%>">
+                    <br>
+                    <label class="form-label text-white h5">Descripción: </label>
+                    <input class="form-control" type="text" name="descripcion" required value="<%=examen.getDescripcion()%>" placeholder="<%=examen.getDescripcion()%>">
+                    <br>
+                    <%
+                        PreguntaDao preguntaDao = new PreguntaDao();
+                        ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen());
+                        int i = 0;
+                        for (Pregunta pregunta : listaPreguntas) {
+                            i++; %>
+                            <label class="form-label text-white h5">Pregunta <%=i%>:  </label>
+                            <input class="form-control" type="text" name="pregunta_<%=i%>" required value="<%=pregunta.getPregunta()%>" placeholder="<%=pregunta.getPregunta()%>">
+                            <br>
+                            <%
+                            if (pregunta.getId_tipo_pregunta()==2){
+                                OpcionDao opcionDao = new OpcionDao();
+                                ArrayList<Opcion> listaOpciones = opcionDao.getAll(examen.getId_examen());
+                                int j = 0;
+                                for (Opcion opcion : listaOpciones) {
+                                    PreguntaOpcion preguntaOpcion = new PreguntaOpcion();
+                                    j++; %>
+                                    <label class="form-label text-white h5">Opcion <%=j%>:  </label>
+                                    <input type="radio" name="opcion_correcta_<%=j%>" value="" <%if (preguntaOpcion.getCorrecta()==1){%>checked<%}%> >
+                                    <input class="form-control" type="text" name="pregunta_<%=i%>_opcion_<%=j%>" required value="<%=opcion.getOpcion()%>" placeholder="<%=opcion.getOpcion()%>">
+                                    <br>
+                                <%}
+                            }
+                        }
+                    %>
+                </form>
+            </div>
+        </div>
+>>>>>>> d8fc55a9abf72e6e31c94a47c809c59c904e2bbe
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+ntpno
