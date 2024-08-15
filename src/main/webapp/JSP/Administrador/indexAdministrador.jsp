@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
-
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0"/>
     <%
@@ -21,24 +20,12 @@
 <body>
 <!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-blue-utz p-2">
-            <h2 class="text-white p-2 ms-2">SICE</h2>
-            <div class="d-flex flex-column ms-2">
-                <a href="registroUsuario.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Registrar
-                    Usuario</h6></a>
-                <a href="verUsuarioEliminado.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Usuarios
-                    Eliminados</h6></a>
-            </div>
-        </div>
-    </div>
     <nav class="navbar bg-blue-utz">
         <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand text-white">
+                <img src="../../IMG/logo.png" alt="Logo" class="d-inline-block align-text-top logoNav">
+                <h5 class="ms-1">SICE</h5>
+            </a>
         </div>
     </nav>
 </header>
@@ -91,8 +78,8 @@
                             <th class="d-none d-md-table-cell">Estado</th>
                             <th>Tipo de usuario</th>
                             <th class="d-none d-md-table-cell">Fecha registrado</th>
-                            <th></th>
-                            <th></th>
+                            <th class="me-0"></th>
+                            <th class="me-0"></th>
                         </tr>
                         </thead>
 
