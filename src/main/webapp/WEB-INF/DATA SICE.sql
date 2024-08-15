@@ -29,21 +29,21 @@ insert into carrera (nombre_carrera, division_academica_id_division_academica) v
 ('TSU Terapia física: área rehabilitación', 4),
 (' Licenciatura en Terapia Física', 4);
 
-insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, id_tipo_usuario, carrera_id_carrera) values
-('Diego Ricardo', 'Amador Casillas', '20233tn077@utez.edu.mx', sha2('20233tn077', 256), null, now(), 1, null),
-('Elias Manuel', 'Marquez Bailón', '20233tn068@utez.edu.mx', sha2('20233tn068', 256), null, now(),3 ,11),
-('Erik', 'Balmaceda Miranda', '20223tn044@utez.edu.mx', sha2('20223tn044', 256), null, now(), 3, 11),
-('Jesus Emmanuel', 'Galvez Osorio', '20233tn108@utez.edu.mx', sha2('20233tn108', 256), null, now(), 3, 11),
-('Paula', 'Vargas Ledesma', '20233tn071@utez.edu.mx', sha2('20233tn071', 256), null, now(), 3, 11),
-('Piero Leonardo', 'Vargas Ledesma', '20233tn072@utez.edu.mx', sha2('20233tn072', 256), null, now(), 3, 11),
-('Hugo Daniel', 'Castillo García', '20233tn991@utez.edu.mx', sha2('20233tn991', 256), null, now(), 3, 10),
-('Ángel', 'Sotelo Fuentes', '20233tn992@utez.edu.mx', sha2('20233tn992', 256), null, now(), 3, 9),
-('Raúl Alejandro', 'Sánchez Jimenez', '20233tn993@utez.edu.mx', sha2('20233tn993', 256), null, now(), 3, 8),
-('Sebastian', 'Pedroza Aguilar', '20233tn994@utez.edu.mx', sha2('20233tn994', 256), null, now(), 3, 7),
-('Eduardo', 'Ramirez Peña', '20233tn995@utez.edu.mx', sha2('20233tn995', 256), null, now(), 3, 6),
-('Monse', 'Juarez Espinosa', '20233tn996@utez.edu.mx', sha2('20233tn996', 256), null, now(), 2, null),
-('Paola', 'Ocampo Bustamante', '20233tn997@utez.edu.mx', sha2('20233tn997', 256), null, now(), 4, null),
-('Blanca', 'Casillas Arias', '20233tn998@utez.edu.mx', sha2('20233tn998', 256), null, now(), 3, 5);
+insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, codigo, fecha_registrado, id_tipo_usuario) values
+('Diego Ricardo', 'Amador Casillas', '20233tn077@utez.edu.mx', sha2('20233tn077', 256), null, now(), 1),
+('Elias Manuel', 'Marquez Bailón', '20233tn068@utez.edu.mx', sha2('20233tn068', 256), null, now(),3),
+('Erik', 'Balmaceda Miranda', '20223tn044@utez.edu.mx', sha2('20223tn044', 256), null, now(), 3),
+('Jesus Emmanuel', 'Galvez Osorio', '20233tn108@utez.edu.mx', sha2('20233tn108', 256), null, now(), 3),
+('Paula', 'Vargas Ledesma', '20233tn071@utez.edu.mx', sha2('20233tn071', 256), null, now(), 3),
+('Piero Leonardo', 'Vargas Ledesma', '20233tn072@utez.edu.mx', sha2('20233tn072', 256), null, now(), 3),
+('Hugo Daniel', 'Castillo García', '20233tn991@utez.edu.mx', sha2('20233tn991', 256), null, now(), 3),
+('Ángel', 'Sotelo Fuentes', '20233tn992@utez.edu.mx', sha2('20233tn992', 256), null, now(), 3),
+('Raúl Alejandro', 'Sánchez Jimenez', '20233tn993@utez.edu.mx', sha2('20233tn993', 256), null, now(), 3),
+('Sebastian', 'Pedroza Aguilar', '20233tn994@utez.edu.mx', sha2('20233tn994', 256), null, now(), 3),
+('Eduardo', 'Ramirez Peña', '20233tn995@utez.edu.mx', sha2('20233tn995', 256), null, now(), 3),
+('Monse', 'Juarez Espinosa', '20233tn996@utez.edu.mx', sha2('20233tn996', 256), null, now(), 2),
+('Paola', 'Ocampo Bustamante', '20233tn997@utez.edu.mx', sha2('20233tn997', 256), null, now(), 4),
+('Blanca', 'Casillas Arias', '20233tn998@utez.edu.mx', sha2('20233tn998', 256), null, now(), 3);
 
 insert into periodo (descripcion, fecha_inicio, fecha_final) values
 ('cuatrimestre enero-abril 2024', '2024-01-04', '2024-04-26'),
@@ -65,7 +65,7 @@ insert into grupo (grado, grupo, periodo_id_periodo) values
 (9, 'D', 2),
 (9, 'E', 2);
 
-insert into grupo_tiene_usuario values
+insert into usuario_tiene_grupo values
 (1, 2),
 (1, 3),
 (1, 4),
@@ -78,6 +78,10 @@ insert into grupo_tiene_usuario values
 (2, 11),
 (2, 14);
 
+insert into grupo_tiene_carrera values
+(11,1),
+(11,2);
+
 insert into examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) values ('Examen teorico U3 Sistemas operativos 3-A-DSM', 15, 1, 'Buen dia. Por favor contestar. Saludos cordiales.', 12);
 
 insert into aplicacion (periodo_id_periodo, examen_id_examen) values (2, 1);
@@ -88,7 +92,7 @@ insert into pregunta (pregunta, id_tipo_pregunta) values
 ('¿Con que comando se crea un directorio?', 2),
 ('¿Que comando nos permite ver los archicvos de un directorio?', 2),
 ('¿Que comando nos permite crear un archivo?',2),
-('En caso de querer ver los archivos del directorio en que nos encontramos, ordenados por tamaño, ¿que comando deberiamos de usar?', 2),
+'En caso de querer ver los archivos del directorio en que nos encontramos, ordenados por tamaño, ¿que comando deberiamos de usar?', 2),
 ('En caso de querer movernos al directorio raiz del sistema, ¿que comando deberiamos de usar', 2),
 ('En caso de haber creado un archivo prueba.txt, ¿que comando deberiamos de usar para eliminarlo?', 2),
 ('En caso de querer ver los archivos y carpetas del directorio en el que nos encontramos con toda su informacion, ¿que comando se deberia de usar?', 2),
@@ -149,7 +153,7 @@ insert into opcion (opcion) values
 ('head texto.txt'),
 ('db y cl'),
 ('rim y tx'),
-('vi y nano'),
+'vi y nano'),
 ('Permiten a los usuarios crear y modificar archivos de texto, como archivos de configuración y scripts de automatización.'),
 ('Sirven para ejecutar programas de gráficos intensivos y videojuegos en el servidor.'),
 ('Permiten la edición de archivos de texto únicamente a través de interfaces gráficas avanzadas.'),
@@ -168,7 +172,7 @@ insert into pregunta_opcion (pregunta_id_pregunta, opcion_id_opcion, correcta) v
 (1,2,1),
 (1,3,0),
 (2,4,1),
-2,5,0),
+(2,5,0),
 (2,6,0),
 (3,7,0),
 (3,8,1),
@@ -241,7 +245,7 @@ insert into respuesta_abierta (pregunta_id_pregunta, aplicacion_id_aplicacion, r
 (24, 1, 'La concurrencia se refiere a la ejecución simultánea de múltiples procesos. Los sistemas operativos multitarea gestionan la concurrencia mediante planificación de CPU y sincronización.', 0),
 (25, 1, 'Los sistemas operativos deben protegerse contra amenazas como virus, malware, ataques de red y vulnerabilidades de software. La seguridad es crucial para mantener la integridad del sistema.', 0),
 (26, 1, 'La planificación de CPU determina qué proceso se ejecutará a continuación. Algoritmos como FIFO, SJF, Round Robin y Prioridad se utilizan para tomar estas decisiones.', 0),
-(27, 1, 'La paginación es una técnica de administración de memoria utilizada en sistemas operativos. Consiste en dividir la memoria física en bloques de tamaño fijo llamados páginas.', 0),
+27, 1, 'La paginación es una técnica de administración de memoria utilizada en sistemas operativos. Consiste en dividir la memoria física en bloques de tamaño fijo llamados páginas.', 0),
 (28, 1, 'En un sistema monolítico, todas las funciones del sistema operativo. En un sistema basado en microkernel, el núcleo (kernel) contiene solo las funciones esenciales', 0),
 (29, 1, 'se refiere a la ejecución simultánea de múltiples tareas en diferentes nodos de la red.', 0),
 (30, 1, 'son aquellos que se ejecutan sin interacción directa del usuario. Pueden realizar tareas como actualizaciones automáticas, indexación de archivos o mantenimiento del sistema.', 0);

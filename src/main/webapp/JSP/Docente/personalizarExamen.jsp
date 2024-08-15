@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 <%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
 <%@ page import="mx.edu.utez.sice.model.*" %>
 <%@ page import="mx.edu.utez.sice.dao.OpcionDao" %><%--
 
-=======
+
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
 <%@ page import="mx.edu.utez.sice.model.Pregunta" %>
@@ -13,7 +13,7 @@
 <%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
 <%@ page import="mx.edu.utez.sice.model.Opcion" %>
 <%@ page import="mx.edu.utez.sice.model.PreguntaOpcion" %><%--
->>>>>>> d8fc55a9abf72e6e31c94a47c809c59c904e2bbe
+
   Created by IntelliJ IDEA.
   User: corey
   Date: 04/08/2024
@@ -153,10 +153,8 @@
                 </form>
             </div>
         </div>
->>>>>>> d8fc55a9abf72e6e31c94a47c809c59c904e2bbe
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-ntpno
