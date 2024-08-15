@@ -41,7 +41,7 @@ public class ExamenServlet extends HttpServlet {
         }
     }*/
 
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    /*protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ExamenDao examenDao = new ExamenDao();
         ArrayList<Examen>examenes = examenDao.getAll();
 
@@ -52,7 +52,7 @@ public class ExamenServlet extends HttpServlet {
         }
             req.setAttribute("examenes", examenes);
             req.getRequestDispatcher("JSP/Docente/indexDocente.jsp").forward(req, resp);
-    }
+    }*/
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         boolean flag = false;
@@ -139,10 +139,13 @@ public class ExamenServlet extends HttpServlet {
                 dao.insertExamenPreguntas(id_examen, id_pregunta);
             }
             if (flag) {
-                resp.sendRedirect(req.getContextPath() + "/ExamenServlet?action=listar&message=Examen creado exitosamente");
+                sesion.setAttribute("mensaje","Examen creado exitosamente");
+                sesion.setAttribute("flag", true);
+                resp.sendRedirect("JSP/Docente/personalizarExamen.jsp");
             } else {
-                req.setAttribute("error", "Hubo un problema al crear el examen");
-                req.getRequestDispatcher("JSP/Docente/examen.jsp").forward(req, resp);
+                sesion.setAttribute("mensaje","Ocurrio un error al crear el examen");
+                sesion.setAttribute("flag", false);
+                resp.sendRedirect("JSP/Docente/indexDocente.jsp");
             }
         }
     }

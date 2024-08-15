@@ -1,10 +1,12 @@
 package mx.edu.utez.sice.dao;
 
+import mx.edu.utez.sice.model.Examen;
 import mx.edu.utez.sice.model.Pregunta;
 import mx.edu.utez.sice.model.PreguntaOpcion;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class PreguntaDao {
     private Connection connection;
@@ -90,6 +92,28 @@ public class PreguntaDao {
         }
         return id_pregunta;
     }
+
+    public ArrayList<Pregunta> getAll(int id_examen) {
+        ArrayList<Pregunta> lista = new ArrayList<>();
+        String query = "select id_pregunta, pregunta, id_tipo_pregunta from pregunta join examen_tiene_pregunta on id_pregunta = pregunta_id_pregunta " +
+                "join examen on examen_id_examen = id_examen where id_examen = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_examen);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pregunta pregunta = new Pregunta();
+                pregunta.setId_pregunta(rs.getInt("id_pregunta"));
+                pregunta.setPregunta(rs.getString("pregunta"));
+                pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
 /*
     public boolean updatePregunta(Pregunta pregunta) {
         try {

@@ -101,12 +101,36 @@ public class ExamenDao {
         return id_examen;
     }
 
-    public ArrayList<Examen> getAll() {
-        ArrayList<Examen> lista = new ArrayList<>();
-        String query = "SELECT * FROM examen";
+    //obtiene la información de un examen por su ID
+    public int getOne(int id_examen){
+        Examen examen = new Examen();
+        String query = "SELECT * FROM examen where id_examen = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_examen);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                examen.setId_examen(rs.getInt("id_examen"));
+                examen.setNombre_examen(rs.getString("nombre_examen"));
+                examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
+                examen.setEstado(rs.getInt("estado"));
+                examen.setDescripcion(rs.getString("descripcion"));
+                examen.setId_usuario(rs.getInt("usuario_id_usuario"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_examen;
+    }
+
+    public ArrayList<Examen> getAll(int id_usuario) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        String query = "SELECT * FROM examen where usuario_id_usuario = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Examen examen = new Examen();

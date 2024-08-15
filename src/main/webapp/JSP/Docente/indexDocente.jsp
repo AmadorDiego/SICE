@@ -2,7 +2,8 @@
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="java.util.List" %>
 <%@ page import="mx.edu.utez.sice.model.Usuario" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -122,37 +123,32 @@
                         <thead class="thead bg-blue-utz">
                         <tr class="text-white h5">
                             <th>Examen</th>
-                            <th>Descripción</th>
+                            <th>Cantidad de preguntas</th>
+                            <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody class="bg-green-SICE">
                         <%
-                            ArrayList<Examen> examenes = (ArrayList<Examen>)request.getAttribute("examenes");
-                            if(examenes != null && !examenes.isEmpty()) {
-                                for(Examen examen : examenes) {
+                            ExamenDao examenDao = new ExamenDao();
+                            ArrayList<Examen> lista = examenDao.getAll(usuario.getId_usuario());
+                            for (Examen examen : lista) {
                         %>
                         <tr class="h6">
                             <td><%= examen.getNombre_examen() %></td>
-                            <td><%= examen.getDescripcion() %></td>
+                            <td><%= examen.getCantidad_preguntas() %></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <%
-                            }
-                        } else {
-                        %>
-                        <tr>
-                            <td colspan="2">No hay exámenes disponibles.</td>
-                        </tr>
-                        <%
-                            }
+                        }
                         %>
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
         </div>
-    </div>
+</div>
 
 <script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
