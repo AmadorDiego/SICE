@@ -1,10 +1,9 @@
 <<<<<<< HEAD
 <%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.model.Usuario" %>
-<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
-<%@ page import="mx.edu.utez.sice.model.Examen" %>
-<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %><%--
+<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
+<%@ page import="mx.edu.utez.sice.model.*" %>
+<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %><%--
 
 =======
 <%@ page import="mx.edu.utez.sice.model.Examen" %>
