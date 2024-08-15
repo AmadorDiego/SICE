@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
@@ -18,24 +20,21 @@
 <body>
 <!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-blue-utz p-2">
-            <h2 class="text-white p-2 ms-2">SICE</h2>
-            <div class="d-flex flex-column ms-2">
-                <a href="registroUsuario.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Registrar
-                    Usuario</h6></a>
-                <a href="verUsuarioEliminado.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Usuarios
-                    Eliminados</h6></a>
-            </div>
-        </div>
-    </div>
     <nav class="navbar bg-blue-utz">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+            </a>
+
+            <div class="d-flex">
+                <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">person_add</span>
+                </a>
+                <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">home</span>
+                </a>
+            </div>
         </div>
     </nav>
 </header>
@@ -50,12 +49,8 @@
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
     <div class="col-12">
-        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
+        <h1 class="text-white mt-2">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
-        <div>
-            <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0">Ver usuarios eliminados</a>
-            <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0">Registrar usuario</a>
-        </div>
     </div>
     <br>
     <div class="row">
@@ -74,18 +69,18 @@
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
         <div class="row text-center">
             <div class="col-12">
-                <div class="table-responsive rounded-4 text-white">
+                <div class="table-responsive rounded-4 text-white d-flex d-md-block">
                     <table id="usuarios" class="table table-striped table-hover">
                         <thead class="bg-blue-utz text-white">
                         <tr>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Correo</th>
-                            <th>Estado</th>
+                            <th class="d-none d-md-table-cell">Estado</th>
                             <th>Tipo de usuario</th>
-                            <th>Fecha registrado</th>
-                            <th></th>
-                            <th></th>
+                            <th class="d-none d-md-table-cell">Fecha registrado</th>
+                            <th class="me-0"></th>
+                            <th class="me-0"></th>
                         </tr>
                         </thead>
 
@@ -103,7 +98,7 @@
                             </td>
                             <td class="text-white"><%=u.getCorreo_electronico()%>
                             </td>
-                            <td class="text-white"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
+                            <td class="text-white d-none d-md-table-cell"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
                             </td>
                             <td class="text-white"><% switch (u.getId_tipo_usuario()) {
                                     case 2:%>
@@ -113,22 +108,26 @@
                                 <%="Alumno"%><%
                                         break;
                                     }%></td>
-                            <td class="text-white"><%=u.getFecha_registrado()%>
+                            <td class="text-white d-none d-md-table-cell"><%=u.getFecha_registrado()%>
                             </td>
-                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white"
-                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
+                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0"
+                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">
+                                <span class="material-symbols-rounded justify-content-center">edit</span>
+                            </a>
                             </td>
                             <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
                             <td>
                                 <%
                                     if(u.getEstado()==1){ %>
                                         <!-- Boton que activa la alerta -->
-                                <button type="button" class="btn btn-warning bg-red-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Deshabilitar
+                                <button type="button" class="btn btn-warning bg-red-SICE border-0 text-white me-0"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">
+                                    <span class="material-symbols-rounded justify-content-center">delete</span>
                                 </button>
                                     <%} else { %>
-                                <button type="button" class="btn btn-warning bg-green-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Habilitar
+                                <button type="button" class="btn btn-warning bg-green-SICE border-0 text-white"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">
+                                    <span class="material-symbols-rounded justify-content-center">restore_from_trash</span>
                                 </button>
                                     <%}
                                 %>

@@ -13,38 +13,38 @@ import java.util.List;
 public class ExamenDao {
 
     /*public boolean crearExamen (Examen examen) {
-        try (Connection conexion = DatabaseConnectionManager.getConnection()) {
-            conexion.setAutoCommit(false);
-            try {
-                String sql = "CALL CrearExamen(?, ?, ?, ?, ?, ?)";
-                try (CallableStatement stmt = conexion.prepareCall(sql)) {
-                    stmt.setString(1, examen.getNombre_examen());
-                    stmt.setInt(2, examen.getCantidad_preguntas());
-                    stmt.setInt(3, examen.getEstado());
-                    stmt.setString(4, examen.getDescripcion());
-                    stmt.setInt(5, examen.getId_usuario());
-                    stmt.registerOutParameter(6, Types.INTEGER);
+            try (Connection conexion = DatabaseConnectionManager.getConnection()) {
+                conexion.setAutoCommit(false);
+                try {
+                    String sql = "CALL CrearExamen(?, ?, ?, ?, ?, ?)";
+                    try (CallableStatement stmt = conexion.prepareCall(sql)) {
+                        stmt.setString(1, examen.getNombre_examen());
+                        stmt.setInt(2, examen.getCantidad_preguntas());
+                        stmt.setInt(3, examen.getEstado());
+                        stmt.setString(4, examen.getDescripcion());
+                        stmt.setInt(5, examen.getId_usuario());
+                        stmt.registerOutParameter(6, Types.INTEGER);
 
-                    stmt.execute();
+                        stmt.execute();
 
-                    int idExamen = stmt.getInt(6);
-                    examen.setId_examen(idExamen);
+                        int idExamen = stmt.getInt(6);
+                        examen.setId_examen(idExamen);
+                    }
+
+                    crearPreguntas(conexion, examen);
+
+                    conexion.commit();
+                    return true;
+                } catch (SQLException e) {
+                    conexion.rollback();
+                    e.printStackTrace();
+                    return false;
                 }
-
-                crearPreguntas(conexion, examen);
-
-                conexion.commit();
-                return true;
             } catch (SQLException e) {
-                conexion.rollback();
                 e.printStackTrace();
                 return false;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
+        }*/
     public boolean insertExamen(Examen examen){
         boolean flag = false;
         String query = "insert into examen (nombre_examen, cantidad_preguntas, descripcion, usuario_id_usuario) values (?, ?, ?, ?);";
@@ -101,12 +101,36 @@ public class ExamenDao {
         return id_examen;
     }
 
-    public ArrayList<Examen> getAll() {
-        ArrayList<Examen> lista = new ArrayList<>();
-        String query = "SELECT * FROM examen";
+    //obtiene la información de un examen por su ID
+    public int getOne(int id_examen){
+        Examen examen = new Examen();
+        String query = "SELECT * FROM examen where id_examen = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_examen);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                examen.setId_examen(rs.getInt("id_examen"));
+                examen.setNombre_examen(rs.getString("nombre_examen"));
+                examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
+                examen.setEstado(rs.getInt("estado"));
+                examen.setDescripcion(rs.getString("descripcion"));
+                examen.setId_usuario(rs.getInt("usuario_id_usuario"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return id_examen;
+    }
+
+    public ArrayList<Examen> getAll(int id_usuario) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        String query = "SELECT * FROM examen where usuario_id_usuario = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Examen examen = new Examen();
@@ -122,6 +146,36 @@ public class ExamenDao {
             e.printStackTrace();
         }
         return lista;
+    }
+
+    // agregacion de Piero
+    public List<Examen> getExamenesFiltrados(String grado, String grupo, String division, String carrera) {
+        List<Examen> examenes = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection()) {
+            String query = "SELECT * FROM examen WHERE grado LIKE ? AND grupo LIKE ? AND division LIKE ? AND carrera LIKE ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, grado.isEmpty() ? "%" : grado);
+                statement.setString(2, grupo.isEmpty() ? "%" : grupo);
+                statement.setString(3, division.isEmpty() ? "%" : division);
+                statement.setString(4, carrera.isEmpty() ? "%" : carrera);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Examen examen = new Examen();
+                        examen.setId(resultSet.getInt("id"));
+                        examen.setNombre(resultSet.getString("nombre"));
+                        examen.setGrado(resultSet.getString("grado"));
+                        examen.setGrupo(resultSet.getString("grupo"));
+                        examen.setDivision(resultSet.getString("division"));
+                        examen.setCarrera(resultSet.getString("carrera"));
+                        examenes.add(examen);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return examenes;
     }
 
 

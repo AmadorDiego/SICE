@@ -79,4 +79,28 @@ public class Examen {
     public void setPreguntas(ArrayList<Integer> preguntas) {
         this.preguntas = preguntas;
     }
+
+    // agregacion de Piero
+
+    public void setId(int id) {
+    }
+
+    public void setNombre(String nombre) {
+    }
+
+    public void setGrado(String grado) {
+    }
+
+    public void setGrupo(String grupo) {
+    }
+
+    public void setDivision(String division) {
+    }
+
+    public void setCarrera(String carrera) {
+    }
+
+    public Object getNombreExamen() {
+        return null;
+    }
 }
