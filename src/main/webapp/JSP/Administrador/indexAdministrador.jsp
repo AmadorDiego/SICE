@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
@@ -53,8 +56,12 @@
         <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
         <div>
-            <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0">Ver usuarios eliminados</a>
-            <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0">Registrar usuario</a>
+            <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0 text-white">
+                <span class="material-symbols-rounded justify-content-center ms-1">delete_sweep</span>
+                <h6 class="justify-content-center">Ver usuarios eliminados</h6> </a>
+            <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0 text-white">
+                <span class="material-symbols-rounded justify-content-center ms-1">person_add</span>
+                <h6 class="justify-content-center">Registrar usuario</h6> </a>
         </div>
     </div>
     <br>
@@ -74,16 +81,16 @@
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
         <div class="row text-center">
             <div class="col-12">
-                <div class="table-responsive rounded-4 text-white">
+                <div class="table-responsive rounded-4 text-white d-flex d-md-block">
                     <table id="usuarios" class="table table-striped table-hover">
                         <thead class="bg-blue-utz text-white">
                         <tr>
                             <th>Nombre</th>
                             <th>Apellido</th>
                             <th>Correo</th>
-                            <th>Estado</th>
+                            <th class="d-none d-md-table-cell">Estado</th>
                             <th>Tipo de usuario</th>
-                            <th>Fecha registrado</th>
+                            <th class="d-none d-md-table-cell">Fecha registrado</th>
                             <th></th>
                             <th></th>
                         </tr>
@@ -103,7 +110,7 @@
                             </td>
                             <td class="text-white"><%=u.getCorreo_electronico()%>
                             </td>
-                            <td class="text-white"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
+                            <td class="text-white d-none d-md-table-cell"><%=u.getEstado() == 1 ? "Habilitado" : "Deshabilitado"%>
                             </td>
                             <td class="text-white"><% switch (u.getId_tipo_usuario()) {
                                     case 2:%>
@@ -113,22 +120,26 @@
                                 <%="Alumno"%><%
                                         break;
                                     }%></td>
-                            <td class="text-white"><%=u.getFecha_registrado()%>
+                            <td class="text-white d-none d-md-table-cell"><%=u.getFecha_registrado()%>
                             </td>
-                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white"
-                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">Ver</a>
+                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0"
+                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">
+                                <span class="material-symbols-rounded justify-content-center">edit</span>
+                            </a>
                             </td>
                             <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
                             <td>
                                 <%
                                     if(u.getEstado()==1){ %>
                                         <!-- Boton que activa la alerta -->
-                                <button type="button" class="btn btn-warning bg-red-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Deshabilitar
+                                <button type="button" class="btn btn-warning bg-red-SICE border-0 text-white me-0"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">
+                                    <span class="material-symbols-rounded justify-content-center">delete</span>
                                 </button>
                                     <%} else { %>
-                                <button type="button" class="btn btn-warning bg-green-SICE border-0"
-                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">Habilitar
+                                <button type="button" class="btn btn-warning bg-green-SICE border-0 text-white"
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">
+                                    <span class="material-symbols-rounded justify-content-center">restore_from_trash</span>
                                 </button>
                                     <%}
                                 %>
