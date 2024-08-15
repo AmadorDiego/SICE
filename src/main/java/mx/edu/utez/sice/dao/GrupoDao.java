@@ -1,9 +1,6 @@
 package mx.edu.utez.sice.dao;
 
-import mx.edu.utez.sice.model.Carrera;
-import mx.edu.utez.sice.model.DivisionAcademica;
-import mx.edu.utez.sice.model.Grupo;
-import mx.edu.utez.sice.model.Usuario;
+import mx.edu.utez.sice.model.*;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.Connection;
@@ -61,8 +58,8 @@ public class GrupoDao {
         return grupo;
     }
 
-    public ArrayList<Grupo> getInfo() {
-        ArrayList<Grupo> grupos = new ArrayList<>();
+    public ArrayList<Tabla> getInfo() {
+        ArrayList<Tabla> tabla = new ArrayList<>();
         try {
             con = DatabaseConnectionManager.getConnection();
             String query = "SELECT g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera " +
@@ -70,31 +67,85 @@ public class GrupoDao {
                     "JOIN grupo_tiene_usuario gu ON g.id_grupo = gu.grupo_id_grupo " +
                     "JOIN usuario u ON u.id_usuario = gu.usuario_id_usuario " +
                     "JOIN carrera c ON u.carrera_id_carrera = c.id_carrera " +
-                    "JOIN division_academica d ON c.division_academica_id_division_academica = d.id_division_academica";
+                    "JOIN division_academica d ON c.division_academica_id_division_academica = d.id_division_academica " +
+                    "GROUP BY g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera;";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
             while (rs.next()) {
+                Tabla t = new Tabla();
+
                 Grupo grupo = new Grupo();
                 grupo.setId_grupo(rs.getInt("id_grupo"));
                 grupo.setGrado(rs.getInt("grado"));
                 grupo.setGrupo(rs.getString("grupo").charAt(0));
+                t.setGrupo(grupo);
 
 
                 Carrera carrera = new Carrera();
                 carrera.setCarrera(rs.getString("nombre_carrera"));
+                t.setCarrera(carrera);
+
 
                 DivisionAcademica division = new DivisionAcademica();
                 division.setDivision_academica(rs.getString("nombre_division_academica"));
+                t.setDivision(division);
 
-                grupos.add(grupo);
+                tabla.add(t);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnections();
         }
-        return grupos;
+        return tabla;
+    }
+
+    public ArrayList<Tabla> getInfo(int id_grupo, int id_division, int id_carrera) {
+        ArrayList<Tabla> tabla = new ArrayList<>();
+        try {
+            con = DatabaseConnectionManager.getConnection();
+            String query = "SELECT g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera " +
+                    "FROM grupo g " +
+                    "JOIN grupo_tiene_usuario gu ON g.id_grupo = gu.grupo_id_grupo " +
+                    "JOIN usuario u ON u.id_usuario = gu.usuario_id_usuario " +
+                    "JOIN carrera c ON u.carrera_id_carrera = c.id_carrera " +
+                    "JOIN division_academica d ON c.division_academica_id_division_academica = d.id_division_academica " +
+                    "WHERE g.id_grupo = ? AND d.id_division_academica = ? AND c.id_carrera = ? " +
+                    "GROUP BY g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera ";
+            ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            ps.setInt(2,id_division);
+            ps.setInt(3,id_carrera);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Tabla t = new Tabla();
+
+                Grupo grupo = new Grupo();
+                grupo.setId_grupo(rs.getInt("id_grupo"));
+                grupo.setGrado(rs.getInt("grado"));
+                grupo.setGrupo(rs.getString("grupo").charAt(0));
+                t.setGrupo(grupo);
+
+
+                Carrera carrera = new Carrera();
+                carrera.setCarrera(rs.getString("nombre_carrera"));
+                t.setCarrera(carrera);
+
+
+                DivisionAcademica division = new DivisionAcademica();
+                division.setDivision_academica(rs.getString("nombre_division_academica"));
+                t.setDivision(division);
+
+                tabla.add(t);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnections();
+        }
+        return tabla;
     }
 
     private void closeConnections() {
@@ -107,4 +158,3 @@ public class GrupoDao {
         }
     }
 }
-
