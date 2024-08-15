@@ -5,12 +5,21 @@
   Time: 08:33 p. m.
   To change this template use File | Settings | File Templates.
 --%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.model.Grupo" %>
+<%@ page import="mx.edu.utez.sice.model.Carrera" %>
+<%@ page import="mx.edu.utez.sice.model.DivisionAcademica" %>
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
+<%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
+<%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
+<%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
+<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calificar Examenes</title>
+    <title>Calificar Exámenes</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
     <style>
         body {
@@ -44,6 +53,9 @@
             .filter-group #id_carrera {
                 width: 300px;
             }
+            .filter-group #id_examen {
+                width: 300px;
+            }
         }
         .home-boton-container {
             margin-left: auto;
@@ -70,8 +82,8 @@
 <body>
 <div class="navbar"></div> <!-- Barra azul -->
 <div class="container">
-    <h1>Calificar Examenes</h1>
-    <h3>Examenes contestados</h3>
+    <h1>Calificar Exámenes</h1>
+    <h3>Exámenes contestados</h3>
     <div class="filter-group">
         <div class="filters">
             <span>Filtros:</span>
@@ -83,21 +95,51 @@
             </select>
             <select id="id_grupo" name="grupo" class="form-control">
                 <option value="">Grupo</option>
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
+                <%
+                    GrupoDao grupoDao = new GrupoDao();
+                    ArrayList<Grupo> grupos = grupoDao.getAll();
+                    for (Grupo g : grupos) {
+                %>
+                <option value="<%= g.getId_grupo() %>"><%= g.getGrado() %> - <%= g.getGrupo() %></option>
+                <%
+                    }
+                %>
             </select>
             <select id="id_division" name="division" class="form-control">
                 <option value="">División</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                <%
+                    DivisionAcademicaDao divisionDao = new DivisionAcademicaDao();
+                    ArrayList<DivisionAcademica> divisiones = divisionDao.getAll();
+                    for (DivisionAcademica d : divisiones) {
+                %>
+                <option value="<%= d.getId_division_academica() %>"><%= d.getDivision_academica() %></option>
+                <%
+                    }
+                %>
             </select>
             <select id="id_carrera" name="carrera" class="form-control">
                 <option value="">Carrera</option>
-                <option value="ing">Ingeniería</option>
-                <option value="med">Medicina</option>
-                <option value="adm">Administración</option>
+                <%
+                    CarreraDao carreraDao = new CarreraDao();
+                    ArrayList<Carrera> carreras = carreraDao.getAll();
+                    for (Carrera c : carreras) {
+                %>
+                <option value="<%= c.getId_carrera() %>"><%= c.getCarrera() %></option>
+                <%
+                    }
+                %>
+            </select>
+            <select id="id_examen" name="examen" class="form-control">
+                <option value="">Examen</option>
+                <%
+                    ExamenDao examenDao = new ExamenDao();
+                    ArrayList<Examen> examenes = examenDao.getAll();
+                    for (Examen e : examenes) {
+                %>
+                <option value="<%= e.getId_examen() %>"><%= e.getNombreExamen() %></option>
+                <%
+                    }
+                %>
             </select>
         </div>
         <div class="home-boton-container">
@@ -118,7 +160,7 @@
             <th class="reporte-col">Reporte</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody id="contenido">
         <c:forEach var="examen" items="${examenes}">
             <tr>
                 <td>${examen.nombre}</td>
