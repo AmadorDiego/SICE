@@ -148,6 +148,36 @@ public class ExamenDao {
         return lista;
     }
 
+    // agregacion de Piero
+    public List<Examen> getExamenesFiltrados(String grado, String grupo, String division, String carrera) {
+        List<Examen> examenes = new ArrayList<>();
+        try (Connection connection = DatabaseConnectionManager.getConnection()) {
+            String query = "SELECT * FROM examen WHERE grado LIKE ? AND grupo LIKE ? AND division LIKE ? AND carrera LIKE ?";
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, grado.isEmpty() ? "%" : grado);
+                statement.setString(2, grupo.isEmpty() ? "%" : grupo);
+                statement.setString(3, division.isEmpty() ? "%" : division);
+                statement.setString(4, carrera.isEmpty() ? "%" : carrera);
+
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    while (resultSet.next()) {
+                        Examen examen = new Examen();
+                        examen.setId(resultSet.getInt("id"));
+                        examen.setNombre(resultSet.getString("nombre"));
+                        examen.setGrado(resultSet.getString("grado"));
+                        examen.setGrupo(resultSet.getString("grupo"));
+                        examen.setDivision(resultSet.getString("division"));
+                        examen.setCarrera(resultSet.getString("carrera"));
+                        examenes.add(examen);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return examenes;
+    }
+
 
     /*private void crearPreguntas(Connection conexion, Examen examen) throws SQLException {
         String sql = "CALL CrearPregunta(?, ?, ?, ?)";
