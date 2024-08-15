@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
 </head>
 <body>
 <%
@@ -24,24 +26,21 @@
 
 <!--///////////////////////////////////////////// NavBar //////////////////////////////////////////////////////-->
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-blue-utz p-2">
-            <h2 class="text-white p-2 ms-2">SICE</h2>
-            <div class="d-flex flex-column ms-2">
-                <a href="indexAdministrador.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Inicio
-                </h6></a>
-                <a href="verUsuarioEliminado.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"><h6>Usuarios
-                    Eliminados</h6></a>
-            </div>
-        </div>
-    </div>
     <nav class="navbar bg-blue-utz">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+            </a>
+
+            <div class="d-flex">
+                <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">person_add</span>
+                </a>
+                <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">home</span>
+                </a>
+            </div>
         </div>
     </nav>
 </header>
@@ -103,7 +102,10 @@
         <div class="row">
             <div class="col-3">
                 <br>
-                <input type="submit" class="btn btn-primary bg-blue-utz">
+                <button type="submit" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Registrar">
+                    <span class="material-symbols-rounded mb-0 justify-content-center">add</span>
+                    <p class="mb-0">Registrar</p>
+                </button>
             </div>
         </div>
     </form>
