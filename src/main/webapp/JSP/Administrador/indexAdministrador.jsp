@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,600,0,0"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
@@ -21,11 +21,20 @@
 <!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
 <header>
     <nav class="navbar bg-blue-utz">
-        <div class="container-fluid">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-white">
-                <img src="../../IMG/logo.png" alt="Logo" class="d-inline-block align-text-top logoNav">
-                <h5 class="ms-1">SICE</h5>
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
+
+            <div class="d-flex">
+                <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">person_add</span>
+                </a>
+                <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">home</span>
+                </a>
+            </div>
         </div>
     </nav>
 </header>
@@ -40,16 +49,8 @@
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
     <div class="col-12">
-        <h1 class="text-white">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
+        <h1 class="text-white mt-2">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
-        <div>
-            <a href="verUsuarioEliminado.jsp" class="btn btn-primary bg-blue-utz border-0 text-white">
-                <span class="material-symbols-rounded justify-content-center ms-1">delete_sweep</span>
-                <h6 class="justify-content-center">Ver usuarios eliminados</h6> </a>
-            <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz border-0 text-white">
-                <span class="material-symbols-rounded justify-content-center ms-1">person_add</span>
-                <h6 class="justify-content-center">Registrar usuario</h6> </a>
-        </div>
     </div>
     <br>
     <div class="row">
