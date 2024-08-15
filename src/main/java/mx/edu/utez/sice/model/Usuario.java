@@ -10,25 +10,10 @@ public class Usuario {
     private String fecha_registrado;
     private String codigo;
     private int id_tipo_usuario;
-    private int id_carrera;
 
     public Usuario() {
     }
-    //campo de carrera exclusivo para alumno
-    public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, int estado, String fecha_registrado, String codigo, int id_tipo_usuario, int id_carrera) {
-        this.id_usuario = id_usuario;
-        this.nombre_usuario = nombre_usuario;
-        this.apellido_usuario = apellido_usuario;
-        this.correo_electronico = correo_electronico;
-        this.contrasena = contrasena;
-        this.estado = estado;
-        this.fecha_registrado = fecha_registrado;
-        this.codigo = codigo;
-        this.id_tipo_usuario = id_tipo_usuario;
-        this.id_carrera = id_carrera;
-    }
 
-    //exclusivo para docente, profesor o ambos
     public Usuario(int id_usuario, String nombre_usuario, String apellido_usuario, String correo_electronico, String contrasena, int estado, String fecha_registrado, String codigo, int id_tipo_usuario) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
@@ -113,11 +98,4 @@ public class Usuario {
         this.id_tipo_usuario = id_tipo_usuario;
     }
 
-    public int getId_carrera() {
-        return id_carrera;
-    }
-
-    public void setId_carrera(int id_carrera) {
-        this.id_carrera = id_carrera;
-    }
 }

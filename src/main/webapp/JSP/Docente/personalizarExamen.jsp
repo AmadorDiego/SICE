@@ -70,13 +70,6 @@
 <%
     HttpSession sesion = request.getSession();
     Examen examen = (Examen) sesion.getAttribute("examen");
-    ArrayList<Pregunta> listaPreguntas1 = (ArrayList<Pregunta>) sesion.getAttribute("preguntas");
-    ArrayList<Opcion> listaOpciones1 = (ArrayList<Opcion>) sesion.getAttribute("opciones");
-
-    if (examen == null) {
-        response.sendRedirect("loginSICE.jsp"); // Redirect if user is not found
-        return;
-    }
 %>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
 <div class="bg"></div>
@@ -111,7 +104,6 @@
             </a>
         </div>
     </div>
-<<<<<<< HEAD
 
     <div class="container-md">
         <div class="row">

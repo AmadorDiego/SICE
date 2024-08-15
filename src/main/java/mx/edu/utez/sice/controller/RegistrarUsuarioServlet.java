@@ -48,7 +48,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
         if (Integer.parseInt(req.getParameter("id_tipo_usuario"))==3){
-            u.setId_carrera(Integer.parseInt(req.getParameter("id_carrera")));
+            //u.setId_carrera(Integer.parseInt(req.getParameter("id_carrera")));
             if (dao.insertAlumno(u)){
                 sesion.setAttribute("mensaje","Se registró correctamente el alumno");
                 sesion.setAttribute("flag", true);
