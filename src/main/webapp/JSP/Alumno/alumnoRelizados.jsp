@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -9,6 +8,9 @@
     <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/bootstrap.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/fondo.css'>
     <link rel='stylesheet' type='text/css' media='screen' href='../../CSS/adicionalesEBM.css'>
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
 </head>
 <body>
 <!--/////////////////////////////////// Fondo //////////////////////////////////////////-->
@@ -19,20 +21,22 @@
 
 <!-- //////////////////////////// Navbar /////////////////////////////////-->
 <header>
-    <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-blue-utz p-2">
-            <h2 class="text-white p-2 ms-2">SICE</h2>
-            <div class="d-flex flex-column ms-2">
-                <a href="inicioAlumno.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"> <h6>Inicio</h6> </a>
-                <a href="alumnoRelizados.jsp" class="btn w-25 text-white btn-brillo-efecto bg-blue-utz"> <h6>Realizados</h6> </a>
-            </div>
-        </div>
-    </div>
     <nav class="navbar bg-blue-utz">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
+                     class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+            </a>
+
+            <div class="d-flex">
+                <a href="indexAlumno.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">Home</span>
+                </a>
+                <a href="alumnoRelizados.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">task</span>
+                </a>
+            </div>
         </div>
     </nav>
 </header>
@@ -44,10 +48,6 @@
         <div class="col-6 p-4">
             <h1 class="text-white">¡Bienvenido Alumno!</h1>
             <h2 class="gray-SICE">Examenes Relizados:</h2>
-        </div>
-        <div class="col-6 p-4 d-flex flex-row-reverse bd-highlight gap-2">
-            <a href="alumnoRelizados.jsp" class="btn bg-green-SICE-obscuro position-relative text-white h5">Realizados</a>
-            <a href="inicioAlumno.jsp" class="btn bg-green-SICE-obscuro position-relative text-white h5">Pendientes</a>
         </div>
     </div>
 
@@ -62,7 +62,8 @@
             <h3 class="green-SICE-obscuro">Filtros:</h3>
         </div>
         <div class="col-10 col-md-3 me-2 py-1 d-flex d-inline">
-            <select class="form-select me-2 ms-2 bg-green-SICE green-SICE-obscuro border-0" aria-label="Default select example">
+            <select class="form-select me-2 ms-2 bg-green-SICE green-SICE-obscuro border-0"
+                    aria-label="Default select example">
                 <option selected>Docente</option>
                 <option value="1">Celin</option>
                 <option value="2">Evelyn</option>
@@ -71,14 +72,14 @@
         </div>
 
         <div class="col-10 col-md-3 me-2 py-1 d-flex d-inline">
-            <select class="form-select me-2 ms-2 bg-green-SICE green-SICE-obscuro border-0" aria-label="Default select example">
+            <select class="form-select me-2 ms-2 bg-green-SICE green-SICE-obscuro border-0"
+                    aria-label="Default select example">
                 <option selected>Calificacion</option>
                 <option value="1">Pendiente</option>
                 <option value="2">Calificado</option>
             </select>
         </div>
     </div>
-
 
 
     <!--////////////////////////////// Contenido principal(Tabla) ////////////////////////////-->
@@ -118,7 +119,7 @@
                         <td class="d-none d-md-table-cell"><h6>03/08/2024/10:19AM</h6></td>
                         <td class="d-none d-md-table-cell"><h6>Celin</h6></td>
                         <td class="d-none d-md-table-cell"><h6>Pendiente</h6></td>
-                        <td><h6>No disponible</h6> </td>
+                        <td><h6>No disponible</h6></td>
                     </tr>
                     </tbody>
                 </table>
