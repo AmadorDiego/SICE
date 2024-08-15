@@ -110,6 +110,7 @@
                             <a href="PaulaAsignarExamen.jsp?id=<%= examen.getId_examen() %>" class="btn btn-success">Asignar</a>
                         </td>
                     </tr>
+
                     <%
                         }
                     %>

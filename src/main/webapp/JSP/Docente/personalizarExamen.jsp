@@ -1,4 +1,10 @@
-<%--
+<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
+<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
+<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %><%--
+
   Created by IntelliJ IDEA.
   User: corey
   Date: 04/08/2024
@@ -93,14 +99,31 @@
 
     <div class="table-responsive">
         <table class="table table-striped table-hover">
-            <thead class="thead">
-            <tr>
+            <thead class="thead bg-blue-utz">
+            <tr class="text-white h5">
                 <th>Pregunta</th>
                 <th>Tipo De Pregunta</th>
             </tr>
             </thead>
-            <tbody>
-            <!-- Aqui se van a agregar los datos de la tabla -->
+            <tbody class="bg-green-SICE">
+            <%
+                ExamenDao examenDao = new ExamenDao();
+                Usuario usuario = new Usuario();
+                PreguntaDao preguntaDao = new PreguntaDao();
+                ArrayList<Examen> listaExamenes = examenDao.getAll(usuario.getId_tipo_usuario());
+
+                for (Examen examen : listaExamenes) {
+                    ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen()); // Asumiendo que necesitas el ID del examen
+                    for (Pregunta pregunta : listaPreguntas) {
+            %>
+            <tr class="h6">
+                <td><%=pregunta.getPregunta()%></td>
+                <td><%=pregunta.getId_tipo_pregunta()%></td>
+            </tr>
+            <%
+                    }
+                }
+            %>
             </tbody>
         </table>
     </div>
