@@ -13,38 +13,38 @@ import java.util.List;
 public class ExamenDao {
 
     /*public boolean crearExamen (Examen examen) {
-        try (Connection conexion = DatabaseConnectionManager.getConnection()) {
-            conexion.setAutoCommit(false);
-            try {
-                String sql = "CALL CrearExamen(?, ?, ?, ?, ?, ?)";
-                try (CallableStatement stmt = conexion.prepareCall(sql)) {
-                    stmt.setString(1, examen.getNombre_examen());
-                    stmt.setInt(2, examen.getCantidad_preguntas());
-                    stmt.setInt(3, examen.getEstado());
-                    stmt.setString(4, examen.getDescripcion());
-                    stmt.setInt(5, examen.getId_usuario());
-                    stmt.registerOutParameter(6, Types.INTEGER);
+            try (Connection conexion = DatabaseConnectionManager.getConnection()) {
+                conexion.setAutoCommit(false);
+                try {
+                    String sql = "CALL CrearExamen(?, ?, ?, ?, ?, ?)";
+                    try (CallableStatement stmt = conexion.prepareCall(sql)) {
+                        stmt.setString(1, examen.getNombre_examen());
+                        stmt.setInt(2, examen.getCantidad_preguntas());
+                        stmt.setInt(3, examen.getEstado());
+                        stmt.setString(4, examen.getDescripcion());
+                        stmt.setInt(5, examen.getId_usuario());
+                        stmt.registerOutParameter(6, Types.INTEGER);
 
-                    stmt.execute();
+                        stmt.execute();
 
-                    int idExamen = stmt.getInt(6);
-                    examen.setId_examen(idExamen);
+                        int idExamen = stmt.getInt(6);
+                        examen.setId_examen(idExamen);
+                    }
+
+                    crearPreguntas(conexion, examen);
+
+                    conexion.commit();
+                    return true;
+                } catch (SQLException e) {
+                    conexion.rollback();
+                    e.printStackTrace();
+                    return false;
                 }
-
-                crearPreguntas(conexion, examen);
-
-                conexion.commit();
-                return true;
             } catch (SQLException e) {
-                conexion.rollback();
                 e.printStackTrace();
                 return false;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
+        }*/
     public boolean insertExamen(Examen examen){
         boolean flag = false;
         String query = "insert into examen (nombre_examen, cantidad_preguntas, descripcion, usuario_id_usuario) values (?, ?, ?, ?);";
