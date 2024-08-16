@@ -13,7 +13,7 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrarUsuarioServlet", value = "/RegistrarUsuarioServlet")
 public class RegistrarUsuarioServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    /*protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1) obtener la información del usuario
         int id = Integer.parseInt(req.getParameter("id"));
         //Si el id identifica a X usuario necesitamos un método
@@ -28,7 +28,7 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         resp.sendRedirect("actualizarUsuario.jsp");
 
         // 3) update (se va a hacer en otro servlet)
-    }
+    }*/
 
     //Esto es para inicio de sesión
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,23 +47,12 @@ public class RegistrarUsuarioServlet extends HttpServlet {
         //Debemos mandar a llamar un DAO que me permita insertar
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
-        if (Integer.parseInt(req.getParameter("id_tipo_usuario"))==3){
-            //u.setId_carrera(Integer.parseInt(req.getParameter("id_carrera")));
-            if (dao.insertAlumno(u)){
-                sesion.setAttribute("mensaje","Se registró correctamente el alumno");
-                sesion.setAttribute("flag", true);
-            }else {
-                sesion.setAttribute("mensaje","Ocurrio un error al registrar el alumno");
-                sesion.setAttribute("flag", false);
-            }
-        }else{
-            if (dao.insertDocenteAdministrador(u)){
-                sesion.setAttribute("mensaje","Se registró correctamente el usuario");
-                sesion.setAttribute("flag", true);
-            }else {
-                sesion.setAttribute("mensaje","Ocurrio un error al registrar el usuario");
-                sesion.setAttribute("flag", false);
-            }
+        if (dao.insertUsuario(u)){
+            sesion.setAttribute("mensaje","Se registró correctamente el usuario");
+            sesion.setAttribute("flag", true);
+        }else {
+            sesion.setAttribute("mensaje","Ocurrio un error al registrar el usuario");
+            sesion.setAttribute("flag", false);
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }
