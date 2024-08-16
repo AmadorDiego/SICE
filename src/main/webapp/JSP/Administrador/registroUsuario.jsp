@@ -81,37 +81,6 @@
                     <option value="2">Docente</option>
                     <option value="3">Alumno</option>
                 </select>
-                <!-- Este es el campo select adicional que solo aparecerá si se selecciona "Alumno" -->
-                <div class="row" id="campoAdicional" style="display:none;">
-                    <div class="col-md-6 col-12 p-3">
-                        <label class="form-label text-white h6">Seleccione la carrera: </label>
-                        <select required class="form-control" name="id_carrera">
-                            <%
-                                CarreraDao carreraDao = new CarreraDao();
-                                ArrayList<Carrera> carreras = carreraDao.getAll();
-                                for (Carrera carrera : carreras) {
-                            %>
-                            <option value="<%= carrera.getId_carrera() %>"><%= carrera.getCarrera() %></option>
-                            <%
-                                }
-                            %>
-                        </select>
-                    </div>
-                    <div class="col-md-6 col-12 p-3">
-                        <label class="form-label text-white h6">Seleccione la carrera: </label>
-                        <select required class="form-control" name="id_grupo">
-                            <%
-                                GrupoDao grupoDao = new GrupoDao();
-                                ArrayList<Grupo> grupos = grupoDao.getAll();
-                                for (Grupo grupo : grupos) {
-                            %>
-                            <option value="<%=grupo.getId_grupo()%>"><%=grupo.getGrado()+ grupo.getGrupo()%></option>
-                            <%
-                                }
-                            %>
-                        </select>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="row">
@@ -125,20 +94,5 @@
         </div>
     </form>
 </div>
-<script>
-    // Escuchar el cambio en el select de tipo de usuario
-    document.getElementById('id_tipo_usuario').addEventListener('change', function () {
-        // Obtener el valor seleccionado
-        var tipoUsuario = this.value;
-
-        // Mostrar o esconder el campo adicional basado en la selección
-        if (tipoUsuario == '3') { // "Alumno" tiene el valor "3"
-            document.getElementById('campoAdicional').style.display = 'block';
-        } else {
-            document.getElementById('campoAdicional').style.display = 'none';
-        }
-    });
-</script>
-
 </body>
 </html>
