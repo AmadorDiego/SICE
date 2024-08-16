@@ -113,7 +113,7 @@
             <td><%= t.getGrupo().getGrado() %></td>
             <td><%= t.getDivision().getDivision_academica() %></td>
             <td><%= t.getCarrera().getCarrera() %></td>
-            <td><a class="btn btn-primary" href="PaulaAsignarAlumno.jsp."> Asignar </a></td>
+            <td><a class="btn btn-primary" href="PaulaAsignarAlumno.jsp"> Asignar </a></td>
         </tr>
         <%
             }
@@ -159,6 +159,10 @@
                 var id_division = division.value;
                 var id_carrera = carrera.value;
 
+                console.log("ID grupo: " + id_grupo);
+                console.log("ID division: " + id_division);
+                console.log("ID carrera: " + id_carrera);
+
                 fetch('../../asignarExamen?id_grupo='+id_grupo+'&id_division='+id_division+'&id_carrera='+id_carrera,{
                     method: 'GET'
                 }).then(response => {
@@ -185,7 +189,7 @@
                         fila.appendChild(td_division);
                         td_carrera.innerText = tabla.carrera.carrera;
                         fila.appendChild(td_carrera);
-                        td_boton.innerHTML = '<a class="btn btn-primary" href="PaulaAsignarAlumno.jsp."> Asignar </a>'
+                        td_boton.innerHTML = '<a class="btn btn-primary" href="PaulaAsignarAlumno.jsp"> Asignar </a>'
                         fila.appendChild(td_boton);
 
                         tbody.appendChild(fila);

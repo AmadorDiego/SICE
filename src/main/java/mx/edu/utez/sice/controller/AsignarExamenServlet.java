@@ -26,6 +26,10 @@ public class AsignarExamenServlet extends HttpServlet {
         String id_division = req.getParameter("id_division");
         String id_carrera = req.getParameter("id_carrera");
 
+        System.out.println("SERVLET id_grupo: " + id_grupo);
+        System.out.println("SERVLET id_division: " + id_division);
+        System.out.println("SERVLET id_carrera: " + id_carrera);
+
         GrupoDao dao  = new GrupoDao();
         ArrayList<Tabla> lista = dao.getInfo(
                 Integer.parseInt(id_grupo),
@@ -33,8 +37,11 @@ public class AsignarExamenServlet extends HttpServlet {
                 Integer.parseInt(id_carrera)
         );
 
+
+
         Gson gson = new Gson();
         String json = gson.toJson(lista);
+        System.out.println("JSON: " + json);
 
         resp.setContentType("text/json");
         resp.getWriter().write(json);

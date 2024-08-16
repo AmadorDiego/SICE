@@ -164,12 +164,12 @@ public class ExamenDao {
                 try (ResultSet resultSet = statement.executeQuery()) {
                     while (resultSet.next()) {
                         Examen examen = new Examen();
-                        examen.setId(resultSet.getInt("id"));
-                        examen.setNombre(resultSet.getString("nombre"));
-                        examen.setGrado(resultSet.getString("grado"));
-                        examen.setGrupo(resultSet.getString("grupo"));
-                        examen.setDivision(resultSet.getString("division"));
-                        examen.setCarrera(resultSet.getString("carrera"));
+                        examen.setId_examen(resultSet.getInt("id_examen"));
+                        examen.setNombre_examen(resultSet.getString("nombre_examen"));
+                        examen.setCantidad_preguntas(resultSet.getInt("cantidad_preguntas"));
+                        examen.setEstado(resultSet.getInt("estado"));
+                        examen.setDescripcion(resultSet.getString("descripcion"));
+                        examen.setId_usuario(resultSet.getInt("usuario_id_usuario"));
                         examenes.add(examen);
                     }
                 }
@@ -179,6 +179,8 @@ public class ExamenDao {
         }
         return examenes;
     }
+
+
 
 
     /*private void crearPreguntas(Connection conexion, Examen examen) throws SQLException {
