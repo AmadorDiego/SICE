@@ -1,7 +1,5 @@
-<% Examen examen = null; %>
-<%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="mx.edu.utez.sice.model.Usuario" %>
-
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
 Created by IntelliJ IDEA.
   User: corey
   Date: 13/08/2024
@@ -19,7 +17,7 @@ Created by IntelliJ IDEA.
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-    %>
+        Examen examen = new Examen();%>
 </head>
 <body>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
@@ -28,9 +26,11 @@ Created by IntelliJ IDEA.
 <div class="bg bg3"></div>
 <!--////////////////////////////////////// Contenido //////////////////////////////////////////////////-->
 <div class="container">
-    <h1>${examen.getNombre_examen()}</h1>
+    <h3 class="text-start mb-3 mb-md-4"><%=examen.getNombre_examen()%></h3>
     <form method="post" action="${pageContext.request.contextPath}/VerExamenServlet">
         <input type="hidden" name="examen_id" value="${examen.getId()}">
+        <input class="form-control" type="text" name="descripcion"
+               required value="<%=examen.getDescripcion()%>" placeholder="<%=examen.getDescripcion()%>">
         <c:forEach var="pregunta" items="${preguntas}">
             <c:choose>
                 <c:when test="${pregunta.getTipo() == 1}">
