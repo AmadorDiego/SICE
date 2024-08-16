@@ -41,8 +41,8 @@
 
 <!--////////////////////////// Encabezado ////////////////////////////////////-->
 <div class="container-fluid">
-    <div class="row align-items-center">
-        <div class="col-6 bg-green-SICE">
+    <div class="row align-items-center mt-4">
+        <div class="col bg-green-SICE rounded-4 mx-5">
             <h1 class="text-white">*Nombre Examen*</h1>
         </div>
     </div>
@@ -51,8 +51,27 @@
 
 <!--///////////////////////////// Contenido ///////////////////////////////////-->
     <div class="row align-items-center mt-3">
-        <div class="col-12">
-
+        <div class="col bg-green-SICE rounded-4 mx-5 p-3">
+            <div class="card rounded-3">
+                <div class="card-header bg-green-SICE">
+                    <br>
+                </div>
+                <div class="card-body bg-green-SICE p-2">
+                    <h6 class="card-title">Special title treatment</h6>
+                    <div class="custom-radio mb-2">
+                        <input type="radio" id="customRadio" name="customRadio" class="custom-radio-input">
+                        <label for="customRadio" class="custom-radio-label">
+                            <h6>*Respuesta 1*</h6>
+                        </label>
+                    </div>
+                    <div class="custom-radio">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-radio-input">
+                        <label for="customRadio2" class="custom-radio-label">
+                            <h6>*Respuesta 2</h6>
+                        </label>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
