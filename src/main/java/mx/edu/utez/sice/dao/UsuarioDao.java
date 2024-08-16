@@ -87,7 +87,6 @@ public class UsuarioDao {
         return usuario;
     }
 
-    //Encargado de insertar un nuevo usuario exclusivamente para un administrador, docente o ambos
     public boolean insertUsuario(Usuario u){
         boolean flag = false;
         String query = "insert into usuario (nombre_usuario, apellido_usuario, correo_electronico, contrasena, estado, fecha_registrado, codigo, id_tipo_usuario) values (?, ?, ?, sha2(?,256), 1, now(), null, ?);";

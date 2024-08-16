@@ -93,11 +93,6 @@
             </a>
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> ac1197a43e987c63c8196126ddebd134b3913740
-
     <div class="container-md">
         <div class="row">
             <div class="col-12">
@@ -116,9 +111,10 @@
                         int i = 0;
                         for (Pregunta pregunta : listaPreguntas) {
                             i++; %>
-                    <label class="form-label text-white h5">Pregunta <%=i%>:  </label>
-                    <input class="form-control" type="text" name="pregunta_<%=i%>" required value="<%=pregunta.getPregunta()%>" placeholder="<%=pregunta.getPregunta()%>">
-                    <br>
+                    <div>
+                        <label class="form-label text-white h5">Pregunta <%=i%>:  </label>
+                        <input class="form-control" type="text" name="pregunta_<%=i%>" required value="<%=pregunta.getPregunta()%>" placeholder="<%=pregunta.getPregunta()%>">
+                    </div>
                     <%
                         if (pregunta.getId_tipo_pregunta()==2){
                             OpcionDao opcionDao = new OpcionDao();
@@ -127,10 +123,10 @@
                             for (Opcion opcion : listaOpciones) {
                                 PreguntaOpcion preguntaOpcion = opcionDao.getOpcionCorrecta(opcion.getId_opcion());
                                 j++; %>
-                    <label class="form-label text-white h5">Opcion <%=j%>:  </label>
-                    <input type="radio" name="opcion_correcta_<%=j%>" value="" <%if (preguntaOpcion.getCorrecta()==1){%>checked<%}%> >
-                    <input class="form-control" type="text" name="pregunta_<%=i%>_opcion_<%=j%>" required value="<%=opcion.getOpcion()%>" placeholder="<%=opcion.getOpcion()%>">
-                    <br>
+                    <div class="mb-2">
+                        <input type="radio" name="pregunta_<%=i%>_opcion_<%=j%>_correcta_<%=preguntaOpcion.getCorrecta()%>" value="" <%if (preguntaOpcion.getCorrecta()==1){%>checked<%}%> >
+                        <input class="form-control" type="text" name="pregunta_<%=i%>_opcion_<%=j%>" required value="<%=opcion.getOpcion()%>" placeholder="<%=opcion.getOpcion()%>">
+                    </div>
                     <%}
                     }
                     }

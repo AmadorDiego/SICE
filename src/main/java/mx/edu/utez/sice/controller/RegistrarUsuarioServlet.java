@@ -29,8 +29,6 @@ public class RegistrarUsuarioServlet extends HttpServlet {
 
         // 3) update (se va a hacer en otro servlet)
     }*/
-
-    //Esto es para inicio de sesión
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Usuario u = new Usuario();
         u.setNombre_usuario(req.getParameter("nombre_usuario"));
