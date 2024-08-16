@@ -2,6 +2,8 @@
 <%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.model.Carrera" %>
+<%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
+<%@ page import="mx.edu.utez.sice.model.Grupo" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -47,8 +49,7 @@
 
 <!--//////////////////////////////////////////// Contenido ////////////////////////////////////////////////////////////-->
 <div class="container ">
-    <form class="form-control bg-green-utz p-3 mt-5 rounded-4 border-0 bg-opacity-75" method="post"
-          action="../../RegistrarUsuarioServlet">
+    <form class="form-control bg-green-utz p-3 mt-5 rounded-4 border-0 bg-opacity-75" method="post" action="../../RegistrarUsuarioServlet">
         <div class="row">
             <div class="col-12">
                 <h1 class="blue-utz">Registrar nuevo usuario</h1>
@@ -86,11 +87,25 @@
                         <label class="form-label text-white h6">Seleccione la carrera: </label>
                         <select required class="form-control" name="id_carrera">
                             <%
-                                CarreraDao dao = new CarreraDao();
-                                ArrayList<Carrera> lista = dao.getAll();
-                                for (Carrera carrera : lista) {
+                                CarreraDao carreraDao = new CarreraDao();
+                                ArrayList<Carrera> carreras = carreraDao.getAll();
+                                for (Carrera carrera : carreras) {
                             %>
                             <option value="<%= carrera.getId_carrera() %>"><%= carrera.getCarrera() %></option>
+                            <%
+                                }
+                            %>
+                        </select>
+                    </div>
+                    <div class="col-md-6 col-12 p-3">
+                        <label class="form-label text-white h6">Seleccione la carrera: </label>
+                        <select required class="form-control" name="id_grupo">
+                            <%
+                                GrupoDao grupoDao = new GrupoDao();
+                                ArrayList<Grupo> grupos = grupoDao.getAll();
+                                for (Grupo grupo : grupos) {
+                            %>
+                            <option value="<%=grupo.getId_grupo()%>"><%=grupo.getGrado()+ grupo.getGrupo()%></option>
                             <%
                                 }
                             %>

@@ -1,25 +1,14 @@
 
-<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
-<%@ page import="mx.edu.utez.sice.model.*" %>
-<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %><%--
-
-
-<%@ page import="mx.edu.utez.sice.model.Examen" %>
-<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
-<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
+<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
 <%@ page import="mx.edu.utez.sice.model.Opcion" %>
-<%@ page import="mx.edu.utez.sice.model.PreguntaOpcion" %><%--
+<%@ page import="mx.edu.utez.sice.model.PreguntaOpcion" %>
 
-  Created by IntelliJ IDEA.
-  User: corey
-  Date: 04/08/2024
-  Time: 10:28 p. m.
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -70,13 +59,6 @@
 <%
     HttpSession sesion = request.getSession();
     Examen examen = (Examen) sesion.getAttribute("examen");
-    ArrayList<Pregunta> listaPreguntas1 = (ArrayList<Pregunta>) sesion.getAttribute("preguntas");
-    ArrayList<Opcion> listaOpciones1 = (ArrayList<Opcion>) sesion.getAttribute("opciones");
-
-    if (examen == null) {
-        response.sendRedirect("loginSICE.jsp"); // Redirect if user is not found
-        return;
-    }
 %>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
 <div class="bg"></div>
@@ -111,7 +93,10 @@
             </a>
         </div>
     </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> ac1197a43e987c63c8196126ddebd134b3913740
 
     <div class="container-md">
         <div class="row">
@@ -131,24 +116,24 @@
                         int i = 0;
                         for (Pregunta pregunta : listaPreguntas) {
                             i++; %>
-                            <label class="form-label text-white h5">Pregunta <%=i%>:  </label>
-                            <input class="form-control" type="text" name="pregunta_<%=i%>" required value="<%=pregunta.getPregunta()%>" placeholder="<%=pregunta.getPregunta()%>">
-                            <br>
-                            <%
-                            if (pregunta.getId_tipo_pregunta()==2){
-                                OpcionDao opcionDao = new OpcionDao();
-                                ArrayList<Opcion> listaOpciones = opcionDao.getAll(examen.getId_examen());
-                                int j = 0;
-                                for (Opcion opcion : listaOpciones) {
-                                    PreguntaOpcion preguntaOpcion = new PreguntaOpcion();
-                                    j++; %>
-                                    <label class="form-label text-white h5">Opcion <%=j%>:  </label>
-                                    <input type="radio" name="opcion_correcta_<%=j%>" value="" <%if (preguntaOpcion.getCorrecta()==1){%>checked<%}%> >
-                                    <input class="form-control" type="text" name="pregunta_<%=i%>_opcion_<%=j%>" required value="<%=opcion.getOpcion()%>" placeholder="<%=opcion.getOpcion()%>">
-                                    <br>
-                                <%}
-                            }
-                        }
+                    <label class="form-label text-white h5">Pregunta <%=i%>:  </label>
+                    <input class="form-control" type="text" name="pregunta_<%=i%>" required value="<%=pregunta.getPregunta()%>" placeholder="<%=pregunta.getPregunta()%>">
+                    <br>
+                    <%
+                        if (pregunta.getId_tipo_pregunta()==2){
+                            OpcionDao opcionDao = new OpcionDao();
+                            ArrayList<Opcion> listaOpciones = opcionDao.getAll(pregunta.getId_pregunta());
+                            int j = 0;
+                            for (Opcion opcion : listaOpciones) {
+                                PreguntaOpcion preguntaOpcion = opcionDao.getOpcionCorrecta(opcion.getId_opcion());
+                                j++; %>
+                    <label class="form-label text-white h5">Opcion <%=j%>:  </label>
+                    <input type="radio" name="opcion_correcta_<%=j%>" value="" <%if (preguntaOpcion.getCorrecta()==1){%>checked<%}%> >
+                    <input class="form-control" type="text" name="pregunta_<%=i%>_opcion_<%=j%>" required value="<%=opcion.getOpcion()%>" placeholder="<%=opcion.getOpcion()%>">
+                    <br>
+                    <%}
+                    }
+                    }
                     %>
                 </form>
             </div>

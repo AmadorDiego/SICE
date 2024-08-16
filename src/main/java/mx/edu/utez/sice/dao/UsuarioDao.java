@@ -57,9 +57,6 @@ public class UsuarioDao {
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
                 usuario.setFecha_registrado(rs.getString("fecha_registrado"));
                 //en caso de que el ID del tipo de usuario obtenido sea 3 (un alumno), seteamos el ID de su carrera
-                if (usuario.getId_tipo_usuario()==3){
-                    usuario.setId_carrera(rs.getInt("carrera_id_carrera"));
-                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -125,7 +122,7 @@ public class UsuarioDao {
             ps.setString(4,u.getContrasena());
             ps.setInt(5,u.getEstado());
             ps.setInt(6,u.getId_tipo_usuario());
-            ps.setInt(7,u.getId_carrera());
+            //ps.setInt(7,u.getId_carrera());
 
             if(ps.executeUpdate()>0){
                 flag = true;

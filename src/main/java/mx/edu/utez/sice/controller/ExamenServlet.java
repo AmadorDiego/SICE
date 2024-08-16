@@ -92,7 +92,7 @@ public class ExamenServlet extends HttpServlet {
                     //obtenemos el id de la pregunta por medio de los atributos que generamos anteriormente
                     int id_pregunta = preguntaDao.getOne(pregunta);
                     //añadimos el id de la pregunta al arraylist
-                    examen_tiene_preguntas.add(id_pregunta);
+                    flag = examen_tiene_preguntas.add(id_pregunta);
 
                     //si la pregunta es cerrada, entonces guardamos las opciones que tiene
                     if (pregunta.getId_tipo_pregunta() == 2) { // Pregunta cerrada

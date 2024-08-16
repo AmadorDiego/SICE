@@ -3,6 +3,7 @@ package mx.edu.utez.sice.dao;
 import mx.edu.utez.sice.model.Opcion;
 import mx.edu.utez.sice.model.Pregunta;
 import mx.edu.utez.sice.model.PreguntaOpcion;
+import mx.edu.utez.sice.model.Usuario;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -78,7 +79,7 @@ public class OpcionDao {
     }
 
     public ArrayList<Opcion> getAll(int id_pregunta) {
-        ArrayList<Opcion> lista = new ArrayList<>();
+        ArrayList<Opcion> listaOpciones = new ArrayList<>();
         String query = "select id_opcion, opcion, correcta from opcion join pregunta_opcion on id_opcion = opcion_id_opcion\n" +
                 "    join pregunta on pregunta_id_pregunta = id_pregunta where id_pregunta = ? and id_tipo_pregunta = 2;";
         try {
@@ -88,17 +89,33 @@ public class OpcionDao {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Opcion opcion = new Opcion();
-                PreguntaOpcion preguntaOpcion = new PreguntaOpcion();
                 opcion.setId_opcion(rs.getInt("id_opcion"));
                 opcion.setOpcion(rs.getString("opcion"));
-                preguntaOpcion.setId_opcion(rs.getInt("id_opcion"));
-                preguntaOpcion.setId_pregunta(id_pregunta);
-                preguntaOpcion.setCorrecta(rs.getInt("correcta"));
+                listaOpciones.add(opcion);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return lista;
+        return listaOpciones;
+    }
+
+    public PreguntaOpcion getOpcionCorrecta(int id_opcion) {
+        PreguntaOpcion preguntaOpcion = new PreguntaOpcion();
+        String query = "select * from pregunta_opcion where opcion_id_opcion = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_opcion);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                preguntaOpcion.setId_pregunta(rs.getInt("pregunta_id_pregunta"));
+                preguntaOpcion.setId_opcion(rs.getInt("opcion_id_opcion"));
+                preguntaOpcion.setCorrecta(rs.getInt("correcta"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return preguntaOpcion;
     }
 
 /*

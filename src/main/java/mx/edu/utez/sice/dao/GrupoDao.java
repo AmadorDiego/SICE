@@ -36,6 +36,23 @@ public class GrupoDao {
         return lista;
     }
 
+    public boolean insertAlumnoGrupo(int id_usuario){
+        boolean flag = false;
+        String query = "insert into usuario_tiene_grupo values (?, ?);";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            /*ps.setString(1,u.getNombre_usuario());
+            ps.setString(2,u.getApellido_usuario());*/
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     public Grupo getById(int id) {
         Grupo grupo = new Grupo();
         try {
