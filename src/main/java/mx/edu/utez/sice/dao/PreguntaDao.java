@@ -94,7 +94,7 @@ public class PreguntaDao {
     }
 
     public ArrayList<Pregunta> getAll(int id_examen) {
-        ArrayList<Pregunta> lista = new ArrayList<>();
+        ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
         String query = "select id_pregunta, pregunta, id_tipo_pregunta from pregunta join examen_tiene_pregunta on id_pregunta = pregunta_id_pregunta " +
                 "join examen on examen_id_examen = id_examen where id_examen = ?;";
         try {
@@ -107,11 +107,12 @@ public class PreguntaDao {
                 pregunta.setId_pregunta(rs.getInt("id_pregunta"));
                 pregunta.setPregunta(rs.getString("pregunta"));
                 pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
+                listaPreguntas.add(pregunta);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return lista;
+        return listaPreguntas;
     }
 
 /*
