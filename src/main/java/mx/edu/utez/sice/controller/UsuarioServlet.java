@@ -21,7 +21,7 @@ public class UsuarioServlet extends HttpServlet {
         Usuario usuario = dao.getOne(correo_electronico, contrasena);
         // llevamos la información a una vista que está en la vista verUsuario.jsp
         HttpSession session = req.getSession();
-        session.setAttribute("usuario", usuario);
+        session.setAttribute("usuarioIndex", usuario);
         if(usuario.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
             session.setAttribute("mensaje","Correo y/o contraseña incorrecta");

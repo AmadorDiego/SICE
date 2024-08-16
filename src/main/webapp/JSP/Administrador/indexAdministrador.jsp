@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndex");
     %>
 </head>
 
@@ -111,7 +111,7 @@
                             <td class="text-white d-none d-md-table-cell"><%=u.getFecha_registrado()%>
                             </td>
                             <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0"
-                                   href="../../VerUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">
+                                   href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">
                                 <span class="material-symbols-rounded justify-content-center">edit</span>
                             </a>
                             </td>
@@ -211,7 +211,6 @@
         request.getSession().removeAttribute("mensaje");
     %>
 </div>
-
 <script>
     const myModal = document.getElementById('myModal')
     const myInput = document.getElementById('myInput')
@@ -219,11 +218,6 @@
     myModal.addEventListener('shown.bs.modal', () => {
         myInput.focus()
     });
-
-
 </script>
-<%
-
-%>
 </body>
 </html>
