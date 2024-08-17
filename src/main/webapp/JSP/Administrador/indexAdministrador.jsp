@@ -28,7 +28,7 @@
             </a>
 
             <div class="d-flex">
-                <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">person_add</span>
                 </a>
                 <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
@@ -141,7 +141,7 @@
                                                 <h1 class="modal-title fs-5 text-white" id="exampleModalLabel_<%= u.getId_usuario() %>">
                                                     <%if (u.getEstado()==1){%>Deshabilitar usuario<%}else{%>Restaurar usuario<%}%>
                                                 </h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                <button type="button" class="btn-close-white" data-bs-dismiss="modal"
                                                         aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
@@ -205,8 +205,65 @@
                 });
             });
         </script>
-
     </div>
+    <!-- Modal registro usuario -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-blue-utz">
+                    <h1 class="modal-title fs-5 text-white">Registrar nuevo usuario</h1>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../../RegistrarUsuarioServlet" id="registrar_usuario">
+                        <div class="row">
+                            <div class="col-md-6 col-12 p-3">
+                                <label class="col-form-label h6">Ingrese su nombre: </label>
+                                <input required class="form-control" type="text" name="nombre_usuario" value="">
+                                <br>
+                                <label class="col-form-label h6">Ingrese su apellido: </label>
+                                <input required class="form-control" type="text" name="apellido_usuario" value="">
+                                <br>
+                                <label class="col-form-label h6">Ingrese su correo electrónico: </label>
+                                <input required class="form-control" type="email" name="correo_electronico" value="">
+                            </div>
+
+                            <div class="col-md-6 col-12 p-3">
+                                <label class="col-form-label h6">Ingrese su contraseña: </label>
+                                <input required class="form-control" type="password" name="contrasena1">
+                                <br>
+                                <label class="col-form-label h6">Reingrese su contraseña: </label>
+                                <input required class="form-control" type="password" name="contrasena2">
+                                <br>
+                                <label class="col-form-label h6">Ingrese el tipo de usuario: </label>
+                                <select required class="form-control" name="id_tipo_usuario" id="id_tipo_usuario">
+                                    <option value="4">Docente administrador</option>
+                                    <option value="1">Administrador</option>
+                                    <option value="2">Docente</option>
+                                    <option value="3">Alumno</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" form="registrar_usuario" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Registrar">
+                        <p class="mb-0">Registrar</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const myModal = document.getElementById('exampleModal')
+        const myInput = document.getElementById('recipient-name')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
+
     <%
         request.getSession().removeAttribute("mensaje");
     %>
