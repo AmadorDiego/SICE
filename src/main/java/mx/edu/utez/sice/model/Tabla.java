@@ -23,6 +23,7 @@ public class Tabla {
         this.grupo = grupo;
     }
 
+
     public DivisionAcademica getDivision() {
         return division;
     }

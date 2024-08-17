@@ -94,8 +94,8 @@
     <table id="tablaExamenes" class="display">
         <thead>
         <tr>
-            <th>Grupo</th>
             <th>Grado</th>
+            <th>Grupo</th>
             <th>División</th>
             <th>Carrera</th>
             <th>Seleccionar Grupo</th>
@@ -109,8 +109,8 @@
                 DivisionAcademica divisionAcademica = new DivisionAcademica();
         %>
         <tr>
-            <td><%= t.getGrupo().getGrupo() %></td>
             <td><%= t.getGrupo().getGrado() %></td>
+            <td><%= t.getGrupo().getGrupo() %></td>
             <td><%= t.getDivision().getDivision_academica() %></td>
             <td><%= t.getCarrera().getCarrera() %></td>
             <td><a class="btn btn-primary" href="PaulaAsignarAlumno.jsp"> Asignar </a></td>
@@ -175,16 +175,16 @@
 
                     for(const tabla in respuesta) {
                         var fila = document.createElement("tr");
-                        var td_grupo = document.createElement("td");
                         var td_grado = document.createElement("td");
+                        var td_grupo = document.createElement("td");
                         var td_division = document.createElement("td");
                         var td_carrera = document.createElement("td");
                         var td_boton = document.createElement("td");
 
-                        td_grupo.innerText = tabla.grupo.grupo;
-                        fila.appendChild(td_grupo);
                         td_grado.innerText = tabla.grupo.grado;
                         fila.appendChild(td_grado);
+                        td_grupo.innerText = tabla.grupo.grupo;
+                        fila.appendChild(td_grupo);
                         td_division.innerText = tabla.division.division_academica;
                         fila.appendChild(td_division);
                         td_carrera.innerText = tabla.carrera.carrera;

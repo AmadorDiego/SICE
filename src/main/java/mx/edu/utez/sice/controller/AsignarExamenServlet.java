@@ -6,7 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import mx.edu.utez.sice.dao.ExamenDao;
 import mx.edu.utez.sice.dao.GrupoDao;
+import mx.edu.utez.sice.dao.OpcionDao;
+import mx.edu.utez.sice.dao.PreguntaDao;
+import mx.edu.utez.sice.model.Examen;
+import mx.edu.utez.sice.model.Opcion;
+import mx.edu.utez.sice.model.Pregunta;
 import mx.edu.utez.sice.model.Tabla;
 
 import java.io.IOException;
@@ -16,8 +23,6 @@ import java.util.ArrayList;
 public class AsignarExamenServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
 
     }
 
@@ -31,7 +36,7 @@ public class AsignarExamenServlet extends HttpServlet {
         System.out.println("SERVLET id_carrera: " + id_carrera);
 
         GrupoDao dao  = new GrupoDao();
-        ArrayList<Tabla> lista = dao.getInfo(
+        ArrayList<Tabla> lista = dao.getInfoGrupo(
                 Integer.parseInt(id_grupo),
                 Integer.parseInt(id_division),
                 Integer.parseInt(id_carrera)
@@ -45,5 +50,6 @@ public class AsignarExamenServlet extends HttpServlet {
 
         resp.setContentType("text/json");
         resp.getWriter().write(json);
+
     }
 }
