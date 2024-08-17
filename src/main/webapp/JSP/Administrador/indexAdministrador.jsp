@@ -212,7 +212,6 @@
             <div class="modal-content">
                 <div class="modal-header bg-blue-utz">
                     <h1 class="modal-title fs-5 text-white">Registrar nuevo usuario</h1>
-                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method="post" action="../../RegistrarUsuarioServlet" id="registrar_usuario">
@@ -247,7 +246,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary bg-gray-SICE" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" form="registrar_usuario" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Registrar">
                         <p class="mb-0">Registrar</p>
                     </button>
