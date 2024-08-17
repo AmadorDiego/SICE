@@ -55,15 +55,9 @@
     <br>
     <div class="row">
         <div class="col-12">
-            <% if ((String) request.getSession().getAttribute("mensaje") != null) {%>
-            <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>primary<%}else{%>danger<%}%> alert-dismissible fade show"
-                 role="alert">
-                <strong><%=(String) request.getSession().getAttribute("mensaje")%>
-                </strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+
         </div>
-        <%}%>
+
 
 
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
@@ -205,6 +199,16 @@
                 });
             });
         </script>
+    </div>
+    <div class="position-fixed bottom-0 end-0 col-3 p-3">
+        <% if ((String) request.getSession().getAttribute("mensaje") != null) {%>
+        <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>primary<%}else{%>danger<%}%> alert-dismissible fade show"
+             role="alert">
+            <strong><%=(String) request.getSession().getAttribute("mensaje")%>
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <%}%>
     </div>
     <!-- Modal registro usuario -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
