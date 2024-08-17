@@ -202,7 +202,7 @@
     </div>
     <div class="position-fixed bottom-0 end-0 col-3 p-3">
         <% if ((String) request.getSession().getAttribute("mensaje") != null) {%>
-        <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>primary<%}else{%>danger<%}%> alert-dismissible fade show"
+        <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> alert-dismissible fade show"
              role="alert">
             <strong><%=(String) request.getSession().getAttribute("mensaje")%>
             </strong>
@@ -216,19 +216,20 @@
             <div class="modal-content">
                 <div class="modal-header bg-blue-utz">
                     <h1 class="modal-title fs-5 text-white">Registrar nuevo usuario</h1>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form method="post" action="../../RegistrarUsuarioServlet" id="registrar_usuario">
                         <div class="row">
                             <div class="col-md-6 col-12 p-3">
                                 <label class="col-form-label h6">Ingrese su nombre: </label>
-                                <input required class="form-control" type="text" name="nombre_usuario" value="">
+                                <input required class="form-control" type="text" name="nombre_usuario" value="" placeholder="Nombre">
                                 <br>
                                 <label class="col-form-label h6">Ingrese su apellido: </label>
-                                <input required class="form-control" type="text" name="apellido_usuario" value="">
+                                <input required class="form-control" type="text" name="apellido_usuario" value="" placeholder="Apellido">
                                 <br>
                                 <label class="col-form-label h6">Ingrese su correo electrónico: </label>
-                                <input required class="form-control" type="email" name="correo_electronico" value="">
+                                <input required class="form-control" type="email" name="correo_electronico" value="" placeholder="matricula/nombre@utez.edu.mx">
                             </div>
 
                             <div class="col-md-6 col-12 p-3">
