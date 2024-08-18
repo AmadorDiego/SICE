@@ -132,6 +132,28 @@ public class UsuarioDao {
         }
         return lista;
     }
+
+    public ArrayList<Usuario> getAllAlumnosSinGrupo(){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String query = "SELECT id_usuario, nombre_usuario, apellido_usuario, correo_electronico, estado FROM usuario LEFT JOIN usuario_tiene_grupo ON id_usuario = usuario_id_usuario WHERE id_tipo_usuario = 3 AND usuario_id_usuario IS NULL;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
+            PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
+            ResultSet rs = ps.executeQuery(); //ejecutar
+            while (rs.next()) { //lo ejecuta por cada ususario en la base de datos
+                Usuario u = new Usuario();
+                u.setId_usuario(rs.getInt("id_usuario"));
+                u.setNombre_usuario(rs.getString("nombre_usuario"));
+                u.setApellido_usuario(rs.getString("apellido_usuario"));
+                u.setCorreo_electronico(rs.getString("correo_electronico"));
+                u.setEstado(rs.getInt("estado"));
+                lista.add(u);
+            }
+        }catch (SQLException e){
+        }
+        return lista;
+    }
+
     public boolean updateDocenteAdministrador(Usuario u){
         boolean flag = false;
         String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, contrasena = sha2(?,256), estado = ?, id_tipo_usuario = ? where id_usuario = ?;";

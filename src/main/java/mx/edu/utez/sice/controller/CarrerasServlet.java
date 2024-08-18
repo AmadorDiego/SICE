@@ -23,7 +23,7 @@ public class CarrerasServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<option value=''>Selecciona una Carrera</option>");
+        out.println("<option value=''disabled selected>Selecciona una Carrera</option>");
         for(Carrera carrera : carreras) {
             System.out.println("Procesando carrera: " + carrera.getId_carrera() + " - " + carrera.getCarrera());
             out.println("<option value='" + carrera.getId_carrera() + "'>" + carrera.getCarrera() + "</option>");

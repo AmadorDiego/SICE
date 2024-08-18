@@ -21,7 +21,7 @@ public class GruposServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<option value=''>Selecciona un Grupo</option>");
+        out.println("<option value='' disabled selected>Selecciona un Grupo</option>");
         for(Grupo grupo : grupos) {
             out.println("<option value='" + grupo.getId_grupo() + "'>" + grupo.getGrado()+grupo.getGrupo() + "</option>");
         }

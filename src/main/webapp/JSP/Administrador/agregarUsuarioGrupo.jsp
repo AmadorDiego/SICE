@@ -16,7 +16,7 @@
 <h1>Selecciona tu División, Carrera y Grupo</h1>
 
 <select id="division" onchange="cargarCarreras()">
-    <option value="">Selecciona una División</option>
+    <option disabled selected> Selecciona una división académica</option>
     <%
         DivisionAcademicaDao divisionAcademicaDao = new DivisionAcademicaDao();
         ArrayList<DivisionAcademica> divisiones = divisionAcademicaDao.getAll();
@@ -27,11 +27,11 @@
 </select>
 
 <select id="carrera" onchange="cargarGrupos()" disabled>
-    <option value="">Selecciona una Carrera</option>
+    <option disabled selected> Selecciona una carrera</option>
 </select>
 
 <select id="grupo" disabled>
-    <option value="">Selecciona un Grupo</option>
+    <option disabled selected> Selecciona un grupo</option>
 </select>
 
 <script>
@@ -45,7 +45,7 @@
                     console.log("Respuesta recibida:", response);
                     $('#carrera').html(response);
                     $('#carrera').prop('disabled', false);
-                    $('#grupo').html('<option value="">Selecciona un Grupo</option>');
+                    $('#grupo').html('<option value="">Selecciona un grupo</option>');
                     $('#grupo').prop('disabled', true);
                 },
                 error: function(xhr, status, error) {
