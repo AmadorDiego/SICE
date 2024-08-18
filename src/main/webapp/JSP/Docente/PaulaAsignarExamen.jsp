@@ -111,7 +111,7 @@
         <tr>
             <td><%= t.getGrupo().getGrado() %></td>
             <td><%= t.getGrupo().getGrupo() %></td>
-            <td><%= t.getDivision().getDivision_academica() %></td>
+            <td><%= t.getDivisionAcademica().getDivision_academica() %></td> <!--Solo modifique la division-->
             <td><%= t.getCarrera().getCarrera() %></td>
             <td><a class="btn btn-primary" href="PaulaAsignarAlumno.jsp"> Asignar </a></td>
         </tr>

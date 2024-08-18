@@ -22,7 +22,7 @@
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Docentes.css">
     <%
         HttpSession sesion = request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
     %>
 
 

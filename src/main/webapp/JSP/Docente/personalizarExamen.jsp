@@ -93,10 +93,6 @@
             </a>
         </div>
     </div>
-<<<<<<< HEAD
-
-=======
->>>>>>> 7e8392b955b30464f6deb24fa59a4a8a44465899
     <div class="container-md">
         <div class="row">
             <div class="col-12">

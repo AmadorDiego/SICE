@@ -98,17 +98,71 @@
         const selectAllCheckbox = document.getElementById('selectAll');
         const usuarioCheckboxes = document.querySelectorAll('.select-alumno');
 
-        selectAllCheckbox.addEventListener('change', () => {
-            const isChecked = selectAllCheckbox.checked;
-            usuarioCheckboxes.forEach(checkbox => {
-                checkbox.checked = isChecked;
+        // Inicializar DataTable
+        const table = $('#usuarios').DataTable({
+            language: {
+                url: '../../JS/es-MX.json'
+            }
+        });
+
+        // Función para actualizar la tabla con nuevos datos
+        function actualizarTabla(data) {
+            table.clear();
+            if (!Array.isArray(data) || data.length === 0) {
+                console.log("No se encontraron datos");
+                table.row.add(['No se encontraron datos', '', '', '']).draw();
+            } else {
+                data.forEach(tabla => {
+                    if (tabla && tabla.usuario) {
+                        table.row.add([
+                            '<input type="checkbox" class="select-alumno" value="' + tabla.usuario.id_usuario + '">',
+                            tabla.usuario.nombre_usuario,
+                            tabla.usuario.apellido_usuario,
+                            tabla.usuario.correo_electronico
+                        ]);
+                    } else {
+                        console.log("Datos incompletos para una fila:", tabla);
+                    }
+                });
+            }
+            table.draw();
+        }
+
+        // Manejar clic en botón de asignar
+        $('.btn-asignar').click(function() {
+            var id_grupo = $(this).data('id-grupo');
+            var grado = $(this).data('grado');
+            var grupo = $(this).data('grupo');
+            var id_division = $(this).data('id-division');
+            var id_carrera = $(this).data('id-carrera');
+
+            fetch('../../asignarExamen?id_grupo='+id_grupo+'&grado='+grado+'&grupo='+grupo+'&id_division='+id_division+'&id_carrera='+id_carrera, {
+                method: 'GET'
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            }).then(data => {
+                console.log("Datos recibidos del servidor:", data);
+                actualizarTabla(data);
+            }).catch(error => {
+                console.error("Error: ", error);
+                alert("Ocurrió un error: " + error.message);
             });
         });
 
+        // Manejar selección de todos
+        selectAllCheckbox.addEventListener('change', () => {
+            const isChecked = selectAllCheckbox.checked;
+            table.$('.select-alumno').prop('checked', isChecked);
+        });
+
+        // Manejar clic en guardar asignación
         document.getElementById('guardarAsignacion').addEventListener('click', () => {
-            const selectedUsuario = Array.from(usuarioCheckboxes)
-                .filter(checkbox => checkbox.checked)
-                .map(checkbox => checkbox.value);
+            const selectedUsuario = table.$('.select-alumno:checked').map(function() {
+                return this.value;
+            }).get();
 
             if (selectedUsuario.length === 0) {
                 alert('Por favor seleccione al menos un alumno.');
@@ -129,12 +183,6 @@
                     alert('Error al asignar alumnos');
                 }
             });
-        });
-
-        const table = $('#usuarios').DataTable({
-            language: {
-                url: '../../JS/es-MX.json'
-            }
         });
     });
 </script>

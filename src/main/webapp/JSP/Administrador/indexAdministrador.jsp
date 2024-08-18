@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndex");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAdministrador");
     %>
 </head>
 

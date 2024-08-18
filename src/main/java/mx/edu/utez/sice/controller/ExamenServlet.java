@@ -8,10 +8,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import mx.edu.utez.sice.dao.ExamenDao;
-import mx.edu.utez.sice.dao.OpcionDao;
-import mx.edu.utez.sice.dao.PreguntaDao;
-import mx.edu.utez.sice.dao.PreguntaOpcionDao;
+import mx.edu.utez.sice.dao.*;
 import mx.edu.utez.sice.model.*;
 import org.apache.poi.sl.draw.geom.GuideIf;
 
@@ -24,34 +21,13 @@ import java.util.List;
 
 @WebServlet (name="ExamenServlet", value = "/ExamenServlet")
 public class ExamenServlet extends HttpServlet {
-    /*protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-
-        if ("crear".equals(action)) {
-            // Preparar para la creación de un nuevo examen
-            request.setAttribute("modo", "crear");
-            request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
-        } else {
-            // Lógica existente para mostrar todos los exámenes
-            ExamenDao dao = new ExamenDao();
-            List<Examen> examenes = dao.getAll();
-            request.setAttribute("examenes", examenes);
-            request.setAttribute("modo", "listar");
-            request.getRequestDispatcher("JSP/Docente/examen.jsp").forward(request, response);
-        }
-    }*/
-
     /*protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ExamenDao examenDao = new ExamenDao();
-        ArrayList<Examen>examenes = examenDao.getAll();
-
-        System.out.println("Número de exámenes recuperados: " + examenes.size());
-        for (Examen examen : examenes) {
-            System.out.println("Examen: " + examen.getNombre_examen()
-                    + ", Descripción: " + examen.getDescripcion());
-        }
-            req.setAttribute("examenes", examenes);
-            req.getRequestDispatcher("JSP/Docente/indexDocente.jsp").forward(req, resp);
+        Usuario usuario = new Usuario();
+        int id_usuario = Integer.parseInt(req.getParameter("id_usuario"));
+        UsuarioDao usuarioDao = new UsuarioDao();
+        usuario = usuarioDao.getOne(id_usuario);
+        HttpSession sesion = req.getSession();
+        sesion.setAttribute("usuario_docente", usuario);
     }*/
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -62,7 +38,7 @@ public class ExamenServlet extends HttpServlet {
         examen.setCantidad_preguntas(Integer.parseInt(req.getParameter("cantidad_preguntas")));
         examen.setEstado(0);
         examen.setDescripcion((req.getParameter("descripcion")));
-        examen.setId_usuario((Integer.parseInt(req.getParameter("id_usuario"))));
+        int id_usuario = (Integer.parseInt(req.getParameter("id_usuario")));
 
         //creamos un ExamenDao para mandar a llamar el método insertExamen, pasando como parametro el examen creado anteriormente
         HttpSession sesion = req.getSession();
@@ -72,7 +48,7 @@ public class ExamenServlet extends HttpServlet {
         if (dao.insertExamen(examen)){
             //obtenemos el id del examen por medio de los atributos que generamos anteriormente
             int id_examen = dao.getOne(examen);
-
+            flag = dao.insertExamenUsuario(id_usuario,id_examen);
             //creamos arreglos para obtener todas las preguntas y todos sus tipos
             String[] preguntas = req.getParameterValues("texto_pregunta[]");
             String[] tipos = req.getParameterValues("id_tipo_pregunta[]");
@@ -141,7 +117,7 @@ public class ExamenServlet extends HttpServlet {
             if (flag) {
                 sesion.setAttribute("mensaje","Examen creado exitosamente");
                 sesion.setAttribute("flag", true);
-                resp.sendRedirect("JSP/Docente/personalizarExamen.jsp");
+                resp.sendRedirect("JSP/Docente/indexDocente.jsp");
             } else {
                 sesion.setAttribute("mensaje","Ocurrio un error al crear el examen");
                 sesion.setAttribute("flag", false);

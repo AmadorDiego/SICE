@@ -14,6 +14,7 @@ select * from pregunta_opcion;
 select * from aplicacion;
 select * from respuesta_opcion;
 select * from respuesta_abierta;
+select * from usuario_tiene_examen;
 
 /*
 	id_tipo_usuario
