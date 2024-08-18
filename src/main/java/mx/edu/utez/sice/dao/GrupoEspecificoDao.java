@@ -5,7 +5,6 @@ import mx.edu.utez.sice.model.DivisionAcademica;
 import mx.edu.utez.sice.model.Grupo;
 import mx.edu.utez.sice.model.Tabla;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
