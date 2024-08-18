@@ -25,8 +25,9 @@ public class GrupoDao {
             while (rs.next()) {
                 Grupo g = new Grupo();
                 g.setId_grupo(rs.getInt("id_grupo"));
+                //g.setGrupo(rs.getString("grupo").charAt(0));
+                g.setGrupo(rs.getString("grupo"));
                 g.setGrado(rs.getInt("grado"));
-                g.setGrupo(rs.getString("grupo").charAt(0));
                 g.setId_periodo(rs.getInt("periodo_id_periodo"));
                 lista.add(g);
             }
@@ -65,7 +66,8 @@ public class GrupoDao {
                 grupo = new Grupo();
                 grupo.setId_grupo(rs.getInt("id_grupo"));
                 grupo.setGrado(rs.getInt("grado"));
-                grupo.setGrupo(rs.getString("grupo").charAt(0));
+                //grupo.setGrupo(rs.getString("grupo").charAt(0));
+                grupo.setGrupo(rs.getString("grupo"));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,12 +81,13 @@ public class GrupoDao {
         ArrayList<Tabla> tabla = new ArrayList<>();
         try {
             con = DatabaseConnectionManager.getConnection();
-            String query = "SELECT g.id_grupo, g.grupo, g.grado, d.nombre_division_academica, c.nombre_carrera " +
+            String query = "SELECT g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera " +
                     "FROM grupo g " +
-                    "JOIN grupo_tiene_carrera gc ON g.id_grupo = gc.grupo_id_grupo " +
-                    "JOIN carrera c ON gc.carrera_id_carrera = c.id_carrera " +
+                    "JOIN grupo_tiene_usuario gu ON g.id_grupo = gu.grupo_id_grupo " +
+                    "JOIN usuario u ON u.id_usuario = gu.usuario_id_usuario " +
+                    "JOIN carrera c ON u.carrera_id_carrera = c.id_carrera " +
                     "JOIN division_academica d ON c.division_academica_id_division_academica = d.id_division_academica " +
-                    "GROUP BY g.id_grupo, g.grupo, g.grado, d.nombre_division_academica, c.nombre_carrera;";
+                    "GROUP BY g.id_grupo, g.grado, g.grupo, d.nombre_division_academica, c.nombre_carrera;";
             ps = con.prepareStatement(query);
             rs = ps.executeQuery();
 
@@ -94,7 +97,8 @@ public class GrupoDao {
                 Grupo grupo = new Grupo();
                 grupo.setId_grupo(rs.getInt("id_grupo"));
                 grupo.setGrado(rs.getInt("grado"));
-                grupo.setGrupo(rs.getString("grupo").charAt(0));
+                //grupo.setGrupo(rs.getString("grupo").charAt(0));
+                grupo.setGrupo(rs.getString("grupo"));
                 t.setGrupo(grupo);
 
 
@@ -105,7 +109,8 @@ public class GrupoDao {
 
                 DivisionAcademica division = new DivisionAcademica();
                 division.setDivision_academica(rs.getString("nombre_division_academica"));
-                t.setDivision(division);
+                //t.setDivision(division);
+                t.setDivisionAcademica(division);
 
                 tabla.add(t);
             }
@@ -117,7 +122,7 @@ public class GrupoDao {
         return tabla;
     }
 
-    public ArrayList<Tabla> getInfoGrupo(int id_grupo, int id_division, int id_carrera) {
+    public ArrayList<Tabla> getInfo(int id_grupo, int id_division, int id_carrera) {
         ArrayList<Tabla> tabla = new ArrayList<>();
         try {
             con = DatabaseConnectionManager.getConnection();
@@ -140,7 +145,8 @@ public class GrupoDao {
                 Grupo grupo = new Grupo();
                 grupo.setId_grupo(rs.getInt("id_grupo"));
                 grupo.setGrado(rs.getInt("grado"));
-                grupo.setGrupo(rs.getString("grupo").charAt(0));
+                //grupo.setGrupo(rs.getString("grupo").charAt(0));
+                grupo.setGrupo(rs.getString("grupo"));
                 t.setGrupo(grupo);
 
 
@@ -151,7 +157,8 @@ public class GrupoDao {
 
                 DivisionAcademica division = new DivisionAcademica();
                 division.setDivision_academica(rs.getString("nombre_division_academica"));
-                t.setDivision(division);
+                //t.setDivision(division);
+                t.setDivisionAcademica(division);
 
                 tabla.add(t);
             }

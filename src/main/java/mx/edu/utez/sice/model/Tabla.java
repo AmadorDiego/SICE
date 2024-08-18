@@ -3,12 +3,12 @@ package mx.edu.utez.sice.model;
 public class Tabla {
 
     private Grupo grupo;
-    private DivisionAcademica division;
+    private DivisionAcademica divisionAcademica; //Cambie division por division academica
     private Carrera carrera;
 
-    public Tabla(Grupo grupo, DivisionAcademica division, Carrera carrera) {
+    public Tabla(Grupo grupo, DivisionAcademica divisionAcademica, Carrera carrera) {
         this.grupo = grupo;
-        this.division = division;
+        this.divisionAcademica = divisionAcademica;
         this.carrera = carrera;
     }
 
@@ -23,13 +23,12 @@ public class Tabla {
         this.grupo = grupo;
     }
 
-
-    public DivisionAcademica getDivision() {
-        return division;
+    public DivisionAcademica getDivisionAcademica() {
+        return divisionAcademica;
     }
 
-    public void setDivision(DivisionAcademica division) {
-        this.division = division;
+    public void setDivisionAcademica(DivisionAcademica divisionAcademica) {
+        this.divisionAcademica = divisionAcademica;
     }
 
     public Carrera getCarrera() {
