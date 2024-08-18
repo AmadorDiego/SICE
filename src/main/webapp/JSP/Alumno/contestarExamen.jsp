@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
 </head>
 
-<body>
+<body class="bg-fondo">
 <!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
 <header>
     <nav class="navbar bg-blue-utz">
@@ -33,17 +33,14 @@
 </header>
 
 
-<!--/////////////////////////////////// Fondo //////////////////////////////////////////-->
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-
 
 <!--////////////////////////// Encabezado ////////////////////////////////////-->
+<form>
 <div class="container-fluid">
     <div class="row align-items-center mt-4">
-        <div class="col bg-green-SICE rounded-4 mx-5">
+        <div class="col bg-green-utz rounded-4 mx-5 p-3">
             <h1 class="text-white">*Nombre Examen*</h1>
+            <h3>*Informacion (Si no se utiliza, borrar)*</h3>
         </div>
     </div>
 
@@ -51,20 +48,22 @@
 
 <!--///////////////////////////// Contenido ///////////////////////////////////-->
     <div class="row align-items-center mt-3">
-        <div class="col bg-green-SICE rounded-4 mx-5 p-3">
-            <div class="card rounded-3">
-                <div class="card-header bg-green-SICE">
+        <div class="col bg-green-utz rounded-4 mx-5 p-5">
+
+            <!----------------------- Tarjeta Pregunta (Cerrada)---------------------------->
+            <div class="card rounded-4 border-0 mb-4">
+                <div class="card-header bg-green-SICE-obscuro">
                     <br>
                 </div>
-                <div class="card-body bg-green-SICE p-2">
-                    <h6 class="card-title">Special title treatment</h6>
-                    <div class="custom-radio mb-2">
+                <div class="card-body bg-fondo p-4">
+                    <h4 class="card-title mb-3">*Pregunta*</h4>
+                    <div class="custom-radio mb-2 d-block">
                         <input type="radio" id="customRadio" name="customRadio" class="custom-radio-input">
                         <label for="customRadio" class="custom-radio-label">
                             <h6>*Respuesta 1*</h6>
                         </label>
                     </div>
-                    <div class="custom-radio">
+                    <div class="custom-radio d-block">
                         <input type="radio" id="customRadio2" name="customRadio" class="custom-radio-input">
                         <label for="customRadio2" class="custom-radio-label">
                             <h6>*Respuesta 2</h6>
@@ -72,6 +71,24 @@
                     </div>
                 </div>
             </div>
+
+            <!------------------------------------Tarjeta Pregunta (Abierta)------------------------------------->
+            <div class="card rounded-4 border-0">
+                <div class="card-header bg-green-SICE-obscuro">
+                    <br>
+                </div>
+                <div class="card-body bg-fondo p-4">
+                    <h4 class="card-title mb-3">*Pregunta*</h4>
+
+                    <label for="preguntaAbierta1" class="d-block">
+                        <h6>Ingresa una respuesta:</h6>
+                    </label>
+                    <input type="text" class="rounded-3 d-block" id="preguntaAbierta1">
+                </div>
+            </div>
+            <button type="submit" class="btn-primary btn bg-blue-utz rounded-3 justify-content-center mt-4 p-1">
+                <h6 class="text-white">Enviar Respuestas</h6>
+            </button>
         </div>
     </div>
 
@@ -80,6 +97,7 @@
 
 
 </div>
+</form>
 <script href="../../JS/bootstrap.js"></script>
 </body>
 </html>

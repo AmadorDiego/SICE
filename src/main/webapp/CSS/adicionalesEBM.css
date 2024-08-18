@@ -24,7 +24,10 @@
     background-color: #CA4E4E;
 }
 
-
+/*----------------------------- Nuevo Fondo------------------------------------*/
+.bg-fondo {
+    background: #b5c5be;
+}
 
 /*! ----------------------Colores (General)----------------------------*/
 .blue-utz {
@@ -101,11 +104,11 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     border: 2px solid #00604C;
     border-radius: 50%;
-    background-color: #fff;
+    background-color: rgba(137, 255, 234, 0.6);
 }
 
 .custom-radio-input:checked + .custom-radio-label::after {
@@ -113,12 +116,12 @@
     position: absolute;
     left: 5px;
     top: 5px;
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    background-color: #007bff;
+    background-color: #00604C;
 }
 
 .custom-radio-input:focus + .custom-radio-label::before {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+    box-shadow: 0 0 0 3px rgba(0, 96, 76, 0.25);
 }
