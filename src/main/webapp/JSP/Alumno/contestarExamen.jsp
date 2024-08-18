@@ -56,16 +56,17 @@
                     <br>
                 </div>
                 <div class="card-body bg-fondo p-4">
-                    <h4 class="card-title mb-3">*Pregunta*</h4>
-                    <div class="custom-radio mb-2 d-block">
-                        <input type="radio" id="customRadio" name="customRadio" class="custom-radio-input">
-                        <label for="customRadio" class="custom-radio-label">
+                    <h4 class="card-title mb-4">*Pregunta*</h4>
+
+                    <div class="custom-radio mb-3 d-block">
+                        <input type="radio" id="customRadio" name="customRadio" class="custom-radio-input me-2">
+                        <label for="customRadio" class="custom-radio-label ms-1">
                             <h6>*Respuesta 1*</h6>
                         </label>
                     </div>
-                    <div class="custom-radio d-block">
-                        <input type="radio" id="customRadio2" name="customRadio" class="custom-radio-input">
-                        <label for="customRadio2" class="custom-radio-label">
+                    <div class="custom-radio mb-3 d-block">
+                        <input type="radio" id="customRadio2" name="customRadio" class="custom-radio-input me-2">
+                        <label for="customRadio2" class="custom-radio-label ms-1">
                             <h6>*Respuesta 2</h6>
                         </label>
                     </div>
