@@ -8,20 +8,21 @@ public class Examen {
     private int cantidad_preguntas;
     private int estado;
     private String descripcion;
-    private int id_usuario;
     //ArrayList para la tabla examen_tiene_pregunta
     private ArrayList<Integer> preguntas;
+    //ArrayList para la tabla usuario_tiene_examen
+    private ArrayList<Integer> usuarios;
 
     public Examen() {}
 
-    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, int id_usuario, ArrayList<Integer> preguntas) {
+    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, ArrayList<Integer> preguntas, ArrayList<Integer> usuarios) {
         this.id_examen = id_examen;
         this.nombre_examen = nombre_examen;
         this.cantidad_preguntas = cantidad_preguntas;
         this.estado = estado;
         this.descripcion = descripcion;
-        this.id_usuario = id_usuario;
         this.preguntas = preguntas;
+        this.usuarios = usuarios;
     }
 
     public int getId_examen() {
@@ -64,20 +65,18 @@ public class Examen {
         this.descripcion = descripcion;
     }
 
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
-    public ArrayList<Integer> getPreguntas() {
-        return preguntas;
-    }
+    public ArrayList<Integer> getPreguntas() { return preguntas; }
 
     public void setPreguntas(ArrayList<Integer> preguntas) {
         this.preguntas = preguntas;
+    }
+
+    public ArrayList<Integer> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(ArrayList<Integer> usuarios) {
+        this.usuarios = usuarios;
     }
 
     // agregacion de Piero

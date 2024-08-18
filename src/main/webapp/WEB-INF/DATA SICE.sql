@@ -10,7 +10,7 @@ insert into carrera (nombre_carrera, division_academica_id_division_academica) v
 ('TSU Mecatrónica: área automatización', 2),
 ('ingeniería en Mecatrónica', 2),
 ('TSU Procesos industriales: área manufactura', 2),
-('ingeniería Industrial', 2),
+'ingeniería Industrial', 2),
 ('TSU Nanotecnología: área materiales', 2),
 ('ingeniería en Nanotecnología', 2),
 ('TSU Diseño y moda industrial: área producción', 1),
@@ -82,7 +82,9 @@ insert into grupo_tiene_carrera values
 (11,1),
 (11,2);
 
-insert into examen (nombre_examen, cantidad_preguntas, estado, descripcion, usuario_id_usuario) values ('Examen teorico U3 Sistemas operativos 3-A-DSM', 15, 1, 'Buen dia. Por favor contestar. Saludos cordiales.', 12);
+insert into examen (nombre_examen, cantidad_preguntas, estado, descripcion) values ('Examen teorico U3 Sistemas operativos 3-A-DSM', 15, 1, 'Buen dia. Por favor contestar. Saludos cordiales.');
+
+insert into usuario_tiene_examen values (12, 1);
 
 insert into aplicacion (periodo_id_periodo, examen_id_examen) values (2, 1);
 
@@ -92,7 +94,7 @@ insert into pregunta (pregunta, id_tipo_pregunta) values
 ('¿Con que comando se crea un directorio?', 2),
 ('¿Que comando nos permite ver los archicvos de un directorio?', 2),
 ('¿Que comando nos permite crear un archivo?',2),
-'En caso de querer ver los archivos del directorio en que nos encontramos, ordenados por tamaño, ¿que comando deberiamos de usar?', 2),
+('En caso de querer ver los archivos del directorio en que nos encontramos, ordenados por tamaño, ¿que comando deberiamos de usar?', 2),
 ('En caso de querer movernos al directorio raiz del sistema, ¿que comando deberiamos de usar', 2),
 ('En caso de haber creado un archivo prueba.txt, ¿que comando deberiamos de usar para eliminarlo?', 2),
 ('En caso de querer ver los archivos y carpetas del directorio en el que nos encontramos con toda su informacion, ¿que comando se deberia de usar?', 2),
@@ -110,7 +112,7 @@ insert into pregunta (pregunta, id_tipo_pregunta) values
 ('¿Cuáles son los principales sistemas de archivos utilizados en sistemas operativos?', 1),
 ('¿Qué es la memoria virtual y cómo se gestiona en un sistema operativo?', 1),
 ('¿Cuál es la importancia de los controladores (drivers) en un sistema operativo?', 1),
-('¿Qué es la concurrencia y cómo se maneja en sistemas operativos multitarea?', 1),
+'¿Qué es la concurrencia y cómo se maneja en sistemas operativos multitarea?', 1),
 ('¿Cuáles son los desafíos de seguridad que enfrentan los sistemas operativos?', 1),
 ('¿Cómo se realiza la planificación de CPU en un sistema operativo?', 1),
 ('¿Qué es la paginación y cómo se implementa en un sistema operativo?', 1),
@@ -126,7 +128,7 @@ insert into opcion (opcion) values
 ('date'),
 ('cd'),
 ('move'),
-('esc'),
+'esc'),
 ('create'),
 ('mkdir'),
 ('crtdir'),
@@ -153,7 +155,7 @@ insert into opcion (opcion) values
 ('head texto.txt'),
 ('db y cl'),
 ('rim y tx'),
-'vi y nano'),
+('vi y nano'),
 ('Permiten a los usuarios crear y modificar archivos de texto, como archivos de configuración y scripts de automatización.'),
 ('Sirven para ejecutar programas de gráficos intensivos y videojuegos en el servidor.'),
 ('Permiten la edición de archivos de texto únicamente a través de interfaces gráficas avanzadas.'),
@@ -245,7 +247,7 @@ insert into respuesta_abierta (pregunta_id_pregunta, aplicacion_id_aplicacion, r
 (24, 1, 'La concurrencia se refiere a la ejecución simultánea de múltiples procesos. Los sistemas operativos multitarea gestionan la concurrencia mediante planificación de CPU y sincronización.', 0),
 (25, 1, 'Los sistemas operativos deben protegerse contra amenazas como virus, malware, ataques de red y vulnerabilidades de software. La seguridad es crucial para mantener la integridad del sistema.', 0),
 (26, 1, 'La planificación de CPU determina qué proceso se ejecutará a continuación. Algoritmos como FIFO, SJF, Round Robin y Prioridad se utilizan para tomar estas decisiones.', 0),
-27, 1, 'La paginación es una técnica de administración de memoria utilizada en sistemas operativos. Consiste en dividir la memoria física en bloques de tamaño fijo llamados páginas.', 0),
+(27, 1, 'La paginación es una técnica de administración de memoria utilizada en sistemas operativos. Consiste en dividir la memoria física en bloques de tamaño fijo llamados páginas.', 0),
 (28, 1, 'En un sistema monolítico, todas las funciones del sistema operativo. En un sistema basado en microkernel, el núcleo (kernel) contiene solo las funciones esenciales', 0),
 (29, 1, 'se refiere a la ejecución simultánea de múltiples tareas en diferentes nodos de la red.', 0),
 (30, 1, 'son aquellos que se ejecutan sin interacción directa del usuario. Pueden realizar tareas como actualizaciones automáticas, indexación de archivos o mantenimiento del sistema.', 0);

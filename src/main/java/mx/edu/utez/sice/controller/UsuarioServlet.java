@@ -21,7 +21,6 @@ public class UsuarioServlet extends HttpServlet {
         Usuario usuario = dao.getOne(correo_electronico, contrasena);
         // llevamos la información a una vista que está en la vista verUsuario.jsp
         HttpSession session = req.getSession();
-        session.setAttribute("usuarioIndex", usuario);
         if(usuario.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
             session.setAttribute("mensaje","Correo y/o contraseña incorrecta");
@@ -30,15 +29,19 @@ public class UsuarioServlet extends HttpServlet {
             switch (usuario.getId_tipo_usuario()) {
                 case 1:
                     resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
+                    session.setAttribute("usuarioIndexAdministrador", usuario);
                     break;
                 case 2:
                     resp.sendRedirect("JSP/Docente/indexDocente.jsp");
+                    session.setAttribute("usuarioIndexDocente", usuario);
                     break;
                 case 3:
                     resp.sendRedirect("JSP/Alumno/indexAlumno.jsp");
+                    session.setAttribute("usuarioIndexAlumno", usuario);
                     break;
                 case 4:
                     resp.sendRedirect("JSP/Docente-Administrador/indexDocenteAdministrador.jsp");
+                    session.setAttribute("usuarioIndexDocenteAdministrador", usuario);
                     break;
             }
         }

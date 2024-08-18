@@ -49,24 +49,6 @@ CREATE TABLE IF NOT EXISTS `sice`.`carrera` (
 
 
 -- -----------------------------------------------------
--- Table `sice`.`usuario`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sice`.`usuario` (
-                                                `id_usuario` INT NOT NULL AUTO_INCREMENT,
-                                                `nombre_usuario` VARCHAR(45) NOT NULL,
-    `apellido_usuario` VARCHAR(45) NOT NULL,
-    `correo_electronico` VARCHAR(100) NOT NULL,
-    `contrasena` VARCHAR(256) NOT NULL,
-    `estado` TINYINT NOT NULL DEFAULT 1,
-    `fecha_registrado` DATETIME NOT NULL,
-    `codigo` VARCHAR(20) NULL,
-    `id_tipo_usuario` INT NOT NULL,
-    PRIMARY KEY (`id_usuario`),
-    UNIQUE INDEX `correo_electronico_UNIQUE` (`correo_electronico` ASC) VISIBLE)
-    ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `sice`.`examen`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `sice`.`examen` (
@@ -75,14 +57,7 @@ CREATE TABLE IF NOT EXISTS `sice`.`examen` (
     `cantidad_preguntas` INT NOT NULL,
     `estado` TINYINT NOT NULL DEFAULT 0,
     `descripcion` VARCHAR(500) NULL,
-    `usuario_id_usuario` INT NOT NULL,
-    PRIMARY KEY (`id_examen`),
-    INDEX `fk_examen_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
-    CONSTRAINT `fk_examen_usuario1`
-    FOREIGN KEY (`usuario_id_usuario`)
-    REFERENCES `sice`.`usuario` (`id_usuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    PRIMARY KEY (`id_examen`))
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
@@ -158,6 +133,24 @@ CREATE TABLE IF NOT EXISTS `sice`.`pregunta_opcion` (
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sice`.`usuario`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sice`.`usuario` (
+                                                `id_usuario` INT NOT NULL AUTO_INCREMENT,
+                                                `nombre_usuario` VARCHAR(45) NOT NULL,
+    `apellido_usuario` VARCHAR(45) NOT NULL,
+    `correo_electronico` VARCHAR(100) NOT NULL,
+    `contrasena` VARCHAR(256) NOT NULL,
+    `estado` TINYINT NOT NULL DEFAULT 1,
+    `fecha_registrado` DATETIME NOT NULL,
+    `codigo` VARCHAR(20) NULL,
+    `id_tipo_usuario` INT NOT NULL,
+    PRIMARY KEY (`id_usuario`),
+    UNIQUE INDEX `correo_electronico_UNIQUE` (`correo_electronico` ASC) VISIBLE)
+    ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
@@ -332,6 +325,28 @@ CREATE TABLE IF NOT EXISTS `sice`.`grupo_tiene_carrera` (
     ENGINE = InnoDB
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `sice`.`usuario_tiene_examen`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sice`.`usuario_tiene_examen` (
+                                                             `usuario_id_usuario` INT NOT NULL,
+                                                             `examen_id_examen` INT NOT NULL,
+                                                             PRIMARY KEY (`usuario_id_usuario`, `examen_id_examen`),
+    INDEX `fk_usuario_has_examen_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
+    INDEX `fk_usuario_has_examen_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,
+    CONSTRAINT `fk_usuario_has_examen_usuario1`
+    FOREIGN KEY (`usuario_id_usuario`)
+    REFERENCES `sice`.`usuario` (`id_usuario`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_usuario_has_examen_examen1`
+    FOREIGN KEY (`examen_id_examen`)
+    REFERENCES `sice`.`examen` (`id_examen`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+    ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
