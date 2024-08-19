@@ -29,6 +29,7 @@ public class DivisionAcademicaDao {
         }
         return lista;
     }
+
     public DivisionAcademica getById(int id) {
         DivisionAcademica division = new DivisionAcademica();
         try {

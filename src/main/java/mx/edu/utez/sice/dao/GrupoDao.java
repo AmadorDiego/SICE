@@ -37,6 +37,24 @@ public class GrupoDao {
         return lista;
     }
 
+    public boolean imparteDocenteGrupo(int id_grupo, int id_usuario) {
+        boolean flag = false;
+        String query = "select * from usuario_tiene_grupo where grupo_id_grupo = ? and usuario_id_usuario = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            ps.setInt(2,id_usuario);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                flag = true;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     public ArrayList<Grupo> getAll(int id_carrera) {
         ArrayList<Grupo> lista = new ArrayList<>();
         String query = "select id_grupo, grado, grupo, periodo_id_periodo, carrera_id_carrera from grupo where carrera_id_carrera = ?;";

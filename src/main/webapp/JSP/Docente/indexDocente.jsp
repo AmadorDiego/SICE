@@ -128,7 +128,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-blue-utz">
-                    <h1 class="modal-title fs-5 text-white">Grupos</h1>
+                    <h1 class="modal-title fs-5 text-white">Grupos que impartes:</h1>
                     <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -180,7 +180,8 @@
                                     <td><%=grupo.getGrado()+"-"+grupo.getGrupo()%></td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="id_grupo" value="<%=grupo.getId_grupo()%>">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="id_grupo" value="<%=grupo.getId_grupo()%>"
+                                                <%if (grupoDao.imparteDocenteGrupo(grupo.getId_grupo(), usuario.getId_usuario())){%> checked disabled<%}%>>
                                         </div>
                                     </td>
                                 </tr><%}
