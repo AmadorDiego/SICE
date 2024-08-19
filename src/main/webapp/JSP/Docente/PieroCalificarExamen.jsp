@@ -23,19 +23,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calificar Exámenes</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <script src="../../JS/dataTables.bootstrap5.js"></script>
+    <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <style>
-        body {
-            background-color: #f4f6f7;
-        }
-        .navbar {
-            background-color: #1f3c88;
-            color: white;
-            padding: 10px;
-            font-size: 1.5rem;
-        }
         .content-container {
             background-color: white;
             padding: 20px;
@@ -72,13 +67,36 @@
     </style>
 </head>
 <body>
-<nav class="navbar">
-    Calificar Exámenes
-</nav>
+<!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
+<header>
+    <nav class="navbar bg-blue-utz">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+            </a>
+            <div class="d-flex">
+                <a href="indexDocente.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                    <span class="material-symbols-rounded">home</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>
 
+<!--///////////////////////////////////////////// Fondo //////////////////////////////////////////////////////////////-->
+<div class="bg"></div>
+<div class="bg bg2"></div>
+<div class="bg bg3"></div>
+
+
+<!--//////////////////////////////////// Encabezado ////////////////////////////////////////////////-->
 <div class="container content-container">
-    <h4 class="mb-4">Exámenes contestados</h4>
+    <h3 class="mb-4 blue-utz">Exámenes contestados</h3>
 
+
+
+<!--////////////////////////////////////// Contenido /////////////////////////////////////////////////////////-->
     <div class="filter-container">
         <strong>Filtros:</strong>
         <select id="id_grado" name="grado" class="form-select">
@@ -134,15 +152,12 @@
             <option value="">No se puede obtener los exámenes</option>
             <% } %>
         </select>
-        <button type="button" id="filterButton" class="btn btn-primary">Filtrar</button>
-        <a href="indexDocente.jsp" class="btn btn-outline-secondary">
-            <i class="fas fa-home"></i>
-        </a>
+        <button type="button" id="filterButton" class="btn btn-primary bg-blue-utz">Filtrar</button>
     </div>
 
     <div class="table-container">
         <table id="tablaExamenes" class="table table-striped display">
-            <thead>
+            <thead class="bg-blue-utz text-white">
             <tr>
                 <th>Examen</th>
                 <th>Grado</th>
@@ -153,15 +168,17 @@
                 <th>Reporte</th>
             </tr>
             </thead>
-            <tbody id="contenido">
+            <tbody id="contenido" class="bg-green-SICE">
             <!-- Aquí se llenará la tabla dinámicamente -->
             </tbody>
         </table>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="../../JS/jquery-3.7.0.js"></script>
+<script src="../../JS/datatables.js"></script>
+<script src="../../JS/bootstrap.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#tablaExamenes').DataTable({
