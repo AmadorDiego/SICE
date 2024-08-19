@@ -61,7 +61,7 @@
                     <h3 class="card-title blue-utz"><strong>Examen unidad 1</strong></h3>
                     <h6 class="card-text text-white">Contestar examen, Buena tarde.</h6>
                     <div class="p-4 d-flex flex-row-reverse bd-highlight gap-2">
-                        <a href="#" class="btn bg-blue-utz text-white">Realizar</a>
+                        <a href="../Docente/VerExamen.jsp" class="btn bg-blue-utz text-white">Realizar</a>
                         <strong class="text-white align-content-center">DD-MM-AAAA</strong>
                     </div>
                 </div>
