@@ -1,6 +1,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.model.Usuario" %>
 <%@ page import="mx.edu.utez.sice.dao.UsuarioDao" %>
+<%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
+<%@ page import="mx.edu.utez.sice.model.DivisionAcademica" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -13,7 +15,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndex");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAdministrador");
     %>
 </head>
 
@@ -28,6 +30,9 @@
             </a>
 
             <div class="d-flex">
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#asignarCarreraGrupoModal" data-bs-whatever="@getbootstrap">
+                    <span class="material-symbols-rounded">person_add</span>
+                </a>
                 <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">person_add</span>
                 </a>
@@ -210,6 +215,133 @@
         </div>
         <%}%>
     </div>
+
+    <!-- Modal para asignar alumnos a grupo -->
+    <div class="modal fade" id="asignarCarreraGrupoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-blue-utz">
+                    <h1 class="modal-title fs-5 text-white">Alumnos por asignar a un grupo:</h1>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../../AsignarAlumnoGrupoServlet" id="asignar_alumno_grupo">
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Correo electrónico:</th>
+                                        <th scope="col">Nombre:</th>
+                                        <th scope="col">Asignar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                <%
+                                    ArrayList<Usuario> alumnos = dao.getAllAlumnosSinGrupo();
+                                    for (Usuario u : alumnos) {%>
+                                    <tr>
+                                        <th scope="row"><%=u.getCorreo_electronico()%></th>
+                                        <td><%=u.getNombre_usuario()+" "+u.getApellido_usuario()%></td>
+                                        <td>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>" checked>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr>
+                        <div>
+                            <label class="form-label">División académica:</label>
+                            <select id="division" onchange="cargarCarreras()" required class="form-control" name="id_division_academica">
+                                <option disabled selected> Selecciona una división académica</option>
+                                <%
+                                    DivisionAcademicaDao divisionAcademicaDao = new DivisionAcademicaDao();
+                                    ArrayList<DivisionAcademica> divisiones = divisionAcademicaDao.getAll();
+                                    for(DivisionAcademica division : divisiones) {
+                                %>
+                                <option value="<%= division.getId_division_academica() %>"><%= division.getDivision_academica() %></option>
+                                <% } %>
+                            </select>
+                            <div class="row">
+                                <div class="col-md-9 col-12 p-3">
+                                    <label class="form-label">Carrera:</label>
+                                    <select id="carrera" onchange="cargarGrupos()" disabled required class="form-control" name="id_carrera">
+                                        <option disabled selected> Selecciona una carrera</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3 col-12 p-3">
+                                    <label class="form-label">Grupo:</label>
+                                    <select id="grupo" disabled required class="form-control" name="id_grupo">
+                                        <option disabled selected> Selecciona un grupo</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <br>
+                            <script>
+                                function cargarCarreras() {
+                                    var divisionId = $('#division').val();
+                                    if(divisionId) {
+                                        $.ajax({
+                                            url: '${pageContext.request.contextPath}/CarrerasServlet',
+                                            data: { divisionId: divisionId },
+                                            success: function(response) {
+                                                console.log("Respuesta recibida:", response);
+                                                $('#carrera').html(response);
+                                                $('#carrera').prop('disabled', false);
+                                                $('#grupo').html('<option value="">Selecciona un grupo</option>');
+                                                $('#grupo').prop('disabled', true);
+                                            },
+                                            error: function(xhr, status, error) {
+                                                console.error("Error al cargar carreras:", status, error);
+                                            }
+                                        });
+                                    } else {
+                                        // ... código existente ...
+                                    }
+                                }
+
+                                function cargarGrupos() {
+                                    var divisionId = $('#division').val();
+                                    var carreraId = $('#carrera').val();
+                                    if(divisionId && carreraId) {
+                                        $.ajax({
+                                            url: '${pageContext.request.contextPath}/GruposServlet',
+                                            data: { divisionId: divisionId, carreraId: carreraId },
+                                            success: function(response) {
+                                                $('#grupo').html(response);
+                                                $('#grupo').prop('disabled', false);
+                                            }
+                                        });
+                                    } else {
+                                        $('#grupo').html('<option value="">Selecciona un Grupo</option>');
+                                        $('#grupo').prop('disabled', true);
+                                    }
+                                }
+                            </script>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-gray-SICE" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="asignar_alumno_grupo" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Asignar">
+                        <p class="mb-0">Asignar</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const myModalAsignarCarreraGrupo = document.getElementById('asignarCarreraGrupoModal')
+        const myInput = document.getElementById('recipient-name')
+
+        myModalAsignarCarreraGrupo.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
+
     <!-- Modal registro usuario -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
@@ -262,11 +394,13 @@
     <script>
         const myModal = document.getElementById('exampleModal')
         const myInput = document.getElementById('recipient-name')
-
         myModal.addEventListener('shown.bs.modal', () => {
             myInput.focus()
         })
     </script>
+
+
+
 
     <%
         request.getSession().removeAttribute("mensaje");

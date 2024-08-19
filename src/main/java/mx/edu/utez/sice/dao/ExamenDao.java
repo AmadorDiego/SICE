@@ -164,33 +164,31 @@ public class ExamenDao {
     }
 
     // agregacion de Piero
-    public List<Examen> getExamenesFiltrados(String grado, String grupo, String division, String carrera) {
-        List<Examen> examenes = new ArrayList<>();
-        try (Connection connection = DatabaseConnectionManager.getConnection()) {
-            String query = "SELECT * FROM examen WHERE grado LIKE ? AND grupo LIKE ? AND division LIKE ? AND carrera LIKE ?";
-            try (PreparedStatement statement = connection.prepareStatement(query)) {
-                statement.setString(1, grado.isEmpty() ? "%" : grado);
-                statement.setString(2, grupo.isEmpty() ? "%" : grupo);
-                statement.setString(3, division.isEmpty() ? "%" : division);
-                statement.setString(4, carrera.isEmpty() ? "%" : carrera);
+    public List<Examen> filtrarExamenes(int idGrado, int idGrupo, int idDivision, int idCarrera, int idExamen) {
+        List<Examen> lista = new ArrayList<>();
+        String sql = "SELECT e.nombre_examen, e.descripcion, e.cantidad_preguntas, e.estado, u.nombre_usuario, u.apellido_usuario "
+                + "FROM examen e "
+                + "JOIN usuario_tiene_examen ute ON e.id_examen = ute.examen_id_examen "
+                + "JOIN usuario u ON ute.usuario_id_usuario = u.id_usuario "
+                + "WHERE e.estado = 2 AND u.id_tipo_usuario = 3";
 
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    while (resultSet.next()) {
-                        Examen examen = new Examen();
-                        examen.setId_examen(resultSet.getInt("id_examen"));
-                        examen.setNombre_examen(resultSet.getString("nombre_examen"));
-                        examen.setCantidad_preguntas(resultSet.getInt("cantidad_preguntas"));
-                        examen.setEstado(resultSet.getInt("estado"));
-                        examen.setDescripcion(resultSet.getString("descripcion"));
-                        //examen.setId_usuario(resultSet.getInt("usuario_id_usuario"));
-                        examenes.add(examen);
-                    }
-                }
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen();
+                examen.setNombre_examen(rs.getString("nombre_examen"));
+                examen.setDescripcion(rs.getString("descripcion"));
+                examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
+                examen.setEstado(rs.getInt("estado"));
+                // Agregar los datos del usuario si es necesario
+                lista.add(examen);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return examenes;
+        return lista;
     }
 
 
