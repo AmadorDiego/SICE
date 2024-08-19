@@ -14,6 +14,10 @@ import mx.edu.utez.sice.model.Grupo;
 @WebServlet(name = "GruposServlet", value = "/GruposServlet")
 public class GruposServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
         String divisionId = request.getParameter("divisionId");
         String carreraId = request.getParameter("carreraId");
         GrupoDao grupoDao = new GrupoDao();

@@ -14,6 +14,10 @@ import mx.edu.utez.sice.model.Carrera;
 @WebServlet(name = "CarrerasServlet", value = "/CarrerasServlet")
 public class CarrerasServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
         String divisionId = request.getParameter("divisionId");
         System.out.println("CarrerasServlet llamado con divisionId: " + divisionId);
 

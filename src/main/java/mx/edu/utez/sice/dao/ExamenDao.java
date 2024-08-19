@@ -163,6 +163,22 @@ public class ExamenDao {
         return lista;
     }
 
+    public boolean updateExamenAsignado(int id_examen) {
+        boolean flag = false;
+        String query = "update examen set estado = 1 where id_examen = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_examen);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
     // agregacion de Piero
     public List<Examen> filtrarExamenes(int idGrado, int idGrupo, int idDivision, int idCarrera, int idExamen) {
         List<Examen> lista = new ArrayList<>();
