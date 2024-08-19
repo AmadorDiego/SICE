@@ -133,6 +133,7 @@
                 </div>
                 <div class="modal-body">
                     <form method="post" action="../../AsignarGrupoDocenteServlet" id="asignar_grupo_docente">
+                        <input type="hidden" name="id_usuario" value="<%=usuario.getId_usuario()%>">
                         <div>
                             <table class="table">
                                 <thead>
@@ -179,7 +180,7 @@
                                     <td><%=grupo.getGrado()+"-"+grupo.getGrupo()%></td>
                                     <td>
                                         <div class="form-check form-switch">
-                                            <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=grupo.getId_grupo()%>">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="id_grupo" value="<%=grupo.getId_grupo()%>">
                                         </div>
                                     </td>
                                 </tr><%}

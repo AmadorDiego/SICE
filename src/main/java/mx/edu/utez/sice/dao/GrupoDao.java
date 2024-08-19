@@ -77,14 +77,14 @@ public class GrupoDao {
         return flag;
     }
 
-    public boolean insertAlumnoGrupo(int id_usuario){
+    public boolean insertGrupoDocente(int id_grupo, int id_usuario) {
         boolean flag = false;
         String query = "insert into usuario_tiene_grupo values (?, ?);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
-            /*ps.setString(1,u.getNombre_usuario());
-            ps.setString(2,u.getApellido_usuario());*/
+            ps.setInt(1,id_grupo);
+            ps.setInt(2,id_usuario);
             if(ps.executeUpdate()>0){
                 flag = true;
             }

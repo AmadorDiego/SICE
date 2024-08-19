@@ -13,8 +13,8 @@ import java.io.IOException;
 
 @WebServlet (name = "AsignarAlumnoGrupoServlet", value = "/AsignarAlumnoGrupoServlet")
 public class AsignarAlumnoGrupoServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UsuarioDao usuarioDao = new UsuarioDao();  // Instancia del DAO
         int id_grupo = Integer.parseInt(req.getParameter("id_grupo"));  // Obtiene el id del grupo
         GrupoDao grupoDao = new GrupoDao();
 
