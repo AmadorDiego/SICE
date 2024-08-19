@@ -31,7 +31,7 @@
 
             <div class="d-flex">
                 <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#asignarCarreraGrupoModal" data-bs-whatever="@getbootstrap">
-                    <span class="material-symbols-rounded">person_add</span>
+                    <span class="material-symbols-rounded">group_add</span>
                 </a>
                 <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">person_add</span>
