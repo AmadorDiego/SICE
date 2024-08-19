@@ -9,6 +9,9 @@ public class Aplicacion {
     //ArrayList para la tabla respuesta_opcion
     private ArrayList<PreguntaOpcion> respuesta_opcion;
 
+    public Aplicacion() {
+    }
+
     public Aplicacion(int id_aplicacion, int id_periodo, int examen_id_examen) {
         this.id_aplicacion = id_aplicacion;
         this.id_periodo = id_periodo;

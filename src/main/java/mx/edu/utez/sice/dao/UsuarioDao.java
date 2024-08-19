@@ -1,5 +1,6 @@
 package mx.edu.utez.sice.dao;
 
+import mx.edu.utez.sice.model.Examen;
 import mx.edu.utez.sice.model.Usuario;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
@@ -57,6 +58,24 @@ public class UsuarioDao {
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
                 usuario.setFecha_registrado(rs.getString("fecha_registrado"));
                 //en caso de que el ID del tipo de usuario obtenido sea 3 (un alumno), seteamos el ID de su carrera
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return usuario;
+    }
+
+    public Usuario getDocentePorExamen(int id_examen){
+        Usuario usuario = new Usuario();
+        String query = "select nombre_usuario, apellido_usuario from usuario join usuario_tiene_examen on id_usuario = usuario_id_usuario where examen_id_examen = ? and id_tipo_usuario = 2;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_examen);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                usuario.setNombre_usuario(rs.getString("nombre_usuario"));
+                usuario.setApellido_usuario(rs.getString("apellido_usuario"));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
