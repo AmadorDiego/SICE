@@ -1,9 +1,10 @@
-
-<%@ page import="mx.edu.utez.sice.model.Examen" %>
 <%@ page import="java.util.List" %>
-<%@ page import="mx.edu.utez.sice.model.Usuario" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %><%--
+<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
+<%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
+<%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
+<%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
+<%@ page import="mx.edu.utez.sice.model.*" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -58,6 +59,9 @@
         <div class="col p-3">
             <h1 class="text-start mb-3 blue-utz">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></h1>
             <h3 class="text-start mb-4 blue-utz">Exámenes creados:</h3>
+            <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0"data-bs-toggle="modal" data-bs-target="#asignarGrupoDocente" data-bs-whatever="@getbootstrap">
+                <span class="material-symbols-rounded">person_add</span>
+            </a>
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <div class="d-flex align-items-center">
@@ -110,7 +114,6 @@
                             <a href="../../AsignarExamenServlet?id_examen=<%=examen.getId_examen()%>" class="btn btn-success">Asignar</a>
                         </td>
                     </tr>
-
                     <%
                         }
                     %>
@@ -119,6 +122,93 @@
             </div>
         </div>
     </div>
+
+    <!-------------------------------------- Modal para asignar grupos al docente ------------------------------------------------------->
+    <div class="modal fade" id="asignarGrupoDocente" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-blue-utz">
+                    <h1 class="modal-title fs-5 text-white">Grupos</h1>
+                    <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../../AsignarGrupoDocenteServlet" id="asignar_grupo_docente">
+                        <div>
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Division</th>
+                                    <th scope="col">Carrera</th>
+                                    <th scope="col">Grado y grupo</th>
+                                    <th scope="col">Seleccionar</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                                <%
+                                    DivisionAcademicaDao divisionAcademicaDao = new DivisionAcademicaDao();
+                                    ArrayList<DivisionAcademica> divisiones = divisionAcademicaDao.getAll();
+                                    for (DivisionAcademica divisionAcademica : divisiones) {%> <tr> <%
+                                        CarreraDao carreraDao = new CarreraDao();
+                                        ArrayList<Carrera> carreras = carreraDao.getAll(divisionAcademica.getId_division_academica());
+                                        for (Carrera carrera : carreras) {
+                                            GrupoDao grupoDao = new GrupoDao();
+                                            ArrayList<Grupo> grupos = grupoDao.getAll(carrera.getId_carrera());
+                                            for (Grupo grupo : grupos) {%>
+                                    <th scope="row">
+                                        <%
+                                            switch (divisionAcademica.getId_division_academica()){
+                                                case 1:%>
+                                        DATID<%
+                                            break;
+                                        case 2:%>
+                                        DAMI<%
+                                            break;
+                                        case 3:%>
+                                        DACEA<%
+                                            break;
+                                        case 4:%>
+                                        DATEFI<%
+                                            break;
+                                        default:%>
+                                        divisionAcademica.getDivision_academica()<%
+                                                break;
+                                        }%>
+                                    </th>
+                                    <td><%=carrera.getCarrera()%></td>
+                                    <td><%=grupo.getGrado()+"-"+grupo.getGrupo()%></td>
+                                    <td>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=grupo.getId_grupo()%>">
+                                        </div>
+                                    </td>
+                                </tr><%}
+                                        }
+                                    }
+                                %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary bg-gray-SICE" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" form="asignar_grupo_docente" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Asignar">
+                        <p class="mb-0">Asignar</p>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const myModalasignarGrupoDocente = document.getElementById('asignarGrupoDocente')
+        const myInput = document.getElementById('recipient-name')
+
+        myModalasignarGrupoDocente.addEventListener('shown.bs.modal', () => {
+            myInput.focus()
+        })
+    </script>
+
 </div>
 
 <script src="../../JS/jquery-3.7.0.js"></script>

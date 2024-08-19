@@ -39,7 +39,7 @@ public class GrupoDao {
 
     public ArrayList<Grupo> getAll(int id_carrera) {
         ArrayList<Grupo> lista = new ArrayList<>();
-        String query = "select id_grupo, grado, grupo, periodo_id_periodo from grupo join grupo_tiene_carrera on id_grupo = grupo_id_grupo join carrera on carrera_id_carrera = id_carrera where id_carrera = ?;";
+        String query = "select id_grupo, grado, grupo, periodo_id_periodo, carrera_id_carrera from grupo where carrera_id_carrera = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -51,6 +51,7 @@ public class GrupoDao {
                 grupo.setGrado(rs.getInt("grado"));
                 grupo.setGrupo(rs.getString("grupo"));
                 grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
+                grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
                 lista.add(grupo);
             }
         } catch (Exception e) {

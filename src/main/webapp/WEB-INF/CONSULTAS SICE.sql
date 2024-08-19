@@ -5,7 +5,6 @@ select * from periodo;
 select * from grupo;
 select * from calificacion;
 select * from usuario_tiene_grupo;
-select * from grupo_tiene_carrera;
 select * from examen;
 select * from pregunta;
 select * from examen_tiene_pregunta;

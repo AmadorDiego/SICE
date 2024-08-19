@@ -13,13 +13,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.model.Grupo" %>
-<%@ page import="mx.edu.utez.sice.model.Carrera" %>
-<%@ page import="mx.edu.utez.sice.model.DivisionAcademica" %>
 <%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
 <%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
 <%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
-<%@ page import="mx.edu.utez.sice.model.Tabla" %>
+<%@ page import="mx.edu.utez.sice.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -44,6 +41,11 @@
 </head>
 <body>
 
+<%
+  HttpSession sesion = request.getSession();
+  Examen examen = (Examen) sesion.getAttribute("examen");
+%>
+
 <div class="full-width-navbar">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
@@ -55,8 +57,6 @@
 <div class="container">
   <br>
   <h1>Asignar Examen</h1>
-  <h3>Exámenes por asignar</h3>
-  <h3 id="id_periodo"><strong>Mayo-Agosto 2024</strong></h3>
 
   <div class="filters d-flex align-items-center mb-4">
     <span class="me-2">Filtros </span>

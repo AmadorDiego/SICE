@@ -146,10 +146,10 @@
                                             <div class="modal-body">
                                                 <%
                                                     if(u.getEstado()==1){ // %>
-                                                        <h4>¿Estás seguro de que quieres deshabilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</h4>
+                                                        <strong>¿Estás seguro de que quieres deshabilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</strong>
                                                         <p>Los usuarios deshabilitados no podrán ingresar en el sistema, sin embargo, pueden volver a ser habilitados.</p>
                                                 <%} else { %>
-                                                        <h4>¿Estás seguro de que quieres habilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</h4>
+                                                        <strong>¿Estás seguro de que quieres habilitar a <%= u.getNombre_usuario()%> <%=u.getApellido_usuario()%>?</strong>
                                                         <p>Los usuarios una vez habilitados volverán a tener los mismos permisos que anteriormente respecto a su rol.</p>
                                                 <%}
                                                 %>

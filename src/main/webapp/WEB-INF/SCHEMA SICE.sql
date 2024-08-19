@@ -196,11 +196,18 @@ CREATE TABLE IF NOT EXISTS `sice`.`grupo` (
                                               `grado` INT NOT NULL,
                                               `grupo` VARCHAR(1) NOT NULL,
     `periodo_id_periodo` INT NOT NULL,
+    `carrera_id_carrera` INT NOT NULL,
     INDEX `fk_grupos_periodo1_idx` (`periodo_id_periodo` ASC) VISIBLE,
     PRIMARY KEY (`id_grupo`),
+    INDEX `fk_grupo_carrera1_idx` (`carrera_id_carrera` ASC) VISIBLE,
     CONSTRAINT `fk_grupos_periodo1`
     FOREIGN KEY (`periodo_id_periodo`)
     REFERENCES `sice`.`periodo` (`id_periodo`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+    CONSTRAINT `fk_grupo_carrera1`
+    FOREIGN KEY (`carrera_id_carrera`)
+    REFERENCES `sice`.`carrera` (`id_carrera`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
@@ -301,30 +308,6 @@ CREATE TABLE IF NOT EXISTS `sice`.`usuario_tiene_grupo` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `sice`.`grupo_tiene_carrera`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sice`.`grupo_tiene_carrera` (
-                                                            `carrera_id_carrera` INT NOT NULL,
-                                                            `grupo_id_grupo` INT NOT NULL,
-                                                            PRIMARY KEY (`carrera_id_carrera`, `grupo_id_grupo`),
-    INDEX `fk_carrera_has_grupo_grupo1_idx` (`grupo_id_grupo` ASC) VISIBLE,
-    INDEX `fk_carrera_has_grupo_carrera1_idx` (`carrera_id_carrera` ASC) VISIBLE,
-    CONSTRAINT `fk_carrera_has_grupo_carrera1`
-    FOREIGN KEY (`carrera_id_carrera`)
-    REFERENCES `sice`.`carrera` (`id_carrera`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_carrera_has_grupo_grupo1`
-    FOREIGN KEY (`grupo_id_grupo`)
-    REFERENCES `sice`.`grupo` (`id_grupo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-    ENGINE = InnoDB
-    DEFAULT CHARACTER SET = utf8mb4
-    COLLATE = utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------

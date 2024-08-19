@@ -8,15 +8,17 @@ public class Grupo {
     private int grado;
     private String grupo; //Modifique de tipo char a tipo String
     private int id_periodo;
+    private int id_carrera;
     private ArrayList<Usuario> alumnos;
 
     //Modifique de tipo char a tipo String
-    public Grupo(int id_grupo, int grado, String grupo, int id_periodo, ArrayList<Usuario> alumnos) {
+    public Grupo(int id_grupo, int grado, String grupo, int id_periodo, int id_carrera, ArrayList<Usuario> alumnos) {
         this.id_grupo = id_grupo;
         this.grado = grado;
         //Modifique de tipo char a tipo String
         this.grupo = grupo;
         this.id_periodo = id_periodo;
+        this.id_carrera = id_carrera;
         this.alumnos = alumnos;
     }
 
@@ -54,6 +56,14 @@ public class Grupo {
 
     public void setId_periodo(int id_periodo) {
         this.id_periodo = id_periodo;
+    }
+
+    public int getId_carrera() {
+        return id_carrera;
+    }
+
+    public void setId_carrera(int id_carrera) {
+        this.id_carrera = id_carrera;
     }
 
     public ArrayList<Usuario> getAlumnos() {
