@@ -126,7 +126,11 @@
                                class="btn btn-primary bg-blue-utz">Ver</a>
                         </td>
                         <td>
+<<<<<<< HEAD
                             <a href="${pageContext.request.contextPath}/asignarExamen?id_examen=<%=examen.getId_examen()%>"
+=======
+                            <a href="../../AsignarGrupoExamenServlet?id_examen=<%=examen.getId_examen()%>"
+>>>>>>> a8497aa762f2cd13c0d9cc6a53617c0dc69cddb7
                                class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
                         </td>
                     </tr>
@@ -236,12 +240,22 @@
             myInput.focus()
         })
     </script>
-
+    <div class="position-fixed bottom-0 end-0 col-3 p-3">
+        <% if ((String) request.getSession().getAttribute("mensajeDocente") != null) {%>
+        <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> alert-dismissible fade show"
+             role="alert">
+            <strong><%=(String) request.getSession().getAttribute("mensajeDocente")%>
+            </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <%}%>
+    </div>
+    <%
+        request.getSession().removeAttribute("mensajeDocente");
+    %>
 </div>
 
-<script src="../../JS/jquery-3.7.0.js"></script>
 <script src="../../JS/bootstrap.js"></script>
-<script src="../../JS/Ajustes.js"></script>
 <script src="../../JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>

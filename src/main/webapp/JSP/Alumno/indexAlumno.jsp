@@ -1,3 +1,8 @@
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
+<%@ page import="mx.edu.utez.sice.model.Examen" %>
+<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.dao.UsuarioDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -10,6 +15,10 @@
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAlumno");
+    %>
 </head>
 <body>
 <!--/////////////////////////////////// Fondo //////////////////////////////////////////-->
@@ -45,7 +54,7 @@
 <div class="container-fluid">
     <div class="row align-items-center">
         <div class="col-6 p-4">
-            <h1 class="text-white">¡Bienvenido Alumno!</h1>
+            <h1 class="text-white">¡Bienvenido <%=usuario.getNombre_usuario()+" "+usuario.getApellido_usuario()%>!</h1>
         </div>
     </div>
 
@@ -54,34 +63,27 @@
 
     <!--////////////////////////////// Contenido principal(Tarjetas) ////////////////////////////-->
     <div class="row">
+        <%
+            ExamenDao examenDao = new ExamenDao();
+            UsuarioDao usuarioDao = new UsuarioDao();
+            ArrayList<Examen> examenes = examenDao.getAll(usuario.getId_usuario());
+            for (Examen examen : examenes){%>
         <div class="col-12 col-md-6 p-4">
             <div class="card rounded-5 border-0 bg-blue-utz">
                 <div class="card-header bg-blue-utz border-0 rounded-5"><br></div>
                 <div class="card-body bg-gray-SICE rounded-bottom border-0">
-                    <h3 class="card-title blue-utz"><strong>Examen unidad 1</strong></h3>
-                    <h6 class="card-text text-white">Contestar examen, Buena tarde.</h6>
+                    <h3 class="card-title blue-utz"><strong><%=examen.getNombre_examen()%></strong></h3>
+                    <h6 class="card-text text-white"><%=examen.getDescripcion()%></h6>
                     <div class="p-4 d-flex flex-row-reverse bd-highlight gap-2">
-                        <a href="../Docente/VerExamen.jsp" class="btn bg-blue-utz text-white">Realizar</a>
-                        <strong class="text-white align-content-center">DD-MM-AAAA</strong>
+                        <a href="../../ContestarExamenServlet?id_examen=<%=examen.getId_examen()%>" class="btn bg-blue-utz text-white">Realizar</a>
+                        <%Usuario docente = usuarioDao.getDocentePorExamen(examen.getId_examen());%>
+                        <strong class="text-white align-content-center"><%=docente.getNombre_usuario()+" "+docente.getApellido_usuario()%></strong>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-md-6 p-4">
-            <div class="card rounded-5 border-0 bg-blue-utz">
-                <div class="card-header bg-blue-utz rounded-5 border-0"><br></div>
-                <div class="card-body bg-gray-SICE rounded-bottom border-0">
-                    <h3 class="card-title blue-utz"><strong>Examen unidad 1</strong></h3>
-                    <h6 class="card-text text-white">Contestar examen, Buena tarde.</h6>
-                    <div class="p-4 d-flex flex-row-reverse bd-highlight gap-2">
-                        <a href="#" class="btn bg-blue-utz text-white">Realizar</a>
-                        <strong class="text-white align-content-center">DD-MM-AAAA</strong>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <%}
+        %>
     </div>
 </div>
 <script href="../../JS/bootstrap.js"></script>

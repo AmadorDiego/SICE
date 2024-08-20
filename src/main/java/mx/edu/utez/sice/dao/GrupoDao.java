@@ -15,6 +15,27 @@ public class GrupoDao {
     private PreparedStatement ps;
     private ResultSet rs;
 
+    public Grupo getOne(int id_grupo){
+        Grupo grupo = new Grupo();
+        String query = "SELECT * FROM grupo where id_grupo = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                grupo.setId_grupo(rs.getInt("id_grupo"));
+                grupo.setGrado(rs.getInt("grado"));
+                grupo.setGrupo(rs.getString("grupo"));
+                grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
+                grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return grupo;
+    }
+
     public ArrayList<Grupo> getAll() {
         ArrayList<Grupo> lista = new ArrayList<>();
         try (Connection con = DatabaseConnectionManager.getConnection()) {
@@ -54,6 +75,30 @@ public class GrupoDao {
         }
         return flag;
     }
+
+    /*
+    public ArrayList<Grupo> getAllGruposByDocente(int id_usuario) {
+        ArrayList<Grupo> lista = new ArrayList<>();
+        String query = "select id_grupo, grado, grupo, periodo_id_periodo, carrera_id_carrera from grupo join usuario_tiene_grupo where usuario_id_usuario = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Grupo grupo = new Grupo();
+                grupo.setId_grupo(rs.getInt("id_grupo"));
+                grupo.setGrado(rs.getInt("grado"));
+                grupo.setGrupo(rs.getString("grupo"));
+                grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
+                grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
+                lista.add(grupo);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }*/
 
     public ArrayList<Grupo> getAll(int id_carrera) {
         ArrayList<Grupo> lista = new ArrayList<>();

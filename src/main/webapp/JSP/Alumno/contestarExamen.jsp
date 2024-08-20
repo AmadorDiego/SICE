@@ -1,17 +1,26 @@
+<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
+<%@ page import="mx.edu.utez.sice.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>*nombre examen*</title>
+    <%
+        HttpSession sesion = request.getSession();
+        Examen examen = (Examen) sesion.getAttribute("examenAlumno");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAlumno");
+    %>
+    <title><%= examen.getNombre_examen() %></title>
     <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
-    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <!-- Iconos -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
 </head>
 
 <body class="bg-fondo">
-<!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
+<!-- NavBar -->
 <header>
     <nav class="navbar bg-blue-utz">
         <div class="container-fluid d-flex justify-content-between align-items-center">
@@ -19,7 +28,6 @@
                 <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
                 <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
-
             <div class="d-flex">
                 <a href="indexAlumno.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
                     <span class="material-symbols-rounded">home</span>
@@ -32,73 +40,69 @@
     </nav>
 </header>
 
-
-
-<!--////////////////////////// Encabezado ////////////////////////////////////-->
-<form>
+<!-- Encabezado -->
 <div class="container-fluid">
     <div class="row align-items-center mt-4">
-        <div class="col bg-green-utz rounded-4 mx-5 p-3">
-            <h1 class="text-white">*Nombre Examen*</h1>
-            <h3>*Informacion (Si no se utiliza, borrar)*</h3>
+        <div class="col bg-green-utz rounded-4 mx-5 p-4 text-center">
+            <h1 class="text-white"><%= examen.getNombre_examen() %></h1>
+            <h3 class="text-white"><%= examen.getDescripcion() %></h3>
         </div>
     </div>
 
-
-
-<!--///////////////////////////// Contenido ///////////////////////////////////-->
+    <!-- Contenido -->
     <div class="row align-items-center mt-3">
         <div class="col bg-green-utz rounded-4 mx-5 p-5">
-
-            <!----------------------- Tarjeta Pregunta (Cerrada)---------------------------->
-            <div class="card rounded-4 border-0 mb-4">
-                <div class="card-header bg-green-SICE-obscuro">
-                    <br>
-                </div>
-                <div class="card-body bg-fondo p-4">
-                    <h4 class="card-title mb-4">*Pregunta*</h4>
-
-                    <div class="custom-radio mb-3 d-block">
-                        <input type="radio" id="customRadio" name="customRadio" class="custom-radio-input me-2">
-                        <label for="customRadio" class="custom-radio-label ms-1">
-                            <h6>*Respuesta 1*</h6>
-                        </label>
+            <form action="../../ContestarExamenServlet" method="post">
+                <%
+                    PreguntaDao preguntaDao = new PreguntaDao();
+                    ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen());
+                    int i = 0;
+                    for (Pregunta pregunta : listaPreguntas) {
+                        i++;
+                %>
+                <div class="card rounded-4 border-0 mb-4">
+                    <div class="card-header bg-green-SICE-obscuro text-white">
+                        <h4>Pregunta <%= i %>: <%= pregunta.getPregunta() %></h4>
                     </div>
-                    <div class="custom-radio mb-3 d-block">
-                        <input type="radio" id="customRadio2" name="customRadio" class="custom-radio-input me-2">
-                        <label for="customRadio2" class="custom-radio-label ms-1">
-                            <h6>*Respuesta 2</h6>
-                        </label>
+                    <div class="card-body bg-fondo p-4">
+                        <% if (pregunta.getId_tipo_pregunta() == 2) { %>
+                        <div class="mb-3">
+                            <%
+                                OpcionDao opcionDao = new OpcionDao();
+                                ArrayList<Opcion> listaOpciones = opcionDao.getAll(pregunta.getId_pregunta());
+                                int j = 0;
+                                for (Opcion opcion : listaOpciones) {
+                                    PreguntaOpcion preguntaOpcion = opcionDao.getOpcionCorrecta(opcion.getId_opcion());
+                                    j++;
+                            %>
+                            <div class="form-check">
+                                <input required class="form-check-input" type="radio" name="pregunta_<%=pregunta.getId_pregunta()%>" id="opcion_<%= i %>_<%= j %>" value="<%= opcion.getId_opcion() %>">
+                                <label class="form-check-label" for="opcion_<%= i %>_<%= j %>">
+                                    <%= opcion.getOpcion() %>
+                                </label>
+                            </div>
+                            <% } %>
+                        </div>
+                        <% } else { %>
+                        <div class="mb-3">
+                            <label for="preguntaAbierta_<%= i %>">Ingresa una respuesta:</label>
+                            <input type="text" class="form-control rounded-3" id="preguntaAbierta_<%= i %>" name="pregunta_<%=pregunta.getId_pregunta()%>" required>
+                        </div>
+                        <% } %>
                     </div>
                 </div>
-            </div>
+                <% } %>
 
-            <!------------------------------------Tarjeta Pregunta (Abierta)------------------------------------->
-            <div class="card rounded-4 border-0">
-                <div class="card-header bg-green-SICE-obscuro">
-                    <br>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary bg-blue-utz rounded-3 p-2">
+                        Enviar Respuestas
+                    </button>
                 </div>
-                <div class="card-body bg-fondo p-4">
-                    <h4 class="card-title mb-3">*Pregunta*</h4>
-
-                    <label for="preguntaAbierta1" class="d-block">
-                        <h6>Ingresa una respuesta:</h6>
-                    </label>
-                    <input type="text" class="rounded-3 d-block" id="preguntaAbierta1">
-                </div>
-            </div>
-            <button type="submit" class="btn-primary btn bg-blue-utz rounded-3 justify-content-center mt-4 p-1">
-                <h6 class="text-white">Enviar Respuestas</h6>
-            </button>
+            </form>
         </div>
     </div>
-
-
-
-
-
 </div>
-</form>
-<script href="../../JS/bootstrap.js"></script>
+
+<script src="../../JS/bootstrap.js"></script>
 </body>
 </html>

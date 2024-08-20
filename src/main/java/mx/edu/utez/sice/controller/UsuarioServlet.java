@@ -23,7 +23,7 @@ public class UsuarioServlet extends HttpServlet {
         HttpSession session = req.getSession();
         if(usuario.getCorreo_electronico() == null){
             //Es porque no existe en la base de datos
-            session.setAttribute("mensaje","Correo y/o contraseña incorrecta");
+            session.setAttribute("mensajeInicio","Correo y/o contraseña incorrecta");
             resp.sendRedirect("loginSICE.jsp");
         }else{
             switch (usuario.getId_tipo_usuario()) {
