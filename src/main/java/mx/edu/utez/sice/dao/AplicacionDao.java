@@ -4,27 +4,28 @@ import mx.edu.utez.sice.model.Aplicacion;
 import mx.edu.utez.sice.model.Usuario;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class AplicacionDao {
-    public boolean insertExamen(int id_examen){
-        boolean flag = false;
-        String query = "insert into aplicacion (preiodo_id_periodo, examen_id_examen) values (1, ?);";
+    public int insertExamen(int id_examen){
+        int generatedId = 0;
+        String query = "insert into aplicacion (periodo_id_periodo, examen_id_examen) values (1, ?);";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1,id_examen);
             if(ps.executeUpdate()>0){
-                flag = true;
+                ResultSet rs = ps.getGeneratedKeys();
+                if(rs.next()){
+                    generatedId = rs.getInt(1);
+                }
             }
         }catch(SQLException e){
             e.printStackTrace();
         }
-        return flag;
+        return generatedId;
     }
+
 
     public boolean insertPreguntaAbierta(int id_pregunta, int id_aplicacion, String respuesta){
         boolean flag = false;

@@ -76,7 +76,7 @@
                                     j++;
                             %>
                             <div class="form-check">
-                                <input required class="form-check-input" type="radio" name="pregunta_<%= i %>" id="opcion_<%= i %>_<%= j %>" value="<%= opcion.getId_opcion() %>">
+                                <input required class="form-check-input" type="radio" name="pregunta_<%=pregunta.getId_pregunta()%>" id="opcion_<%= i %>_<%= j %>" value="<%= opcion.getId_opcion() %>">
                                 <label class="form-check-label" for="opcion_<%= i %>_<%= j %>">
                                     <%= opcion.getOpcion() %>
                                 </label>
@@ -86,7 +86,7 @@
                         <% } else { %>
                         <div class="mb-3">
                             <label for="preguntaAbierta_<%= i %>">Ingresa una respuesta:</label>
-                            <input type="text" class="form-control rounded-3" id="preguntaAbierta_<%= i %>" name="pregunta_<%= i %>" required>
+                            <input type="text" class="form-control rounded-3" id="preguntaAbierta_<%= i %>" name="pregunta_<%=pregunta.getId_pregunta()%>" required>
                         </div>
                         <% } %>
                     </div>

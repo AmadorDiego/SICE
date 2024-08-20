@@ -38,8 +38,7 @@ public class ContestarExamenServlet extends HttpServlet {
         OpcionDao opcionDao = new OpcionDao();
         ExamenDao examenDao = new ExamenDao();
         AplicacionDao aplicacionDao = new AplicacionDao();
-        flag = aplicacionDao.insertExamen(examen.getId_examen());
-        int id_aplicación = aplicacionDao.getOne(examen.getId_examen());
+        int id_aplicacion = aplicacionDao.insertExamen(examen.getId_examen());
         // Obtener las preguntas del examen
         ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen());
 
@@ -56,20 +55,19 @@ public class ContestarExamenServlet extends HttpServlet {
                 preguntaOpcion.setId_pregunta(pregunta.getId_pregunta());
 
                 // Guardar la respuesta en la base de datos
-                flag = flag && aplicacionDao.insertPreguntaCerrada(pregunta.getId_pregunta(), id_opcion, id_aplicación);
+                flag = flag && aplicacionDao.insertPreguntaCerrada(pregunta.getId_pregunta(), id_opcion, id_aplicacion);
             } else {
                 // Procesar respuesta de pregunta abierta
-                flag = flag && aplicacionDao.insertPreguntaAbierta(pregunta.getId_pregunta(), id_aplicación , respuesta);
+                flag = flag && aplicacionDao.insertPreguntaAbierta(pregunta.getId_pregunta(), id_aplicacion , respuesta);
             }
         }
 
         // Redirigir según el resultado de la operación
         if (flag) {
             sesion.setAttribute("mensaje", "Respuestas guardadas exitosamente");
-            resp.sendRedirect("JSP/Alumno/resultadoExamen.jsp");
+            resp.sendRedirect("JSP/Alumno/indexAlumno.jsp");
         } else {
             sesion.setAttribute("mensaje", "Ocurrió un error al guardar las respuestas");
-            resp.sendRedirect("JSP/Alumno/contestarExamen.jsp");
         }
     }
 }
