@@ -15,6 +15,27 @@ public class GrupoDao {
     private PreparedStatement ps;
     private ResultSet rs;
 
+    public Grupo getOne(int id_grupo){
+        Grupo grupo = new Grupo();
+        String query = "SELECT * FROM grupo where id_grupo = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                grupo.setId_grupo(rs.getInt("id_grupo"));
+                grupo.setGrado(rs.getInt("grado"));
+                grupo.setGrupo(rs.getString("grupo"));
+                grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
+                grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return grupo;
+    }
+
     public ArrayList<Grupo> getAll() {
         ArrayList<Grupo> lista = new ArrayList<>();
         try (Connection con = DatabaseConnectionManager.getConnection()) {

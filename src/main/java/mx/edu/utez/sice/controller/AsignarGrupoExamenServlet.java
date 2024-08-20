@@ -29,17 +29,21 @@ public class AsignarGrupoExamenServlet extends HttpServlet {
         ExamenDao examenDao = new ExamenDao();
 
         // Captura los IDs de los grupos seleccionados
-        String[] grupos_seleccionados = req.getParameterValues("id_grupo");  // Revisa si es necesario usar "id_grupo[]" o "id_grupo"
+        String[] grupos_seleccionados = req.getParameterValues("id_grupo[]");  // Revisa si es necesario usar "id_grupo[]" o "id_grupo"
 
+
+        for (int i = 0; i < grupos_seleccionados.length; i++) {
+            System.out.println(grupos_seleccionados[i]);
+        }
         boolean flag = false;
 
-        // Si hay grupos seleccionados, inserta cada uno
-        if (grupos_seleccionados != null) {
+        if (grupos_seleccionados != null){
+            // Si hay grupos seleccionados, inserta cada uno
             for (String grupo_id : grupos_seleccionados) {
-                int id_grupo = Integer.parseInt(grupo_id); // Convierte el ID a entero
+                int id_grupo = Integer.parseInt(grupo_id);
+                System.out.println(id_grupo);// Convierte el ID a entero
                 UsuarioDao usuarioDao = new UsuarioDao();
                 ArrayList<Usuario> usuarios = usuarioDao.getAllAlumnosConGrupo(id_grupo);
-
                 for (Usuario usuario : usuarios) {
                     flag = examenDao.insertExamenUsuario(usuario.getId_usuario(), id_examen); // Inserta en la base de datos
                     if (!flag) {
