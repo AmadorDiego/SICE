@@ -10,25 +10,30 @@ function agregarPregunta(tipo) {
         <input type="hidden" name="id_pregunta[]" value="${preguntaIndex}">
         <input type="hidden" name="id_tipo_pregunta[]" value="${tipo === 'abierta' ? '1' : '2'}">
         <div class="mb-2">
-            <label class="form-label text-white">Pregunta:</label>
+            <label class="form-label text-white h6">Pregunta:</label>
             <input type="text" class="form-control" name="texto_pregunta[]" required>
+            <button type="button" class="btn btn-danger btn-sm bg-red-SICE mb-3" onclick="eliminarPregunta(${preguntaIndex})">
+                <h6>Eliminar pregunta</h6>
+            </button>
         </div>
-        <button type="button" class="btn btn-danger btn-sm me-2" onclick="eliminarPregunta(${preguntaIndex})">Eliminar Pregunta</button>
+        
     `;
 
     if (tipo === 'cerrada') {
         contenido += `
-            <div id="opciones-${preguntaIndex}">
-                <div class="mb-2">
+            <div id="opciones-${preguntaIndex}" class="mt-3">
+                <div class="mb-2 mt-2">
                     <input class="" type="radio" name="opcion_correcta_${preguntaIndex}" value="1" checked>
                     <input type="text" class="form-control d-inline-block w-75" name="opcion_${preguntaIndex}[]" required>
                 </div>
                 <div class="mb-2">
-                    <input type="radio" name="opcion_correcta_${preguntaIndex}" value="2">
+                    <input type="radio" class="me-2" name="opcion_correcta_${preguntaIndex}" value="2">
                     <input type="text" class="form-control d-inline-block w-75" name="opcion_${preguntaIndex}[]" required>
                 </div>
             </div>
-            <button type="button" class="btn btn-info btn-sm" onclick="agregarOpcion(${preguntaIndex})">Agregar opción</button>
+            <button type="button" class="btn btn-info btn-sm" onclick="agregarOpcion(${preguntaIndex})">
+                <span class="material-symbols-rounded">add</span>
+            </button>
         `;
     }
 
