@@ -126,11 +126,7 @@
                                class="btn btn-primary bg-blue-utz">Ver</a>
                         </td>
                         <td>
-<<<<<<< HEAD
-                            <a href="${pageContext.request.contextPath}/asignarExamen?id_examen=<%=examen.getId_examen()%>"
-=======
                             <a href="../../AsignarGrupoExamenServlet?id_examen=<%=examen.getId_examen()%>"
->>>>>>> a8497aa762f2cd13c0d9cc6a53617c0dc69cddb7
                                class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
                         </td>
                     </tr>
