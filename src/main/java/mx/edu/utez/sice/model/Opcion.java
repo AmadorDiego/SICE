@@ -29,4 +29,9 @@ public class Opcion {
     public void setOpcion(String opcion) {
         this.opcion = opcion;
     }
+
+    //Agregue esto aunque se lo tengo que quitar
+    /*public int getId_pregunta() {
+        return id_opcion;
+    }*/
 }

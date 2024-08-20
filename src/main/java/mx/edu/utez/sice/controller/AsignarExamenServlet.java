@@ -27,7 +27,7 @@ public class AsignarExamenServlet extends HttpServlet {
         examenDao.getOne(id_examen);
         HttpSession sesion = req.getSession();
         sesion.setAttribute("examen", examen);
-        resp.sendRedirect("JSP/Docente/asignarExamen.jsp");
+        resp.sendRedirect("JSP/Docente/AsignarExamen.jsp");
     }
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

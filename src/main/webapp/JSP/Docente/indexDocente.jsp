@@ -126,7 +126,7 @@
                                class="btn btn-primary bg-blue-utz">Ver</a>
                         </td>
                         <td>
-                            <a href="../../AsignarExamenServlet?id_examen=<%=examen.getId_examen()%>"
+                            <a href="${pageContext.request.contextPath}/asignarExamen?id_examen=<%=examen.getId_examen()%>"
                                class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
                         </td>
                     </tr>
