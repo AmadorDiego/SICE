@@ -24,6 +24,8 @@ public class DivisionAcademicaDao {
                 division.setDivision_academica(rs.getString("nombre_division_academica"));
                 lista.add(division);
             }
+            rs.close();
+            ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,6 +45,9 @@ public class DivisionAcademicaDao {
                 division.setId_division_academica(rs.getInt("id_division_academica"));
                 division.setDivision_academica(rs.getString("nombre_division_academica"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

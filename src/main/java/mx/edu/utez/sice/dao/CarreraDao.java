@@ -27,6 +27,9 @@ public class CarreraDao {
                 carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
                 lista.add(carrera);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,6 +51,9 @@ public class CarreraDao {
                 carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
                 carreras.add(carrera);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,6 +74,9 @@ public class CarreraDao {
                 carrera.setCarrera(rs.getString("nombre_carrera"));
                 carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,6 +98,9 @@ public class CarreraDao {
                 carrera.setCarrera(rs.getString("nombre_carrera"));
                 carrera.setId_division_academica(rs.getInt("division_academica_id_division_academica"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

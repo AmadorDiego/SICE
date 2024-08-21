@@ -20,6 +20,8 @@ public class AplicacionDao {
                     generatedId = rs.getInt(1);
                 }
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -39,6 +41,8 @@ public class AplicacionDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -57,6 +61,8 @@ public class AplicacionDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -74,6 +80,9 @@ public class AplicacionDao {
             if(rs.next()){
                 id_aplicacion = (rs.getInt("id_aplicacion"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

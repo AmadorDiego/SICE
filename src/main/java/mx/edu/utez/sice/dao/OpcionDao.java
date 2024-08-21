@@ -39,6 +39,9 @@ public class OpcionDao {
             // Ejecutar la consulta y obtener el resultado
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             // Manejar la excepción
             e.printStackTrace();
@@ -55,6 +58,8 @@ public class OpcionDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -72,6 +77,9 @@ public class OpcionDao {
             if(rs.next()){
                 id_opcion = (rs.getInt("id_opcion"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -93,6 +101,9 @@ public class OpcionDao {
                 opcion.setOpcion(rs.getString("opcion"));
                 listaOpciones.add(opcion);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -112,6 +123,9 @@ public class OpcionDao {
                 preguntaOpcion.setId_opcion(rs.getInt("opcion_id_opcion"));
                 preguntaOpcion.setCorrecta(rs.getInt("correcta"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

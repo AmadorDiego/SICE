@@ -169,7 +169,8 @@
                               <td><%=u.getNombre_usuario()+" "+u.getApellido_usuario()%></td>
                               <td>
                                 <div class="form-check form-switch">
-                                  <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>" checked>
+                                  <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>">
+                                  <label><%=u.getId_usuario()%></label>
                                 </div>
                               </td>
                             </tr>

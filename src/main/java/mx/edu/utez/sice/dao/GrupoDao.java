@@ -30,6 +30,9 @@ public class GrupoDao {
                 grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
                 grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -52,6 +55,8 @@ public class GrupoDao {
                 g.setId_periodo(rs.getInt("periodo_id_periodo"));
                 lista.add(g);
             }
+            rs.close();
+            ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,6 +75,9 @@ public class GrupoDao {
             if(rs.next()){
                 flag = true;
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -117,6 +125,9 @@ public class GrupoDao {
                 grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
                 lista.add(grupo);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -134,6 +145,8 @@ public class GrupoDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -151,6 +164,8 @@ public class GrupoDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -172,6 +187,9 @@ public class GrupoDao {
                 //grupo.setGrupo(rs.getString("grupo").charAt(0));
                 grupo.setGrupo(rs.getString("grupo"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -217,6 +235,9 @@ public class GrupoDao {
 
                 tabla.add(t);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -265,6 +286,9 @@ public class GrupoDao {
 
                 tabla.add(t);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

@@ -59,6 +59,8 @@ public class ExamenDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -76,6 +78,8 @@ public class ExamenDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -93,6 +97,8 @@ public class ExamenDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -112,6 +118,9 @@ public class ExamenDao {
             if(rs.next()){
                 id_examen = (rs.getInt("id_examen"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -134,6 +143,9 @@ public class ExamenDao {
                 examen.setEstado(rs.getInt("estado"));
                 examen.setDescripcion(rs.getString("descripcion"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -157,6 +169,9 @@ public class ExamenDao {
                 examen.setDescripcion(rs.getString("descripcion"));
                 lista.add(examen);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -173,6 +188,8 @@ public class ExamenDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
