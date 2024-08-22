@@ -33,6 +33,9 @@ public class UsuarioDao {
                 usuario.setId_tipo_usuario(rs.getInt("id_tipo_usuario"));
                 usuario.setNombre_usuario(rs.getString("nombre_usuario"));
                 usuario.setApellido_usuario(rs.getString("apellido_usuario"));            }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -42,7 +45,7 @@ public class UsuarioDao {
     //obtiene un usuario por medio del ID y regresa el ID, estado, contraseña y su correo electronico
     public Usuario getOne(int id_usuario){
         Usuario usuario = new Usuario();
-        String query = "select * from Usuario where id_usuario = ?;";
+        String query = "select * from usuario where id_usuario = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -59,6 +62,9 @@ public class UsuarioDao {
                 usuario.setFecha_registrado(rs.getString("fecha_registrado"));
                 //en caso de que el ID del tipo de usuario obtenido sea 3 (un alumno), seteamos el ID de su carrera
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -77,6 +83,9 @@ public class UsuarioDao {
                 usuario.setNombre_usuario(rs.getString("nombre_usuario"));
                 usuario.setApellido_usuario(rs.getString("apellido_usuario"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -86,7 +95,7 @@ public class UsuarioDao {
     //obtiene un usuario por medio del correo y devuelve u ID, nombre, contraseña, correo electronico y estado
     public Usuario getOne(String correo_electronico) {
         Usuario usuario = new Usuario();
-        String query = "select * from Usuario where correo_electronico = ?;";
+        String query = "select * from usuario where correo_electronico = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -100,6 +109,9 @@ public class UsuarioDao {
                 usuario.setContrasena(rs.getString("contrasena"));
                 usuario.setEstado(rs.getInt("estado"));
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -121,6 +133,9 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -131,7 +146,7 @@ public class UsuarioDao {
     //cuando hay un select ocupamos un conjunto de resultado (result set)
     public ArrayList<Usuario> getAll(){
         ArrayList<Usuario> lista = new ArrayList<>();
-        String query = "select * from Usuario";
+        String query = "select * from usuario";
         try {
             Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
             PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
@@ -147,6 +162,9 @@ public class UsuarioDao {
                 u.setFecha_registrado(rs.getString("fecha_registrado"));
                 lista.add(u);
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -155,7 +173,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getAllAlumnosConGrupo(int id_grupo){
         ArrayList<Usuario> lista = new ArrayList<>();
-        String query = "select id_usuario, nombre_usuario, apellido_usuario, correo_electronico from Usuario join usuario_tiene_grupo on id_usuario = usuario_id_usuario where grupo_id_grupo = ? and id_tipo_usuario = 3;";
+        String query = "select id_usuario, nombre_usuario, apellido_usuario, correo_electronico from udesuario join usuario_tiene_grupo on id_usuario = usuario_id_usuario where grupo_id_grupo = ? and id_tipo_usuario = 3;";
         try {
             Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
             PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
@@ -169,6 +187,9 @@ public class UsuarioDao {
                 u.setCorreo_electronico(rs.getString("correo_electronico"));
                 lista.add(u);
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -191,6 +212,9 @@ public class UsuarioDao {
                 u.setEstado(rs.getInt("estado"));
                 lista.add(u);
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch (SQLException e){
         }
         return lista;
@@ -212,6 +236,8 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch (SQLException e){
             e.printStackTrace();
         }
@@ -228,6 +254,9 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -243,6 +272,8 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -260,6 +291,8 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -277,6 +310,8 @@ public class UsuarioDao {
             if(rs.next()){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -296,6 +331,9 @@ public class UsuarioDao {
             if(rs.next()){
                 flag = true;
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -321,6 +359,9 @@ public class UsuarioDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            rs.close();
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }

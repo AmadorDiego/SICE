@@ -51,6 +51,8 @@ public class PreguntaDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -69,6 +71,8 @@ public class PreguntaDao {
             if(ps.executeUpdate()>0){
                 flag = true;
             }
+            ps.close();
+            con.close();
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -109,6 +113,9 @@ public class PreguntaDao {
                 pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
                 listaPreguntas.add(pregunta);
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -126,6 +133,9 @@ public class PreguntaDao {
 
             int rowsAffected = statement.executeUpdate();
             return rowsAffected > 0;
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -147,6 +157,9 @@ public class PreguntaDao {
 
             int rowsAffected = deletePreguntaStatement.executeUpdate();
             return rowsAffected > 0;
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -166,6 +179,9 @@ public class PreguntaDao {
                 int tipoPreguntaId = resultSet.getInt("tipo_pregunta_id_tipo_pregunta");
                 /*return new Pregunta(id, preguntaText, tipoPreguntaId);*//*
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,6 +202,9 @@ public class PreguntaDao {
                 /*Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
                 preguntas.add(p);*//*
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -211,6 +230,9 @@ public class PreguntaDao {
                 /*Pregunta p = new Pregunta(id_pregunta, pregunta, tipo_pregunta_id_tipo_pregunta);
                 preguntas.add(p);*//*
             }
+            rs.close();
+            ps.close();
+            con.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

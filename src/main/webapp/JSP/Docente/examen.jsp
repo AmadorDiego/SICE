@@ -20,6 +20,8 @@
     <!--<link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">-->
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/adicionalesEBM.css">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Docentes.css">
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
@@ -38,7 +40,9 @@
         <div class="container md">
             <div class="row">
                 <div class="col-12">
-                    <a class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp"> Regresar < </a>
+                    <a  class="btn btn-primary bg-blue-utz text-white h5 g-2 mt-4 h6" href="indexDocente.jsp">
+                        <span class="material-symbols-rounded">arrow_back</span>
+                    </a>
                 </div>
                 <div class="col-12 mt-2 rounded-5 p-3 bg-green-utz g-3">
                     <h1 class="mb-4 blue-utz">Crear Nuevo Examen</h1>
@@ -68,19 +72,22 @@
                             </select>
                         </div>-->
 
-                        <div id="id_preguntas" class="mb-3">
+                        <div id="id_preguntas" class="mb-3 mt-4">
                             <!--Aqui se van agregando las preguntas que se vayan creando-->
                         </div>
 
-                        <div class="mt-3">
-                            <button type="button" class="btn btn-primary blue-utz me-2" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
+                        <div class="mt-5">
+                            <button type="button" class="btn btn-primary blue-utz me-2 text-white" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
                             <button type="button" class="btn btn-secondary gray-SICE text-white" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                         </div>
                         <!-- <div class="mt-3">
                             <button type="button" id="guardarCambios"
                                     class="btn btn-primary bg-blue-utz h6" href="indexDocente">Guardar cambios</button>
                         </div> -->
-                        <input class="btn btn-primary bg-blue-utz mt-3" type="submit" value="Crear">
+                        <button class="btn btn-primary bg-blue-utz mt-3 d-flex" type="submit" value="Crear">
+                            <h6 class="d-block me-2">Crear </h6>
+                            <span class="material-symbols-rounded d-block">check_circle</span>
+                        </button>
                     </form>
                 </div>
             </div>

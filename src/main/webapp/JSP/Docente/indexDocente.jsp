@@ -48,16 +48,40 @@
                 <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
             <div class="d-flex">
-                <a href="indexDocente.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
-                    <span class="material-symbols-rounded">home</span>
-                </a>
-                <a href="PieroCalificarExamen.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
-                    <span class="material-symbols-rounded">pending_actions</span>
-                </a>
-                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0" data-bs-toggle="modal"
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
                    data-bs-target="#asignarGrupoDocente" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">groups</span>
+                    <h6 class="mb-0 ms-2">Grupos</h6>
                 </a>
+                <a href="PieroCalificarExamen.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">pending_actions</span>
+                    <h6 class="mb-0 ms-2">Calificar examenes</h6>
+                </a>
+                <a href="indexDocente.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">home</span>
+                    <h6 class="mb-0 ms-2">Inicio</h6>
+                </a>
+
+                <!------------- Boton dezplegable ---------------->
+                <div class="dropdown dropstart">
+                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-symbols-rounded">arrow_drop_down</span>
+                    </button>
+                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
+                        <li class="p-2">
+                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                                <span class="material-symbols-rounded">person</span>
+                                <h6 class="mb-0 ms-2">Perfil</h6>
+                            </a>
+                        </li>
+                        <li class="p-2">
+                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                                <span class="material-symbols-rounded">logout</span>
+                                <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -126,11 +150,7 @@
                                class="btn btn-primary bg-blue-utz">Ver</a>
                         </td>
                         <td>
-<<<<<<< HEAD
-                            <a href="${pageContext.request.contextPath}/asignarExamen?id_examen=<%=examen.getId_examen()%>"
-=======
                             <a href="../../AsignarGrupoExamenServlet?id_examen=<%=examen.getId_examen()%>"
->>>>>>> a8497aa762f2cd13c0d9cc6a53617c0dc69cddb7
                                class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
                         </td>
                     </tr>
