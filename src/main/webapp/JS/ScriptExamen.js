@@ -1,3 +1,4 @@
+let bancoPreguntas= [];
 let preguntaIndex = 0;
 
 function agregarPregunta(tipo) {
@@ -71,5 +72,114 @@ function actualizarCantidadPreguntas() {
 }
 
 // Inicializar el contador de preguntas al cargar la página
-window.addEventListener('load', actualizarCantidadPreguntas);
+//window.addEventListener('load', actualizarCantidadPreguntas);
+
+// Funciones de BuscarPreguntas.js (modificadas y adaptadas) ---------------------------------------------------------------------
+
+function actualizarListaBancoPreguntas(preguntas = bancoPreguntas) {
+    const lista = document.getElementById('lista-banco-preguntas');
+    lista.innerHTML = '';
+    preguntas.forEach(pregunta => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <input type="checkbox" id="pregunta-${pregunta.id}" onchange="togglePregunta(${pregunta.id})">
+            <label for="pregunta-${pregunta.id}">${pregunta.texto}</label>
+        `;
+        lista.appendChild(li);
+    });
+}
+
+function togglePregunta(id) {
+    const checkbox = document.getElementById(`pregunta-${id}`);
+    if (checkbox.checked) {
+        const pregunta = bancoPreguntas.find(p => p.id === id);
+        agregarPreguntaDesdeElBanco(pregunta);
+    } else {
+        eliminarPreguntaDelExamen(id);
+    }
+}
+
+function agregarPreguntaDesdeElBanco(pregunta) {
+    preguntaIndex++;
+    const preguntaContainer = document.createElement('div');
+    preguntaContainer.classList.add('mb-3', 'pregunta-container');
+    preguntaContainer.id = `pregunta-examen-${pregunta.id}`;
+
+    let contenido = `
+        <input type="hidden" name="preguntasSeleccionadas[]" value="${pregunta.id}">
+        <div class="mb-2">
+            <label class="form-label text-white h5">Pregunta ${preguntaIndex}:</label>
+            <input type="text" class="form-control" value="${pregunta.texto}" readonly>
+            <button type="button" class="btn btn-danger btn-sm bg-red-SICE mb-3" onclick="eliminarPreguntaDelExamen(${pregunta.id})">
+                <h6>Eliminar pregunta</h6>
+            </button>
+        </div>
+    `;
+
+    if (pregunta.tipo === 'cerrada') {
+        contenido += `
+            <div class="mt-3">
+                ${pregunta.opciones.map((opcion, index) => `
+                    <div class="mb-2 mt-2">
+                        <input type="radio" disabled ${index === 0 ? 'checked' : ''}>
+                        <input type="text" class="form-control d-inline-block w-75" value="${opcion}" readonly>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    preguntaContainer.innerHTML = contenido;
+    document.getElementById('id_preguntas').appendChild(preguntaContainer);
+    actualizarCantidadPreguntas();
+}
+
+function eliminarPreguntaDelExamen(id) {
+    const pregunta = document.getElementById(`pregunta-examen-${id}`);
+    if (pregunta) {
+        pregunta.remove();
+        const checkbox = document.getElementById(`pregunta-${id}`);
+        if (checkbox) {
+            checkbox.checked = false;
+        }
+        actualizarCantidadPreguntas();
+    }
+}
+
+function buscarEnBanco(busqueda) {
+    const resultados = bancoPreguntas.filter(pregunta =>
+        pregunta.texto.toLowerCase().includes(busqueda.toLowerCase())
+    );
+    actualizarListaBancoPreguntas(resultados);
+}
+
+function actualizarCantidadPreguntas() {
+    const cantidadPreguntas = document.querySelectorAll('.pregunta-container').length;
+    document.getElementById('cantidad_preguntas').value = cantidadPreguntas;
+}
+
+// Event Listeners
+window.addEventListener('load', () => {
+    actualizarCantidadPreguntas();
+    preguntaIndex = document.querySelectorAll('.pregunta-container').length;
+
+    // Cargar banco de preguntas desde el HTML
+    const listaBanco = document.getElementById('lista-banco-preguntas');
+    const preguntas = Array.from(listaBanco.querySelectorAll('li')).map(li => {
+        const checkbox = li.querySelector('input[type="checkbox"]');
+        const label = li.querySelector('label');
+        return {
+            id: parseInt(checkbox.id.split('-')[1]),
+            texto: label.textContent.trim(),
+            tipo: li.querySelector('.ml-4') ? 'cerrada' : 'abierta',
+            opciones: Array.from(li.querySelectorAll('.ml-4 label')).map(opcionLabel => opcionLabel.textContent.trim())
+        };
+    });
+    bancoPreguntas = preguntas;
+    actualizarListaBancoPreguntas();
+});
+
+document.getElementById('buscar-banco').addEventListener('input', function() {
+    buscarEnBanco(this.value);
+});
 

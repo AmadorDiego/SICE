@@ -1,6 +1,5 @@
 package mx.edu.utez.sice.dao;
 
-import mx.edu.utez.sice.model.Examen;
 import mx.edu.utez.sice.model.Pregunta;
 import mx.edu.utez.sice.model.PreguntaOpcion;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
@@ -76,4 +75,29 @@ public class PreguntaDao {
         }
         return listaPreguntas;
     }
+
+    public ArrayList<Pregunta> getAll() {
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM pregunta";
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Pregunta pregunta = new Pregunta();
+                pregunta.setId_pregunta(rs.getInt("id_pregunta"));
+                pregunta.setPregunta(rs.getString("pregunta"));
+                pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
+                preguntas.add(pregunta);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return preguntas;
+    }
+
 }
