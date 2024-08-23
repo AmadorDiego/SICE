@@ -279,7 +279,7 @@ public class UsuarioDao {
         }
         return flag;
     }
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     public boolean updateCodigo(Usuario u, String codigo) {
         boolean flag = false;
         String query = "update usuario set codigo = ? where id_usuario = ?";
@@ -339,14 +339,7 @@ public class UsuarioDao {
         }
         return flag;
     }
-
-    /*
-    ps.close();
-    rs.close();
-    con.close();
-
-    cerrar sesiones*/
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /*
     public boolean eliminarFisico(int id) {

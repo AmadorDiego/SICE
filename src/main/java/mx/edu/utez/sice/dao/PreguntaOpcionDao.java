@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PreguntaOpcionDao {
-    private Connection connection;
+    /*private Connection connection;
 
     public PreguntaOpcionDao() {
         // Obtener la conexión a la base de datos
@@ -127,5 +127,5 @@ public class PreguntaOpcionDao {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 }

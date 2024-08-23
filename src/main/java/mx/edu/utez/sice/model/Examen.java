@@ -6,7 +6,6 @@ public class Examen {
     private int id_examen;
     private String nombre_examen;
     private int cantidad_preguntas;
-    private int estado;
     private String descripcion;
     //ArrayList para la tabla examen_tiene_pregunta
     private ArrayList<Integer> preguntas;
@@ -15,11 +14,10 @@ public class Examen {
 
     public Examen() {}
 
-    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, int estado, String descripcion, ArrayList<Integer> preguntas, ArrayList<Integer> usuarios) {
+    public Examen(int id_examen, String nombre_examen, int cantidad_preguntas, String descripcion, ArrayList<Integer> preguntas, ArrayList<Integer> usuarios) {
         this.id_examen = id_examen;
         this.nombre_examen = nombre_examen;
         this.cantidad_preguntas = cantidad_preguntas;
-        this.estado = estado;
         this.descripcion = descripcion;
         this.preguntas = preguntas;
         this.usuarios = usuarios;
@@ -49,14 +47,6 @@ public class Examen {
         this.cantidad_preguntas = cantidad_preguntas;
     }
 
-    public int getEstado() {
-        return estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -77,29 +67,5 @@ public class Examen {
 
     public void setUsuarios(ArrayList<Integer> usuarios) {
         this.usuarios = usuarios;
-    }
-
-    // agregacion de Piero
-
-    public void setId(int id) {
-    }
-
-    public void setNombre(String nombre) {
-    }
-
-    public void setGrado(String grado) {
-    }
-
-    public void setGrupo(String grupo) {
-    }
-
-    public void setDivision(String division) {
-    }
-
-    public void setCarrera(String carrera) {
-    }
-
-    public Object getNombreExamen() {
-        return null;
     }
 }

@@ -55,7 +55,6 @@ CREATE TABLE IF NOT EXISTS `sice`.`examen` (
                                                `id_examen` INT NOT NULL AUTO_INCREMENT,
                                                `nombre_examen` VARCHAR(100) NOT NULL,
     `cantidad_preguntas` INT NOT NULL,
-    `estado` TINYINT NOT NULL DEFAULT 0,
     `descripcion` VARCHAR(500) NULL,
     PRIMARY KEY (`id_examen`))
     ENGINE = InnoDB
@@ -316,6 +315,7 @@ CREATE TABLE IF NOT EXISTS `sice`.`usuario_tiene_grupo` (
 CREATE TABLE IF NOT EXISTS `sice`.`usuario_tiene_examen` (
                                                              `usuario_id_usuario` INT NOT NULL,
                                                              `examen_id_examen` INT NOT NULL,
+                                                             `estado` TINYINT NOT NULL,
                                                              PRIMARY KEY (`usuario_id_usuario`, `examen_id_examen`),
     INDEX `fk_usuario_has_examen_examen1_idx` (`examen_id_examen` ASC) VISIBLE,
     INDEX `fk_usuario_has_examen_usuario1_idx` (`usuario_id_usuario` ASC) VISIBLE,

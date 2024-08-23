@@ -79,9 +79,9 @@ insert into usuario_tiene_grupo values
                                     (2, 11),
                                     (2, 14);
 
-insert into examen (nombre_examen, cantidad_preguntas, estado, descripcion) values ('Examen teorico U3 Sistemas operativos 3-A-DSM', 15, 1, 'Buen dia. Por favor contestar. Saludos cordiales.');
+insert into examen (nombre_examen, cantidad_preguntas, descripcion) values ('Examen teorico U3 Sistemas operativos 3-A-DSM', 15, 'Buen dia. Por favor contestar. Saludos cordiales.');
 
-insert into usuario_tiene_examen values (12, 1);
+insert into usuario_tiene_examen values (12, 1, 0);
 
 insert into aplicacion (periodo_id_periodo, examen_id_examen) values (2, 1);
 

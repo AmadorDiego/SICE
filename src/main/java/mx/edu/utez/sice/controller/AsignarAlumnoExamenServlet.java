@@ -14,6 +14,7 @@ import java.io.IOException;
 public class AsignarAlumnoExamenServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id_examen = Integer.parseInt(req.getParameter("id_examen"));  // Obtiene el id del grupo
+        int id_docente = Integer.parseInt(req.getParameter("id_usuario"));
         ExamenDao examenDao = new ExamenDao();
 
         // Captura los IDs de los usuarios seleccionados
@@ -23,12 +24,12 @@ public class AsignarAlumnoExamenServlet extends HttpServlet {
         if (alumnos_seleccionados != null) {
             for (String usuario_id_usuario : alumnos_seleccionados) {
                 int id_usuario = Integer.parseInt(usuario_id_usuario);  // Convierte el ID a entero
-                flag = examenDao.insertExamenUsuario(id_usuario, id_examen);  // Inserta en la base de datos
+                flag = examenDao.insertExamenUsuario(id_usuario, id_examen); // Inserta en la base de datos
             }
         }
         HttpSession sesion = req.getSession();
         if (flag){
-            if (examenDao.updateExamenAsignado(id_examen)){
+            if (examenDao.examenAsignadoCompletado(id_examen, id_docente)){
                 sesion.setAttribute("mensajeDocente","Se asignó correctamente el examen a el/los alumno/s");
                 sesion.setAttribute("flag", true);
             }

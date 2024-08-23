@@ -26,11 +26,11 @@ public class AsignarGrupoExamenServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int id_examen = Integer.parseInt(req.getParameter("id_examen"));
+        int id_docente = Integer.parseInt(req.getParameter("id_usuario"));
         ExamenDao examenDao = new ExamenDao();
 
         // Captura los IDs de los grupos seleccionados
         String[] grupos_seleccionados = req.getParameterValues("id_grupo[]");  // Revisa si es necesario usar "id_grupo[]" o "id_grupo"
-
 
         for (int i = 0; i < grupos_seleccionados.length; i++) {
             System.out.println(grupos_seleccionados[i]);
@@ -46,16 +46,13 @@ public class AsignarGrupoExamenServlet extends HttpServlet {
                 ArrayList<Usuario> usuarios = usuarioDao.getAllAlumnosConGrupo(id_grupo);
                 for (Usuario usuario : usuarios) {
                     flag = examenDao.insertExamenUsuario(usuario.getId_usuario(), id_examen); // Inserta en la base de datos
-                    if (!flag) {
-                        break; // Sal del ciclo si ocurre un error
-                    }
                 }
             }
         }
 
         HttpSession sesion = req.getSession();
         if (flag) {
-            if (examenDao.updateExamenAsignado(id_examen)) {
+            if (examenDao.examenAsignadoCompletado(id_examen, id_docente)) {
                 sesion.setAttribute("mensajeDocente", "Se asignó el examen correctamente a el/los grupo/s");
                 sesion.setAttribute("flag", true);
             }
