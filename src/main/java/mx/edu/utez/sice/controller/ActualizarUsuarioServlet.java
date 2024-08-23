@@ -40,7 +40,7 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         }else{
             //Mensaje para visar que las contras no son iguales
             req.getSession().setAttribute("mensaje", "Las contraseñas no coinciden");
-            resp.sendRedirect("JSP/Administrador/registroUsuario.jsp");
+            resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
         }
         u.setEstado(req.getParameter("estado") != null ? 1 : 0);
         u.setId_tipo_usuario(Integer.parseInt(req.getParameter("id_tipo_usuario")));
