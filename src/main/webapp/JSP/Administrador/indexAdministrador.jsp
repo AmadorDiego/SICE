@@ -60,7 +60,7 @@
                     </button>
                     <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                            <a href="perfilAdministrador.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
                                 <h6 class="mb-0 ms-2">Perfil</h6>
                             </a>
@@ -91,11 +91,6 @@
         <h1 class="text-white mt-2">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-12">
-
-        </div>
 
 
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
