@@ -33,31 +33,34 @@
             </a>
 
             <div class="d-flex">
-                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center"
+                   data-bs-toggle="modal"
                    data-bs-target="#asignarCarreraGrupoModal" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">group_add</span>
                     <h6 class="mb-0 ms-2">Agregar a grupo</h6>
                 </a>
-                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center"
+                   data-bs-toggle="modal"
                    data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">person_add</span>
                     <h6 class="mb-0 ms-2">Agregar usuario</h6>
                 </a>
-                <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="indexAdministrador.jsp"
+                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">home</span>
                     <h6 class="mb-0 ms-2">Inicio</h6>
                 </a>
 
 
-
                 <!------------- Boton dezplegable ---------------->
                 <div class="dropdown dropstart">
-                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
                     <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                            <a href="perfilAdministrador.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
                                 <h6 class="mb-0 ms-2">Perfil</h6>
                             </a>
@@ -88,11 +91,6 @@
         <h1 class="text-white mt-2">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
     </div>
-    <br>
-    <div class="row">
-        <div class="col-12">
-
-        </div>
 
 
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
@@ -426,7 +424,6 @@
                                 <br>
                                 <label class="col-form-label h6">Ingrese el tipo de usuario: </label>
                                 <select required class="form-control" name="id_tipo_usuario" id="id_tipo_usuario">
-                                    <option value="4">Docente administrador</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Docente</option>
                                     <option value="3">Alumno</option>
