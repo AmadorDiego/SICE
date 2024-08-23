@@ -107,6 +107,7 @@
             </tbody>
           </table>
         </div>
+        <input type="hidden" name="id_usuario" value="<%=usuario.getId_usuario()%>">
         <input type="submit" form="asignar_examen" class="btn btn-primary bg-blue-utz justify-content-center mb-0">
       </form>
     </div>
@@ -176,6 +177,7 @@
                             <%}%>
                             </tbody>
                           </table>
+                          <input type="hidden" name="id_usuario" value="<%=usuario.getId_usuario()%>">
                         </form>
                       </div>
                       <div class="modal-footer">

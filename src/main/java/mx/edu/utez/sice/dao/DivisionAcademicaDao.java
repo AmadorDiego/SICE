@@ -31,27 +31,5 @@ public class DivisionAcademicaDao {
         }
         return lista;
     }
-
-    public DivisionAcademica getById(int id) {
-        DivisionAcademica division = new DivisionAcademica();
-        try {
-            Connection con = DatabaseConnectionManager.getConnection();
-            String query = "SELECT * FROM division_academica WHERE id_division_academica=?";
-            PreparedStatement ps = con.prepareStatement(query);
-            ResultSet rs = ps.executeQuery();
-            ps.setInt(1, id);
-            if (rs.next()) {
-                division = new DivisionAcademica();
-                division.setId_division_academica(rs.getInt("id_division_academica"));
-                division.setDivision_academica(rs.getString("nombre_division_academica"));
-            }
-            rs.close();
-            ps.close();
-            con.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return division;
-    }
 }
 
