@@ -18,7 +18,7 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-blue-utz">
         <div class="container-fluid">
-            <h2 class="text-white p-2 me-4">SICE</h2>
+            <img src="IMG/logoBueno.png" class="me-0 d-flex justify-content-start" width="50" height="45" alt="Logo">
             <ul class="navbar-nav mb-1">
                 <li class="nav-item me-2">
                     <a class="text-white btn btn-success bg-green-utz d-flex align-items-center justify-content-end"
@@ -52,13 +52,26 @@
 
 <!--///////////////////////////////////Contenido (Descripccion)///////////////////////////////////////////-->
 <div class="container">
-    <div class="row d-flex justify-content-center align-items-center min-vh-100">
-        <div class="col-12 col-md-6 mb-4 mb-md-0">
-            <h1 class="blue-utz">¡Bienvenido a SICE!</h1>
-            <h2 class="blue-utz">(Sistema de Creacion de Examenes)</h2>
+    <div class="row d-flex mt-4 mb-5">
+        <div class="col-12 mb-2">
+            <h1 class="blue-utz d-flex justify-content-center">¡Bienvenido a SICE!</h1>
+            <h2 class="blue-utz d-flex justify-content-center">(Sistema de Creacion de Examenes)</h2>
         </div>
-
-        <div class="col-12 col-md-6">
+    </div>
+    <div class="row d-flex justify-content-center align-items-center mt-2">
+        <div class="col-12 col-md-4">
+            <div class="bg-blue-utz rounded-5 p-3">
+                <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
+                <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="bg-blue-utz rounded-5 p-3">
+                <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
+                <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3">
                 <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
                 <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
