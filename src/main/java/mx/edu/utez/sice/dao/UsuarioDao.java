@@ -173,7 +173,7 @@ public class UsuarioDao {
 
     public ArrayList<Usuario> getAllAlumnosConGrupo(int id_grupo){
         ArrayList<Usuario> lista = new ArrayList<>();
-        String query = "select id_usuario, nombre_usuario, apellido_usuario, correo_electronico from udesuario join usuario_tiene_grupo on id_usuario = usuario_id_usuario where grupo_id_grupo = ? and id_tipo_usuario = 3;";
+        String query = "select id_usuario, nombre_usuario, apellido_usuario, correo_electronico from usuario join usuario_tiene_grupo on id_usuario = usuario_id_usuario where grupo_id_grupo = ? and id_tipo_usuario = 3 order by apellido_usuario;";
         try {
             Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
             PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos

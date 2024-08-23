@@ -166,11 +166,10 @@
                               for (Usuario u : alumnos) {%>
                             <tr>
                               <th scope="row"><%=u.getCorreo_electronico()%></th>
-                              <td><%=u.getNombre_usuario()+" "+u.getApellido_usuario()%></td>
+                              <td><%=u.getApellido_usuario()+" "+u.getNombre_usuario()%></td>
                               <td>
                                 <div class="form-check form-switch">
                                   <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>">
-                                  <label><%=u.getId_usuario()%></label>
                                 </div>
                               </td>
                             </tr>
