@@ -4,6 +4,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.UsuarioDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset='utf-8'>
@@ -36,14 +37,39 @@
                      class="d-inline-block align-middle mt-0 mb-2">
                 <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
-
             <div class="d-flex">
-                <a href="indexAlumno.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
-                    <span class="material-symbols-rounded">Home</span>
-                </a>
-                <a href="alumnoRelizados.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                <a href="alumnoRelizados.jsp"
+                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">task</span>
+                    <h6 class="mb-0 ms-2">Examenes Realizados</h6>
                 </a>
+                <a href="indexAlumno.jsp"
+                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">home</span>
+                    <h6 class="mb-0 ms-2">Inicio</h6>
+                </a>
+
+                <!------------- Boton dezplegable ---------------->
+                <div class="dropdown dropstart">
+                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-symbols-rounded">arrow_drop_down</span>
+                    </button>
+                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
+                        <li class="p-2">
+                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                                <span class="material-symbols-rounded">person</span>
+                                <h6 class="mb-0 ms-2">Perfil</h6>
+                            </a>
+                        </li>
+                        <li class="p-2">
+                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                                <span class="material-symbols-rounded">logout</span>
+                                <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -54,7 +80,8 @@
 <div class="container-fluid">
     <div class="row align-items-center">
         <div class="col-6 p-4">
-            <h1 class="text-white">¡Bienvenido <%=usuario.getNombre_usuario()+" "+usuario.getApellido_usuario()%>!</h1>
+            <h1 class="text-white">¡Bienvenido <%=usuario.getNombre_usuario() + " " + usuario.getApellido_usuario()%>
+                !</h1>
         </div>
     </div>
 
@@ -67,25 +94,31 @@
             ExamenDao examenDao = new ExamenDao();
             UsuarioDao usuarioDao = new UsuarioDao();
             ArrayList<Examen> examenes = examenDao.getAll(usuario.getId_usuario());
-            for (Examen examen : examenes){%>
+            for (Examen examen : examenes) {%>
         <div class="col-12 col-md-6 p-4">
             <div class="card rounded-5 border-0 bg-blue-utz">
                 <div class="card-header bg-blue-utz border-0 rounded-5"><br></div>
                 <div class="card-body bg-gray-SICE rounded-bottom border-0">
-                    <h3 class="card-title blue-utz"><strong><%=examen.getNombre_examen()%></strong></h3>
-                    <h6 class="card-text text-white"><%=examen.getDescripcion()%></h6>
+                    <h3 class="card-title blue-utz"><strong><%=examen.getNombre_examen()%>
+                    </strong></h3>
+                    <h6 class="card-text text-white"><%=examen.getDescripcion()%>
+                    </h6>
                     <div class="p-4 d-flex flex-row-reverse bd-highlight gap-2">
-                        <a href="../../ContestarExamenServlet?id_examen=<%=examen.getId_examen()%>" class="btn bg-blue-utz text-white">Realizar</a>
+                        <a href="../../ContestarExamenServlet?id_examen=<%=examen.getId_examen()%>"
+                           class="btn btn-primary bg-blue-utz text-white">Realizar</a>
                         <%Usuario docente = usuarioDao.getDocentePorExamen(examen.getId_examen());%>
-                        <strong class="text-white align-content-center"><%=docente.getNombre_usuario()+" "+docente.getApellido_usuario()%></strong>
+                        <h6 class="text-white align-content-center ms-1"><%=docente.getNombre_usuario() + " " + docente.getApellido_usuario()%>
+                        </h6>
                     </div>
                 </div>
             </div>
         </div>
-        <%}
+        <%
+            }
         %>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script href="../../JS/bootstrap.js"></script>
 </body>
 </html>
