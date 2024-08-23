@@ -54,27 +54,24 @@
 <div class="container">
     <div class="row d-flex mt-4 mb-5">
         <div class="col-12 mb-2">
-            <h1 class="blue-utz d-flex justify-content-center">¡Bienvenido a SICE!</h1>
-            <h2 class="blue-utz d-flex justify-content-center">(Sistema de Creacion de Examenes)</h2>
+            <h1 class="blue-utz d-flex justify-content-center"><strong>¡Bienvenido a SICE!</strong></h1>
+            <h2 class="blue-utz d-flex justify-content-center"><strong>(Sistema de Creacion de Examenes)</strong></h2>
         </div>
     </div>
     <div class="row d-flex justify-content-center align-items-center mt-2">
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3">
                 <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
-                <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3">
                 <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
-                <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
             </div>
         </div>
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3">
                 <h2 class="text-white p-3">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h2>
-                <a type="button" class="btn btn-success bg-green-utz p-2 text-white" href="loginSICE.jsp">¡Empezar ahora!</a>
             </div>
         </div>
     </div>

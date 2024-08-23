@@ -34,9 +34,6 @@
             </a>
 
             <div class="d-flex">
-                <a href="registroUsuario.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
-                    <span class="material-symbols-rounded">person_add</span>
-                </a>
                 <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
                     <span class="material-symbols-rounded">home</span>
                 </a>

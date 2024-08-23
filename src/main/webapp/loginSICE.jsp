@@ -5,7 +5,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title>Inicio de sesión</title>
+    <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
+    <link rel="stylesheet" type="text/css" href="../../CSS/Docentes.css">
+    <!--///////////////////////////// Iconos ////////////////////////////////////-->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
     <link rel="stylesheet" href="CSS/bootstrap.css">
     <link rel="stylesheet" href="CSS/adicionales.css">
     <style>
@@ -49,12 +56,17 @@
     </style>
 </head>
 <body>
-<nav class="navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <span class="navbar-brand mb-0 h1"><strong>Inicio de sesión</strong></span>
-        <a href="#" class="btn-outline-light"><strong>¿Olvidaste tu contraseña?</strong></a>
-    </div>
-</nav>
+<header>
+    <nav class="navbar bg-blue-utz">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="IMG/logoBueno.png" width="50" height="45" alt="Logo"
+                     class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle"><strong>SICE</strong></h3>
+            </a>
+        </div>
+    </nav>
+</header>
 
 <div class="login-container">
     <h1 class="text-center"><strong>Bienvenido a SICE</strong></h1>
@@ -78,6 +90,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%}%>
+        <hr>
+        <button type="button" class="btn bg-blue-utz btn-success border-0 text-white me-0 w-100"><strong>¿Olvidaste tu contraseña?</strong></button>
         <hr>
         <button type="submit" class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0 w-100"><strong>Iniciar sesión</strong></button>
     </form>
