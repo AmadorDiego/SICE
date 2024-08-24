@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         preguntaIndex++;
         const preguntaContainer = document.createElement('div');
         preguntaContainer.classList.add('mb-3', 'pregunta-container');
-        preguntaContainer.id = `pregunta-${preguntaIndex}`;
+        preguntaContainer.id = `pregunta-examen-${preguntaIndex}`;
 
         let contenido = `
             <input type="hidden" name="id_pregunta[]" value="${preguntaIndex}">
@@ -46,9 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     window.eliminarPregunta = function(index) {
-        const pregunta = document.getElementById(`pregunta-${index}`);
-        pregunta.remove();
-        actualizarCantidadPreguntas();
+        const pregunta = document.getElementById(`pregunta-examen-${index}`);
+        if (pregunta) {
+            pregunta.remove();
+            actualizarCantidadPreguntas();
+        }
     };
 
     window.agregarOpcion = function(preguntaIndex) {
