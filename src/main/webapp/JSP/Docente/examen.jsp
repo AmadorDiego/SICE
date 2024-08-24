@@ -174,8 +174,10 @@
                     </div>
 
                     <div class="mt-5">
-                        <button type="button" class="btn btn-primary blue-utz me-2 text-white" onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
-                        <button type="button" class="btn btn-secondary gray-SICE text-white" onclick="agregarPregunta('abierta')">Pregunta abierta</button>
+                        <button type="button" class="btn btn-primary blue-utz me-2 text-white"
+                                onclick="agregarPregunta('cerrada')">Pregunta cerrada</button>
+                        <button type="button" class="btn btn-secondary gray-SICE text-white"
+                                onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                     </div>
                     <button class="btn btn-primary bg-blue-utz mt-3 d-flex" type="submit" value="Crear">
                         <h6 class="d-block me-2">Crear </h6>
