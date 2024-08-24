@@ -7,8 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido administrador</title>
     <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
@@ -63,7 +61,7 @@
                     </button>
                     <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                            <a href="perfilAdministrador.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
                                 <h6 class="mb-0 ms-2">Perfil</h6>
                             </a>
@@ -432,7 +430,6 @@
                                 <br>
                                 <label class="col-form-label h6">Ingrese el tipo de usuario: </label>
                                 <select required class="form-control" name="id_tipo_usuario" id="id_tipo_usuario">
-                                    <option value="4">Docente administrador</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Docente</option>
                                     <option value="3">Alumno</option>
