@@ -65,7 +65,7 @@
                             </a>
                         </li>
                         <li class="p-2">
-                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                            <a href="../../CerrarSesionServlet" class="btn btn-danger bg-red-SICE d-flex align-items-center">
                                 <span class="material-symbols-rounded">logout</span>
                                 <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
                             </a>
@@ -331,16 +331,16 @@
         </div>
     </div>
     <script src="../../JS/bootstrap.bundle.min.js"></script>
-    <div class="position-fixed bottom-0 start-0 col-3 p-3">
+    <div class="position-fixed bottom-0 start-0 p-3" style="width: 400px;">
         <% if ((String) request.getSession().getAttribute("mensajeAdministrador") != null) {%>
         <div class="alert p-3 mb-2 bg-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> text-white alert-dismissible fade show"
              role="alert">
-            <strong><%=(String) request.getSession().getAttribute("mensajeAdministrador")%>
-            </strong>
+            <strong><%=(String) request.getSession().getAttribute("mensajeAdministrador")%></strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%}%>
     </div>
+
     <!-- Modal para asignar alumnos a grupo -->
     <div class="modal fade" id="asignarCarreraGrupoModal" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">

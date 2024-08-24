@@ -48,7 +48,7 @@
                             </a>
                         </li>
                         <li class="p-2">
-                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                            <a href="../../CerrarSesionServlet" class="btn btn-danger bg-red-SICE d-flex align-items-center">
                                 <span class="material-symbols-rounded">logout</span>
                                 <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
                             </a>

@@ -18,10 +18,11 @@ public class CerrarSesionServlet extends HttpServlet {
         // Si hay una sesión válida, invalidarla
         if (sesion != null) {
             sesion.invalidate();
+            sesion = request.getSession();
+            sesion.setAttribute("mensajeInicio", "Se cerró sesión correctamente");
         }
 
-        // Redirigir a la página de inicio de sesión o página principal
+        // Redirigir a la página de inicio de sesión
         response.sendRedirect("loginSICE.jsp");
-
     }
 }
