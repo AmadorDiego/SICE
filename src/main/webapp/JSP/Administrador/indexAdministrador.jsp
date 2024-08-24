@@ -33,29 +33,30 @@
             </a>
 
             <div class="d-flex">
-                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center"
-                   data-bs-toggle="modal"
-                   data-bs-target="#asignarCarreraGrupoModal" data-bs-whatever="@getbootstrap">
+                <a href="grupos.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">group_add</span>
+                    <h6 class="mb-0 ms-2">Grupos</h6>
+                </a>
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
+                   data-bs-target="#asignarCarreraGrupoModal">
                     <span class="material-symbols-rounded">group_add</span>
                     <h6 class="mb-0 ms-2">Agregar a grupo</h6>
                 </a>
-                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center"
-                   data-bs-toggle="modal"
-                   data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">
+                <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
+                   data-bs-target="#exampleModal">
                     <span class="material-symbols-rounded">person_add</span>
                     <h6 class="mb-0 ms-2">Agregar usuario</h6>
                 </a>
-                <a href="indexAdministrador.jsp"
-                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="indexAdministrador.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">home</span>
                     <h6 class="mb-0 ms-2">Inicio</h6>
                 </a>
 
 
+
                 <!------------- Boton dezplegable ---------------->
                 <div class="dropdown dropstart">
-                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
                     <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
@@ -66,7 +67,7 @@
                             </a>
                         </li>
                         <li class="p-2">
-                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                            <a href="../../CerrarSesionServlet" class="btn btn-danger bg-red-SICE d-flex align-items-center">
                                 <span class="material-symbols-rounded">logout</span>
                                 <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
                             </a>
@@ -91,6 +92,11 @@
         <h1 class="text-white mt-2">Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
         </h1>
     </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+
+        </div>
 
 
         <!---//////////////////////////////////////Contenido//////////////////////////////////////////////////-->
@@ -147,7 +153,7 @@
                                 <%
                                     if (u.getEstado() == 1) { %>
                                 <!-- Boton que activa la alerta -->
-                                <button type="button" class="btn btn-warning bg-red-SICE border-0 text-white me-0"
+                                <button type="button" class="btn btn-danger bg-red-SICE border-0 text-white me-0"
                                         data-bs-toggle="modal" data-bs-target="#exampleModal_<%= u.getId_usuario() %>">
                                     <span class="material-symbols-rounded justify-content-center">delete</span>
                                 </button>
@@ -195,7 +201,7 @@
                                                         id="botonCancelar_<%= u.getId_usuario() %>">
                                                     Cancelar
                                                 </button>
-                                                <a class="btn btn-warning bg-red-SICE border-0 text-white"
+                                                <a class="btn btn-danger bg-red-SICE border-0 text-white"
                                                         <%
                                                             if (u.getEstado() == 1) { // %>
                                                    href="../../EliminacionLogServlet?id_usuario=<%=u.getId_usuario()%>">Deshabilitar</a>

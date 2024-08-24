@@ -143,4 +143,84 @@ public class GrupoDao {
         }
         return flag;
     }
+
+    public boolean crearGrupo(int id_carrera, int grado, String grupo, int id_periodo) {
+        boolean flag = false;
+        String query = "insert into grupo (carrera_id_carrera, grado, grupo, periodo_id_periodo) values (?, ?, ?, ?);";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_carrera);
+            ps.setInt(2,grado);
+            ps.setString(3,grupo);
+            ps.setInt(4,id_periodo);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public boolean deleteUsuariosGrupo(int id_grupo, int id_usuario) {
+        boolean flag = false;
+        String query = "delete from usuario_tiene_grupo where grupo_id_grupo = ? and usuario_id_usuario = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            ps.setInt(2,id_usuario);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public boolean deleteGrupo(int id_grupo) {
+        boolean flag = false;
+        String query = "delete from grupo where id_grupo = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_grupo);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
+    public boolean updateGrupo(int id_carrera, int grado, String grupo, int id_periodo, int id_grupo) {
+        boolean flag = false;
+        String query = "update grupo set carrera_id_carrera = ? and grado = ? and grupo = ? and periodo_id_periodo = ? where id_grupo = ?;";
+        try{
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_carrera);
+            ps.setInt(2,grado);
+            ps.setString(3,grupo);
+            ps.setInt(4,id_periodo);
+            ps.setInt(5,id_grupo);
+            if(ps.executeUpdate()>0){
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }
