@@ -51,6 +51,7 @@ public class PreguntaDao {
         return flag;
     }
 
+    //PreguntaDao
     public ArrayList<Pregunta> getAll(int id_examen) {
         ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
         String query = "select id_pregunta, pregunta, id_tipo_pregunta from pregunta join examen_tiene_pregunta on id_pregunta = pregunta_id_pregunta " +
@@ -100,4 +101,29 @@ public class PreguntaDao {
         return preguntas;
     }
 
+    //preguntaDao
+    public Pregunta getOne(int id_pregunta) {
+        Pregunta pregunta = null;
+        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM pregunta WHERE id_pregunta = ?";
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_pregunta);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                pregunta = new Pregunta();
+                pregunta.setId_pregunta(rs.getInt("id_pregunta"));
+                pregunta.setPregunta(rs.getString("pregunta"));
+                pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pregunta;
+    }
 }
