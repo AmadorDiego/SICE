@@ -128,7 +128,7 @@ public class ExamenDao {
     // metodo llamado al asignar un examen por docente O metodo llamado cuando un alumno manda un examen
     public boolean examenAsignadoCompletado(int id_examen, int id_usuario) {
         boolean flag = false;
-        String query = "update usuario_tiene_examen set estado = 2 where id_examen = ? and id_usuario = ?;";
+        String query = "update usuario_tiene_examen set estado = 2 where examen_id_examen = ? and usuario_id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);

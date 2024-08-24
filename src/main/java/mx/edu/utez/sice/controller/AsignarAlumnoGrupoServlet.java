@@ -37,6 +37,6 @@ public class AsignarAlumnoGrupoServlet extends HttpServlet {
             sesion.setAttribute("mensaje","Ocurrio un error al asignar el grupo");
             sesion.setAttribute("flag", false);
         }
-        resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
+        resp.sendRedirect("JSP/Administrador/grupos.jsp");
     }
 }

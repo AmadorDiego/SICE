@@ -6,6 +6,9 @@ public class Periodo {
     private String fecha_inicio;
     private String fecha_final;
 
+    public Periodo() {
+    }
+
     public Periodo(int id_periodo, String descripcion, String fecha_inicio, String fecha_final) {
         this.id_periodo = id_periodo;
         this.descripcion = descripcion;
