@@ -51,6 +51,7 @@ public class PreguntaDao {
         return flag;
     }
 
+    //PreguntaDao -----
     public ArrayList<Pregunta> getAll(int id_examen) {
         ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
         String query = "select id_pregunta, pregunta, id_tipo_pregunta from pregunta join examen_tiene_pregunta on id_pregunta = pregunta_id_pregunta " +
@@ -76,13 +77,13 @@ public class PreguntaDao {
         return listaPreguntas;
     }
 
-    public ArrayList<Pregunta> getAll() {
+    public ArrayList<Pregunta> getAllByUsuario(int id_usuario) {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
-        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM pregunta";
-
+        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM usuario JOIN usuario_tiene_examen ue ON id_usuario = usuario_id_usuario JOIN examen ON ue.examen_id_examen = id_examen JOIN examen_tiene_pregunta ep ON id_examen = ep.examen_id_examen JOIN pregunta ON pregunta_id_pregunta = id_pregunta where id_usuario = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Pregunta pregunta = new Pregunta();
@@ -100,4 +101,29 @@ public class PreguntaDao {
         return preguntas;
     }
 
+    //preguntaDao
+    public Pregunta getOne(int id_pregunta) {
+        Pregunta pregunta = null;
+        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM pregunta WHERE id_pregunta = ?";
+
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_pregunta);
+            ResultSet rs = ps.executeQuery();
+
+            if(rs.next()){
+                pregunta = new Pregunta();
+                pregunta.setId_pregunta(rs.getInt("id_pregunta"));
+                pregunta.setPregunta(rs.getString("pregunta"));
+                pregunta.setId_tipo_pregunta(rs.getInt("id_tipo_pregunta"));
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return pregunta;
+    }
 }

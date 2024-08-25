@@ -33,6 +33,7 @@ public class OpcionDao {
         return id_opcion;
     }
 
+    //OpcionDao ------
     public ArrayList<Opcion> getAll(int id_pregunta) {
         ArrayList<Opcion> listaOpciones = new ArrayList<>();
         String query = "select id_opcion, opcion, correcta from opcion join pregunta_opcion on id_opcion = opcion_id_opcion\n" +

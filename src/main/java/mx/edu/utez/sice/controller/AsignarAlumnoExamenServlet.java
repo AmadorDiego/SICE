@@ -23,8 +23,13 @@ public class AsignarAlumnoExamenServlet extends HttpServlet {
         // Si hay usuarios seleccionados, inserta cada uno en el grupo
         if (alumnos_seleccionados != null) {
             for (String usuario_id_usuario : alumnos_seleccionados) {
-                int id_usuario = Integer.parseInt(usuario_id_usuario);  // Convierte el ID a entero
-                flag = examenDao.insertExamenUsuario(id_usuario, id_examen); // Inserta en la base de datos
+                int id_usuario = Integer.parseInt(usuario_id_usuario);
+                if (examenDao.insertExamenUsuario(id_usuario, id_examen)) {
+                    flag = examenDao.examenAsignadoCompletado(id_examen, id_usuario);
+                    if (!flag) {
+                        break; // Si falla la actualización de estado, salimos del bucle
+                    }
+                }
             }
         }
         HttpSession sesion = req.getSession();

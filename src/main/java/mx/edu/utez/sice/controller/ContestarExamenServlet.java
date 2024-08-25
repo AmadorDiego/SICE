@@ -35,7 +35,6 @@ public class ContestarExamenServlet extends HttpServlet {
 
         // Inicializar DAOs
         PreguntaDao preguntaDao = new PreguntaDao();
-        OpcionDao opcionDao = new OpcionDao();
         ExamenDao examenDao = new ExamenDao();
         AplicacionDao aplicacionDao = new AplicacionDao();
         int id_aplicacion = aplicacionDao.insertExamen(examen.getId_examen());
@@ -64,10 +63,14 @@ public class ContestarExamenServlet extends HttpServlet {
 
         // Redirigir según el resultado de la operación
         if (flag) {
-            sesion.setAttribute("mensaje", "Respuestas guardadas exitosamente");
-            resp.sendRedirect("JSP/Alumno/indexAlumno.jsp");
+            if (examenDao.examenAsignadoCompletado(examen.getId_examen(), id_usuario)){
+                sesion.setAttribute("mensajeAlumno", "Respuestas guardadas exitosamente");
+                sesion.setAttribute("flag", true);
+            }
         } else {
-            sesion.setAttribute("mensaje", "Ocurrió un error al guardar las respuestas");
+            sesion.setAttribute("mensajeAlumno", "Ocurrió un error al guardar las respuestas");
+            sesion.setAttribute("flag", false);
         }
+        resp.sendRedirect("JSP/Alumno/indexAlumno.jsp");
     }
 }

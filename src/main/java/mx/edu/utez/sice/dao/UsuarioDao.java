@@ -196,6 +196,31 @@ public class UsuarioDao {
         return lista;
     }
 
+    public ArrayList<Usuario> getAllUsuariosConGrupo(int id_grupo){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String query = "select id_usuario, nombre_usuario, apellido_usuario, correo_electronico from usuario join usuario_tiene_grupo on id_usuario = usuario_id_usuario where grupo_id_grupo = ? order by apellido_usuario;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
+            PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
+            ps.setInt(1,id_grupo);
+            ResultSet rs = ps.executeQuery(); //ejecutar
+            while (rs.next()) { //lo ejecuta por cada ususario en la base de datos
+                Usuario u = new Usuario();
+                u.setId_usuario(rs.getInt("id_usuario"));
+                u.setNombre_usuario(rs.getString("nombre_usuario"));
+                u.setApellido_usuario(rs.getString("apellido_usuario"));
+                u.setCorreo_electronico(rs.getString("correo_electronico"));
+                lista.add(u);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
     public ArrayList<Usuario> getAllAlumnosSinGrupo(){
         ArrayList<Usuario> lista = new ArrayList<>();
         String query = "SELECT id_usuario, nombre_usuario, apellido_usuario, correo_electronico, estado FROM usuario LEFT JOIN usuario_tiene_grupo ON id_usuario = usuario_id_usuario WHERE id_tipo_usuario = 3 AND usuario_id_usuario IS NULL;";

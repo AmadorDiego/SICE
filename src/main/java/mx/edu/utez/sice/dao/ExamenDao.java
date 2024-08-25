@@ -102,7 +102,32 @@ public class ExamenDao {
 
     public ArrayList<Examen> getAll(int id_usuario) {
         ArrayList<Examen> lista = new ArrayList<>();
-        String query = "SELECT id_examen, nombre_examen, cantidad_preguntas, descripcion FROM examen join usuario_tiene_examen on id_examen = examen_id_examen join usuario on usuario_id_usuario = id_usuario where id_usuario = ?;";
+        String query = "SELECT id_examen, nombre_examen, cantidad_preguntas, descripcion FROM examen join usuario_tiene_examen ue on id_examen = examen_id_examen join usuario on usuario_id_usuario = id_usuario where id_usuario = ? and ue.estado != 2;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Examen examen = new Examen();
+                examen.setId_examen(rs.getInt("id_examen"));
+                examen.setNombre_examen(rs.getString("nombre_examen"));
+                examen.setCantidad_preguntas(rs.getInt("cantidad_preguntas"));
+                examen.setDescripcion(rs.getString("descripcion"));
+                lista.add(examen);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
+
+    public ArrayList<Examen> getAllAsignadosCompletados(int id_usuario) {
+        ArrayList<Examen> lista = new ArrayList<>();
+        String query = "SELECT id_examen, nombre_examen, cantidad_preguntas, descripcion FROM examen join usuario_tiene_examen ue on id_examen = examen_id_examen join usuario on usuario_id_usuario = id_usuario where id_usuario = ? and ue.estado != 1;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -128,7 +153,7 @@ public class ExamenDao {
     // metodo llamado al asignar un examen por docente O metodo llamado cuando un alumno manda un examen
     public boolean examenAsignadoCompletado(int id_examen, int id_usuario) {
         boolean flag = false;
-        String query = "update usuario_tiene_examen set estado = 2 where id_examen = ? and id_usuario = ?;";
+        String query = "update usuario_tiene_examen set estado = 2 where examen_id_examen = ? and usuario_id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
