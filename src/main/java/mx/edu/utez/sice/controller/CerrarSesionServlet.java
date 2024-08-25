@@ -19,9 +19,10 @@ public class CerrarSesionServlet extends HttpServlet {
         if (sesion != null) {
             sesion.invalidate();
             sesion = request.getSession();
-            sesion.setAttribute("mensajeInicio", "Se cerró sesión correctamente");
+            if (!Boolean.parseBoolean(request.getParameter("denegado"))){
+                sesion.setAttribute("mensajeInicio", "Se cerró sesión correctamente");
+            }
         }
-
         // Redirigir a la página de inicio de sesión
         response.sendRedirect("loginSICE.jsp");
     }

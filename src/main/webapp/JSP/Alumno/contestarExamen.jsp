@@ -9,6 +9,7 @@
         HttpSession sesion = request.getSession();
         Examen examen = (Examen) sesion.getAttribute("examenAlumno");
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAlumno");
+        if (usuario != null){
     %>
     <title><%= examen.getNombre_examen() %></title>
     <link rel="stylesheet" type="text/css" href="../../CSS/datatables.css">
@@ -106,3 +107,4 @@
 <script src="../../JS/bootstrap.js"></script>
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

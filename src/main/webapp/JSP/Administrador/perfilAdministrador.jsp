@@ -1,3 +1,4 @@
+<%@ page import="mx.edu.utez.sice.model.Usuario" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,11 @@
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <%
+        HttpSession sesion = request.getSession();
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAdministrador");
+        if (usuario != null){
+    %>
 </head>
 <body>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
@@ -103,3 +109,4 @@
     <script src="../../JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>
