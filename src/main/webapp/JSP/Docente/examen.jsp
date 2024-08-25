@@ -1,7 +1,3 @@
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
-<%@ page import="mx.edu.utez.sice.model.*" %>
-<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
 <%--
   Created by IntelliJ IDEA.
   User: corey
@@ -12,11 +8,9 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
 <%@ page import="mx.edu.utez.sice.model.*" %>
-<%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
-<%@ page import="java.util.List" %>
 <%@ page import="java.util.logging.Level" %>
-<%@ page import="com.google.gson.Gson" %>
 <%@ page import="java.util.logging.Logger" %>
+<%@ page import="mx.edu.utez.sice.dao.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="es">
 <head>
@@ -115,7 +109,20 @@
             <div id="banco-preguntas" class="bg-light p-3 rounded">
                 <h3>Banco de Preguntas</h3>
                 <input type="text" id="buscar-banco" class="form-control mb-3" placeholder="Buscar pregunta...">
-                <ul id="lista-banco-preguntas" class="list-unstyled">
+
+                <!--Nuevas funcionalidades, DONDE NO SE DEBERIAN IMPLEMENTAR-->
+                <!--<select id="tipo_pregunta" class="form-control mb-2">
+                    <option value="abierta">Abierta</option>
+                    <option value="cerrada">Cerrada</option>
+                </select>
+                <input type="text" id="texto_pregunta" class="form-control mb-2" placeholder="Ingrese la pregunta">-->
+                <div id="opciones_container" style="display: none;">
+                    <!-- Opciones para preguntas cerradas -->
+                </div>
+                <!--<button onclick="agregarPreguntaBanco()" class="btn btn-primary mb-2">Agregar al Banco</button>
+                <button id="agregar_opcion_btn" onclick="agregarOpcionBanco()" class="btn btn-secondary mb-2"
+                        style="display: none;">Agregar Opción</button>-->
+                <ul id="listaPreguntas" class="list-unstyled">
                     <%
                         Logger logger = Logger.getLogger("examen.jsp");
                         int i = 0;
@@ -126,9 +133,11 @@
                                 i++;
                     %>
                     <li data-id-pregunta="<%=pregunta.getId_pregunta()%>" data-tipo-pregunta="<%=pregunta.getId_tipo_pregunta()%>">
-                        <input type="checkbox" name="preguntasSeleccionadas" value="<%=pregunta.getId_pregunta()%>"
-                               id="pregunta-<%=pregunta.getId_pregunta()%>" onchange="togglePregunta(<%=pregunta.getId_pregunta()%>)">
-                        <label for="pregunta-<%=pregunta.getId_pregunta()%>">
+                        <button type="button" class="btn btn-sm btn-primary"
+                                onclick="agregarPregunta(<%=pregunta.getId_pregunta()%>)">
+                            Agregar
+                        </button>
+                        <label>
                             Pregunta <%=i%>: <%=pregunta.getPregunta()%>
                         </label>
                     </li>
@@ -143,6 +152,7 @@
                     %>
                 </ul>
             </div>
+
         </div>
 
         <div class="col-md-9">
@@ -179,22 +189,67 @@
                         <button type="button" class="btn btn-secondary gray-SICE text-white"
                                 onclick="agregarPregunta('abierta')">Pregunta abierta</button>
                     </div>
+
+                    <div id="preguntas_existentes">
+                    <%
+                        PreguntaDao preguntaDao = new PreguntaDao();
+                        OpcionDao opcionDao = new OpcionDao();
+                        PreguntaOpcionDao preguntaOpcionDao = new PreguntaOpcionDao();
+                        Examen examen = new Examen();
+                        ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen());
+
+                        i = 0;
+                        for (Pregunta pregunta : listaPreguntas) {
+                            i++;
+                    %>
+                        <div class="pregunta-container mb-4">
+                            <div class="mb-3">
+                                <label class="form-label text-white h5">Pregunta <%=i%> </label>
+                                <input class="form-control" type="text" name="pregunta_<%=pregunta.getId_pregunta()%>"
+                                required value="<%=pregunta.getPregunta()%>">
+                            </div>
+                            <% if (pregunta.getId_tipo_pregunta()==2) { %>
+                            <div class="opciones-container">
+                                <%
+                                ArrayList<Opcion> listaOpciones = opcionDao.getAll(pregunta.getId_pregunta());
+                                int j = 0;
+                                for (Opcion opcion : listaOpciones) {
+                                    PreguntaOpcion preguntaOpcion = preguntaOpcionDao.getOne
+                                            (pregunta.getId_pregunta(), opcion.getId_opcion());
+                                    j++;
+                                %>
+                                <div class="mb-2 mt-3 d-flex px-3">
+                                    <input class="d-flex form-check-input me-2 align-self-center" type="radio"
+                                           name="pregunta_<%=pregunta.getId_pregunta()%>_opcion_correcta"
+                                           value="<%=opcion.getId_opcion()%>"
+                                        <%=preguntaOpcion.getCorrecta() == 1 ? "checked" : ""%>>
+
+                                    <input class="d-flex form-control align-self-center" type="text"
+                                           name="pregunta_<%=pregunta.getId_pregunta()%>_opcion_<%=opcion.getId_opcion()%>"
+                                           required value="<%=opcion.getOpcion()%>">
+                                </div>
+                                <% } %>
+                            </div>
+                        <% } %>
+                        </div>
+                    <% } %>
+                    </div>
+
                     <button class="btn btn-primary bg-blue-utz mt-3 d-flex" type="submit" value="Crear">
                         <h6 class="d-block me-2">Crear </h6>
                         <span class="material-symbols-rounded d-block">check_circle</span>
                     </button>
+
                 </form>
             </div>
         </div>
     </div>
 </div>
 
-<!--<script src="ruta/a/tu/ScriptExamen.js"></script>-->
-
 <script src="${pageContext.request.contextPath}/JS/jquery-3.7.0.js"></script>
 <script src="${pageContext.request.contextPath}/JS/bootstrap.js"></script>
 <script src="${pageContext.request.contextPath}/JS/ScriptExamen.js"></script>
-
+<script src="${pageContext.request.contextPath}/JS/bancoPreguntas.js"></script>
 </body>
 </html>
 

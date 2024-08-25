@@ -51,7 +51,7 @@ public class PreguntaDao {
         return flag;
     }
 
-    //PreguntaDao
+    //PreguntaDao -----
     public ArrayList<Pregunta> getAll(int id_examen) {
         ArrayList<Pregunta> listaPreguntas = new ArrayList<>();
         String query = "select id_pregunta, pregunta, id_tipo_pregunta from pregunta join examen_tiene_pregunta on id_pregunta = pregunta_id_pregunta " +

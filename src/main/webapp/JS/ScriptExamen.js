@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let bancoPreguntas = [];
+
     let preguntaIndex = 0;
 
     // Make these functions global
@@ -74,9 +74,9 @@ document.addEventListener('DOMContentLoaded', function () {
         const cantidadPreguntas = document.querySelectorAll('.pregunta-container').length;
         document.getElementById('cantidad_preguntas').value = cantidadPreguntas;
     }
+    //-----------------------------------------------------------------------------------------------------------------------------
+    // Función para agregar una pregunta al banco de preguntas
 
-    // Initialize any necessary event listeners or other setup here
 });
-
 
 
