@@ -77,13 +77,13 @@ public class PreguntaDao {
         return listaPreguntas;
     }
 
-    public ArrayList<Pregunta> getAll() {
+    public ArrayList<Pregunta> getAllByUsuario(int id_usuario) {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
-        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM pregunta";
-
+        String query = "SELECT id_pregunta, pregunta, id_tipo_pregunta FROM usuario JOIN usuario_tiene_examen ue ON id_usuario = usuario_id_usuario JOIN examen ON ue.examen_id_examen = id_examen JOIN examen_tiene_pregunta ep ON id_examen = ep.examen_id_examen JOIN pregunta ON pregunta_id_pregunta = id_pregunta where id_usuario = ?;";
         try {
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id_usuario);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Pregunta pregunta = new Pregunta();

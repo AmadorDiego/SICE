@@ -121,7 +121,7 @@
                         int i = 0;
                         try {
                             PreguntaDao bancoPreguntaDao = new PreguntaDao();
-                            ArrayList<Pregunta> todasLasPreguntas = bancoPreguntaDao.getAll();
+                            ArrayList<Pregunta> todasLasPreguntas = bancoPreguntaDao.getAllByUsuario(usuario.getId_usuario());
                             for (Pregunta pregunta : todasLasPreguntas) {
                                 i++;
                     %>
