@@ -29,8 +29,4 @@ public class AsignarExamenServlet extends HttpServlet {
         sesion.setAttribute("examen", examen);
         resp.sendRedirect("JSP/Docente/asignarExamen.jsp");
     }
-
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
 }

@@ -245,19 +245,18 @@ public class UsuarioDao {
         return lista;
     }
 
-    public boolean updateDocenteAdministrador(Usuario u){
+    public boolean updateUsuario(Usuario u){
         boolean flag = false;
-        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, contrasena = sha2(?,256), estado = ?, id_tipo_usuario = ? where id_usuario = ?;";
+        String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, estado = ?, id_tipo_usuario = ? where id_usuario = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1,u.getNombre_usuario());
             ps.setString(2,u.getApellido_usuario());
             ps.setString(3,u.getCorreo_electronico());
-            ps.setString(4,u.getContrasena());
-            ps.setInt(5,u.getEstado());
-            ps.setInt(6,u.getId_tipo_usuario());
-            ps.setInt(7,u.getId_usuario());
+            ps.setInt(4,u.getEstado());
+            ps.setInt(5,u.getId_tipo_usuario());
+            ps.setInt(6,u.getId_usuario());
             if(ps.executeUpdate()>0){
                 flag = true;
             }
@@ -345,7 +344,7 @@ public class UsuarioDao {
 
     public boolean actualizarContrasena(String contra, String codigo) {
         boolean flag = false;
-        String query = "update usuario set contra = sha2(?,256), codigo = null where codigo = ?;";
+        String query = "update usuario set contrasena = sha2(?,256), codigo = null where codigo = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);
@@ -364,4 +363,25 @@ public class UsuarioDao {
         }
         return flag;
     }
+
+    public Boolean updateContrasena(String contrasena, int id_usuario) {
+        boolean flag = false;
+        String query = "update usuario set contrasena = sha2(?,256) where id_usuario = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, contrasena);
+            ps.setInt(2, id_usuario);
+            int rowsUpdated = ps.executeUpdate(); // Cambia a executeUpdate()
+            if (rowsUpdated > 0) {
+                flag = true;
+            }
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
+
 }

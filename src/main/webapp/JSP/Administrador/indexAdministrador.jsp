@@ -137,10 +137,65 @@
                                     }%></td>
                             <td class="d-none d-md-table-cell"><%=u.getFecha_registrado()%>
                             </td>
-                            <td><a class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0"
-                                   href="../../ActualizarUsuarioServlet?id_usuario=<%=u.getId_usuario()%>">
-                                <span class="material-symbols-rounded justify-content-center">edit</span>
-                            </a>
+                            <td>
+                                <!-- Botón para mostrar el modal -->
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#usuario_<%=u.getId_usuario()%>" class="btn btn-success bg-green-SICE-obscuro border-0 text-white me-0">
+                                    <span class="material-symbols-rounded justify-content-center">edit</span>
+                                </button>
+
+                                <!-- Modal para editar un usuario -->
+                                <div class="modal fade" id="usuario_<%=u.getId_usuario()%>" tabindex="-1" aria-labelledby="label_usuario_<%=u.getId_usuario()%>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header bg-blue-utz">
+                                                <h1 class="modal-title fs-5 text-white" id="label_usuario_<%=u.getId_usuario()%>">
+                                                    Editar usuario:
+                                                </h1>
+                                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="../../ActualizarUsuarioServlet" id="actualizar_usuario">
+                                                    <input type="hidden" value="<%=u.getId_usuario()%>" name="id_usuario">
+                                                    <div class="row">
+                                                        <div>
+                                                            <label class="col-form-label h6">Ingrese su nombre: </label>
+                                                            <input required class="form-control" type="text" name="nombre_usuario" value="<%=u.getNombre_usuario()%>"
+                                                                   placeholder="<%=u.getNombre_usuario()%>">
+                                                        </div>
+                                                        <div>
+                                                            <label class="col-form-label h6">Ingrese su apellido: </label>
+                                                            <input required class="form-control" type="text" name="apellido_usuario" value="<%=u.getApellido_usuario()%>"
+                                                                   placeholder="<%=u.getApellido_usuario()%>">
+                                                        </div>
+                                                        <div>
+                                                            <label class="col-form-label h6">Ingrese su correo electrónico: </label>
+                                                            <input required class="form-control" type="email" name="correo_electronico" value="<%=u.getCorreo_electronico()%>"
+                                                                   placeholder="<%=u.getCorreo_electronico()%>">
+                                                        </div>
+                                                        <div class="col-md-8 col-12 p-3">
+                                                            <label class="col-form-label h6">Ingrese el tipo de usuario: </label>
+                                                            <select required class="form-control" name="id_tipo_usuario">
+                                                                <option value="1" <%if (u.getId_tipo_usuario()==1){%>selected<%}%>>Administrador</option>
+                                                                <option value="2" <%if (u.getId_tipo_usuario()==2){%>selected<%}%>>Docente</option>
+                                                                <option value="3" <%if (u.getId_tipo_usuario()==3){%>selected<%}%>>Alumno</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-4 col-12 p-3">
+                                                            <label class="col-form-label h6" for="estado">Estado</label>
+                                                            <div class="form-check form-switch">
+                                                                <input class="form-check-input" type="checkbox" role="switch" name="estado" id="estado" <% if(u.getEstado()==1){%>checked<%}%>>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%=u.getId_usuario()%>">Cancelar </button>
+                                                <button type="submit" form="actualizar_usuario" class="btn btn-success bg-green-utz justify-content-center mb-0" value="Actualizar">Actualizar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </td>
                             <!----------------------- Esta es la columna que contienen todo el codigo de la alerta, perdon si se ve horrible -EBM -------------------------->
                             <td>

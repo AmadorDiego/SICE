@@ -60,7 +60,7 @@
                     </button>
                     <ul class="dropdown-menu bg-blue-utz" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                            <a href="perfilAlumno.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
                                 <h6 class="mb-0 ms-2">Perfil</h6>
                             </a>

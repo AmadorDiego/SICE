@@ -204,4 +204,28 @@ public class GrupoDao {
         }
         return flag;
     }
+
+    public Grupo getGrupoAlumno (int id_usuario){
+        Grupo grupo = new Grupo();
+        String query = "select id_grupo, grado, grupo, periodo_id_periodo, carrera_id_carrera from grupo join usuario_tiene_grupo on id_grupo = grupo_id_grupo join usuario on usuario_id_usuario = id_usuario where id_usuario = ? and id_tipo_usuario = 3;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,id_usuario);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                grupo.setId_grupo(rs.getInt("id_grupo"));
+                grupo.setGrado(rs.getInt("grado"));
+                grupo.setGrupo(rs.getString("grupo"));
+                grupo.setId_periodo(rs.getInt("periodo_id_periodo"));
+                grupo.setId_carrera(rs.getInt("carrera_id_carrera"));
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return grupo;
+    }
 }

@@ -27,14 +27,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-blue-utz">
         <div class="container-fluid">
             <img src="IMG/logoBueno.png" class="me-0 d-flex justify-content-start" width="50" height="45" alt="Logo">
-            <ul class="navbar-nav mb-1">
-                <li class="nav-item me-2">
-                    <a class="text-white btn btn-primary border-0 bg-blue-utz d-flex align-items-center justify-content-end"
-                       href="loginSICE.jsp">
-                        <h6 class="mb-0 p-1">Iniciar Sesion</h6>
-                    </a>
-                </li>
-            </ul>
         </div>
     </nav>
 </header>
@@ -63,7 +55,13 @@
     <div class="row d-flex mt-4 mb-5">
         <div class="col-12 mb-2">
             <h1 class="blue-utz d-flex justify-content-center"><strong>¡Bienvenido a SICE!</strong></h1>
-            <h2 class="blue-utz d-flex justify-content-center"><strong>(Sistema de Creacion de Examenes)</strong></h2>
+            <br>
+            <div class="text-center">
+                <a class="text-white btn btn-success border-0 bg-green-SICE-obscuro"
+                   href="loginSICE.jsp">
+                    <h6 class="mb-0 p-1">Iniciar Sesion</h6>
+                </a>
+            </div>
         </div>
     </div>
     <div class="row d-flex justify-content-center align-items-center mt-2">
@@ -72,30 +70,30 @@
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3 d-flex flex-column align-items-center mb-md-0 mb-2">
                 <div class="d-flex justify-content-center">
-                    <img width="120" height="140" src="IMG/alumicon.svg" alt="Admin icon">
+                    <img width="80" height="45" src="IMG/alumicon.svg" alt="Admin icon">
                 </div>
-                <h2 class="text-white p-2 text-center">Alumno</h2>
-                <h4 class="text-white p-2 text-center">Crea examenes, calificalos y contestalos de manera rapida y eficiente.</h4>
+                <h4 class="text-white p-2 text-center">Alumno</h4>
+                <h6 class="text-white p-2 text-center">Responde los examenes que te asignen tus docentes y consulta tus respuestas y tu calificación.</h6>
             </div>
         </div>
 
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3 d-flex flex-column align-items-center mb-md-0 mb-2">
                 <div class="d-flex justify-content-center">
-                    <img width="120" height="140" src="IMG/docenteicon.svg" alt="Admin icon">
+                    <img width="80" height="45" src="IMG/docenteicon.svg" alt="Admin icon">
                 </div>
-                <h2 class="text-white p-2 text-center">Docente</h2>
-                <h4 class="text-white p-2 text-center">Crea examenes, asignalos y calificalos.</h4>
+                <h4 class="text-white p-2 text-center">Docente</h4>
+                <h6 class="text-white p-2 text-center">Crea examenes para los grupos que impartes y calificalos dependiendo las respuestas.</h6>
             </div>
         </div>
 
         <div class="col-12 col-md-4">
             <div class="bg-blue-utz rounded-5 p-3 d-flex flex-column align-items-center mb-md-0 mb-2">
                 <div class="d-flex justify-content-center">
-                    <img width="120" height="140" src="IMG/adminicon.svg" alt="Admin icon">
+                    <img width="80" height="45" src="IMG/adminicon.svg" alt="Admin icon">
                 </div>
-                <h2 class="text-white p-2 text-center">Administrador</h2>
-                <h4 class="text-white p-2 text-center">Registra, elimina, modifica grupos y alumnos.</h4>
+                <h4 class="text-white p-2 text-center">Administrador</h4>
+                <h6 class="text-white p-2 text-center">Crea una cuenta a los usuarios para ingresar al sitio y crea los grupos con cada alumno.</h6>
             </div>
         </div>
     </div>

@@ -83,8 +83,8 @@
             <h3 class="text-center"><strong>
                 <%ExamenDao examenDao = new ExamenDao();
                 UsuarioDao usuarioDao = new UsuarioDao();
-                ArrayList<Examen> examenes = examenDao.getAll(usuario.getId_usuario());
-                if (examenes == null || examenes.isEmpty()) {%>¡Genial, no tienes examenes pendientes aún!</strong></h3>
+                ArrayList<Examen> examenes = examenDao.getAllAsignadosCompletados(usuario.getId_usuario());
+                if (examenes == null || examenes.isEmpty()) {%>No tienes examenes completados aún</strong></h3>
             <hr><%}else {%>Examenes realizados
             </strong></h3>
             <hr>

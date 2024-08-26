@@ -32,7 +32,6 @@ public class ModificarExamenServlet extends HttpServlet {
         OpcionDao opcionDao = new OpcionDao();
         ArrayList<Opcion> listaOpciones = opcionDao.getAll(examen.getId_examen());
 
-        // llevamos la información a un formulario que está en la vista actualizarUsuario.jsp para actualizar
         HttpSession sesion = req.getSession();
         sesion.setAttribute("examen", examen);
         sesion.setAttribute("preguntas", listaPreguntas);
