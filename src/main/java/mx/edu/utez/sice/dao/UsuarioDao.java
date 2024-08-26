@@ -245,6 +245,30 @@ public class UsuarioDao {
         return lista;
     }
 
+    public ArrayList<Usuario> getAllAlumnosExamenContestado(int id_examen){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String query = "SELECT u.id_usuario, u.nombre_usuario, u.apellido_usuario, u.correo_electronico FROM sice.usuario u JOIN sice.usuario_tiene_examen ute ON u.id_usuario = ute.usuario_id_usuario WHERE ute.examen_id_examen = ? AND ute.estado = 2 and u.id_tipo_usuario = 3;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection(); //conección a la base
+            PreparedStatement ps = con.prepareStatement(query); //preparar la base de datos
+            ps.setInt(1,id_examen);
+            ResultSet rs = ps.executeQuery(); //ejecutar
+            while (rs.next()) { //lo ejecuta por cada ususario en la base de datos
+                Usuario u = new Usuario();
+                u.setId_usuario(rs.getInt("id_usuario"));
+                u.setNombre_usuario(rs.getString("nombre_usuario"));
+                u.setApellido_usuario(rs.getString("apellido_usuario"));
+                u.setCorreo_electronico(rs.getString("correo_electronico"));
+                lista.add(u);
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        }catch (SQLException e){
+        }
+        return lista;
+    }
+
     public boolean updateUsuario(Usuario u){
         boolean flag = false;
         String query = "update usuario set nombre_usuario = ?, apellido_usuario = ?, correo_electronico = ?, estado = ?, id_tipo_usuario = ? where id_usuario = ?;";

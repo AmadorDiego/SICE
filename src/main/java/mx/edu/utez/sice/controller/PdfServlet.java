@@ -19,7 +19,7 @@ public class PdfServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         //Seleccinar una imagen de los assets (logo)
-        FileInputStream archivo = new FileInputStream(req.getSession().getServletContext().getResource("/IMG/logo_sice.png").getFile());
+        FileInputStream archivo = new FileInputStream(req.getSession().getServletContext().getResource("/IMG/logoBueno.png").getFile());
 //Obtener ubicación y bytes del reporte
         String report = "/WEB-INF/integradora.jasper";
         File file = new File(getServletContext().getRealPath(report));

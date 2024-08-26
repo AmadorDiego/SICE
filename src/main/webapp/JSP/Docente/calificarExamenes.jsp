@@ -18,7 +18,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 
-    <title>Bienvenido docente</title>
+    <title>Examenes asignados por calificar</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
@@ -60,10 +60,6 @@
                     <span class="material-symbols-rounded">groups</span>
                     <h6 class="mb-0 ms-2">Grupos</h6>
                 </a>
-                <a href="calificarExamenes.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
-                    <span class="material-symbols-rounded">pending_actions</span>
-                    <h6 class="mb-0 ms-2">Calificar examenes</h6>
-                </a>
                 <a href="indexDocente.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">home</span>
                     <h6 class="mb-0 ms-2">Inicio</h6>
@@ -99,9 +95,9 @@
         <hr>
         <h3 class="text-center"><strong>
             <%ExamenDao examenDao = new ExamenDao();
-            ArrayList<Examen> lista = examenDao.getAll(usuario.getId_usuario());
-            if (lista == null || lista.isEmpty()) {%>No tienes examenes creados o sin asignar aún</strong></h3>
-        <hr><%}else {%>Examenes creados por asignar
+                ArrayList<Examen> lista = examenDao.getAllAsignadosCompletados(usuario.getId_usuario());
+                if (lista == null || lista.isEmpty()) {%>No tienes examenes pendientes aún</strong></h3>
+        <hr><%}else {%>Examenes asignados
         </strong></h3>
         <hr>
     </div>
@@ -111,11 +107,10 @@
                 <table class="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th style="width: 20%">Examen</th>
+                        <th style="width: 25%">Examen</th>
                         <th style="width: 60%">Descripción</th>
-                        <th style="width: 10%">Preguntas</th>
-                        <th style="width: 5%">Ver</th>
-                        <th style="width: 5%">Asignar</th>
+                        <th style="width: 5%">PDF</th>
+                        <th style="width: 10%">Respuestas</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -123,14 +118,13 @@
                     <tr class="h6">
                         <td class="text-wrap" style="max-width: 30%; word-break: break-word;"><%= examen.getNombre_examen() %></td>
                         <td class="text-wrap" style="max-width: 50%; word-break: break-word;"><%= examen.getDescripcion() %></td>
-                        <td class="text-center"><%= examen.getCantidad_preguntas() %></td>
                         <td>
-                            <a href="../../ModificarExamenServlet?id_examen=<%=examen.getId_examen()%>"
-                               class="btn btn-primary bg-blue-utz">Ver</a>
+                            <a href="../../pdf?id_examen=<%=examen.getId_examen()%>"
+                               class="btn btn-danger bg-red-utz">PDF</a>
                         </td>
                         <td>
-                            <a href="../../AsignarGrupoExamenServlet?id_examen=<%=examen.getId_examen()%>"
-                               class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
+                            <a href="../../RespuestasServlet?id_examen=<%=examen.getId_examen()%>"
+                               class="btn btn-success bg-green-SICE-obscuro">Respuestas</a>
                         </td>
                     </tr>
                     <%

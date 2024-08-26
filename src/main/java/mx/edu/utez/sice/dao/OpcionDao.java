@@ -1,9 +1,6 @@
 package mx.edu.utez.sice.dao;
 
-import mx.edu.utez.sice.model.Opcion;
-import mx.edu.utez.sice.model.Pregunta;
-import mx.edu.utez.sice.model.PreguntaOpcion;
-import mx.edu.utez.sice.model.Usuario;
+import mx.edu.utez.sice.model.*;
 import mx.edu.utez.sice.utils.DatabaseConnectionManager;
 
 import java.sql.*;
@@ -112,5 +109,26 @@ public class OpcionDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public PreguntaOpcion getRespuestaOpcion(int idPregunta, int idAplicacion) {
+        PreguntaOpcion preguntaOpcion = new PreguntaOpcion();
+        String query = "select pregunta_opcion_opcion_id_opcion from respuesta_opcion where pregunta_opcion_pregunta_id_pregunta = ? and aplicacion_id_aplicacion = ?;";
+        try {
+            Connection con = DatabaseConnectionManager.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1,idPregunta);
+            ps.setInt(2,idAplicacion);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                preguntaOpcion.setId_opcion(rs.getInt("pregunta_opcion_opcion_id_opcion"));
+            }
+            rs.close();
+            ps.close();
+            con.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return preguntaOpcion;
     }
 }

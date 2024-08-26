@@ -7,7 +7,7 @@ public class Aplicacion {
     private int id_periodo;
     private int id_examen;
     //ArrayList para la tabla respuesta_opcion
-    private ArrayList<PreguntaOpcion> respuesta_opcion;
+    private ArrayList<Integer> respuesta_opcion;
 
     public Aplicacion() {
     }
@@ -42,11 +42,11 @@ public class Aplicacion {
         this.id_examen = id_examen;
     }
 
-    public ArrayList<PreguntaOpcion> getRespuesta_opcion() {
+    public ArrayList<Integer> getRespuesta_opcion() {
         return respuesta_opcion;
     }
 
-    public void setRespuesta_opcion(ArrayList<PreguntaOpcion> respuesta_opcion) {
+    public void setRespuesta_opcion(ArrayList<Integer> respuesta_opcion) {
         this.respuesta_opcion = respuesta_opcion;
     }
 }

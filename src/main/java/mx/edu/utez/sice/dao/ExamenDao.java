@@ -170,26 +170,6 @@ public class ExamenDao {
         return flag;
     }
 
-    /*public boolean updateExamen(String nombre_examen, String descripcion, int id_examen) {
-        boolean flag = false;
-        String query = "update examen set nombre_examen = ?, descripcion = ? where id_examen = ?;";
-        try{
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setString(1,nombre_examen);
-            ps.setString(2,descripcion);
-            ps.setInt(3,id_examen);
-            if(ps.executeUpdate()>0){
-                flag = true;
-            }
-            ps.close();
-            con.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return flag;
-    }*/
-
     // Método para actualizar un examen
     public boolean updateExamen(int idExamen, String nombreExamen, String descripcion) {
         String query = "UPDATE examen SET nombre_examen = ?, descripcion = ? WHERE id_examen = ?";

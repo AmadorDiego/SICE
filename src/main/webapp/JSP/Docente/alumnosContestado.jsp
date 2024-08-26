@@ -1,10 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="mx.edu.utez.sice.dao.ExamenDao" %>
-<%@ page import="mx.edu.utez.sice.dao.DivisionAcademicaDao" %>
-<%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
-<%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
-<%@ page import="mx.edu.utez.sice.model.*" %><%--
+<%@ page import="mx.edu.utez.sice.model.*" %>
+<%@ page import="mx.edu.utez.sice.dao.*" %><%--
   Created by IntelliJ IDEA.
   User: amado
   Date: 27/07/2024
@@ -18,7 +15,7 @@
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 
-    <title>Bienvenido docente</title>
+    <title>Examen contestado</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" type="text/css" href="../../CSS/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
@@ -31,6 +28,7 @@
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
         if (usuario != null){
+            Examen examen = (Examen) sesion.getAttribute("examen");
     %>
     <style>
         .btn-primary {
@@ -59,10 +57,6 @@
                    data-bs-target="#asignarGrupoDocente" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">groups</span>
                     <h6 class="mb-0 ms-2">Grupos</h6>
-                </a>
-                <a href="calificarExamenes.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
-                    <span class="material-symbols-rounded">pending_actions</span>
-                    <h6 class="mb-0 ms-2">Calificar examenes</h6>
                 </a>
                 <a href="indexDocente.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">home</span>
@@ -98,50 +92,109 @@
     <div class="col-12">
         <hr>
         <h3 class="text-center"><strong>
-            <%ExamenDao examenDao = new ExamenDao();
-            ArrayList<Examen> lista = examenDao.getAll(usuario.getId_usuario());
-            if (lista == null || lista.isEmpty()) {%>No tienes examenes creados o sin asignar aún</strong></h3>
-        <hr><%}else {%>Examenes creados por asignar
+            <%UsuarioDao usuarioDao = new UsuarioDao();
+                ArrayList<Usuario> usuarios = usuarioDao.getAllAlumnosExamenContestado(examen.getId_examen());
+                System.out.println(examen.getId_examen());
+                if (usuarios == null || usuarios.isEmpty()) {%>No tienes respuestas del examen aún</strong></h3>
+        <hr><%}else {%>Respuestas de alumnos
         </strong></h3>
         <hr>
-    </div>
-    <div class="row">
-        <div class="col p-3">
-            <div class="table-responsive">
-                <table class="table table-striped table-hover">
-                    <thead>
-                    <tr>
-                        <th style="width: 20%">Examen</th>
-                        <th style="width: 60%">Descripción</th>
-                        <th style="width: 10%">Preguntas</th>
-                        <th style="width: 5%">Ver</th>
-                        <th style="width: 5%">Asignar</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <%for (Examen examen : lista) {%>
-                    <tr class="h6">
-                        <td class="text-wrap" style="max-width: 30%; word-break: break-word;"><%= examen.getNombre_examen() %></td>
-                        <td class="text-wrap" style="max-width: 50%; word-break: break-word;"><%= examen.getDescripcion() %></td>
-                        <td class="text-center"><%= examen.getCantidad_preguntas() %></td>
-                        <td>
-                            <a href="../../ModificarExamenServlet?id_examen=<%=examen.getId_examen()%>"
-                               class="btn btn-primary bg-blue-utz">Ver</a>
-                        </td>
-                        <td>
-                            <a href="../../AsignarGrupoExamenServlet?id_examen=<%=examen.getId_examen()%>"
-                               class="btn btn-success bg-green-SICE-obscuro">Asignar</a>
-                        </td>
-                    </tr>
-                    <%
-                        }
-                    %>
-                    </tbody>
-                </table>
+
+        <div class="row">
+            <div class="col-md-8 col-12 p-3">
+                <% //clase usuario
+                    if (request.getSession().getAttribute("examenAlumno") != null) {
+                Usuario alumno = (Usuario) request.getSession().getAttribute("examenAlumno");%>
+                <div class="container-fluid">
+                    <!-- Contenido -->
+                    <div class="row align-items-center mt-3">
+                        <div class="col bg-white rounded-4 mx-5 p-5">
+
+                            <form action="../../CalificarExamenServlet" method="post">
+                                <%
+                                    PreguntaDao preguntaDao = new PreguntaDao();
+                                    ArrayList<Pregunta> listaPreguntas = preguntaDao.getAll(examen.getId_examen());
+                                    int i = 0;
+                                    for (Pregunta pregunta : listaPreguntas) {
+                                        i++;
+                                %>
+                                <div class="card rounded-4 border-0 mb-4">
+                                    <div class="card-header bg-blue-utz text-white">
+                                        <h6>Pregunta <%= i %>: <%= pregunta.getPregunta() %></h6>
+                                    </div>
+                                    <div class="card-body shadow-lg bg-light rounded-bottom border-0 p-4">
+                                        <% AplicacionDao aplicacionDao = new AplicacionDao();
+                                        ArrayList<Aplicacion> aplicaciones = aplicacionDao.getAplicacionByAlumnoExamen(alumno.getId_usuario(), examen.getId_examen());
+
+                                            if (pregunta.getId_tipo_pregunta() == 2) { %>
+                                        <div class="mb-3">
+                                            <%
+                                                OpcionDao opcionDao = new OpcionDao();
+                                                ArrayList<Opcion> listaOpciones = opcionDao.getAll(pregunta.getId_pregunta());
+                                                int j = 0;
+                                                for (Opcion opcion : listaOpciones) {
+                                                    PreguntaOpcion preguntaOpcion = opcionDao.getOpcionCorrecta(opcion.getId_opcion());
+                                                    j++;
+                                            %>
+                                            <div class="form-check">
+                                                <input required class="form-check-input" type="radio" name="pregunta_<%=pregunta.getId_pregunta()%>" id="opcion_<%= i %>_<%= j %>" value="<%= opcion.getId_opcion() %>">
+                                                <label class="form-check-label" for="opcion_<%= i %>_<%= j %>">
+                                                    <%= opcion.getOpcion() %>
+                                                </label>
+                                            </div>
+                                            <% } %>
+                                        </div>
+                                        <% } else { %>
+                                        <div class="mb-3">
+                                            <label for="preguntaAbierta_<%= i %>">Ingresa una respuesta:</label>
+                                            <input type="text" class="form-control rounded-3" id="preguntaAbierta_<%= i %>" name="pregunta_<%=pregunta.getId_pregunta()%>" required>
+                                        </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <% } %>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-success rounded-3 p-2">
+                                        Enviar calificación
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
+            </div>
+            <div class="col-md-3 col-12 p-3">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                        <tr>
+                            <th style="width: 25%">Nombre</th>
+                            <th style="width: 5%">Calificar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <%for (Usuario alumno : usuarios) {%>
+                        <tr class="h6">
+                            <td class="text-wrap" style="max-width: 30%; word-break: break-word;"><%=alumno.getApellido_usuario()+" "+alumno.getNombre_usuario()%></td>
+                            <td>
+                                <a href="../../CalificarExamenServlet?id_alumno=<%=alumno.getId_usuario()%>"
+                                   class="btn btn-success bg-green-SICE-obscuro">Respuestas</a>
+                            </td>
+                        </tr>
+                        <%
+                            }
+                        %>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <%}%>
     </div>
-    <%}%>
+
+
 
     <!-------------------------------------- Modal para asignar grupos al docente ------------------------------------------------------->
     <div class="modal fade" id="asignarGrupoDocente" tabindex="-1" aria-labelledby="exampleModalLabel"

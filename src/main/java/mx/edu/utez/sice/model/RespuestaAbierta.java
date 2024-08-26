@@ -6,6 +6,10 @@ public class RespuestaAbierta {
     private String respuesta;
     private boolean correcta;
 
+    public RespuestaAbierta() {
+
+    }
+
     public RespuestaAbierta(int id_pregunta, int id_aplicacion, String respuesta, boolean correcta) {
         this.id_pregunta = id_pregunta;
         this.id_aplicacion = id_aplicacion;
