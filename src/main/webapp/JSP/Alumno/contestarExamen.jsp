@@ -25,22 +25,50 @@
     </style>
 </head>
 
-<body class="bg-fondo">
+<body>
 <!-- NavBar -->
 <header>
     <nav class="navbar bg-blue-utz">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-white">
-                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
-                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
+                     class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle"><strong>Bienvenido <%=usuario.getNombre_usuario() + " " + usuario.getApellido_usuario()%></strong>
+                </h3>
             </a>
             <div class="d-flex">
-                <a href="indexAlumno.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
-                    <span class="material-symbols-rounded">home</span>
-                </a>
-                <a href="alumnoRelizados.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0">
+                <a href="alumnoRelizados.jsp"
+                   class="btn btn-primary bg-blue-SICE-claro ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">task</span>
+                    <h6 class="mb-0 ms-2">Examenes Realizados</h6>
                 </a>
+                <a href="indexAlumno.jsp"
+                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">home</span>
+                    <h6 class="mb-0 ms-2">Inicio</h6>
+                </a>
+
+                <!------------- Boton dezplegable ---------------->
+                <div class="dropdown dropstart">
+                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button"
+                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="material-symbols-rounded">arrow_drop_down</span>
+                    </button>
+                    <ul class="dropdown-menu bg-blue-utz" aria-labelledby="dropdownMenuButton">
+                        <li class="p-2">
+                            <a href="perfilAlumno.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
+                                <span class="material-symbols-rounded">person</span>
+                                <h6 class="mb-0 ms-2">Perfil</h6>
+                            </a>
+                        </li>
+                        <li class="p-2">
+                            <a href="../../CerrarSesionServlet" class="btn btn-danger bg-red-SICE d-flex align-items-center">
+                                <span class="material-symbols-rounded">logout</span>
+                                <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </nav>
@@ -48,16 +76,18 @@
 
 <!-- Encabezado -->
 <div class="container-fluid">
-    <div class="row align-items-center mt-4">
-        <div class="col bg-green-utz rounded-4 mx-5 p-4 text-center">
-            <h1 class="text-white"><%= examen.getNombre_examen() %></h1>
-            <h3 class="text-white"><%= examen.getDescripcion() %></h3>
+    <div class="row">
+        <div class="col-12">
+            <hr>
+            <h3 class="text-center"><strong><%=examen.getNombre_examen()%></strong></h3>
+            <h6 class="text-center"><%=examen.getDescripcion()%></h6>
+            <hr>
         </div>
     </div>
 
     <!-- Contenido -->
     <div class="row align-items-center mt-3">
-        <div class="col bg-green-utz rounded-4 mx-5 p-5">
+        <div class="col bg-white rounded-4 mx-5 p-5">
             <form action="../../ContestarExamenServlet" method="post">
                 <%
                     PreguntaDao preguntaDao = new PreguntaDao();
@@ -67,10 +97,10 @@
                         i++;
                 %>
                 <div class="card rounded-4 border-0 mb-4">
-                    <div class="card-header bg-green-SICE-obscuro text-white">
-                        <h4>Pregunta <%= i %>: <%= pregunta.getPregunta() %></h4>
+                    <div class="card-header bg-blue-utz text-white">
+                        <h6>Pregunta <%= i %>: <%= pregunta.getPregunta() %></h6>
                     </div>
-                    <div class="card-body bg-fondo p-4">
+                    <div class="card-body shadow-lg bg-light rounded-bottom border-0 p-4">
                         <% if (pregunta.getId_tipo_pregunta() == 2) { %>
                         <div class="mb-3">
                             <%
@@ -100,11 +130,12 @@
                 <% } %>
 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary bg-blue-utz rounded-3 p-2">
+                    <button type="submit" class="btn btn-success rounded-3 p-2">
                         Enviar Respuestas
                     </button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

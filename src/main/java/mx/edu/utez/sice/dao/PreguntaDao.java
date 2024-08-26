@@ -126,4 +126,22 @@ public class PreguntaDao {
         }
         return pregunta;
     }
+
+    // Método para actualizar una pregunta
+    public boolean updatePregunta(int idPregunta, String textoPregunta) {
+        String query = "UPDATE pregunta SET pregunta = ? WHERE id_pregunta = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, textoPregunta);
+            ps.setInt(2, idPregunta);
+
+            return ps.executeUpdate() > 0; // Retorna true si se actualizó correctamente
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

@@ -79,4 +79,38 @@ public class OpcionDao {
         }
         return preguntaOpcion;
     }
+
+
+    // Método para actualizar una opción
+    public boolean updateOpcion(int idOpcion, String textoOpcion) {
+        String query = "UPDATE opcion SET opcion = ? WHERE id_opcion = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setString(1, textoOpcion);
+            ps.setInt(2, idOpcion);
+
+            return ps.executeUpdate() > 0; // Retorna true si se actualizó correctamente
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    // Método para actualizar el estado de la opción correcta
+    public boolean updateOpcionCorrecta(int idOpcion, int correcta) {
+        String query = "UPDATE pregunta_opcion SET correcta = ? WHERE opcion_id_opcion = ?";
+        try (Connection con = DatabaseConnectionManager.getConnection();
+             PreparedStatement ps = con.prepareStatement(query)) {
+
+            ps.setInt(1, correcta);
+            ps.setInt(2, idOpcion);
+
+            return ps.executeUpdate() > 0; // Retorna true si se actualizó correctamente
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
