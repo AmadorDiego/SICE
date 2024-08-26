@@ -31,6 +31,7 @@
     HttpSession sesion = request.getSession();
     Examen examen = (Examen) sesion.getAttribute("examen");
     Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+    if (usuario != null){
 %>
 <div class="full-width-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -90,11 +91,10 @@
                                         break;}%></th>
                             <td>
                                 <input type="text" class="form-control" disabled value="<%=carrera.getCarrera()%>">
+                                <input type="hidden" name="id_examen" value="<%=examen.getId_examen()%>">
                             </td>
                             <td><%=grupo.getGrado()+"-"+grupo.getGrupo()%></td>
                             <td>
-                                <input type="hidden" name="id_examen" value="<%=examen.getId_examen()%>">
-
                                 <div class="form-check form-switch">
                                     <input class="form-check-input" type="checkbox" role="switch" name="id_grupo[]" value="<%=grupo.getId_grupo()%>">
                                 </div>
@@ -195,3 +195,4 @@
 <script src="../../JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>
