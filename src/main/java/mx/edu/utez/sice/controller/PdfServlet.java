@@ -26,7 +26,7 @@ public class PdfServlet extends HttpServlet {
         InputStream input = new FileInputStream(file);
 //Colocar los parametros del reporte
         Map mapa = new HashMap();
-        mapa.put("logo_sice", archivo);
+        mapa.put("logoBueno", archivo);
 //obtener una coneccion a los datos
         Connection con = null;
         try { con = DatabaseConnectionManager.getConnection();}

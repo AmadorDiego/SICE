@@ -29,10 +29,10 @@ public class AsignarGrupoDocenteServlet extends HttpServlet {
         }
         HttpSession sesion = req.getSession();
         if (flag){
-            sesion.setAttribute("mensaje","Se asignaron los grupos correctamente a tu perfil");
+            sesion.setAttribute("mensajeDocente","Se asignaron los grupos correctamente a tu perfil");
             sesion.setAttribute("flag", true);
         }else {
-            sesion.setAttribute("mensaje","Ocurrio un error al asignar los grupo");
+            sesion.setAttribute("mensajeDocente","Ocurrio un error al asignar los grupo");
             sesion.setAttribute("flag", false);
         }
         resp.sendRedirect("JSP/Docente/indexDocente.jsp");

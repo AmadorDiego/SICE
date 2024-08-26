@@ -63,7 +63,7 @@
                     <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
-                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu bg-blue-utz" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
                             <a href="perfilAdministrador.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
@@ -244,11 +244,11 @@
         </script>
     </div>
     <div class="position-fixed bottom-0 start-0 p-3">
-        <% if ((String) request.getSession().getAttribute("mensaje") != null) {%>
+        <% if ((String) request.getSession().getAttribute("mensajeAdministrador") != null) {%>
         <div class="alert bg-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> text-white alert-dismissible fade show"
              role="alert">
-            <strong><%=(String) request.getSession().getAttribute("mensaje")%>
-            </strong>
+            <h6><%=(String) request.getSession().getAttribute("mensajeAdministrador")%>
+            </h6>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%}%>
@@ -452,7 +452,7 @@
 
 
     <%
-        request.getSession().removeAttribute("mensaje");
+        request.getSession().removeAttribute("mensajeAdministrador");
     %>
 </div>
 <script>

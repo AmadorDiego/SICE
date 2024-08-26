@@ -101,11 +101,11 @@ public class ExamenServlet extends HttpServlet {
             dao.insertExamenPreguntas(id_examen, id_pregunta);
         }
         if (flag) {
-            sesion.setAttribute("mensaje","Examen creado exitosamente");
+            sesion.setAttribute("mensajeDocente","Examen creado exitosamente");
             sesion.setAttribute("flag", true);
             resp.sendRedirect("JSP/Docente/indexDocente.jsp");
         } else {
-            sesion.setAttribute("mensaje","Ocurrio un error al crear el examen");
+            sesion.setAttribute("mensajeDocente","Ocurrio un error al crear el examen");
             sesion.setAttribute("flag", false);
             resp.sendRedirect("JSP/Docente/indexDocente.jsp");
         }

@@ -36,30 +36,36 @@
         .btn-primary {
             background-color: #003e81;
         }
+        /* Añade una clase para limitar el ancho y permitir el ajuste de texto */
+        .limited-width {
+            max-width: 50%; /* Define el ancho máximo para limitar el contenido */
+            word-wrap: break-word; /* Permite que las palabras largas se partan y se ajusten al ancho */
+        }
     </style>
 </head>
 <body>
-<!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
 
 <!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
 <header>
-    <nav class="navbar bg-blue-utz">
+    <nav class="navbar bg-blue-utz align-items-center">
         <div class="container-fluid d-flex justify-content-between align-items-center">
             <a class="navbar-brand text-white">
                 <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
                      class="d-inline-block align-middle mt-0 mb-2">
-                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+                <h3 class="ms-2 d-inline-block align-middle"><strong>Bienvenido <%=usuario.getNombre_usuario() + " " + usuario.getApellido_usuario()%></strong></h3>
             </a>
             <div class="d-flex">
+                <a href="examen.jsp"
+                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                    <span class="material-symbols-rounded">task</span>
+                    <h6 class="mb-0 ms-2">Crear examen</h6>
+                </a>
                 <a href="#" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center" data-bs-toggle="modal"
                    data-bs-target="#asignarGrupoDocente" data-bs-whatever="@getbootstrap">
                     <span class="material-symbols-rounded">groups</span>
                     <h6 class="mb-0 ms-2">Grupos</h6>
                 </a>
-                <a href="//////////////////////////////////////////" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">pending_actions</span>
                     <h6 class="mb-0 ms-2">Calificar examenes</h6>
                 </a>
@@ -73,9 +79,9 @@
                     <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
-                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu bg-blue-utz" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
+                            <a href="perfilDocente.jsp" class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
                                 <h6 class="mb-0 ms-2">Perfil</h6>
                             </a>
@@ -93,64 +99,36 @@
     </nav>
 </header>
 
-
-<!--////////////////////////////////////// Contenido //////////////////////////////////////////////////-->
-<div class="modal fade" id="modalContra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <!-- ... (código del modal sin cambios) ... -->
-</div>
-
-<div class="container my-2 my-md-4">
+<div class="container-xl">
+    <div class="col-12">
+        <hr>
+        <h3 class="text-center"><strong>
+            <%ExamenDao examenDao = new ExamenDao();
+            ArrayList<Examen> lista = examenDao.getAll(usuario.getId_usuario());
+            if (lista == null || lista.isEmpty()) {%>No tienes examenes creados o sin asignar aún</strong></h3>
+        <hr><%}else {%>Examenes creados por asignar
+        </strong></h3>
+        <hr>
+    </div>
     <div class="row">
         <div class="col p-3">
-            <h1 class="text-start mb-3 blue-utz">
-                Bienvenido <%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%>
-            </h1>
-            <h3 class="text-start mb-4 blue-utz">Exámenes creados:</h3>
-
-            <div class="d-flex justify-content-between align-items-center mb-3">
-                <div class="d-flex align-items-center">
-                    <span class="me-2 text-white h5">Crear examen</span>
-                    <a class="btn btn-primary bg-blue-utz h6" href="examen.jsp">Crear</a>
-                </div>
-                <div class="d-flex align-items-center">
-                    <span class="me-2 text-white h5">Exámenes por calificar</span>
-                    <a class="btn btn-primary bg-blue-utz h6" href="//////////////////////////////">Ver</a>
-                </div>
-            </div>
-
-            <!--boton de busqueda-->
-            <div class="d-flex mb-4">
-                <div class="input-group-append">
-                    <input id="search-input" type="search" class="form-control d-block" placeholder="Search">
-                    <button id="search-button" type="button" class="btn btn-primary bg-blue-utz d-block">
-                        <i class="fas fa-search"></i>
-                        <h6>Buscar</h6>
-                    </button>
-                </div>
-            </div>
-
             <div class="table-responsive">
-                <table class="table table-striped table-hover rounded-3">
-                    <thead class="thead bg-blue-utz">
-                    <tr class="text-white h5">
-                        <th>Examen</th>
-                        <th>Cantidad de preguntas</th>
-                        <th></th>
-                        <th></th>
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th style="width: 20%">Examen</th>
+                        <th style="width: 60%">Descripción</th>
+                        <th style="width: 10%">Preguntas</th>
+                        <th style="width: 5%">Ver</th>
+                        <th style="width: 5%">Asignar</th>
                     </tr>
                     </thead>
-                    <tbody class="bg-green-SICE">
-                    <%
-                        ExamenDao examenDao = new ExamenDao();
-                        ArrayList<Examen> lista = examenDao.getAll(usuario.getId_usuario());
-                        for (Examen examen : lista) {
-                    %>
+                    <tbody>
+                    <%for (Examen examen : lista) {%>
                     <tr class="h6">
-                        <td><%= examen.getNombre_examen() %>
-                        </td>
-                        <td><%= examen.getCantidad_preguntas() %>
-                        </td>
+                        <td class="text-wrap" style="max-width: 30%; word-break: break-word;"><%= examen.getNombre_examen() %></td>
+                        <td class="text-wrap" style="max-width: 50%; word-break: break-word;"><%= examen.getDescripcion() %></td>
+                        <td class="text-center"><%= examen.getCantidad_preguntas() %></td>
                         <td>
                             <a href="../../ModificarExamenServlet?id_examen=<%=examen.getId_examen()%>"
                                class="btn btn-primary bg-blue-utz">Ver</a>
@@ -168,6 +146,7 @@
             </div>
         </div>
     </div>
+    <%}%>
 
     <!-------------------------------------- Modal para asignar grupos al docente ------------------------------------------------------->
     <div class="modal fade" id="asignarGrupoDocente" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -266,12 +245,12 @@
             myInput.focus()
         })
     </script>
-    <div class="position-fixed bottom-0 end-0 col-3 p-3">
+    <div class="position-fixed bottom-0 start-0 p-3">
         <% if ((String) request.getSession().getAttribute("mensajeDocente") != null) {%>
-        <div class="alert alert-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> alert-dismissible fade show"
+        <div class="alert bg-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> text-white alert-dismissible fade show"
              role="alert">
-            <strong><%=(String) request.getSession().getAttribute("mensajeDocente")%>
-            </strong>
+            <h6><%=(String) request.getSession().getAttribute("mensajeDocente")%>
+            </h6>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%}%>

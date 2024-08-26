@@ -39,7 +39,7 @@ public class ActualizarUsuarioServlet extends HttpServlet {
             u.setContrasena(req.getParameter("contrasena1"));
         }else{
             //Mensaje para visar que las contras no son iguales
-            req.getSession().setAttribute("mensaje", "Las contraseñas no coinciden");
+            req.getSession().setAttribute("mensajeAdministrador", "Las contraseñas no coinciden");
             resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
         }
         u.setEstado(req.getParameter("estado") != null ? 1 : 0);
@@ -48,10 +48,10 @@ public class ActualizarUsuarioServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
         if (dao.updateDocenteAdministrador(u)) {
-            sesion.setAttribute("mensaje", "Se actualizarón correctamente los datos del usuario");
+            sesion.setAttribute("mensajeAdministrador", "Se actualizarón correctamente los datos del usuario");
             sesion.setAttribute("flag", true);
         } else {
-            sesion.setAttribute("mensaje", "Ocurrio un error al actualizar los datos del usuario");
+            sesion.setAttribute("mensajeAdministrador", "Ocurrio un error al actualizar los datos del usuario");
             sesion.setAttribute("flag", false);
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");

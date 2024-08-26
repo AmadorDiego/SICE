@@ -37,7 +37,7 @@
             <a class="navbar-brand text-white">
                 <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
                      class="d-inline-block align-middle mt-0 mb-2">
-                <h3 class="ms-2 d-inline-block align-middle">¡Bienvenido <%=usuario.getNombre_usuario() + " " + usuario.getApellido_usuario()%>
+                <h3 class="ms-2 d-inline-block align-middle"><strong>¡Bienvenido <%=usuario.getNombre_usuario() + " " + usuario.getApellido_usuario()%></strong>
                     !</h3>
             </a>
             <div class="d-flex">
@@ -78,16 +78,18 @@
 <div class="container-fluid">
     <!--////////////////////////////// Contenido principal(Tarjetas) ////////////////////////////-->
     <div class="row">
-        <%
-            ExamenDao examenDao = new ExamenDao();
-            UsuarioDao usuarioDao = new UsuarioDao();
-            ArrayList<Examen> examenes = examenDao.getAllAsignadosCompletados(usuario.getId_usuario());
-            if (examenes == null || examenes.isEmpty()) {%>
-        <br><br><br><br><br><br><br>
-        <hr>
-        <h3 class="text-center"><strong>No tienes examenes completados aún</strong></h3>
-        <hr>
-        <%}for (Examen examen : examenes) {%>
+        <div class="col-12">
+            <hr>
+            <h3 class="text-center"><strong>
+                <%ExamenDao examenDao = new ExamenDao();
+                UsuarioDao usuarioDao = new UsuarioDao();
+                ArrayList<Examen> examenes = examenDao.getAll(usuario.getId_usuario());
+                if (examenes == null || examenes.isEmpty()) {%>¡Genial, no tienes examenes pendientes aún!</strong></h3>
+            <hr><%}else {%>Examenes realizados
+            </strong></h3>
+            <hr>
+        </div>
+        <%for (Examen examen : examenes) {%>
         <div class="col-12 col-md-6 p-4">
             <div class="card rounded-5 border-0 bg-green-utz">
                 <div class="card-header bg-green-utz border-0 rounded-5"><br></div>
@@ -107,14 +109,14 @@
             </div>
         </div>
         <%
-            }
+            }}
         %>
     </div>
     <div class="position-fixed bottom-0 start-0 p-3" style="width: 400px;">
         <% if ((String) request.getSession().getAttribute("mensajeAlumno") != null) {%>
         <div class="alert p-3 mb-2 bg-<% if ((Boolean) request.getSession().getAttribute("flag")){%>success<%}else{%>danger<%}%> text-white alert-dismissible fade show"
              role="alert">
-            <strong><%=(String) request.getSession().getAttribute("mensajeAlumno")%></strong>
+            <h6><%=(String) request.getSession().getAttribute("mensajeAlumno")%></h6>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <%}%>

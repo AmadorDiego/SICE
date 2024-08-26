@@ -18,10 +18,11 @@ public class RestaurarUsuarioServlet extends HttpServlet {
         UsuarioDao dao = new UsuarioDao();
         HttpSession sesion = req.getSession();
         if(dao.restaurarUsuario(id_usuario)){
-            sesion.setAttribute("mensaje","Usuario restaurado con exito");
+            sesion.setAttribute("mensajeAdministrador","Usuario restaurado con exito");
+            sesion.setAttribute("flag", true);
         }else{
-            sesion.setAttribute("mensaje","Fallo la restauración");
-
+            sesion.setAttribute("mensajeAdministrador","Fallo la restauración");
+            sesion.setAttribute("flag", false);
         }
         resp.sendRedirect("JSP/Administrador/indexAdministrador.jsp");
     }

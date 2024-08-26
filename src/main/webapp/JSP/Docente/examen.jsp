@@ -74,7 +74,7 @@
                     <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="material-symbols-rounded">arrow_drop_down</span>
                     </button>
-                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
+                    <ul class="dropdown-menu bg-blue-utz" aria-labelledby="dropdownMenuButton">
                         <li class="p-2">
                             <a class="btn btn-success bg-green-utz d-flex align-items-center">
                                 <span class="material-symbols-rounded">person</span>
