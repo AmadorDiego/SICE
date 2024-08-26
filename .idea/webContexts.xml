@@ -7,6 +7,7 @@
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Administrador/perfilAdministrador.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Administrador" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/AsignarExamen.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/PaulaAsignarAlumno.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/bancoPreguntas.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/examen.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/indexDocente.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente/personalizarExamen.jsp" value="file://$PROJECT_DIR$/src/main/webapp/JSP/Docente" />
