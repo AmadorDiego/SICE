@@ -36,10 +36,14 @@
         #lista-banco-preguntas input[type="checkbox"] {
             margin-right: 10px;
         }
+        .btn-primary {
+            background-color: #003e81;
+        }
     </style>
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+        if (usuario != null){
     %>
 
     <script>
@@ -58,7 +62,7 @@
                 <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
             <div class="d-flex">
-                <a href="PieroCalificarExamen.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="//////////////////////////////////////////////////////" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">pending_actions</span>
                     <h6 class="mb-0 ms-2">Calificar examenes</h6>
                 </a>
@@ -252,4 +256,4 @@
 <script src="${pageContext.request.contextPath}/JS/bancoPreguntas.js"></script>
 </body>
 </html>
-
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

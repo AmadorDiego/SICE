@@ -106,26 +106,7 @@ public class GrupoDao {
         return lista;
     }
 
-    public boolean insertAlumnoGrupo(int id_grupo, int id_usuario){
-        boolean flag = false;
-        String query = "insert into usuario_tiene_grupo values (?, ?);";
-        try{
-            Connection con = DatabaseConnectionManager.getConnection();
-            PreparedStatement ps = con.prepareStatement(query);
-            ps.setInt(1,id_grupo);
-            ps.setInt(2,id_usuario);
-            if(ps.executeUpdate()>0){
-                flag = true;
-            }
-            ps.close();
-            con.close();
-        }catch(SQLException e){
-            e.printStackTrace();
-        }
-        return flag;
-    }
-
-    public boolean insertGrupoDocente(int id_grupo, int id_usuario) {
+    public boolean insertUsuarioGrupo(int id_grupo, int id_usuario){
         boolean flag = false;
         String query = "insert into usuario_tiene_grupo values (?, ?);";
         try{
@@ -204,7 +185,7 @@ public class GrupoDao {
 
     public boolean updateGrupo(int id_carrera, int grado, String grupo, int id_periodo, int id_grupo) {
         boolean flag = false;
-        String query = "update grupo set carrera_id_carrera = ? and grado = ? and grupo = ? and periodo_id_periodo = ? where id_grupo = ?;";
+        String query = "update grupo set carrera_id_carrera = ?, grado = ?, grupo = ?, periodo_id_periodo = ? where id_grupo = ?;";
         try{
             Connection con = DatabaseConnectionManager.getConnection();
             PreparedStatement ps = con.prepareStatement(query);

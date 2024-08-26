@@ -29,10 +29,13 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-blue-utz">
-        <div class="container-fluid">
-            <img src="<%= request.getContextPath() %>/IMG/logoBueno.png" class="me-0 d-flex justify-content-start" width="30" height="24" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
-            <h6 class="ms-2 d-inline-block align-middle text-white"><strong>Error 404</strong></h6>
+    <nav class="navbar bg-blue-utz">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="<%= request.getContextPath() %>/IMG/logoBueno.png" width="50" height="45" alt="Logo"
+                     class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle"><strong>Error 404</strong></h3>
+            </a>
         </div>
     </nav>
 </header>
@@ -43,15 +46,15 @@
     <hr>
     <a href="<%HttpSession sesion = request.getSession();
     if (sesion.getAttribute("usuarioIndexAdministrador")!=null){
-        %>http://localhost:8080/SICE_war_exploded/JSP/Administrador/indexAdministrador.jsp<%
+        %><%= request.getContextPath() %>/JSP/Administrador/indexAdministrador.jsp<%
     } else if (sesion.getAttribute("usuarioIndexDocente")!=null) {
-        %>http://localhost:8080/SICE_war_exploded/JSP/Docente/indexDocente.jsp<%
+        %><%= request.getContextPath() %>/JSP/Docente/indexDocente.jsp<%
     } else if (sesion.getAttribute("usuarioIndexAlumno")!=null){
-        %>http://localhost:8080/SICE_war_exploded/JSP/Alumno/indexAlumno.jsp<%
+        %><%= request.getContextPath() %>/JSP/Alumno/indexAlumno.jsp<%
     } else if (sesion.getAttribute("usuarioIndexDocenteAdministrador")!=null){
-        %>http://localhost:8080/SICE_war_exploded/JSP/Docente-Administrador/indexDocenteAdministrador.jsp<%
+        %><%= request.getContextPath() %>/JSP/Docente-Administrador/indexDocenteAdministrador.jsp<%
     } else{
-        %>http://localhost:8080/SICE_war_exploded/loginSICE.jsp<%
+        %><%= request.getContextPath() %>/loginSICE.jsp<%
     }%>" class="btn btn-primary bg-blue-utz border-0 text-white me-0 w-100"><strong>Volver</strong></a>
 </div>
 </body>

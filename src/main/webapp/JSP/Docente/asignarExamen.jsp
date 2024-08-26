@@ -1,3 +1,4 @@
+
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.GrupoDao" %>
 <%@ page import="mx.edu.utez.sice.dao.CarreraDao" %>
@@ -5,98 +6,53 @@
 <%@ page import="mx.edu.utez.sice.model.*" %>
 <%@ page import="mx.edu.utez.sice.dao.UsuarioDao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Asignar Examen</title>
     <link href="../../CSS/bootstrap.css" rel="stylesheet">
-    <link href="../../CSS/adicionalesEBM.css" rel="stylesheet">
-    <link href="../../CSS/fondo.css" rel="stylesheet">
-
-    <!--///////////////////////////// Iconos ////////////////////////////////////-->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <style>
+        .navbar {
+            background-color: #003366 !important;
+        }
+        .navbar-light .navbar-nav .nav-link {
+            color: white !important;
+        }
+        .full-width-navbar {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 <%
     HttpSession sesion = request.getSession();
     Examen examen = (Examen) sesion.getAttribute("examen");
     Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+    if (usuario != null){
 %>
-<!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
-<div class="bg"></div>
-<div class="bg bg2"></div>
-<div class="bg bg3"></div>
-
-
-<!-- //////////////////////////////////////////NavBar//////////////////////////////////////////////////////  -->
-<header>
-    <nav class="navbar bg-blue-utz">
-        <div class="container-fluid d-flex justify-content-between align-items-center">
-            <a class="navbar-brand text-white">
-                <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
-                     class="d-inline-block align-middle mt-0 mb-2">
-                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
-            </a>
-            <div class="d-flex">
-                <a href="PieroCalificarExamen.jsp"
-                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
-                    <span class="material-symbols-rounded">pending_actions</span>
-                    <h6 class="mb-0 ms-2">Calificar examenes</h6>
-                </a>
-                <a href="indexDocente.jsp"
-                   class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
-                    <span class="material-symbols-rounded">home</span>
-                    <h6 class="mb-0 ms-2">Inicio</h6>
-                </a>
-
-                <!------------- Boton dezplegable ---------------->
-                <div class="dropdown dropstart">
-                    <button class="btn btn-primary bg-blue-utz ms-3 text-white border-0" type="button"
-                            id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="material-symbols-rounded">arrow_drop_down</span>
-                    </button>
-                    <ul class="dropdown-menu bg-green-utz-claro" aria-labelledby="dropdownMenuButton">
-                        <li class="p-2">
-                            <a class="btn btn-success bg-green-utz d-flex align-items-center">
-                                <span class="material-symbols-rounded">person</span>
-                                <h6 class="mb-0 ms-2">Perfil</h6>
-                            </a>
-                        </li>
-                        <li class="p-2">
-                            <a class="btn btn-danger bg-red-SICE d-flex align-items-center">
-                                <span class="material-symbols-rounded">logout</span>
-                                <h6 class="mb-0 ms-2">Cerrar Sesion</h6>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+<div class="full-width-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"></a>
         </div>
     </nav>
-</header>
-
-
-<!--//////////////////////////////////// Contenido /////////////////////////////////////////////-->
-<%
-    DivisionAcademicaDao divisionAcademicaDao = new DivisionAcademicaDao();
-    ArrayList<DivisionAcademica> divisiones = divisionAcademicaDao.getAll();
-%>
-
+</div>
+<%DivisionAcademicaDao divisionAcademicaDao = new DivisionAcademicaDao();
+    ArrayList<DivisionAcademica> divisiones = divisionAcademicaDao.getAll();%>
 <div class="container">
     <br>
-    <h1 class="blue-utz"><%=examen.getNombre_examen()%>
-    </h1>
-    <a class="btn btn-primary bg-blue-utz mb-4" href="indexDocente.jsp"> Regresar </a>
-
-    <div class="row mt-2">
-        <div class="col-11 me-0">
+    <h1><%=examen.getNombre_examen()%></h1>
+    <a class="btn btn-primary" href="indexDocente.jsp"> Regresar </a>
+    <div class="row">
+        <div class="col-md-11 col-12 p-3">
             <form method="post" action="../../AsignarGrupoExamenServlet" id="asignar_examen">
+                <input type="hidden" name="id_usuario" value="<%=usuario.getId_usuario()%>">
                 <div>
                     <table class="table">
-                        <thead class="bg-blue-utz text-white">
+                        <thead>
                         <tr>
                             <th scope="col">Division</th>
                             <th scope="col" class="w-75">Carrera</th>
@@ -104,22 +60,20 @@
                             <th scope="col">Seleccionar</th>
                         </tr>
                         </thead>
-                        <tbody class="bg-green-utz text-white">
-
+                        <tbody>
                         <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
                         <%
-                            for (DivisionAcademica divisionAcademica : divisiones) {%>
-                        <tr><%
+                            for (DivisionAcademica divisionAcademica : divisiones) {%> <tr> <%
                             CarreraDao carreraDao = new CarreraDao();
                             ArrayList<Carrera> carreras = carreraDao.getAll(divisionAcademica.getId_division_academica());
                             for (Carrera carrera : carreras) {
                                 GrupoDao grupoDao = new GrupoDao();
                                 ArrayList<Grupo> grupos = grupoDao.getAll(carrera.getId_carrera());
                                 for (Grupo grupo : grupos) {
-                                    if (grupoDao.imparteDocenteGrupo(grupo.getId_grupo(), usuario.getId_usuario())) {%>
+                                    if (grupoDao.imparteDocenteGrupo(grupo.getId_grupo(), usuario.getId_usuario())){%>
                             <th scope="row">
                                 <%
-                                    switch (divisionAcademica.getId_division_academica()) {
+                                    switch (divisionAcademica.getId_division_academica()){
                                         case 1:%>
                                 DATID<%
                                     break;
@@ -134,81 +88,63 @@
                                     break;
                                 default:%>
                                 divisionAcademica.getDivision_academica()<%
-                                        break;
-                                }%></th>
-
-                            <td class="bg-green-utz">
-                                <input type="text" class="form-control bg-green-utz" disabled
-                                       value="<%=carrera.getCarrera()%>">
-                            </td>
-
-                            <td><%=grupo.getGrado() + "-" + grupo.getGrupo()%>
-                            </td>
+                                        break;}%></th>
                             <td>
+                                <input type="text" class="form-control" disabled value="<%=carrera.getCarrera()%>">
                                 <input type="hidden" name="id_examen" value="<%=examen.getId_examen()%>">
+                            </td>
+                            <td><%=grupo.getGrado()+"-"+grupo.getGrupo()%></td>
+                            <td>
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" role="switch" name="id_grupo[]"
-                                           value="<%=grupo.getId_grupo()%>">
+                                    <input class="form-check-input" type="checkbox" role="switch" name="id_grupo[]" value="<%=grupo.getId_grupo()%>">
                                 </div>
                             </td>
-                        </tr>
-                        <%
-                                        }
-                                    }
-                                }
-                            }
-                        %>
+                        </tr><%}}}}%>
                         </tbody>
                     </table>
                 </div>
-                <input type="hidden" name="id_usuario" value="<%=usuario.getId_usuario()%>">
-                <input type="submit" form="asignar_examen"
-                       class="btn btn-primary bg-blue-utz justify-content-center mb-0">
+                <input type="submit" form="asignar_examen" class="btn btn-primary bg-blue-utz justify-content-center mb-0">
             </form>
         </div>
-
-        <div class="col-1 ms-0">
+        <div class="col-md-1 col-12 p-3">
             <div>
                 <table class="table">
-                    <thead class="bg-blue-utz text-white">
+                    <thead>
                     <tr>
                         <th scope="col">Alumnos</th>
                     </tr>
                     </thead>
-                    <tbody class="bg-green-utz">
+                    <tbody>
                     <!-- ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
                     <%
-                        for (DivisionAcademica divisionAcademica : divisiones) {%>
-                    <tr><%
+                        for (DivisionAcademica divisionAcademica : divisiones) {%> <tr> <%
                         CarreraDao carreraDao = new CarreraDao();
                         ArrayList<Carrera> carreras = carreraDao.getAll(divisionAcademica.getId_division_academica());
                         for (Carrera carrera : carreras) {
                             GrupoDao grupoDao = new GrupoDao();
                             ArrayList<Grupo> grupos = grupoDao.getAll(carrera.getId_carrera());
                             for (Grupo grupo : grupos) {
-                                if (grupoDao.imparteDocenteGrupo(grupo.getId_grupo(), usuario.getId_usuario())) {%>
+                                if (grupoDao.imparteDocenteGrupo(grupo.getId_grupo(), usuario.getId_usuario())){%>
                         <th scope="row">
                             <button type="button" class="btn btn-primary bg-blue-utz justify-content-center mb-0"
                                     data-bs-toggle="modal" data-bs-target="#alumnos_grupo_<%= grupo.getId_grupo() %>">
-                                <span class="material-symbols-rounded d-flex justify-content-center mb-0-0">visibility</span>
+                                <span class="material-symbols-rounded justify-content-center">ver</span>
                             </button>
-
                             <!-- Modal para asignar examen a alumnos -->
                             <div class="modal fade" id="alumnos_grupo_<%= grupo.getId_grupo() %>" tabindex="-1"
                                  aria-labelledby="exampleModalLabel_<%= grupo.getId_grupo()  %>" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header bg-blue-utz">
-                                            <h1 class="modal-title fs-5 text-white"
-                                                id="exampleModalLabel_<%= grupo.getId_grupo()  %>">
-                                                Alumnos del <%=grupo.getGrado() + "-" + grupo.getGrupo()%>:
+                                            <h1 class="modal-title fs-5 text-white" id="exampleModalLabel_<%= grupo.getId_grupo()  %>">
+                                                Alumnos del <%=grupo.getGrado()+"-"+grupo.getGrupo()%>:
                                             </h1>
                                             <button type="button" class="btn-close-white" data-bs-dismiss="modal"
                                                     aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="post" action="../../AsignarAlumnoExamenServlet"
-                                                  id="asignar_examen_alumno">
+                                            <form method="post" action="../../AsignarAlumnoExamenServlet" id="asignar_examen_alumno">
+                                                <input type="hidden" value="<%=usuario.getId_usuario()%>" name="id_docente">
                                                 <table class="table">
                                                     <thead>
                                                     <tr>
@@ -218,40 +154,30 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                    <input type="hidden" name="id_examen"
-                                                           value="<%=examen.getId_examen()%>">
+                                                    <input type="hidden" name="id_examen" value="<%=examen.getId_examen()%>">
                                                     <%
                                                         UsuarioDao usuarioDao = new UsuarioDao();
                                                         ArrayList<Usuario> alumnos = usuarioDao.getAllAlumnosConGrupo(grupo.getId_grupo());
                                                         for (Usuario u : alumnos) {%>
                                                     <tr>
-                                                        <th scope="row"><%=u.getCorreo_electronico()%>
-                                                        </th>
-                                                        <td><%=u.getApellido_usuario() + " " + u.getNombre_usuario()%>
-                                                        </td>
+                                                        <th scope="row"><%=u.getCorreo_electronico()%></th>
+                                                        <td><%=u.getApellido_usuario()+" "+u.getNombre_usuario()%></td>
                                                         <td>
                                                             <div class="form-check form-switch">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                       role="switch" name="id_usuario"
-                                                                       value="<%=u.getId_usuario()%>">
+                                                                <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>">
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <%}%>
                                                     </tbody>
                                                 </table>
-                                                <input type="hidden" name="id_usuario"
-                                                       value="<%=usuario.getId_usuario()%>">
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                                                    id="botonCancelar_<%= grupo.getId_grupo() %>">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%= grupo.getId_grupo() %>">
                                                 Cancelar
                                             </button>
-                                            <button type="submit" form="asignar_examen_alumno"
-                                                    class="btn btn-primary bg-blue-utz justify-content-center mb-0"
-                                                    value="Asignar">
+                                            <button type="submit" form="asignar_examen_alumno" class="btn btn-primary bg-blue-utz justify-content-center mb-0" value="Asignar">
                                                 <p class="mb-0">Asignar</p>
                                             </button>
                                         </div>
@@ -259,26 +185,14 @@
                                 </div>
                             </div>
                         </th>
-                    </tr>
-                    <%
-                                    }
-                                }
-                            }
-                        }
-                    %>
+                    </tr><%}}}}%>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
-<script src="../../JS/bootstrap.js"></script>
 <script src="../../JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

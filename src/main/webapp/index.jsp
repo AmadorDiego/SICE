@@ -15,6 +15,11 @@
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 <body>
 <!-- //////////////////////////// Navbar /////////////////////////////////-->
@@ -24,7 +29,7 @@
             <img src="IMG/logoBueno.png" class="me-0 d-flex justify-content-start" width="50" height="45" alt="Logo">
             <ul class="navbar-nav mb-1">
                 <li class="nav-item me-2">
-                    <a class="text-white btn btn-success bg-green-utz d-flex align-items-center justify-content-end"
+                    <a class="text-white btn btn-primary border-0 bg-blue-utz d-flex align-items-center justify-content-end"
                        href="loginSICE.jsp">
                         <h6 class="mb-0 p-1">Iniciar Sesion</h6>
                     </a>

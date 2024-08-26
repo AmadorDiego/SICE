@@ -18,6 +18,11 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/fondo.css">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 
 <body class="bg-fondo">

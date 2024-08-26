@@ -31,10 +31,6 @@ public class AsignarGrupoExamenServlet extends HttpServlet {
 
         // Captura los IDs de los grupos seleccionados
         String[] grupos_seleccionados = req.getParameterValues("id_grupo[]");  // Revisa si es necesario usar "id_grupo[]" o "id_grupo"
-
-        for (int i = 0; i < grupos_seleccionados.length; i++) {
-            System.out.println(grupos_seleccionados[i]);
-        }
         boolean flag = false;
 
         if (grupos_seleccionados != null){

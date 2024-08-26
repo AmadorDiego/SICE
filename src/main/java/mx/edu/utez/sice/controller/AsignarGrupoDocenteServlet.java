@@ -24,7 +24,7 @@ public class AsignarGrupoDocenteServlet extends HttpServlet {
         if (grupos_seleccionados != null) {
             for (String grupo_id_grupo : grupos_seleccionados) {
                 int id_grupo = Integer.parseInt(grupo_id_grupo);  // Convierte el ID a entero
-                flag = grupoDao.insertGrupoDocente(id_grupo, id_usuario);  // Inserta en la base de datos
+                flag = grupoDao.insertUsuarioGrupo(id_grupo, id_usuario);  // Inserta en la base de datos
             }
         }
         HttpSession sesion = req.getSession();

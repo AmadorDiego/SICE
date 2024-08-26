@@ -26,10 +26,13 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-blue-utz">
-        <div class="container-fluid">
-            <img src="../IMG/logoBueno.png" class="me-0 d-flex justify-content-start" width="30" height="24" alt="Logo" class="d-inline-block align-middle mt-0 mb-2">
-            <h6 class="ms-2 d-inline-block align-middle text-white"><strong>Acceso denegado</strong></h6>
+    <nav class="navbar bg-blue-utz">
+        <div class="container-fluid d-flex justify-content-between align-items-center">
+            <a class="navbar-brand text-white">
+                <img src="../IMG/logoBueno.png" width="50" height="45" alt="Logo"
+                     class="d-inline-block align-middle mt-0 mb-2">
+                <h3 class="ms-2 d-inline-block align-middle"><strong>Acceso denegado</strong></h3>
+            </a>
         </div>
     </nav>
 </header>
