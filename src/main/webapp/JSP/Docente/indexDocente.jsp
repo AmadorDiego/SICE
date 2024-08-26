@@ -30,7 +30,13 @@
     <%
         HttpSession sesion = request.getSession();
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+        if (usuario != null){
     %>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 <body>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
@@ -53,7 +59,7 @@
                     <span class="material-symbols-rounded">groups</span>
                     <h6 class="mb-0 ms-2">Grupos</h6>
                 </a>
-                <a href="PieroCalificarExamen.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="//////////////////////////////////////////" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">pending_actions</span>
                     <h6 class="mb-0 ms-2">Calificar examenes</h6>
                 </a>
@@ -109,7 +115,7 @@
                 </div>
                 <div class="d-flex align-items-center">
                     <span class="me-2 text-white h5">Exámenes por calificar</span>
-                    <a class="btn btn-primary bg-blue-utz h6" href="PieroCalificarExamen.jsp">Ver</a>
+                    <a class="btn btn-primary bg-blue-utz h6" href="//////////////////////////////">Ver</a>
                 </div>
             </div>
 
@@ -279,3 +285,4 @@
 <script src="../../JS/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

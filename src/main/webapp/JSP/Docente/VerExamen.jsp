@@ -19,8 +19,14 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/CSS/Docentes.css">
     <%
         HttpSession sesion = request.getSession();
-        Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+        Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+        if (usuario != null){
         Examen examen = new Examen();%>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 <body>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
@@ -82,3 +88,4 @@ To change this template use File | Settings | File Templates.
 
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

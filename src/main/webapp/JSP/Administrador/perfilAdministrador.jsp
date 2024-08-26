@@ -16,6 +16,11 @@
         Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexAdministrador");
         if (usuario != null){
     %>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 <body>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->

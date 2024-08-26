@@ -1,10 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="mx.edu.utez.sice.dao.PreguntaDao" %>
 <%@ page import="mx.edu.utez.sice.dao.OpcionDao" %>
-<%@ page import="mx.edu.utez.sice.model.Examen" %>
-<%@ page import="mx.edu.utez.sice.model.Pregunta" %>
-<%@ page import="mx.edu.utez.sice.model.Opcion" %>
-<%@ page import="mx.edu.utez.sice.model.PreguntaOpcion" %>
+<%@ page import="mx.edu.utez.sice.model.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,10 +15,17 @@
     <link rel="stylesheet" type="text/css" href="../../CSS/adicionalesEBM.css">
     <!--///////////////////////////// Iconos ////////////////////////////////////-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@30,600,0,0"/>
+    <style>
+        .btn-primary {
+            background-color: #003e81;
+        }
+    </style>
 </head>
 <body>
 <%
     HttpSession sesion = request.getSession();
+    Usuario usuario = (Usuario) sesion.getAttribute("usuarioIndexDocente");
+    if (usuario != null){
     Examen examen = (Examen) sesion.getAttribute("examen");
 %>
 <!--//////////////////////////////////////// Fondo ///////////////////////////////////////////////////-->
@@ -40,7 +44,7 @@
                 <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
             </a>
             <div class="d-flex">
-                <a href="PieroCalificarExamen.jsp" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
+                <a href="/////////////////////////////////////////////" class="btn btn-primary bg-blue-utz ms-3 text-white border-0 d-flex align-items-center">
                     <span class="material-symbols-rounded">pending_actions</span>
                     <h6 class="mb-0 ms-2">Calificar examenes</h6>
                 </a>
@@ -133,3 +137,4 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+<%} else {response.sendRedirect("../permisoDenegado.jsp");}%>

@@ -34,7 +34,7 @@
             <a class="navbar-brand text-white">
                 <img src="../../IMG/logoBueno.png" width="50" height="45" alt="Logo"
                      class="d-inline-block align-middle mt-0 mb-2">
-                <h3 class="ms-2 d-inline-block align-middle">SICE</h3>
+                <h3 class="ms-2 d-inline-block align-middle"><strong><%=usuario.getNombre_usuario() %> <%=usuario.getApellido_usuario()%></strong></h3>
             </a>
 
             <div class="d-flex">
@@ -85,15 +85,15 @@
 
 <!--/////////////////////////////////////////////// Encabezado //////////////////////////////////////////////////////////////////////-->
 <div class="container-xl">
-    <br>
     <div class="col-12">
-        <h1 class="mt-2">Grupos existentes:
-        </h1>
+        <hr>
+        <h3 class="text-center"><strong>Grupos existentes y sus alumnos</strong></h3>
+        <hr>
     </div>
     <div class="row">
         <div class="col-md-11 col-12 p-3">
             <div>
-                <table class="table">
+                <table class="table table-striped table-hover">
                     <thead>
                     <tr>
                         <th scope="col">Division</th>
@@ -149,53 +149,51 @@
                                         <div class="modal-content">
                                             <div class="modal-header bg-blue-utz">
                                                 <h1 class="modal-title fs-5 text-white" id="exampleModal_<%= grupo.getId_grupo()  %>">
-                                                    Alumnos del <%=grupo.getGrado()+"-"+grupo.getGrupo()%>:
+                                                    Grupo: <%=grupo.getGrado()+"-"+grupo.getGrupo()%>:
                                                 </h1>
                                                 <button type="button" class="btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
                                                 <form method="post" action="../../ActualizarGrupoServlet" id="actualizar_grupo">
-                                                    <input type="hidden" value="<%=grupo.getId_grupo()%>">
+                                                    <input type="hidden" value="<%=grupo.getId_grupo()%>" name="id_grupo">
                                                     <div>
                                                         <div class="row">
                                                             <div class="col-md-8 col-12 p-3">
-                                                                <label class="form-label">Carrera:</label>
-                                                                <select required class="form-control" name="id_carrera">
-                                                                    <option disabled selected> Selecciona una carrera</option>
-                                                                    <%ArrayList<Carrera> carreras1 = carreraDao.getAll();
-                                                                        for (Carrera carrera1 : carreras1){%>
-                                                                    <option value="<%=carrera1.getId_carrera()%>"><%=carrera1.getCarrera()%></option>
-                                                                    <%}%>
-                                                                </select>
-                                                            </div>
-                                                            <div class="col-md-2 col-12 p-3">
-                                                                <label class="form-label">Grado:</label>
-                                                                <input required class="form-control" type="number" min="1" max="10" name="grado" placeholder="Grado">
-                                                            </div>
-                                                            <div class="col-md-2 col-12 p-3">
-                                                                <label class="form-label">Grupo:</label>
-                                                                <select required class="form-control" name="grupo">
-                                                                    <option disabled selected>Grupo</option>
-                                                                    <option value="A">A</option>
-                                                                    <option value="B">B</option>
-                                                                    <option value="C">C</option>
-                                                                    <option value="D">D</option>
-                                                                    <option value="E">E</option>
-                                                                    <option value="F">F</option>
-                                                                    <option value="G">G</option>
-                                                                    <option value="H">H</option>
-                                                                    <option value="I">I</option>
-                                                                    <option value="J">J</option>
-                                                                </select>
-                                                            </div>
-                                                            <div>
                                                                 <label class="form-label">Selecciona un periodo</label>
                                                                 <select required class="form-control" name="id_periodo">
                                                                     <option disabled selected> Selecciona un periodo</option>
                                                                     <% PeriodoDao periodoDao = new PeriodoDao();
                                                                         ArrayList<Periodo> periodos = periodoDao.getAll();
                                                                         for (Periodo periodo : periodos){%>
-                                                                    <option value="<%=periodo.getId_periodo()%>"><%=periodo.getDescripcion()%></option>
+                                                                    <option value="<%=periodo.getId_periodo()%>" <%if(grupo.getId_periodo()==periodo.getId_periodo()){%>selected<%}%>><%=periodo.getDescripcion()%></option>
+                                                                    <%}%>
+                                                                </select>
+                                                            </div>
+                                                            <div class="col-md-2 col-12 p-3">
+                                                                <label class="form-label">Grado:</label>
+                                                                <input required class="form-control" type="number" min="1" max="10" name="grado" placeholder="<%=grupo.getGrado()%>" value="<%=grupo.getGrado()%>">
+                                                            </div>
+                                                            <div class="col-md-2 col-12 p-3">
+                                                                <label class="form-label">Grupo:</label>
+                                                                <select required class="form-control" name="grupo">
+                                                                    <option value="A" <%if(grupo.getGrupo().equals("A")){%>selected<%}%>>A</option>
+                                                                    <option value="B" <%if(grupo.getGrupo().equals("B")){%>selected<%}%>>B</option>
+                                                                    <option value="C" <%if(grupo.getGrupo().equals("C")){%>selected<%}%>>C</option>
+                                                                    <option value="D" <%if(grupo.getGrupo().equals("D")){%>selected<%}%>>D</option>
+                                                                    <option value="E" <%if(grupo.getGrupo().equals("E")){%>selected<%}%>>E</option>
+                                                                    <option value="F" <%if(grupo.getGrupo().equals("F")){%>selected<%}%>>F</option>
+                                                                    <option value="G" <%if(grupo.getGrupo().equals("G")){%>selected<%}%>>G</option>
+                                                                    <option value="H" <%if(grupo.getGrupo().equals("H")){%>selected<%}%>>H</option>
+                                                                    <option value="I" <%if(grupo.getGrupo().equals("I")){%>selected<%}%>>I</option>
+                                                                    <option value="J" <%if(grupo.getGrupo().equals("J")){%>selected<%}%>>J</option>
+                                                                </select>
+                                                            </div>
+                                                            <div>
+                                                                <label class="form-label">Carrera:</label>
+                                                                <select required class="form-control" name="id_carrera">
+                                                                    <%ArrayList<Carrera> carreras1 = carreraDao.getAll();
+                                                                        for (Carrera carrera1 : carreras1){%>
+                                                                    <option value="<%=carrera1.getId_carrera()%>" <%if(grupo.getId_carrera()==carrera1.getId_carrera()){%>selected<%}%>><%=carrera1.getCarrera()%></option>
                                                                     <%}%>
                                                                 </select>
                                                             </div>
@@ -230,7 +228,7 @@
                                             <div class="modal-body">
                                                 <strong>¿Estás seguro de que quieres eliminar el grupo del
                                                     <%=grupo.getGrado()+"-"+grupo.getGrupo()%>?</strong>
-                                                <p>Esta acción no se puede deshacer, sin embargo, puedes crear otro grupo después.</p>
+                                                <p>Esta acción no se puede deshacer y todos los usuarios de este grupo quedarán sin el mismo, sin embargo, puedes crear otro después y volver a asignar los alumnos.</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%=grupo.getId_grupo()%>">
@@ -261,7 +259,7 @@
         <!-- Parte de alumnos -->
         <div class="col-md-1 col-12 p-3">
             <div>
-                <table class="table">
+                <table class="table table-striped table-hover">
                     <thead>
                         <tr>
                             <th scope="col">Alumnos</th>
@@ -309,7 +307,7 @@
                                                             <tr>
                                                                 <th scope="row"><%=u.getCorreo_electronico()%></th>
                                                                 <td><%=u.getApellido_usuario()+" "+u.getNombre_usuario()%></td>
-                                                                <td>
+                                                                <td class="align-items-center text-center">
                                                                     <div class="form-check form-switch">
                                                                         <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>">
                                                                     </div>
@@ -324,7 +322,7 @@
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="botonCancelar_<%= grupo.getId_grupo() %>">
                                                     Cancelar
                                                 </button>
-                                                <button type="submit" form="eliminar_alumno_grupo" class="btn btn-warning justify-content-center mb-0" value="Eliminar">Eliminar del grupo</button>
+                                                <button type="submit" form="eliminar_alumno_grupo" class="btn btn-danger justify-content-center mb-0" value="Eliminar">Eliminar del grupo</button>
                                             </div>
                                         </div>
                                     </div>
@@ -375,7 +373,7 @@
                                     <tr>
                                         <th scope="row"><%=u.getCorreo_electronico()%></th>
                                         <td><%=u.getNombre_usuario() + " " + u.getApellido_usuario()%></td>
-                                        <td>
+                                        <td class="align-items-center text-center">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" role="switch" name="id_usuario" value="<%=u.getId_usuario()%>" checked>
                                             </div>
@@ -387,25 +385,27 @@
                         </div>
                         <hr>
                         <div>
-                            <label class="form-label">División académica:</label>
-                            <select id="division" onchange="cargarCarreras()" required class="form-control" name="id_division_academica">
-                                <option disabled selected> Selecciona una división académica</option>
-                                <%for (DivisionAcademica division : divisiones) {%>
-                                <option value="<%= division.getId_division_academica() %>"><%= division.getDivision_academica() %></option>
-                                <% } %>
-                            </select>
                             <div class="row">
                                 <div class="col-md-9 col-12 p-3">
-                                    <label class="form-label">Carrera:</label>
-                                    <select id="carrera" onchange="cargarGrupos()" disabled required
-                                            class="form-control" name="id_carrera">
-                                        <option disabled selected> Selecciona una carrera</option>
+                                    <label class="form-label">División académica:</label>
+                                    <select id="division" onchange="cargarCarreras()" required class="form-control" name="id_division_academica">
+                                        <option disabled selected> Selecciona una división académica</option>
+                                        <%for (DivisionAcademica division : divisiones) {%>
+                                        <option value="<%= division.getId_division_academica() %>"><%= division.getDivision_academica() %></option>
+                                        <% } %>
                                     </select>
                                 </div>
                                 <div class="col-md-3 col-12 p-3">
                                     <label class="form-label">Grupo:</label>
                                     <select id="grupo" disabled required class="form-control" name="id_grupo">
                                         <option disabled selected> Selecciona un grupo</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="form-label">Carrera:</label>
+                                    <select id="carrera" onchange="cargarGrupos()" disabled required
+                                            class="form-control" name="id_carrera">
+                                        <option disabled selected> Selecciona una carrera</option>
                                     </select>
                                 </div>
                             </div>
@@ -538,13 +538,12 @@
                     <form method="post" action="../../CrearGrupoServlet" id="crear_grupo">
                         <div class="row">
                             <div class="col-md-8 col-12 p-3">
-                                <label class="form-label">Carrera:</label>
-                                <select required class="form-control" name="id_carrera">
-                                    <option disabled selected> Selecciona una carrera</option>
-                                    <% CarreraDao carreraDao = new CarreraDao();
-                                        ArrayList<Carrera> carreras = carreraDao.getAll();
-                                        for (Carrera carrera : carreras){%>
-                                    <option value="<%=carrera.getId_carrera()%>"><%=carrera.getCarrera()%></option>
+                                <label class="form-label">Selecciona un periodo</label>
+                                <select required class="form-control" name="id_periodo">
+                                    <% PeriodoDao periodoDao = new PeriodoDao();
+                                        ArrayList<Periodo> periodos = periodoDao.getAll();
+                                        for (Periodo periodo : periodos){%>
+                                    <option value="<%=periodo.getId_periodo()%>"><%=periodo.getDescripcion()%></option>
                                     <%}%>
                                 </select>
                             </div>
@@ -555,7 +554,6 @@
                             <div class="col-md-2 col-12 p-3">
                                 <label class="form-label">Grupo:</label>
                                 <select required class="form-control" name="grupo">
-                                    <option disabled selected>Grupo</option>
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -569,13 +567,12 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="form-label">Selecciona un periodo</label>
-                                <select required class="form-control" name="id_periodo">
-                                    <option disabled selected> Selecciona un periodo</option>
-                                    <% PeriodoDao periodoDao = new PeriodoDao();
-                                        ArrayList<Periodo> periodos = periodoDao.getAll();
-                                        for (Periodo periodo : periodos){%>
-                                    <option value="<%=periodo.getId_periodo()%>"><%=periodo.getDescripcion()%></option>
+                                <label class="form-label">Carrera:</label>
+                                <select required class="form-control" name="id_carrera">
+                                    <% CarreraDao carreraDao = new CarreraDao();
+                                        ArrayList<Carrera> carreras = carreraDao.getAll();
+                                        for (Carrera carrera : carreras){%>
+                                    <option value="<%=carrera.getId_carrera()%>"><%=carrera.getCarrera()%></option>
                                     <%}%>
                                 </select>
                             </div>
