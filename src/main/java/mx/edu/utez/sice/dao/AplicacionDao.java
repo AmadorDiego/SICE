@@ -175,7 +175,7 @@ public class AplicacionDao {
         }
         return respuestas_abiertas;
     }
-
+/*
     public boolean aplicacionPreguntasCerradas (int id_aplicacion){
         boolean flag = false;
         String query = "select pregunta_opcion_opcion_id_opcion from respuesta_opcion join aplicacion on aplicacion_id_aplicacion = id_aplicacion where id_aplicacion = 14;";
@@ -194,5 +194,5 @@ public class AplicacionDao {
             e.printStackTrace();
         }
         return flag;
-    }
+    }*/
 }
